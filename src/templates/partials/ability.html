@@ -1,6 +1,6 @@
 <!-- SHOW FOR ABILITY -->
 <div class="form-group">
-  <label for="ability">{{ localize 'C5ETRAINING.SelectAnAbility' }}</label>
+  <label for="ability">{{ localize 'downtime-5e.SelectAnAbility' }}</label>
   <div class="form-fields">
     <select name="ability" id="abilityInput">
       {{#each dropdownOptions.abilities as |option oid| }}
@@ -12,7 +12,7 @@
 
 <!-- SHOW FOR ABILITY OR SKILL OR TOOL -->
 <div class="form-group">
-  <label for="dc">{{ localize 'C5ETRAINING.CheckDC' }}</label>
+  <label for="dc">{{ localize 'downtime-5e.CheckDC' }}</label>
   <div class="form-fields">
     <input type="number" name="dc" id="dcInput" value="{{item.dc}}">
   </div>
@@ -20,18 +20,18 @@
 
 <div class="form-group">
   {{#if item.dc}}
-  <label for="completionAt">{{ localize 'C5ETRAINING.SuccessesRequired' }}</label>
+  <label for="completionAt">{{ localize 'downtime-5e.SuccessesRequired' }}</label>
   {{else}}
-  <label for="completionAt">{{ localize 'C5ETRAINING.CompletionTarget' }}</label>
+  <label for="completionAt">{{ localize 'downtime-5e.CompletionTarget' }}</label>
   {{/if}}
   <div class="form-fields">
     <input type="number" name="completionAt" id="completionAtInput" value="{{item.completionAt}}" min="0">
     <label class="help">
       <i class="fas fa-question-circle"></i>
       {{#if item.dc}}
-      <span class="tooltip">{{ localize 'C5ETRAINING.SuccessesRequiredInputHelpText' }}</span>
+      <span class="tooltip">{{ localize 'downtime-5e.SuccessesRequiredInputHelpText' }}</span>
       {{else}}
-      <span class="tooltip">{{ localize 'C5ETRAINING.CompletionTargetInputHelpText' }}</span>
+      <span class="tooltip">{{ localize 'downtime-5e.CompletionTargetInputHelpText' }}</span>
       {{/if}}
     </label>
   </div>

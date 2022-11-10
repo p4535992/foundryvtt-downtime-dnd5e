@@ -9,8 +9,8 @@ export function registerSettings() {
 	});
 
 	game.settings.register("5e-training", "showImportButton", {
-		name: game.i18n.localize("C5ETRAINING.SettingShowImportButton"),
-		hint: game.i18n.localize("C5ETRAINING.SettingShowImportButtonHint"),
+		name: game.i18n.localize("downtime-5e.SettingShowImportButton"),
+		hint: game.i18n.localize("downtime-5e.SettingShowImportButtonHint"),
 		scope: "client",
 		config: true,
 		default: false,
@@ -18,8 +18,8 @@ export function registerSettings() {
 	});
 
 	game.settings.register("5e-training", "gmOnlyMode", {
-		name: game.i18n.localize("C5ETRAINING.SettingGmOnlyMode"),
-		hint: game.i18n.localize("C5ETRAINING.SettingGmOnlyModeHint"),
+		name: game.i18n.localize("downtime-5e.SettingGmOnlyMode"),
+		hint: game.i18n.localize("downtime-5e.SettingGmOnlyModeHint"),
 		scope: "world",
 		config: true,
 		default: false,
@@ -27,8 +27,8 @@ export function registerSettings() {
 	});
 
 	game.settings.register("5e-training", "enableTraining", {
-		name: game.i18n.localize("C5ETRAINING.SettingShowDowntimeTabPc"),
-		hint: game.i18n.localize("C5ETRAINING.SettingShowDowntimeTabPcHint"),
+		name: game.i18n.localize("downtime-5e.SettingShowDowntimeTabPc"),
+		hint: game.i18n.localize("downtime-5e.SettingShowDowntimeTabPcHint"),
 		scope: "world",
 		config: true,
 		default: true,
@@ -36,8 +36,8 @@ export function registerSettings() {
 	});
 
 	game.settings.register("5e-training", "enableTrainingNpc", {
-		name: game.i18n.localize("C5ETRAINING.SettingShowDowntimeTabNpc"),
-		hint: game.i18n.localize("C5ETRAINING.SettingShowDowntimeTabNpcHint"),
+		name: game.i18n.localize("downtime-5e.SettingShowDowntimeTabNpc"),
+		hint: game.i18n.localize("downtime-5e.SettingShowDowntimeTabNpcHint"),
 		scope: "world",
 		config: true,
 		default: true,
@@ -45,8 +45,8 @@ export function registerSettings() {
 	});
 
 	game.settings.register("5e-training", "tabName", {
-		name: game.i18n.localize("C5ETRAINING.SettingTabName"),
-		hint: game.i18n.localize("C5ETRAINING.SettingTabNameHint"),
+		name: game.i18n.localize("downtime-5e.SettingTabName"),
+		hint: game.i18n.localize("downtime-5e.SettingTabNameHint"),
 		scope: "world",
 		config: true,
 		default: "Downtime",
@@ -54,8 +54,8 @@ export function registerSettings() {
 	});
 
 	game.settings.register("5e-training", "extraSheetWidth", {
-		name: game.i18n.localize("C5ETRAINING.SettingExtraSheetWidth"),
-		hint: game.i18n.localize("C5ETRAINING.SettingExtraSheetWidthHint"),
+		name: game.i18n.localize("downtime-5e.SettingExtraSheetWidth"),
+		hint: game.i18n.localize("downtime-5e.SettingExtraSheetWidthHint"),
 		scope: "client",
 		config: true,
 		default: 50,
@@ -63,8 +63,8 @@ export function registerSettings() {
 	});
 
 	game.settings.register("5e-training", "totalToComplete", {
-		name: game.i18n.localize("C5ETRAINING.SettingDefaultCompletionTarget"),
-		hint: game.i18n.localize("C5ETRAINING.SettingDefaultCompletionTargetHint"),
+		name: game.i18n.localize("downtime-5e.SettingDefaultCompletionTarget"),
+		hint: game.i18n.localize("downtime-5e.SettingDefaultCompletionTargetHint"),
 		scope: "world",
 		config: true,
 		default: 300,
@@ -72,16 +72,16 @@ export function registerSettings() {
 	});
 
 	game.settings.register("5e-training", "announceCompletionFor", {
-		name: game.i18n.localize("C5ETRAINING.SettingAnnounceActivityCompletionFor"),
-		hint: game.i18n.localize("C5ETRAINING.SettingAnnounceActivityCompletionForHint"),
+		name: game.i18n.localize("downtime-5e.SettingAnnounceActivityCompletionFor"),
+		hint: game.i18n.localize("downtime-5e.SettingAnnounceActivityCompletionForHint"),
 		scope: "world",
 		config: true,
 		type: String,
 		choices: {
-			pc: game.i18n.localize("C5ETRAINING.PcsOnly"),
-			npc: game.i18n.localize("C5ETRAINING.NpcsOnly"),
-			both: game.i18n.localize("C5ETRAINING.PcsAndNpcs"),
-			none: game.i18n.localize("C5ETRAINING.None"),
+			pc: game.i18n.localize("downtime-5e.PcsOnly"),
+			npc: game.i18n.localize("downtime-5e.NpcsOnly"),
+			both: game.i18n.localize("downtime-5e.PcsAndNpcs"),
+			none: game.i18n.localize("downtime-5e.None"),
 		},
 		default: "pc",
 	});

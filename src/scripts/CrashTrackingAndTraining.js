@@ -42,17 +42,17 @@ export default class CrashTrackingAndTraining {
 
 		// Create dialog
 		new Dialog({
-			title: game.i18n.localize("C5ETRAINING.DeleteCategory"),
+			title: game.i18n.localize("downtime-5e.DeleteCategory"),
 			content: dialogContent,
 			buttons: {
 				yes: {
 					icon: "<i class='fas fa-check'></i>",
-					label: game.i18n.localize("C5ETRAINING.Delete"),
+					label: game.i18n.localize("downtime-5e.Delete"),
 					callback: () => (del = true),
 				},
 				no: {
 					icon: "<i class='fas fa-times'></i>",
-					label: game.i18n.localize("C5ETRAINING.Cancel"),
+					label: game.i18n.localize("downtime-5e.Cancel"),
 					callback: () => (del = false),
 				},
 			},
@@ -116,17 +116,17 @@ export default class CrashTrackingAndTraining {
 
 		// Create dialog
 		new Dialog({
-			title: game.i18n.localize("C5ETRAINING.DeleteItem"),
+			title: game.i18n.localize("downtime-5e.DeleteItem"),
 			content: dialogContent,
 			buttons: {
 				yes: {
 					icon: "<i class='fas fa-check'></i>",
-					label: game.i18n.localize("C5ETRAINING.Delete"),
+					label: game.i18n.localize("downtime-5e.Delete"),
 					callback: () => (del = true),
 				},
 				no: {
 					icon: "<i class='fas fa-times'></i>",
-					label: game.i18n.localize("C5ETRAINING.Cancel"),
+					label: game.i18n.localize("downtime-5e.Cancel"),
 					callback: () => (del = false),
 				},
 			},
@@ -155,15 +155,15 @@ export default class CrashTrackingAndTraining {
 
 		// Format input and change
 		if (value.charAt(0) === "+") {
-			let changeName = game.i18n.localize("C5ETRAINING.AdjustProgressValue") + " (+)";
+			let changeName = game.i18n.localize("downtime-5e.AdjustProgressValue") + " (+)";
 			adjustment = parseInt(value.substr(1).trim());
 			thisItem = CrashTrackingAndTraining.calculateNewProgress(thisItem, changeName, adjustment);
 		} else if (value.charAt(0) === "-") {
-			let changeName = game.i18n.localize("C5ETRAINING.AdjustProgressValue") + " (-)";
+			let changeName = game.i18n.localize("downtime-5e.AdjustProgressValue") + " (-)";
 			adjustment = 0 - parseInt(value.substr(1).trim());
 			thisItem = CrashTrackingAndTraining.calculateNewProgress(thisItem, changeName, adjustment);
 		} else {
-			let changeName = game.i18n.localize("C5ETRAINING.AdjustProgressValue") + " (=)";
+			let changeName = game.i18n.localize("downtime-5e.AdjustProgressValue") + " (=)";
 			adjustment = parseInt(value);
 			thisItem = CrashTrackingAndTraining.calculateNewProgress(thisItem, changeName, adjustment, true);
 		}
@@ -192,7 +192,7 @@ export default class CrashTrackingAndTraining {
 			let options = CrashTrackingAndTraining.getRollOptions();
 			let r = await actor.rollAbilityTest(thisItem.ability, options);
 			if (r) {
-				let attemptName = game.i18n.localize("C5ETRAINING.Roll") + " " + abilityName;
+				let attemptName = game.i18n.localize("downtime-5e.Roll") + " " + abilityName;
 				// Increase progress
 				let progressChange = CrashTrackingAndTraining.getRollResult(r);
 				thisItem = CrashTrackingAndTraining.calculateNewProgress(thisItem, attemptName, progressChange);
@@ -210,7 +210,7 @@ export default class CrashTrackingAndTraining {
 			let options = CrashTrackingAndTraining.getRollOptions();
 			let r = await actor.rollSkill(thisItem.skill, options);
 			if (r) {
-				let attemptName = game.i18n.localize("C5ETRAINING.Roll") + " " + abilityName;
+				let attemptName = game.i18n.localize("downtime-5e.Roll") + " " + abilityName;
 				// Increase progress
 				let progressChange = CrashTrackingAndTraining.getRollResult(r);
 				thisItem = CrashTrackingAndTraining.calculateNewProgress(thisItem, attemptName, progressChange);
@@ -231,7 +231,7 @@ export default class CrashTrackingAndTraining {
 				let options = CrashTrackingAndTraining.getRollOptions();
 				let r = await tool.rollToolCheck(options);
 				if (r) {
-					let attemptName = game.i18n.localize("C5ETRAINING.Roll") + " " + toolName;
+					let attemptName = game.i18n.localize("downtime-5e.Roll") + " " + toolName;
 					// Increase progress
 					let progressChange = CrashTrackingAndTraining.getToolRollResult(r);
 					thisItem = CrashTrackingAndTraining.calculateNewProgress(thisItem, attemptName, progressChange);
@@ -242,14 +242,14 @@ export default class CrashTrackingAndTraining {
 				}
 			} else {
 				ui.notifications.warn(
-					"Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.ToolNotFoundWarning")
+					"Crash's Tracking & Training (5e): " + game.i18n.localize("downtime-5e.ToolNotFoundWarning")
 				);
 			}
 		}
 
 		// Progression Type: Simple
 		else if (rollType === "FIXED") {
-			let itemName = game.i18n.localize("C5ETRAINING.ProgressionStyleFixed");
+			let itemName = game.i18n.localize("downtime-5e.ProgressionStyleFixed");
 			// Increase progress
 			thisItem = CrashTrackingAndTraining.calculateNewProgress(thisItem, itemName, thisItem.fixedIncrease);
 			// Log item completion
@@ -267,7 +267,7 @@ export default class CrashTrackingAndTraining {
 			} else {
 				ui.notifications.warn(
 					"Crash's Tracking & Training (5e): " +
-						game.i18n.localize("C5ETRAINING.MacroNotFoundWarning") +
+						game.i18n.localize("downtime-5e.MacroNotFoundWarning") +
 						": " +
 						macroName
 				);
@@ -388,7 +388,7 @@ export default class CrashTrackingAndTraining {
 			}
 
 			if (sendIt) {
-				// console.log("Crash's Tracking & Training (5e) | " + actor.name + " " + game.i18n.localize("C5ETRAINING.CompletedATrackedItem"));
+				// console.log("Crash's Tracking & Training (5e) | " + actor.name + " " + game.i18n.localize("downtime-5e.CompletedATrackedItem"));
 				let chatHtml = await renderTemplate("modules/5e-training/templates/completion-message.html", {
 					actor: actor,
 					activity: item,
@@ -466,35 +466,35 @@ export default class CrashTrackingAndTraining {
 
 	static formatAbilitiesForDropdown() {
 		return [
-			{ value: "str", type: "ability", label: game.i18n.localize("C5ETRAINING.AbilityStr") },
-			{ value: "dex", type: "ability", label: game.i18n.localize("C5ETRAINING.AbilityDex") },
-			{ value: "con", type: "ability", label: game.i18n.localize("C5ETRAINING.AbilityCon") },
-			{ value: "int", type: "ability", label: game.i18n.localize("C5ETRAINING.AbilityInt") },
-			{ value: "wis", type: "ability", label: game.i18n.localize("C5ETRAINING.AbilityWis") },
-			{ value: "cha", type: "ability", label: game.i18n.localize("C5ETRAINING.AbilityCha") },
+			{ value: "str", type: "ability", label: game.i18n.localize("downtime-5e.AbilityStr") },
+			{ value: "dex", type: "ability", label: game.i18n.localize("downtime-5e.AbilityDex") },
+			{ value: "con", type: "ability", label: game.i18n.localize("downtime-5e.AbilityCon") },
+			{ value: "int", type: "ability", label: game.i18n.localize("downtime-5e.AbilityInt") },
+			{ value: "wis", type: "ability", label: game.i18n.localize("downtime-5e.AbilityWis") },
+			{ value: "cha", type: "ability", label: game.i18n.localize("downtime-5e.AbilityCha") },
 		];
 	}
 
 	static formatSkillsForDropdown() {
 		return [
-			{ value: "acr", type: "skill", label: game.i18n.localize("C5ETRAINING.SkillAcr") },
-			{ value: "ani", type: "skill", label: game.i18n.localize("C5ETRAINING.SkillAni") },
-			{ value: "arc", type: "skill", label: game.i18n.localize("C5ETRAINING.SkillArc") },
-			{ value: "ath", type: "skill", label: game.i18n.localize("C5ETRAINING.SkillAth") },
-			{ value: "dec", type: "skill", label: game.i18n.localize("C5ETRAINING.SkillDec") },
-			{ value: "his", type: "skill", label: game.i18n.localize("C5ETRAINING.SkillHis") },
-			{ value: "ins", type: "skill", label: game.i18n.localize("C5ETRAINING.SkillIns") },
-			{ value: "inv", type: "skill", label: game.i18n.localize("C5ETRAINING.SkillInv") },
-			{ value: "itm", type: "skill", label: game.i18n.localize("C5ETRAINING.SkillItm") },
-			{ value: "med", type: "skill", label: game.i18n.localize("C5ETRAINING.SkillMed") },
-			{ value: "nat", type: "skill", label: game.i18n.localize("C5ETRAINING.SkillNat") },
-			{ value: "per", type: "skill", label: game.i18n.localize("C5ETRAINING.SkillPer") },
-			{ value: "prc", type: "skill", label: game.i18n.localize("C5ETRAINING.SkillPrc") },
-			{ value: "prf", type: "skill", label: game.i18n.localize("C5ETRAINING.SkillPrf") },
-			{ value: "rel", type: "skill", label: game.i18n.localize("C5ETRAINING.SkillRel") },
-			{ value: "slt", type: "skill", label: game.i18n.localize("C5ETRAINING.SkillSlt") },
-			{ value: "ste", type: "skill", label: game.i18n.localize("C5ETRAINING.SkillSte") },
-			{ value: "sur", type: "skill", label: game.i18n.localize("C5ETRAINING.SkillSur") },
+			{ value: "acr", type: "skill", label: game.i18n.localize("downtime-5e.SkillAcr") },
+			{ value: "ani", type: "skill", label: game.i18n.localize("downtime-5e.SkillAni") },
+			{ value: "arc", type: "skill", label: game.i18n.localize("downtime-5e.SkillArc") },
+			{ value: "ath", type: "skill", label: game.i18n.localize("downtime-5e.SkillAth") },
+			{ value: "dec", type: "skill", label: game.i18n.localize("downtime-5e.SkillDec") },
+			{ value: "his", type: "skill", label: game.i18n.localize("downtime-5e.SkillHis") },
+			{ value: "ins", type: "skill", label: game.i18n.localize("downtime-5e.SkillIns") },
+			{ value: "inv", type: "skill", label: game.i18n.localize("downtime-5e.SkillInv") },
+			{ value: "itm", type: "skill", label: game.i18n.localize("downtime-5e.SkillItm") },
+			{ value: "med", type: "skill", label: game.i18n.localize("downtime-5e.SkillMed") },
+			{ value: "nat", type: "skill", label: game.i18n.localize("downtime-5e.SkillNat") },
+			{ value: "per", type: "skill", label: game.i18n.localize("downtime-5e.SkillPer") },
+			{ value: "prc", type: "skill", label: game.i18n.localize("downtime-5e.SkillPrc") },
+			{ value: "prf", type: "skill", label: game.i18n.localize("downtime-5e.SkillPrf") },
+			{ value: "rel", type: "skill", label: game.i18n.localize("downtime-5e.SkillRel") },
+			{ value: "slt", type: "skill", label: game.i18n.localize("downtime-5e.SkillSlt") },
+			{ value: "ste", type: "skill", label: game.i18n.localize("downtime-5e.SkillSte") },
+			{ value: "sur", type: "skill", label: game.i18n.localize("downtime-5e.SkillSur") },
 		];
 	}
 
@@ -507,7 +507,7 @@ export default class CrashTrackingAndTraining {
 			categories: allCategories,
 		};
 		if (allItems.length < 1 && allCategories.length < 1) {
-			ui.notifications.info(game.i18n.localize("C5ETRAINING.ExportNoTrackedItems"));
+			ui.notifications.info(game.i18n.localize("downtime-5e.ExportNoTrackedItems"));
 			return;
 		}
 		let jsonData = JSON.stringify(dataToExport);
@@ -520,7 +520,7 @@ export default class CrashTrackingAndTraining {
 		input.on("change", function () {
 			const file = this.files[0];
 			if (!file) {
-				ui.notifications.info(game.i18n.localize("C5ETRAINING.ImportNoFile"));
+				ui.notifications.info(game.i18n.localize("downtime-5e.ImportNoFile"));
 				return;
 			}
 			readTextFromFile(file).then(async (contents) => {
@@ -534,12 +534,12 @@ export default class CrashTrackingAndTraining {
 					importedCategories = importedData.categories;
 				} else {
 					new Dialog({
-						title: game.i18n.localize("C5ETRAINING.ImportOldWarningTitle"),
-						content: `<p>${game.i18n.localize("C5ETRAINING.ImportOldWarningText")}</p>`,
+						title: game.i18n.localize("downtime-5e.ImportOldWarningTitle"),
+						content: `<p>${game.i18n.localize("downtime-5e.ImportOldWarningText")}</p>`,
 						buttons: {
 							ok: {
 								icon: "<i class='fas fa-check'></i>",
-								label: game.i18n.localize("C5ETRAINING.ImportOldWarningConfirm"),
+								label: game.i18n.localize("downtime-5e.ImportOldWarningConfirm"),
 							},
 						},
 						default: "ok",
@@ -549,7 +549,7 @@ export default class CrashTrackingAndTraining {
 				}
 
 				if (importedItems.length < 1 && importedCategories.legnth < 1) {
-					ui.notifications.info(game.i18n.localize("C5ETRAINING.ImportNoTrackedItems"));
+					ui.notifications.info(game.i18n.localize("downtime-5e.ImportNoTrackedItems"));
 					return;
 				}
 
@@ -619,19 +619,19 @@ export default class CrashTrackingAndTraining {
 				await actor.setFlag("5e-training", "categories", combinedCategories);
 				await actor.setFlag("5e-training", "trainingItems", combinedItems);
 
-				ui.notifications.info(game.i18n.localize("C5ETRAINING.ImportComplete"));
+				ui.notifications.info(game.i18n.localize("downtime-5e.ImportComplete"));
 
 				// let act = "quit";
-				//let content = `<p><b>${game.i18n.localize("C5ETRAINING.ImportTypeSelectionOverwrite")}:</b> ${game.i18n.localize("C5ETRAINING.ImportTypeSelectionTextOverwrite")}</p>
-				//               <p><b>${game.i18n.localize("C5ETRAINING.ImportTypeSelectionCombine")}:</b> ${game.i18n.localize("C5ETRAINING.ImportTypeSelectionTextCombine")}</p>`;
+				//let content = `<p><b>${game.i18n.localize("downtime-5e.ImportTypeSelectionOverwrite")}:</b> ${game.i18n.localize("downtime-5e.ImportTypeSelectionTextOverwrite")}</p>
+				//               <p><b>${game.i18n.localize("downtime-5e.ImportTypeSelectionCombine")}:</b> ${game.i18n.localize("downtime-5e.ImportTypeSelectionTextCombine")}</p>`;
 				// Create dialog
 				// new Dialog({
-				//   title: game.i18n.localize("C5ETRAINING.ImportTypeSelectionTitle"),
+				//   title: game.i18n.localize("downtime-5e.ImportTypeSelectionTitle"),
 				//   content: content,
 				//   buttons: {
-				//     overwrite: {icon: "<i class='fas fa-file-import'></i>", label: game.i18n.localize("C5ETRAINING.ImportTypeSelectionOverwrite"), callback: () => act = "overwrite"},
-				//     add: {icon: "<i class='fas fa-plus'></i>", label: game.i18n.localize("C5ETRAINING.ImportTypeSelectionCombine"), callback: () => act = "add"},
-				//     quit: {icon: "<i class='fas fa-times'></i>", label: game.i18n.localize("C5ETRAINING.Cancel"), callback: () => act = "quit"},
+				//     overwrite: {icon: "<i class='fas fa-file-import'></i>", label: game.i18n.localize("downtime-5e.ImportTypeSelectionOverwrite"), callback: () => act = "overwrite"},
+				//     add: {icon: "<i class='fas fa-plus'></i>", label: game.i18n.localize("downtime-5e.ImportTypeSelectionCombine"), callback: () => act = "add"},
+				//     quit: {icon: "<i class='fas fa-times'></i>", label: game.i18n.localize("downtime-5e.Cancel"), callback: () => act = "quit"},
 				//   },
 				//   default: "quit",
 				//   close: async (html) => {
@@ -648,7 +648,7 @@ export default class CrashTrackingAndTraining {
 				//         }
 				//       }
 				//       actor.setFlag("5e-training","trainingItems",importedItems);
-				//       await ui.notifications.info(game.i18n.localize("C5ETRAINING.ImportComplete"));
+				//       await ui.notifications.info(game.i18n.localize("downtime-5e.ImportComplete"));
 				//     } else if (act === "add") {
 				//       let currentItems = actor.getFlag("5e-training","trainingItems") || [];
 				//       let currentCategories = actor.getFlag("5e-training","categories") || [];
@@ -677,13 +677,13 @@ export default class CrashTrackingAndTraining {
 				//       }
 				//       let combinedItems = currentItems.concat(importedItems);
 				//       await actor.setFlag("5e-training","trainingItems", combinedItems);
-				//       ui.notifications.info(game.i18n.localize("C5ETRAINING.ImportComplete"));
+				//       ui.notifications.info(game.i18n.localize("downtime-5e.ImportComplete"));
 				//       if(possibleDupes){
 				//         new Dialog({
-				//           title: game.i18n.localize("C5ETRAINING.ImportDupeWarningTitle"),
-				//           content: `<p>${game.i18n.localize("C5ETRAINING.ImportDupeWarningText")}</p>`,
+				//           title: game.i18n.localize("downtime-5e.ImportDupeWarningTitle"),
+				//           content: `<p>${game.i18n.localize("downtime-5e.ImportDupeWarningText")}</p>`,
 				//           buttons: {
-				//             ok: {icon: "<i class='fas fa-check'></i>", label: game.i18n.localize("C5ETRAINING.ImportDupeWarningConfirm")},
+				//             ok: {icon: "<i class='fas fa-check'></i>", label: game.i18n.localize("downtime-5e.ImportDupeWarningConfirm")},
 				//           },
 				//           default: "ok"
 				//         }).render(true);

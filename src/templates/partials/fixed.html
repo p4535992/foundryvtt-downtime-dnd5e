@@ -1,6 +1,6 @@
 <!-- SHOW FOR FIXED VALUE -->
 <div class="form-group">
-  <label for="fixedIncrease">{{ localize 'C5ETRAINING.SelectIncreaseAmount' }}</label>
+  <label for="fixedIncrease">{{ localize 'downtime-5e.SelectIncreaseAmount' }}</label>
   <div class="form-fields">
     <input type="number" name="fixedIncrease" id="fixedIncreaseInput"
       {{#if item.fixedIncrease}} value="{{item.fixedIncrease}}" {{/if}}
@@ -8,13 +8,13 @@
       min="1">
     <label class="help">
       <i class="fas fa-question-circle"></i>
-      <span class="tooltip">{{ localize 'C5ETRAINING.FixedIncreaseInputHelpText' }}</span>
+      <span class="tooltip">{{ localize 'downtime-5e.FixedIncreaseInputHelpText' }}</span>
     </label>
   </div>
 </div>
 
 <div class="form-group">
-  <label for="completionAt">{{ localize 'C5ETRAINING.CompletionTarget' }}</label>
+  <label for="completionAt">{{ localize 'downtime-5e.CompletionTarget' }}</label>
   <div class="form-fields">
     <input type="number" name="completionAt" id="completionAtInput" value="{{item.completionAt}}" min="0">
   </div>

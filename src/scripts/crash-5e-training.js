@@ -104,7 +104,7 @@ async function addTrainingTab(app, html, data) {
 			let itemId = event.currentTarget.id.replace("crash-edit-", "");
 			if (!itemId) {
 				ui.notifications.warn(
-					"Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.NoIdWarning"),
+					"Crash's Tracking & Training (5e): " + game.i18n.localize("downtime-5e.NoIdWarning"),
 					{ permanent: true }
 				);
 				return;
@@ -121,7 +121,7 @@ async function addTrainingTab(app, html, data) {
 			if (!itemId) {
 				ui.notifications.warn(
 					"Crash's Tracking & Training (5e): " +
-						game.i18n.localize("C5ETRAINING.NoIdWarning", { permanent: true })
+						game.i18n.localize("downtime-5e.NoIdWarning", { permanent: true })
 				);
 				return;
 			}
@@ -136,7 +136,7 @@ async function addTrainingTab(app, html, data) {
 			let itemId = event.currentTarget.id.replace("crash-override-", "");
 			if (!itemId) {
 				ui.notifications.warn(
-					"Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.NoIdWarning"),
+					"Crash's Tracking & Training (5e): " + game.i18n.localize("downtime-5e.NoIdWarning"),
 					{ permanent: true }
 				);
 				return;
@@ -146,7 +146,7 @@ async function addTrainingTab(app, html, data) {
 			if (isNaN(field.value)) {
 				field.value = thisItem.progress;
 				ui.notifications.warn(
-					"Crash's 5e Tracking & Training: " + game.i18n.localize("C5ETRAINING.InvalidNumberWarning")
+					"Crash's 5e Tracking & Training: " + game.i18n.localize("downtime-5e.InvalidNumberWarning")
 				);
 			} else {
 				CrashTrackingAndTraining.updateItemProgressFromSheet(actor.id, itemId, field.value);
@@ -160,7 +160,7 @@ async function addTrainingTab(app, html, data) {
 			let itemId = event.currentTarget.id.replace("crash-roll-", "");
 			if (!itemId) {
 				ui.notifications.warn(
-					"Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.NoIdWarning"),
+					"Crash's Tracking & Training (5e): " + game.i18n.localize("downtime-5e.NoIdWarning"),
 					{ permanent: true }
 				);
 				return;
@@ -180,7 +180,7 @@ async function addTrainingTab(app, html, data) {
 			let itemId = fieldId.replace("crash-toggle-desc-", "");
 			if (!itemId) {
 				ui.notifications.warn(
-					"Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.NoIdWarning"),
+					"Crash's Tracking & Training (5e): " + game.i18n.localize("downtime-5e.NoIdWarning"),
 					{ permanent: true }
 				);
 				return;
@@ -270,7 +270,7 @@ async function migrateAllActors() {
 		let currentUserIsGm = game.user.isGM;
 		if (!currentUserOwnsActor && !currentUserIsGm) {
 			console.log(
-				"Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.Skipping") + ": " + a.data.name
+				"Crash's Tracking & Training (5e): " + game.i18n.localize("downtime-5e.Skipping") + ": " + a.data.name
 			);
 			continue;
 		}
@@ -301,12 +301,12 @@ async function migrateAllActors() {
 	if (updatesRequired.length > 0) {
 		// Prompt to see if the user wants to update their actors.
 		let doUpdate = false;
-		let content = `<h3>${game.i18n.localize("C5ETRAINING.MigrationPromptTitle")}</h3>
-                   <p>${game.i18n.format("C5ETRAINING.MigrationPromptText1")}</p>
-                   <h3>${game.i18n.localize("C5ETRAINING.MigrationPromptBackupWarning")}</h3>
-                   <p>${game.i18n.format("C5ETRAINING.MigrationPromptText2")}</p>
+		let content = `<h3>${game.i18n.localize("downtime-5e.MigrationPromptTitle")}</h3>
+                   <p>${game.i18n.format("downtime-5e.MigrationPromptText1")}</p>
+                   <h3>${game.i18n.localize("downtime-5e.MigrationPromptBackupWarning")}</h3>
+                   <p>${game.i18n.format("downtime-5e.MigrationPromptText2")}</p>
                    <hr>
-                   <p>${game.i18n.format("C5ETRAINING.MigrationPromptText3", { num: updatesRequired.length })}</p>`;
+                   <p>${game.i18n.format("downtime-5e.MigrationPromptText3", { num: updatesRequired.length })}</p>`;
 		// Insert dialog
 		new Dialog({
 			title: `Crash's Tracking & Training (5e)`,
@@ -314,12 +314,12 @@ async function migrateAllActors() {
 			buttons: {
 				yes: {
 					icon: "<i class='fas fa-check'></i>",
-					label: game.i18n.localize("C5ETRAINING.MigrationPromptYes"),
+					label: game.i18n.localize("downtime-5e.MigrationPromptYes"),
 					callback: () => (doUpdate = true),
 				},
 				no: {
 					icon: "<i class='fas fa-times'></i>",
-					label: game.i18n.localize("C5ETRAINING.MigrationPromptNo"),
+					label: game.i18n.localize("downtime-5e.MigrationPromptNo"),
 					callback: () => (doUpdate = false),
 				},
 			},
@@ -336,13 +336,13 @@ async function migrateAllActors() {
 						let backup = { trainingItems: allTrainingItems, timestamp: new Date() };
 						ui.notifications.notify(
 							"Crash's Tracking & Training (5e): " +
-								game.i18n.localize("C5ETRAINING.BackingUpDataFor") +
+								game.i18n.localize("downtime-5e.BackingUpDataFor") +
 								": " +
 								a.data.name
 						);
 						console.log(
 							"Crash's Tracking & Training (5e): " +
-								game.i18n.localize("C5ETRAINING.BackingUpDataFor") +
+								game.i18n.localize("downtime-5e.BackingUpDataFor") +
 								": " +
 								a.data.name
 						);
@@ -351,13 +351,13 @@ async function migrateAllActors() {
 						// Alert that we're migrating actor
 						ui.notifications.notify(
 							"Crash's Tracking & Training (5e): " +
-								game.i18n.localize("C5ETRAINING.UpdatingDataFor") +
+								game.i18n.localize("downtime-5e.UpdatingDataFor") +
 								": " +
 								a.data.name
 						);
 						console.log(
 							"Crash's Tracking & Training (5e): " +
-								game.i18n.localize("C5ETRAINING.UpdatingDataFor") +
+								game.i18n.localize("downtime-5e.UpdatingDataFor") +
 								": " +
 								a.data.name
 						);
@@ -374,13 +374,13 @@ async function migrateAllActors() {
 									console.error(err);
 									ui.notifications.warn(
 										"Crash's Tracking & Training (5e): " +
-											game.i18n.localize("C5ETRAINING.ProblemUpdatingDataFor") +
+											game.i18n.localize("downtime-5e.ProblemUpdatingDataFor") +
 											": " +
 											a.data.name
 									);
 									console.error(
 										"Crash's Tracking & Training (5e): " +
-											game.i18n.localize("C5ETRAINING.ProblemUpdatingDataFor") +
+											game.i18n.localize("downtime-5e.ProblemUpdatingDataFor") +
 											": " +
 											a.data.name
 									);
@@ -391,13 +391,13 @@ async function migrateAllActors() {
 						await a.setFlag("5e-training", "trainingItems", allTrainingItems);
 						ui.notifications.notify(
 							"Crash's Tracking & Training (5e): " +
-								game.i18n.localize("C5ETRAINING.SuccessUpdatingDataFor") +
+								game.i18n.localize("downtime-5e.SuccessUpdatingDataFor") +
 								": " +
 								a.data.name
 						);
 						console.log(
 							"Crash's Tracking & Training (5e): " +
-								game.i18n.localize("C5ETRAINING.SuccessUpdatingDataFor") +
+								game.i18n.localize("downtime-5e.SuccessUpdatingDataFor") +
 								": " +
 								a.data.name
 						);
@@ -431,20 +431,20 @@ export function crashTNT() {
 		let actor = game.actors.getName(actorName);
 		if (!actor) {
 			ui.notifications.warn(
-				"Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.ActorNotFoundWarning")
+				"Crash's Tracking & Training (5e): " + game.i18n.localize("downtime-5e.ActorNotFoundWarning")
 			);
 			return;
 		}
 		let allItems = actor.getFlag("5e-training", "trainingItems");
 		let itemIdx = allItems.findIndex((i) => i.name === itemName);
 		if (itemIdx < 0) {
-			ui.notifications.warn(game.i18n.localize("C5ETRAINING.ItemNotFoundWarning") + ": " + itemName);
+			ui.notifications.warn(game.i18n.localize("downtime-5e.ItemNotFoundWarning") + ": " + itemName);
 			return;
 		}
 
 		newProgress = parseInt(newProgress);
 		if (isNaN(newProgress)) {
-			ui.notifications.warn(game.i18n.localize("C5ETRAINING.ProgressValueIsNanWarning"));
+			ui.notifications.warn(game.i18n.localize("downtime-5e.ProgressValueIsNanWarning"));
 			return;
 		}
 
@@ -453,7 +453,7 @@ export function crashTNT() {
 		let alreadyCompleted = thisItem.progress >= thisItem.completionAt;
 		thisItem = CrashTrackingAndTraining.calculateNewProgress(
 			thisItem,
-			game.i18n.localize("C5ETRAINING.LogActionMacro"),
+			game.i18n.localize("downtime-5e.LogActionMacro"),
 			newProgress,
 			true
 		);
@@ -471,7 +471,7 @@ export function crashTNT() {
 			return allItems;
 		} else {
 			ui.notifications.warn(
-				"Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.ActorNotFoundWarning")
+				"Crash's Tracking & Training (5e): " + game.i18n.localize("downtime-5e.ActorNotFoundWarning")
 			);
 		}
 	}
@@ -480,14 +480,14 @@ export function crashTNT() {
 		let actor = game.actors.getName(actorName);
 		if (!actor) {
 			ui.notifications.warn(
-				"Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.ActorNotFoundWarning")
+				"Crash's Tracking & Training (5e): " + game.i18n.localize("downtime-5e.ActorNotFoundWarning")
 			);
 			return;
 		}
 		let allItems = actor.getFlag("5e-training", "trainingItems") || [];
 		let itemIdx = allItems.findIndex((i) => i.name === itemName);
 		if (itemIdx < 0) {
-			ui.notifications.warn(game.i18n.localize("C5ETRAINING.ItemNotFoundWarning") + ": " + itemName);
+			ui.notifications.warn(game.i18n.localize("downtime-5e.ItemNotFoundWarning") + ": " + itemName);
 		} else {
 			return allItems[itemIdx];
 		}

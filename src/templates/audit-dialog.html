@@ -1,21 +1,21 @@
 <form class="crash-audit-log">
   <input type="hidden" name="actorId" value="{{object.id}}"/>
 
-  <h1 class="title">{{ localize "C5ETRAINING.ChangeLog" }}</h1>
+  <h1 class="title">{{ localize "downtime-5e.ChangeLog" }}</h1>
 
   <!-- Player View -->
   {{#unless isGm}}
     <div class="instructions">
-      <p>{{ localize "C5ETRAINING.ChangeLogInstructionsPlayer" }}</p>
+      <p>{{ localize "downtime-5e.ChangeLogInstructionsPlayer" }}</p>
     </div>
     <div class="action-table">
       <table>
         <tr>
-          <th>{{ localize "C5ETRAINING.Time" }}</th>
-          <th>{{ localize "C5ETRAINING.User" }}</th>
-          <th>{{ localize "C5ETRAINING.Item" }}</th>
-          <th>{{ localize "C5ETRAINING.Action" }}</th>
-          <th>{{ localize "C5ETRAINING.ProgressChange" }}</th>
+          <th>{{ localize "downtime-5e.Time" }}</th>
+          <th>{{ localize "downtime-5e.User" }}</th>
+          <th>{{ localize "downtime-5e.Item" }}</th>
+          <th>{{ localize "downtime-5e.Action" }}</th>
+          <th>{{ localize "downtime-5e.ProgressChange" }}</th>
         </tr>
         {{#each changes as |change id|}}
         <tr>
@@ -33,18 +33,18 @@
   <!-- GM View -->
   {{#if isGm}}
   <div class="instructions">
-    <p>{{ localize "C5ETRAINING.ChangeLogInstructionsGm" }}</p>
-    <p>{{ localize "C5ETRAINING.ChangeLogDeleteNote" }}</p>
+    <p>{{ localize "downtime-5e.ChangeLogInstructionsGm" }}</p>
+    <p>{{ localize "downtime-5e.ChangeLogDeleteNote" }}</p>
   </div>
   <div class="action-table">
     <table>
       <tr>
-        <th>{{ localize "C5ETRAINING.Time" }}</th>
-        <th>{{ localize "C5ETRAINING.User" }}</th>
-        <th>{{ localize "C5ETRAINING.Item" }}</th>
-        <th>{{ localize "C5ETRAINING.Action" }}</th>
-        <th>{{ localize "C5ETRAINING.ProgressChange" }}</th>
-        <th>{{ localize "C5ETRAINING.Dismiss" }}<th>
+        <th>{{ localize "downtime-5e.Time" }}</th>
+        <th>{{ localize "downtime-5e.User" }}</th>
+        <th>{{ localize "downtime-5e.Item" }}</th>
+        <th>{{ localize "downtime-5e.Action" }}</th>
+        <th>{{ localize "downtime-5e.ProgressChange" }}</th>
+        <th>{{ localize "downtime-5e.Dismiss" }}<th>
       </tr>
       {{#each changes as |change id|}}
       <tr>
@@ -60,7 +60,7 @@
   </div>
 
   <footer>
-    <button id="apply-audits"><i class='fas fa-check'></i> {{ localize "C5ETRAINING.DismissSelected" }}</button>
+    <button id="apply-audits"><i class='fas fa-check'></i> {{ localize "downtime-5e.DismissSelected" }}</button>
   </footer>
   {{/if}}
 

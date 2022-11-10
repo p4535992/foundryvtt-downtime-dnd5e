@@ -6,7 +6,7 @@ export default class TrackedItemApp extends FormApplication {
 		return mergeObject(super.defaultOptions, {
 			id: "crash-downtime-item-app",
 			template: "modules/5e-training/templates/tracked-item-app.html",
-			title: game.i18n.localize("C5ETRAINING.CreateEditItemAppTitle"),
+			title: game.i18n.localize("downtime-5e.CreateEditItemAppTitle"),
 			width: 400,
 			resizable: true,
 			closeOnSubmit: true,
@@ -53,7 +53,7 @@ export default class TrackedItemApp extends FormApplication {
 			let newThing = $(ev.currentTarget).val();
 			if (!newThing) {
 				ui.notifications.warn(
-					"Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.InputErrorName")
+					"Crash's Tracking & Training (5e): " + game.i18n.localize("downtime-5e.InputErrorName")
 				);
 				this.render();
 			} else {
@@ -73,7 +73,7 @@ export default class TrackedItemApp extends FormApplication {
 			let newThing = parseInt($(ev.currentTarget).val());
 			if (newThing == null || isNaN(newThing) || newThing < 0 || newThing > this.object.item.completionAt) {
 				ui.notifications.warn(
-					"Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.InputErrorProgress")
+					"Crash's Tracking & Training (5e): " + game.i18n.localize("downtime-5e.InputErrorProgress")
 				);
 				this.render();
 			} else {
@@ -102,7 +102,7 @@ export default class TrackedItemApp extends FormApplication {
 			let newThing = $(ev.currentTarget).val();
 			if (!newThing) {
 				ui.notifications.warn(
-					"Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.InputErrorMacroName")
+					"Crash's Tracking & Training (5e): " + game.i18n.localize("downtime-5e.InputErrorMacroName")
 				);
 				this.render();
 			} else {
@@ -114,7 +114,7 @@ export default class TrackedItemApp extends FormApplication {
 			let newThing = parseInt($(ev.currentTarget).val());
 			if (!newThing || isNaN(newThing) || newThing <= 0) {
 				ui.notifications.warn(
-					"Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.InputErrorFixedIncrease")
+					"Crash's Tracking & Training (5e): " + game.i18n.localize("downtime-5e.InputErrorFixedIncrease")
 				);
 				this.render();
 			} else {
@@ -135,7 +135,7 @@ export default class TrackedItemApp extends FormApplication {
 			let newThing = parseInt($(ev.currentTarget).val());
 			if (!newThing || isNaN(newThing) || newThing <= 0) {
 				ui.notifications.warn(
-					"Crash's Tracking & Training (5e): " + game.i18n.localize("C5ETRAINING.InputErrorCompletionAt")
+					"Crash's Tracking & Training (5e): " + game.i18n.localize("downtime-5e.InputErrorCompletionAt")
 				);
 				this.render();
 			} else {
@@ -154,7 +154,7 @@ export default class TrackedItemApp extends FormApplication {
 		let newItem = objItem;
 
 		// Set placeholders for name and image, just in case something's gone really wrong here
-		newItem.name = formData.name || game.i18n.localize("C5ETRAINING.NewItem");
+		newItem.name = formData.name || game.i18n.localize("downtime-5e.NewItem");
 		newItem.img = formData.img || "icons/svg/book.svg";
 		newItem.progressionStyle = formData.progressionStyle || "ABILITY";
 

@@ -14,7 +14,7 @@ export function registerHelpers() {
 		let formatted = "";
 
 		if (item.progressionStyle === "FIXED") {
-			formatted = game.i18n.localize("C5ETRAINING.ProgressionStyleFixed");
+			formatted = game.i18n.localize("downtime-5e.ProgressionStyleFixed");
 		} else if (item.progressionStyle === "ABILITY") {
 			formatted = CONFIG.DND5E.abilities[item.ability];
 		} else if (item.progressionStyle === "SKILL") {
@@ -27,14 +27,14 @@ export function registerHelpers() {
 			if (tool) {
 				formatted = tool.name;
 			} else {
-				formatted = "[" + game.i18n.localize("C5ETRAINING.InvalidTool") + "]";
+				formatted = "[" + game.i18n.localize("downtime-5e.InvalidTool") + "]";
 			}
 		} else if (item.progressionStyle === "MACRO") {
-			formatted = game.i18n.localize("C5ETRAINING.ProgressionStyleMacro");
+			formatted = game.i18n.localize("downtime-5e.ProgressionStyleMacro");
 		}
 
 		if (item.dc) {
-			formatted += " (" + game.i18n.localize("C5ETRAINING.DC") + item.dc + ")";
+			formatted += " (" + game.i18n.localize("downtime-5e.DC") + item.dc + ")";
 		}
 
 		return formatted;
@@ -49,9 +49,9 @@ export function registerHelpers() {
 	});
 
 	Handlebars.registerHelper("5e-training-trainingRollBtnTooltip", function (trainingItem) {
-		let text = game.i18n.localize("C5ETRAINING.RollItemProgress");
+		let text = game.i18n.localize("downtime-5e.RollItemProgress");
 		if (trainingItem.progress >= trainingItem.completionAt) {
-			text = game.i18n.localize("C5ETRAINING.RollItemDisabled");
+			text = game.i18n.localize("downtime-5e.RollItemDisabled");
 		}
 		return text;
 	});

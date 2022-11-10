@@ -3,7 +3,7 @@ export default class CategoryApp extends FormApplication {
 		return mergeObject(super.defaultOptions, {
 			id: "crash-downtime-category-app",
 			template: "modules/5e-training/templates/category-app.html",
-			title: game.i18n.localize("C5ETRAINING.CreateEditCategoryAppTitle"),
+			title: game.i18n.localize("downtime-5e.CreateEditCategoryAppTitle"),
 			width: 400,
 			resizable: false,
 			closeOnSubmit: true,
@@ -28,7 +28,7 @@ export default class CategoryApp extends FormApplication {
 
 		// Build category data
 		newCategory.id = formData.categoryId;
-		newCategory.name = formData.nameInput || game.i18n.localize("C5ETRAINING.UnnamedCategory");
+		newCategory.name = formData.nameInput || game.i18n.localize("downtime-5e.UnnamedCategory");
 		newCategory.description = formData.descriptionInput || "";
 
 		// See if category already exists
