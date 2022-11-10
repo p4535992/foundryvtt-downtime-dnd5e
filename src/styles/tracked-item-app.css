@@ -7,11 +7,9 @@ form.crash-tracked-item-app .form-group {
 	align-items: center;
 }
 
-
 form.crash-tracked-item-app .form-group.lighter {
 	opacity: 60%;
 }
-
 
 form.crash-tracked-item-app .form-group label {
 	color: #4b4a44;
@@ -30,27 +28,27 @@ form.crash-tracked-item-app .form-header {
 }
 
 form.crash-tracked-item-app .help {
-  position: relative;
-  display: inline-block;
+	position: relative;
+	display: inline-block;
 }
 
 form.crash-tracked-item-app .help .tooltip {
-  visibility: hidden;
-  background-color: #4b4a44;
-  color: #fff;
+	visibility: hidden;
+	background-color: #4b4a44;
+	color: #fff;
 	font-weight: normal;
 	line-height: 15px;
 	font-size: 10px;
-  text-align: center;
-  padding: 5px;
+	text-align: center;
+	padding: 5px;
 	width: 200px;
-  border-radius: 4px;
-  position: absolute;
-  z-index: 1;
+	border-radius: 4px;
+	position: absolute;
+	z-index: 1;
 	right: 105%;
 	box-shadow: 0px 0px 5px #4b4a44;
 }
 
 form.crash-tracked-item-app .help:hover .tooltip {
-  visibility: visible;
+	visibility: visible;
 }
