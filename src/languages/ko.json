@@ -78,7 +78,7 @@
 	"downtime-5e.SettingAnnounceCompletionFor": "추적된 항목 완료 알림:",
 	"downtime-5e.SettingAnnounceCompletionForHint": "추적된 항목 완료 시 채팅 메시지를 발동할 액터 유형을 선택한다.",
 	"downtime-5e.SettingShowImportButton": "가져오기 버튼 표시",
-	"downtime-5e.SettingShowImportButtonHint": "추적 탭에 가져오기 버튼을 표시하려면 활성화한다. 문제 해결/데이터 복원 도구이며 예기치 않은 데이터 가져오기를 방지하기 위한 검사가 없다. 이러한 방식으로 예기치 않은 데이터를 가져오면 액터의 모듈이 손상될 수 있다. 이 기능은 사용자의 책임 하에 사용한다. Crash는 무슨 일이 생겼을 때 해결할 수 있도록 기꺼이 도와주지만, 보장은 하지 않는다.",
+	"downtime-5e.SettingShowImportButtonHint": "추적 탭에 가져오기 버튼을 표시하려면 활성화한다. 문제 해결/데이터 복원 도구이며 예기치 않은 데이터 가져오기를 방지하기 위한 검사가 없다. 이러한 방식으로 예기치 않은 데이터를 가져오면 액터의 모듈이 손상될 수 있다. 이 기능은 사용자의 책임 하에 사용한다. developer는 무슨 일이 생겼을 때 해결할 수 있도록 기꺼이 도와주지만, 보장은 하지 않는다.",
 
 	"downtime-5e.SettingTabName": "탭 이름",
 	"downtime-5e.SettingTabNameHint": "Sets the title of the tab to whatever you enter here. Default is 'Tracking,' but you may wish to call it something else depending on how you use the module.",
@@ -210,7 +210,7 @@
 
 	"downtime-5e.ImportComplete": "가져오기 완료",
 
-	"downtime-5e.NoIdWarning": "아이템 ID를 찾을 수 없습니다. 이는 모듈의 이전 버전에서 이 항목을 만들었기 때문일 수 있으며 일반적으로 페이지를 새로고침하고 메시지가 나타났을 때 마이그레이션을 수행하도록 선택하면 해결할 수 있다. 마이그레이션 대화상자가 표시되지 않으면 Crash가 도와줄 수 있다. 이 액터의 추적된 항목을 내보내기 한 뒤 GitHub 또는 디스코드의 버그 리포트를 통해 Crash에게 보낼 것.",
+	"downtime-5e.NoIdWarning": "아이템 ID를 찾을 수 없습니다. 이는 모듈의 이전 버전에서 이 항목을 만들었기 때문일 수 있으며 일반적으로 페이지를 새로고침하고 메시지가 나타났을 때 마이그레이션을 수행하도록 선택하면 해결할 수 있다. 마이그레이션 대화상자가 표시되지 않으면 developer가 도와줄 수 있다. 이 액터의 추적된 항목을 내보내기 한 뒤 GitHub 또는 디스코드의 버그 리포트를 통해 developer에게 보낼 것.",
 
 	"downtime-5e.SuccessesRequired": "성공 목표"
 }

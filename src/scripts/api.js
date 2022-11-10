@@ -9,5 +9,7 @@ const API = {
 	//     //@ts-ignore
 	//     MaxwelMaliciousMaladies.displayDialog();
 	// },
+
+	crashTNT,
 };
 export default API;

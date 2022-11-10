@@ -80,7 +80,7 @@
 	"downtime-5e.SettingAnnounceCompletionFor": "Announce Tracked Item Completion For:",
 	"downtime-5e.SettingAnnounceCompletionForHint": "Choose which actor types you would like to have trigger chat messages upon tracked item completion.",
 	"downtime-5e.SettingShowImportButton": "Show Import Button",
-	"downtime-5e.SettingShowImportButtonHint": "Enable this to display the import button on the tracking tab. This is meant to be a troubleshooting / data restoration tool, and there are no checks in place to prevent the importing of unexpected data. Importing unexpected data in this way can break the module for the actor. You use this feature AT YOUR OWN RISK. Crash is happy to help you un-break things if something happens, but she makes no guarantees.",
+	"downtime-5e.SettingShowImportButtonHint": "Enable this to display the import button on the tracking tab. This is meant to be a troubleshooting / data restoration tool, and there are no checks in place to prevent the importing of unexpected data. Importing unexpected data in this way can break the module for the actor. You use this feature AT YOUR OWN RISK. The developer is happy to help you un-break things if something happens, but she makes no guarantees.",
 
 	"downtime-5e.SettingTabName": "Tab Name",
 	"downtime-5e.SettingTabNameHint": "Sets the title of the tab to whatever you enter here. Default is 'Tracking,' but you may wish to call it something else depending on how you use the module.",
@@ -210,7 +210,7 @@
 
 	"downtime-5e.ImportComplete": "Import Complete",
 
-	"downtime-5e.NoIdWarning": "Item ID not found. This is probably because this item was created by an earlier version of this module, and can usually be solved by refreshing the page and choosing to perform the migration when prompted. If no migration prompt is presented, Crash can help you out! Export this actor's tracked items and send them to Crash via a bug report on GitHub or Discord.",
+	"downtime-5e.NoIdWarning": "Item ID not found. This is probably because this item was created by an earlier version of this module, and can usually be solved by refreshing the page and choosing to perform the migration when prompted. If no migration prompt is presented, The developer can help you out! Export this actor's tracked items and send them to the developer via a bug report on GitHub or Discord.",
 
 	"downtime-5e.SuccessesRequired": "Successes Required"
 }

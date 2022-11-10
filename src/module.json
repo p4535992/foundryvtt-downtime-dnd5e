@@ -86,12 +86,12 @@
 		"verified": 10,
 		"maximum": 10
 	},
-	"url": "https://github.com/p4535992/foundryvtt-mountup",
-	"manifest": "https://github.com/p4535992/foundryvtt-mountup/releases/latest/download/module.json",
-	"download": "https://github.com/p4535992/foundryvtt-mountup/releases/latest/download/module.zip",
-	"readme": "https://github.com/p4535992/foundryvtt-mountup/blob/v3.3.3/README.md",
-	"changelog": "https://github.com/p4535992/foundryvtt-mountup/blob/v3.3.3/changelog.md",
-	"bugs": "https://github.com/p4535992/foundryvtt-mountup/issues",
+	"url": "https://github.com/p4535992/foundryvtt-downtime-5e",
+	"manifest": "https://github.com/p4535992/foundryvtt-downtime-5e/releases/latest/download/module.json",
+	"download": "https://github.com/p4535992/foundryvtt-downtime-5e/releases/latest/download/module.zip",
+	"readme": "https://github.com/p4535992/foundryvtt-downtime-5e/blob/v1.1.0/README.md",
+	"changelog": "https://github.com/p4535992/foundryvtt-downtime-5e/blob/v1.1.0/changelog.md",
+	"bugs": "https://github.com/p4535992/foundryvtt-downtime-5e/issues",
 	"allowBugReporter": true,
 	"manifestPlusVersion": "1.2.0",
 	"relationships": {

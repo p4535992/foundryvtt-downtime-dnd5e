@@ -1,4 +1,4 @@
-import CrashTrackingAndTraining from "../CrashTrackingAndTraining.js";
+import TrackingAndTraining from "../TrackingAndTraining.js";
 
 /* MIGRATION #1 (implemented in version 0.6.0)
 - Add id's to items and log entries
@@ -20,7 +20,7 @@ export const migrateToVersion1 = function (item) {
 
 	// Translate old roll types to new ones and set appropriate fields
 	// To do this, we're going to use the getRollType method we used to use in the old days when everything was under the roof of "ability" progression types
-	let rollType = CrashTrackingAndTraining.determineRollType(item);
+	let rollType = TrackingAndTraining.determineRollType(item);
 
 	// OLD Progression Type: Ability Check or DC - ABILITY
 	if (rollType === "ability") {

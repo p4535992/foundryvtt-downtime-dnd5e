@@ -4,9 +4,9 @@ import TrackedItem from "./TrackedItem.js";
 import Category from "./Category.js";
 import CONSTANTS from "./constants.js";
 
-export default class CrashTrackingAndTraining {
+export default class TrackingAndTraining {
 	static async addCategory(actorId) {
-		// console.log("Crash's Tracking & Training (5e) | New Category excuted!");
+		// log("New Category excuted!");
 
 		let actor = game.actors.get(actorId);
 		let data = {
@@ -17,7 +17,7 @@ export default class CrashTrackingAndTraining {
 	}
 
 	static async editCategory(actorId, categoryId) {
-		// console.log("Crash's Tracking & Training (5e) | Edit Category excuted!");
+		// log("Edit Category excuted!");
 
 		let actor = game.actors.get(actorId);
 		let allCategories = actor.getFlag(CONSTANTS.MODULE_NAME, "categories") || [];
@@ -30,7 +30,7 @@ export default class CrashTrackingAndTraining {
 	}
 
 	static async deleteCategory(actorId, categoryId) {
-		// console.log("Crash's Tracking & Training (5e) | Delete Category excuted!");
+		// log("Delete Category excuted!");
 
 		// Set up some variables
 		let actor = game.actors.get(actorId);
@@ -79,7 +79,7 @@ export default class CrashTrackingAndTraining {
 	}
 
 	static async addItem(actorId, DROPDOWN_OPTIONS) {
-		// console.log("Crash's Tracking & Training (5e) | New Item excuted!");
+		// log("New Item excuted!");
 		let actor = game.actors.get(actorId);
 		let allCategories = actor.getFlag(CONSTANTS.MODULE_NAME, "categories") || [];
 		let item = new TrackedItem();
@@ -94,7 +94,7 @@ export default class CrashTrackingAndTraining {
 	}
 
 	static async editFromSheet(actorId, itemId, DROPDOWN_OPTIONS) {
-		// console.log("Crash's Tracking & Training (5e) | Edit Downtime Activity excuted!");
+		// log("Edit Downtime Activity excuted!");
 		let actor = game.actors.get(actorId);
 		let allCategories = actor.getFlag(CONSTANTS.MODULE_NAME, "categories") || [];
 		let allItems = actor.getFlag(CONSTANTS.MODULE_NAME, "trainingItems") || [];
@@ -110,7 +110,7 @@ export default class CrashTrackingAndTraining {
 	}
 
 	static async deleteFromSheet(actorId, itemId) {
-		// console.log("Crash's Tracking & Training (5e) | Delete Downtime Activity excuted!");
+		// log("Delete Downtime Activity excuted!");
 
 		// Set up some variables
 		let actor = game.actors.get(actorId);
@@ -149,7 +149,7 @@ export default class CrashTrackingAndTraining {
 	}
 
 	static async updateItemProgressFromSheet(actorId, itemId, value) {
-		// console.log("Crash's Tracking & Training (5e) | Progression Override excuted!");
+		// log("Progression Override excuted!");
 
 		// Set up some variables
 		let actor = game.actors.get(actorId);
@@ -162,47 +162,47 @@ export default class CrashTrackingAndTraining {
 		if (value.charAt(0) === "+") {
 			let changeName = game.i18n.localize("downtime-5e.AdjustProgressValue") + " (+)";
 			adjustment = parseInt(value.substr(1).trim());
-			thisItem = CrashTrackingAndTraining.calculateNewProgress(thisItem, changeName, adjustment);
+			thisItem = TrackingAndTraining.calculateNewProgress(thisItem, changeName, adjustment);
 		} else if (value.charAt(0) === "-") {
 			let changeName = game.i18n.localize("downtime-5e.AdjustProgressValue") + " (-)";
 			adjustment = 0 - parseInt(value.substr(1).trim());
-			thisItem = CrashTrackingAndTraining.calculateNewProgress(thisItem, changeName, adjustment);
+			thisItem = TrackingAndTraining.calculateNewProgress(thisItem, changeName, adjustment);
 		} else {
 			let changeName = game.i18n.localize("downtime-5e.AdjustProgressValue") + " (=)";
 			adjustment = parseInt(value);
-			thisItem = CrashTrackingAndTraining.calculateNewProgress(thisItem, changeName, adjustment, true);
+			thisItem = TrackingAndTraining.calculateNewProgress(thisItem, changeName, adjustment, true);
 		}
 
 		// Log completion
-		CrashTrackingAndTraining.checkCompletion(actor, thisItem, alreadyCompleted);
+		TrackingAndTraining.checkCompletion(actor, thisItem, alreadyCompleted);
 
 		// Update flags and actor
 		await actor.setFlag(CONSTANTS.MODULE_NAME, "trainingItems", allItems);
 	}
 
 	static async progressItem(actorId, itemId) {
-		// console.log("Crash's Tracking & Training (5e) | Progress Downtime Activity excuted!");
+		// log("Progress Downtime Activity excuted!");
 
 		// Set up some variables
 		let actor = game.actors.get(actorId);
 		let allItems = actor.getFlag(CONSTANTS.MODULE_NAME, "trainingItems") || [];
 		let thisItem = allItems.filter((obj) => obj.id === itemId)[0];
-		let rollType = CrashTrackingAndTraining.determineRollType(thisItem);
+		let rollType = TrackingAndTraining.determineRollType(thisItem);
 		let alreadyCompleted = thisItem.progress >= thisItem.completionAt;
 
 		// Progression Type: Ability Check or DC - ABILITY
 		if (rollType === "ABILITY") {
 			let abilityName = CONFIG.DND5E.abilities[thisItem.ability];
 			// Roll to increase progress
-			let options = CrashTrackingAndTraining.getRollOptions();
+			let options = TrackingAndTraining.getRollOptions();
 			let r = await actor.rollAbilityTest(thisItem.ability, options);
 			if (r) {
 				let attemptName = game.i18n.localize("downtime-5e.Roll") + " " + abilityName;
 				// Increase progress
-				let progressChange = CrashTrackingAndTraining.getRollResult(r);
-				thisItem = CrashTrackingAndTraining.calculateNewProgress(thisItem, attemptName, progressChange);
+				let progressChange = TrackingAndTraining.getRollResult(r);
+				thisItem = TrackingAndTraining.calculateNewProgress(thisItem, attemptName, progressChange);
 				// Log item completion
-				CrashTrackingAndTraining.checkCompletion(actor, thisItem, alreadyCompleted);
+				TrackingAndTraining.checkCompletion(actor, thisItem, alreadyCompleted);
 				// Update flags and actor
 				await actor.setFlag(CONSTANTS.MODULE_NAME, "trainingItems", allItems);
 			}
@@ -212,15 +212,15 @@ export default class CrashTrackingAndTraining {
 		else if (rollType === "SKILL") {
 			let abilityName = CONFIG.DND5E.skills[thisItem.skill].label;
 			// Roll to increase progress
-			let options = CrashTrackingAndTraining.getRollOptions();
+			let options = TrackingAndTraining.getRollOptions();
 			let r = await actor.rollSkill(thisItem.skill, options);
 			if (r) {
 				let attemptName = game.i18n.localize("downtime-5e.Roll") + " " + abilityName;
 				// Increase progress
-				let progressChange = CrashTrackingAndTraining.getRollResult(r);
-				thisItem = CrashTrackingAndTraining.calculateNewProgress(thisItem, attemptName, progressChange);
+				let progressChange = TrackingAndTraining.getRollResult(r);
+				thisItem = TrackingAndTraining.calculateNewProgress(thisItem, attemptName, progressChange);
 				// Log item completion
-				CrashTrackingAndTraining.checkCompletion(actor, thisItem, alreadyCompleted);
+				TrackingAndTraining.checkCompletion(actor, thisItem, alreadyCompleted);
 				// Update flags and actor
 				await actor.setFlag(CONSTANTS.MODULE_NAME, "trainingItems", allItems);
 			}
@@ -233,22 +233,20 @@ export default class CrashTrackingAndTraining {
 			if (tool) {
 				let toolName = tool.name;
 				// Roll to increase progress
-				let options = CrashTrackingAndTraining.getRollOptions();
+				let options = TrackingAndTraining.getRollOptions();
 				let r = await tool.rollToolCheck(options);
 				if (r) {
 					let attemptName = game.i18n.localize("downtime-5e.Roll") + " " + toolName;
 					// Increase progress
-					let progressChange = CrashTrackingAndTraining.getToolRollResult(r);
-					thisItem = CrashTrackingAndTraining.calculateNewProgress(thisItem, attemptName, progressChange);
+					let progressChange = TrackingAndTraining.getToolRollResult(r);
+					thisItem = TrackingAndTraining.calculateNewProgress(thisItem, attemptName, progressChange);
 					// Log item completion
-					CrashTrackingAndTraining.checkCompletion(actor, thisItem, alreadyCompleted);
+					TrackingAndTraining.checkCompletion(actor, thisItem, alreadyCompleted);
 					// Update flags and actor
 					await actor.setFlag(CONSTANTS.MODULE_NAME, "trainingItems", allItems);
 				}
 			} else {
-				ui.notifications.warn(
-					"Crash's Tracking & Training (5e): " + game.i18n.localize("downtime-5e.ToolNotFoundWarning")
-				);
+				ui.notifications.warn(game.i18n.localize("downtime-5e.ToolNotFoundWarning"));
 			}
 		}
 
@@ -256,9 +254,9 @@ export default class CrashTrackingAndTraining {
 		else if (rollType === "FIXED") {
 			let itemName = game.i18n.localize("downtime-5e.ProgressionStyleFixed");
 			// Increase progress
-			thisItem = CrashTrackingAndTraining.calculateNewProgress(thisItem, itemName, thisItem.fixedIncrease);
+			thisItem = TrackingAndTraining.calculateNewProgress(thisItem, itemName, thisItem.fixedIncrease);
 			// Log item completion
-			CrashTrackingAndTraining.checkCompletion(actor, thisItem, alreadyCompleted);
+			TrackingAndTraining.checkCompletion(actor, thisItem, alreadyCompleted);
 			// Update flags and actor
 			await actor.setFlag(CONSTANTS.MODULE_NAME, "trainingItems", allItems);
 		}
@@ -270,12 +268,7 @@ export default class CrashTrackingAndTraining {
 			if (macro) {
 				macro.execute();
 			} else {
-				ui.notifications.warn(
-					"Crash's Tracking & Training (5e): " +
-						game.i18n.localize("downtime-5e.MacroNotFoundWarning") +
-						": " +
-						macroName
-				);
+				ui.notifications.warn(game.i18n.localize("downtime-5e.MacroNotFoundWarning") + ": " + macroName);
 			}
 		}
 	}
@@ -393,7 +386,7 @@ export default class CrashTrackingAndTraining {
 			}
 
 			if (sendIt) {
-				// console.log("Crash's Tracking & Training (5e) | " + actor.name + " " + game.i18n.localize("downtime-5e.CompletedATrackedItem"));
+				// log("" + actor.name + " " + game.i18n.localize("downtime-5e.CompletedATrackedItem"));
 				let chatHtml = await renderTemplate(
 					`modules/${CONSTANTS.MODULE_NAME}/templates/completion-message.hbs`,
 					{
@@ -552,7 +545,7 @@ export default class CrashTrackingAndTraining {
 						},
 						default: "ok",
 					}).render(true);
-					console.log("Crash's Tracking & Training (5e) | Import detected old format.", importedData);
+					log("Import detected old format.", importedData);
 					importedItems = importedData;
 				}
 

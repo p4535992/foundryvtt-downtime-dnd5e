@@ -1,5 +1,5 @@
 import TrackedItem from "./TrackedItem.js";
-import CrashTrackingAndTraining from "./CrashTrackingAndTraining.js";
+import TrackingAndTraining from "./TrackingAndTraining.js";
 import CONSTANTS from "./constants.js";
 
 export default class TrackedItemApp extends FormApplication {
@@ -53,9 +53,7 @@ export default class TrackedItemApp extends FormApplication {
 		html.on("change", "#nameInput", (ev) => {
 			let newThing = $(ev.currentTarget).val();
 			if (!newThing) {
-				ui.notifications.warn(
-					"Crash's Tracking & Training (5e): " + game.i18n.localize("downtime-5e.InputErrorName")
-				);
+				ui.notifications.warn(game.i18n.localize("downtime-5e.InputErrorName"));
 				this.render();
 			} else {
 				this.object.item.name = newThing;
@@ -73,9 +71,7 @@ export default class TrackedItemApp extends FormApplication {
 		html.on("change", "#progressInput", (ev) => {
 			let newThing = parseInt($(ev.currentTarget).val());
 			if (newThing == null || isNaN(newThing) || newThing < 0 || newThing > this.object.item.completionAt) {
-				ui.notifications.warn(
-					"Crash's Tracking & Training (5e): " + game.i18n.localize("downtime-5e.InputErrorProgress")
-				);
+				ui.notifications.warn(game.i18n.localize("downtime-5e.InputErrorProgress"));
 				this.render();
 			} else {
 				this.object.item.progress = newThing;
@@ -102,9 +98,7 @@ export default class TrackedItemApp extends FormApplication {
 		html.on("change", "#macroNameInput", (ev) => {
 			let newThing = $(ev.currentTarget).val();
 			if (!newThing) {
-				ui.notifications.warn(
-					"Crash's Tracking & Training (5e): " + game.i18n.localize("downtime-5e.InputErrorMacroName")
-				);
+				ui.notifications.warn(game.i18n.localize("downtime-5e.InputErrorMacroName"));
 				this.render();
 			} else {
 				this.object.item.macroName = newThing;
@@ -114,9 +108,7 @@ export default class TrackedItemApp extends FormApplication {
 		html.on("change", "#fixedIncreaseInput", (ev) => {
 			let newThing = parseInt($(ev.currentTarget).val());
 			if (!newThing || isNaN(newThing) || newThing <= 0) {
-				ui.notifications.warn(
-					"Crash's Tracking & Training (5e): " + game.i18n.localize("downtime-5e.InputErrorFixedIncrease")
-				);
+				ui.notifications.warn(game.i18n.localize("downtime-5e.InputErrorFixedIncrease"));
 				this.render();
 			} else {
 				this.object.item.fixedIncrease = newThing;
@@ -135,9 +127,7 @@ export default class TrackedItemApp extends FormApplication {
 		html.on("change", "#completionAtInput", (ev) => {
 			let newThing = parseInt($(ev.currentTarget).val());
 			if (!newThing || isNaN(newThing) || newThing <= 0) {
-				ui.notifications.warn(
-					"Crash's Tracking & Training (5e): " + game.i18n.localize("downtime-5e.InputErrorCompletionAt")
-				);
+				ui.notifications.warn(game.i18n.localize("downtime-5e.InputErrorCompletionAt"));
 				this.render();
 			} else {
 				this.object.item.completionAt = newThing;
@@ -218,6 +208,6 @@ export default class TrackedItemApp extends FormApplication {
 
 		// Announce completion if complete
 		let alreadyCompleted = this.object.alreadyCompleted;
-		CrashTrackingAndTraining.checkCompletion(actor, newItem, alreadyCompleted);
+		TrackingAndTraining.checkCompletion(actor, newItem, alreadyCompleted);
 	}
 }

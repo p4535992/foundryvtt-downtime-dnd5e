@@ -1,5 +1,5 @@
 import CONSTANTS from "./constants.js";
-import CrashTrackingAndTraining from "./CrashTrackingAndTraining.js";
+import TrackingAndTraining from "./TrackingAndTraining.js";
 
 export function registerHelpers() {
 	Handlebars.registerHelper(`${CONSTANTS.MODULE_NAME}-trainingCompletion`, function (trainingItem) {
