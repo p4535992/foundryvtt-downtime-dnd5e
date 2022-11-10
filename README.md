@@ -61,7 +61,7 @@ Any issues, bugs, or feature requests are always welcome to be reported directly
 
 ## License
 
-- [Crash's Tracking & Training (formerly known as Crash's Downtime Tracking)](https://github.com/crash1115/5e-training) with [???](https://github.com/crash1115/5e-training/blob/master/LICENSE)
+- [Crash's Tracking & Training (formerly known as Crash's Downtime Tracking)](https://github.com/crash1115/5e-training) with [Creative Commons Attribution 4.0 International License.](https://github.com/crash1115/5e-training/blob/master/LICENSE)
 
 - [Ethck's 5e Downtime Tracking](https://github.com/Ethck/Ethck-s-Downtime-Tracking) with [MIT](https://github.com/Ethck/Ethck-s-Downtime-Tracking/blob/master/LICENSE)
 
