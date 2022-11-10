@@ -42,9 +42,9 @@ export function registerHelpers() {
 	});
 
 	Handlebars.registerHelper(`${CONSTANTS.MODULE_NAME}-trainingRollBtnClass`, function (trainingItem) {
-		let className = "downtime-5e-training-roll";
+		let className = "downtime-5e-roll";
 		if (trainingItem.progress >= trainingItem.completionAt) {
-			className = "downtime-5e-training-roll-disabled";
+			className = "downtime-5e-roll-disabled";
 		}
 		return className;
 	});

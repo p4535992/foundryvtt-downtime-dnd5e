@@ -1,4 +1,4 @@
-import CONSTANTS from "./constants";
+import CONSTANTS from "./constants.js";
 
 export const preloadTemplates = async function () {
 	const templatePaths = [
@@ -6,7 +6,7 @@ export const preloadTemplates = async function () {
 		`modules/${CONSTANTS.MODULE_NAME}/templates/partials/skill.hbs`,
 		`modules/${CONSTANTS.MODULE_NAME}/templates/partials/tool.hbs`,
 		`modules/${CONSTANTS.MODULE_NAME}/templates/partials/macro.hbs`,
-		`modules/${CONSTANTS.MODULE_NAME}templates/partials/fixed.hbs`,
+		`modules/${CONSTANTS.MODULE_NAME}/templates/partials/fixed.hbs`,
 	];
 	return loadTemplates(templatePaths);
 };

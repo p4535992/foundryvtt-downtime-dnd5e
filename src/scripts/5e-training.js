@@ -7,6 +7,7 @@ import AuditLog from "./AuditLog.js";
 import TrackingAndTraining from "./TrackingAndTraining.js";
 import { setApi } from "../main.js";
 import CONSTANTS from "./constants.js";
+import API from "./api.js";
 
 // Register Game Settings
 export const initHooks = () => {
@@ -20,11 +21,12 @@ export const initHooks = () => {
 export const setupHooks = () => {
 	// warn("Setup Hooks processing");
 	//@ts-ignore
-	setApi(API);
+	// setApi(API);
 };
 
 export const readyHooks = () => {
 	API.crashTNT = crashTNT();
+	setApi(API);
 	migrateAllActors();
 };
 
@@ -33,6 +35,7 @@ async function addTrainingTab(app, html, data) {
 	// Determine if we should show the downtime tab
 	let showTrainingTab = false;
 	let showToUser = game.users.current.isGM || !game.settings.get(CONSTANTS.MODULE_NAME, "gmOnlyMode");
+	let notShowToUserEditMode = game.settings.get(CONSTANTS.MODULE_NAME, "gmOnlyEditMode") && !game.users.current.isGM;
 	if (data.isCharacter && data.editable) {
 		showTrainingTab = game.settings.get(CONSTANTS.MODULE_NAME, "enableTraining") && showToUser;
 	} else if (data.isNPC && data.editable) {
@@ -53,6 +56,7 @@ async function addTrainingTab(app, html, data) {
 		// Get some permissions
 		let showImportButton = game.settings.get(CONSTANTS.MODULE_NAME, "showImportButton");
 		data.showImportButton = showImportButton;
+		data.showToUserEditMode = !notShowToUserEditMode;
 
 		// Create the tab content
 		let sheet = html.find(".sheet-body");
@@ -68,14 +72,14 @@ async function addTrainingTab(app, html, data) {
 		const DROPDOWN_OPTIONS = { abilities: ABILITIES, skills: SKILLS, tools: actorTools };
 
 		// NEW CATEGORY
-		html.find(".downtime-5e-training-new-category").click(async (event) => {
+		html.find(".downtime-5e-new-category").click(async (event) => {
 			event.preventDefault();
 			// console.log("Create Category excuted!");
 			await TrackingAndTraining.addCategory(actor.id);
 		});
 
 		// EDIT CATEGORY
-		html.find(".downtime-5e-training-edit-category").click(async (event) => {
+		html.find(".downtime-5e-edit-category").click(async (event) => {
 			event.preventDefault();
 			// console.log("Edit Category excuted!");
 			let fieldId = event.currentTarget.id;
@@ -84,7 +88,7 @@ async function addTrainingTab(app, html, data) {
 		});
 
 		// DELETE CATEGORY
-		html.find(".downtime-5e-training-delete-category").click(async (event) => {
+		html.find(".downtime-5e-delete-category").click(async (event) => {
 			event.preventDefault();
 			// console.log("Delete Category excuted!");
 			let fieldId = event.currentTarget.id;
@@ -93,14 +97,14 @@ async function addTrainingTab(app, html, data) {
 		});
 
 		// ADD NEW DOWNTIME ACTIVITY
-		html.find(".downtime-5e-training-add").click(async (event) => {
+		html.find(".downtime-5e-add").click(async (event) => {
 			event.preventDefault();
 			// console.log("Create Item excuted!");
 			await TrackingAndTraining.addItem(actor.id, DROPDOWN_OPTIONS);
 		});
 
 		// EDIT DOWNTIME ACTIVITY
-		html.find(".downtime-5e-training-edit").click(async (event) => {
+		html.find(".downtime-5e-edit").click(async (event) => {
 			event.preventDefault();
 			// console.log("Edit Item excuted!");
 			let allItems = actor.getFlag(CONSTANTS.MODULE_NAME, "trainingItems") || [];
@@ -113,7 +117,7 @@ async function addTrainingTab(app, html, data) {
 		});
 
 		// DELETE DOWNTIME ACTIVITY
-		html.find(".downtime-5e-training-delete").click(async (event) => {
+		html.find(".downtime-5e-delete").click(async (event) => {
 			event.preventDefault();
 			// console.log("Delete Item excuted!");
 			let allItems = actor.getFlag(CONSTANTS.MODULE_NAME, "trainingItems") || [];
@@ -126,7 +130,7 @@ async function addTrainingTab(app, html, data) {
 		});
 
 		// EDIT PROGRESS VALUE
-		html.find(".downtime-5e-training-override").change(async (event) => {
+		html.find(".downtime-5e-override").change(async (event) => {
 			event.preventDefault();
 			// console.log("Progress Override excuted!");
 			let field = event.currentTarget;
@@ -146,7 +150,7 @@ async function addTrainingTab(app, html, data) {
 		});
 
 		// ROLL TO TRAIN
-		html.find(".downtime-5e-training-roll").click(async (event) => {
+		html.find(".downtime-5e-roll").click(async (event) => {
 			event.preventDefault();
 			// console.log("Roll Item excuted!");
 			let itemId = event.currentTarget.id.replace("downtime-5e-roll-", "");
@@ -160,7 +164,7 @@ async function addTrainingTab(app, html, data) {
 		// TOGGLE DESCRIPTION
 		// Modified version of _onItemSummary from dnd5e system located in
 		// dnd5e/module/actor/sheets/base.js
-		html.find(".downtime-5e-training-toggle-desc").click(async (event) => {
+		html.find(".downtime-5e-toggle-desc").click(async (event) => {
 			event.preventDefault();
 			// console.log("Toggle Acvtivity Info excuted!");
 
@@ -188,7 +192,7 @@ async function addTrainingTab(app, html, data) {
 		});
 
 		// EXPORT
-		html.find(".downtime-5e-training-export").click(async (event) => {
+		html.find(".downtime-5e-export").click(async (event) => {
 			event.preventDefault();
 			console.log("Export excuted!");
 			let actorId = actor.id;
@@ -196,7 +200,7 @@ async function addTrainingTab(app, html, data) {
 		});
 
 		// IMPORT
-		html.find(".downtime-5e-training-import").click(async (event) => {
+		html.find(".downtime-5e-import").click(async (event) => {
 			event.preventDefault();
 			console.log("Import excuted!");
 			let actorId = actor.id;
@@ -204,7 +208,7 @@ async function addTrainingTab(app, html, data) {
 		});
 
 		// OPEN AUDIT LOG
-		html.find(".downtime-5e-training-audit").click(async (event) => {
+		html.find(".downtime-5e-audit").click(async (event) => {
 			event.preventDefault();
 			// console.log("GM Audit excuted!");
 			new AuditLog(actor).render(true);

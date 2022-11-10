@@ -67,6 +67,8 @@
 
 	"downtime-5e.SettingGmOnlyMode": "Enable GM Only Mode.",
 	"downtime-5e.SettingGmOnlyModeHint": "Enabling this will put the module into GM Only mode. When this is on, the tab does not display on sheets for non-GM users, completion messages are automatically whispered to GM rather than displayed publicly, and roll dialogs will automatically have the Private GM Roll mode selected.",
+	"downtime-5e.SettingGmOnlyEditMode": "Enable GM Only Edit Mode.",
+	"downtime-5e.SettingGmOnlyEditModeHint": "Enabling this will put the module into GM Only Edit mode. When this is on, only a GM can add/edit category or add/edit any training. Basically the player can only roll the dice.",
 	"downtime-5e.SettingShowDowntimeTabPc": "Show Tracking Tab (PCs)",
 	"downtime-5e.SettingShowDowntimeTabPcHint": "Toggling this on will display the tracking tab on all PC sheets. You will need to close and reopen sheets for this to take effect.",
 	"downtime-5e.SettingShowDowntimeTabNpc": "Show Tracking Tab (NPCs)",

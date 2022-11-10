@@ -1,4 +1,4 @@
-import CONSTANTS from "./constants";
+import CONSTANTS from "./constants.js";
 
 export default class AuditLog extends FormApplication {
 	static get defaultOptions() {
@@ -14,11 +14,7 @@ export default class AuditLog extends FormApplication {
 
 	async getData(options = {}) {
 		let originalData = super.getData();
-		// let activities = originalData.object.data.flags[CONSTANTS.MODULE_NAME].trainingItems || [];
-		let activities =
-			(originalData.object.data
-				? getFlag(originalData.object.data, CONSTANTS.MODULE_NAME, `trainingItems`)
-				: getFlag(originalData.object, CONSTANTS.MODULE_NAME, `trainingItems`)) || [];
+		let activities = originalData.object.data.flags[CONSTANTS.MODULE_NAME].trainingItems || [];
 		let changes = [];
 
 		// Loop through each activity. If it's got no changes array, move on to the next one.

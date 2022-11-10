@@ -1,4 +1,4 @@
-import CONSTANTS from "./constants";
+import CONSTANTS from "./constants.js";
 
 export function registerSettings() {
 	// Stores data about migrations. This gets updated to the module's current version
@@ -22,6 +22,15 @@ export function registerSettings() {
 	game.settings.register(CONSTANTS.MODULE_NAME, "gmOnlyMode", {
 		name: game.i18n.localize("downtime-5e.SettingGmOnlyMode"),
 		hint: game.i18n.localize("downtime-5e.SettingGmOnlyModeHint"),
+		scope: "world",
+		config: true,
+		default: false,
+		type: Boolean,
+	});
+
+	game.settings.register(CONSTANTS.MODULE_NAME, "gmOnlyEditMode", {
+		name: game.i18n.localize("downtime-5e.SettingGmOnlyEditMode"),
+		hint: game.i18n.localize("downtime-5e.SettingGmOnlyEditModeHint"),
 		scope: "world",
 		config: true,
 		default: false,

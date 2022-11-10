@@ -1,10 +1,10 @@
-import CONSTANTS from "./constants";
+import CONSTANTS from "./constants.js";
 
 export default class CategoryApp extends FormApplication {
 	static get defaultOptions() {
 		return mergeObject(super.defaultOptions, {
 			id: "downtime-5e-downtime-category-app",
-			template: `modules/CONSTANTS.MODULE_NAME/templates/category-app.hbs`,
+			template: `modules/${CONSTANTS.MODULE_NAME}/templates/category-app.hbs`,
 			title: game.i18n.localize("downtime-5e.CreateEditCategoryAppTitle"),
 			width: 400,
 			resizable: false,
