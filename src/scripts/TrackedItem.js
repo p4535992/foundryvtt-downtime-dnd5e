@@ -1,3 +1,5 @@
+import CONSTANTS from "./constants";
+
 export default class TrackedItem {
 	constructor() {
 		this.id = randomID();
@@ -13,7 +15,7 @@ export default class TrackedItem {
 		this.macroName = null;
 		this.dc = null;
 		this.progress = 0;
-		this.completionAt = game.settings.get("5e-training", "totalToComplete");
+		this.completionAt = game.settings.get(CONSTANTS.MODULE_NAME, "totalToComplete");
 		this.changes = [];
 		this.schemaVersion = 1;
 	}

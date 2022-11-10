@@ -1,4 +1,4 @@
-form.crash-category-app .form-group {
+form.downtime-5e-category-app .form-group {
 	clear: both;
 	display: flex;
 	flex-direction: row;
@@ -7,17 +7,17 @@ form.crash-category-app .form-group {
 	align-items: center;
 }
 
-form.crash-category-app .form-group.lighter {
+form.downtime-5e-category-app .form-group.lighter {
 	opacity: 60%;
 }
 
-form.crash-category-app .form-group label {
+form.downtime-5e-category-app .form-group label {
 	color: #4b4a44;
 	font-weight: bold;
 	font-size: 13px;
 }
 
-form.crash-category-app .form-header {
+form.downtime-5e-category-app .form-header {
 	margin: 0 0 0.25em 0;
 	padding: 2px 0;
 	border-top: 2px groove #eeede0;

@@ -1,12 +1,13 @@
+import CONSTANTS from "./constants.js";
 import CrashTrackingAndTraining from "./CrashTrackingAndTraining.js";
 
 export function registerHelpers() {
-	Handlebars.registerHelper("5e-training-trainingCompletion", function (trainingItem) {
+	Handlebars.registerHelper(`${CONSTANTS.MODULE_NAME}-trainingCompletion`, function (trainingItem) {
 		let percentComplete = Math.min(100, (100 * trainingItem.progress) / trainingItem.completionAt).toFixed(0);
 		return percentComplete;
 	});
 
-	Handlebars.registerHelper("5e-training-progressionStyle", function (item, actor) {
+	Handlebars.registerHelper(`${CONSTANTS.MODULE_NAME}-progressionStyle`, function (item, actor) {
 		if (!item || !actor) {
 			return "?";
 		}
@@ -40,15 +41,15 @@ export function registerHelpers() {
 		return formatted;
 	});
 
-	Handlebars.registerHelper("5e-training-trainingRollBtnClass", function (trainingItem) {
-		let className = "crash-training-roll";
+	Handlebars.registerHelper(`${CONSTANTS.MODULE_NAME}-trainingRollBtnClass`, function (trainingItem) {
+		let className = "downtime-5e-training-roll";
 		if (trainingItem.progress >= trainingItem.completionAt) {
-			className = "crash-training-roll-disabled";
+			className = "downtime-5e-training-roll-disabled";
 		}
 		return className;
 	});
 
-	Handlebars.registerHelper("5e-training-trainingRollBtnTooltip", function (trainingItem) {
+	Handlebars.registerHelper(`${CONSTANTS.MODULE_NAME}-trainingRollBtnTooltip`, function (trainingItem) {
 		let text = game.i18n.localize("downtime-5e.RollItemProgress");
 		if (trainingItem.progress >= trainingItem.completionAt) {
 			text = game.i18n.localize("downtime-5e.RollItemDisabled");
@@ -56,9 +57,9 @@ export function registerHelpers() {
 		return text;
 	});
 
-	Handlebars.registerHelper("5e-training-isInCategory", function (actor, category) {
+	Handlebars.registerHelper(`${CONSTANTS.MODULE_NAME}-isInCategory`, function (actor, category) {
 		let thisCategoryId = category.id;
-		let allTrainingItems = actor.flags["5e-training"]?.trainingItems || [];
+		let allTrainingItems = actor.flags[CONSTANTS.MODULE_NAME]?.trainingItems || [];
 		let matchingItems = [];
 		for (var i = 0; i < allTrainingItems.length; i++) {
 			let thisItem = allTrainingItems[i];
@@ -70,8 +71,8 @@ export function registerHelpers() {
 		return matchingItems;
 	});
 
-	Handlebars.registerHelper("5e-training-isUncategorized", function (actor) {
-		let allTrainingItems = actor.flags["5e-training"]?.trainingItems || [];
+	Handlebars.registerHelper(`${CONSTANTS.MODULE_NAME}-isUncategorized`, function (actor) {
+		let allTrainingItems = actor.flags[CONSTANTS.MODULE_NAME]?.trainingItems || [];
 		let matchingItems = [];
 		for (var i = 0; i < allTrainingItems.length; i++) {
 			let thisItem = allTrainingItems[i];
@@ -83,7 +84,7 @@ export function registerHelpers() {
 		return matchingItems;
 	});
 
-	Handlebars.registerHelper("5e-training-getBarColor", function (item) {
+	Handlebars.registerHelper(`${CONSTANTS.MODULE_NAME}-getBarColor`, function (item) {
 		// Derived from this: https://gist.github.com/mlocati/7210513
 		let perc = Math.min(100, (100 * item.progress) / item.completionAt).toFixed(0);
 		var r,

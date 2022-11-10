@@ -1,23 +1,23 @@
-<div class="tab crash-training" data-group="primary" data-tab="training">
+<div class="tab downtime-5e-training" data-group="primary" data-tab="training">
 
   <!-- Tab Controls -->
   {{#if showToUserEditMode}}
-  <div class="crash-training-controls">
-    <div class="crash-training-export" title="{{ localize 'downtime-5e.ExportTrackedItemsTooltip' }}">
+  <div class="downtime-5e-training-controls">
+    <div class="downtime-5e-training-export" title="{{ localize 'downtime-5e.ExportTrackedItemsTooltip' }}">
       <i class="fas fa-file-import"></i> {{ localize 'downtime-5e.ExportTrackedItems' }}
     </div>
     {{#if showImportButton}}
-    <div class="crash-training-import" title="{{ localize 'downtime-5e.ImportTrackedItemsTooltip' }}">
+    <div class="downtime-5e-training-import" title="{{ localize 'downtime-5e.ImportTrackedItemsTooltip' }}">
       <i class="fas fa-file-export"></i> {{ localize 'downtime-5e.ImportTrackedItems' }}
     </div>
     {{/if}}
-    <div class="crash-training-audit push-left" title="{{ localize 'downtime-5e.ReviewChanges' }}">
+    <div class="downtime-5e-training-audit push-left" title="{{ localize 'downtime-5e.ReviewChanges' }}">
       <i class="fas fa-clipboard"></i> {{ localize 'downtime-5e.ChangeLog' }}
     </div>
-    <div class="crash-training-new-category" title="{{ localize 'downtime-5e.CreateNewCategory' }}">
+    <div class="downtime-5e-training-new-category" title="{{ localize 'downtime-5e.CreateNewCategory' }}">
       <i class="fas fa-list"></i> {{ localize 'downtime-5e.AddCategory' }}
     </div>
-    <div class="crash-training-add" title="{{ localize 'downtime-5e.CreateNewItem' }}">
+    <div class="downtime-5e-training-add" title="{{ localize 'downtime-5e.CreateNewItem' }}">
       <i class="fas fa-plus"></i> {{ localize 'downtime-5e.AddItem' }}
     </div>
   </div>
@@ -32,42 +32,42 @@
       <div class="activity-type">{{localize "downtime-5e.CheckTypeColumnHeader"}}</div>
       <div class="activity-override">{{localize "downtime-5e.ProgressColumnHeader"}}</div>
       <div class="activity-progress"></div>
-      <div class="crash-item-controls flexrow"></div>
+      <div class="downtime-5e-item-controls flexrow"></div>
     </li>
     <ol class="item-list inventory-list">
       {{#each (5e-training-isUncategorized actor) as |training tid| }}
         <li class="item flexrow">
           <div class="item-name flexrow rollable">
             <div class="{{5e-training-trainingRollBtnClass training}}"
-                 id="crash-roll-{{training.id}}"
+                 id="downtime-5e-roll-{{training.id}}"
                  title="{{5e-training-trainingRollBtnTooltip training}}"
                  style="background-image: url('{{training.img}}')">
               <div class="checkmark">  <i class="fas fa-check"></i></div>
             </div>
-            <h4 class="crash-training-toggle-desc" id="crash-toggle-desc-{{training.id}}" title="{{ localize 'downtime-5e.ToggleInfo' }}">{{training.name}}</h4>
+            <h4 class="downtime-5e-training-toggle-desc" id="downtime-5e-toggle-desc-{{training.id}}" title="{{ localize 'downtime-5e.ToggleInfo' }}">{{training.name}}</h4>
           </div>
           <div class="activity-type-row">
             {{5e-training-progressionStyle training ../actor}}
           </div>
           <div class="activity-override-row">
             {{#if ../showToUserEditMode}}
-            <input type="text" class="item-control crash-training-override" id="crash-override-{{training.id}}" title="{{ localize 'downtime-5e.AdjustProgressValue' }}" value="{{training.progress}}"/>
+            <input type="text" class="item-control downtime-5e-training-override" id="downtime-5e-override-{{training.id}}" title="{{ localize 'downtime-5e.AdjustProgressValue' }}" value="{{training.progress}}"/>
             {{else}}
-            <input type="text" readonly class="item-control crash-training-override" id="crash-override-{{training.id}}" title="{{ localize 'downtime-5e.AdjustProgressValue' }}" value="{{training.progress}}"/>
+            <input type="text" readonly class="item-control downtime-5e-training-override" id="downtime-5e-override-{{training.id}}" title="{{ localize 'downtime-5e.AdjustProgressValue' }}" value="{{training.progress}}"/>
             {{/if}}
             <span> / {{training.completionAt}}</span>
           </div>
           <div class="activity-progress-row">
             <div class="progress-bar">
-              <div class="crash-training-completion" style="width:{{5e-training-trainingCompletion training}}%;">
+              <div class="downtime-5e-training-completion" style="width:{{5e-training-trainingCompletion training}}%;">
                 <span>{{5e-training-trainingCompletion training}}%</span>
               </div>
             </div>
           </div>
           {{#if ../showToUserEditMode}}
-          <div class="crash-item-row-controls">
-            <a class="item-control crash-training-edit" id="crash-edit-{{training.id}}" title="{{ localize 'downtime-5e.EditItem' }}"><i class="fas fa-edit"></i></a>
-            <a class="item-control crash-training-delete" id="crash-delete-{{training.id}}" title="{{ localize 'downtime-5e.DeleteItem' }}"><i class="fas fa-trash"></i></a>
+          <div class="downtime-5e-item-row-controls">
+            <a class="item-control downtime-5e-training-edit" id="downtime-5e-edit-{{training.id}}" title="{{ localize 'downtime-5e.EditItem' }}"><i class="fas fa-edit"></i></a>
+            <a class="item-control downtime-5e-training-delete" id="downtime-5e-delete-{{training.id}}" title="{{ localize 'downtime-5e.DeleteItem' }}"><i class="fas fa-trash"></i></a>
           </div>
           {{/if}}
         </li>
@@ -82,9 +82,9 @@
         <div class="activity-override">{{localize "downtime-5e.ProgressColumnHeader"}}</div>
         <div class="activity-progress"></div>
         {{#if ../showToUserEditMode}}
-        <div class="crash-item-controls flexrow">
-          <a class="item-control crash-training-edit-category" id="crash-edit-category-{{category.id}}" title="{{ localize 'downtime-5e.EditCategory' }}"><i class="fas fa-edit"></i></a>
-          <a class="item-control crash-training-delete-category" id="crash-delete-category-{{category.id}}" title="{{ localize 'downtime-5e.DeleteCategory' }}"><i class="fas fa-trash"></i></a>
+        <div class="downtime-5e-item-controls flexrow">
+          <a class="item-control downtime-5e-training-edit-category" id="downtime-5e-edit-category-{{category.id}}" title="{{ localize 'downtime-5e.EditCategory' }}"><i class="fas fa-edit"></i></a>
+          <a class="item-control downtime-5e-training-delete-category" id="downtime-5e-delete-category-{{category.id}}" title="{{ localize 'downtime-5e.DeleteCategory' }}"><i class="fas fa-trash"></i></a>
         </div>
         {{/if}}
       </li>
@@ -93,35 +93,35 @@
           <li class="item flexrow">
             <div class="item-name flexrow rollable">
               <div class="{{5e-training-trainingRollBtnClass training}}"
-                   id="crash-roll-{{training.id}}"
+                   id="downtime-5e-roll-{{training.id}}"
                    title="{{5e-training-trainingRollBtnTooltip training}}"
                    style="background-image: url('{{training.img}}')">
                 <div class="checkmark">  <i class="fas fa-check"></i></div>
               </div>
-              <h4 class="crash-training-toggle-desc" id="crash-toggle-desc-{{training.id}}" title="{{ localize 'downtime-5e.ToggleInfo' }}">{{training.name}}</h4>
+              <h4 class="downtime-5e-training-toggle-desc" id="downtime-5e-toggle-desc-{{training.id}}" title="{{ localize 'downtime-5e.ToggleInfo' }}">{{training.name}}</h4>
             </div>
             <div class="activity-type-row">
               {{5e-training-progressionStyle training ../../actor}}
             </div>
             <div class="activity-override-row">
               {{#if ../../showToUserEditMode}}
-              <input type="text" class="item-control crash-training-override" id="crash-override-{{training.id}}" title="{{ localize 'downtime-5e.AdjustProgressValue' }}" value="{{training.progress}}"/>
+              <input type="text" class="item-control downtime-5e-training-override" id="downtime-5e-override-{{training.id}}" title="{{ localize 'downtime-5e.AdjustProgressValue' }}" value="{{training.progress}}"/>
               {{else}}
-              <input type="text" readonly class="item-control crash-training-override" id="crash-override-{{training.id}}" title="{{ localize 'downtime-5e.AdjustProgressValue' }}" value="{{training.progress}}"/>
+              <input type="text" readonly class="item-control downtime-5e-training-override" id="downtime-5e-override-{{training.id}}" title="{{ localize 'downtime-5e.AdjustProgressValue' }}" value="{{training.progress}}"/>
               {{/if}}
               <span> / {{training.completionAt}}</span>
             </div>
             <div class="activity-progress-row">
               <div class="progress-bar">
-                <div class="crash-training-completion" style="width:{{5e-training-trainingCompletion training}}%;">
+                <div class="downtime-5e-training-completion" style="width:{{5e-training-trainingCompletion training}}%;">
                   <span>{{5e-training-trainingCompletion training}}%</span>
                 </div>
               </div>
             </div>
             {{#if ../../showToUserEditMode}}
-            <div class="crash-item-row-controls">
-              <a class="item-control crash-training-edit" id="crash-edit-{{training.id}}" title="{{ localize 'downtime-5e.EditItem' }}"><i class="fas fa-edit"></i></a>
-              <a class="item-control crash-training-delete" id="crash-delete-{{training.id}}" title="{{ localize 'downtime-5e.DeleteItem' }}"><i class="fas fa-trash"></i></a>
+            <div class="downtime-5e-item-row-controls">
+              <a class="item-control downtime-5e-training-edit" id="downtime-5e-edit-{{training.id}}" title="{{ localize 'downtime-5e.EditItem' }}"><i class="fas fa-edit"></i></a>
+              <a class="item-control downtime-5e-training-delete" id="downtime-5e-delete-{{training.id}}" title="{{ localize 'downtime-5e.DeleteItem' }}"><i class="fas fa-trash"></i></a>
             </div>
             {{/if}}
           </li>

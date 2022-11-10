@@ -1,11 +1,12 @@
 import TrackedItem from "./TrackedItem.js";
 import CrashTrackingAndTraining from "./CrashTrackingAndTraining.js";
+import CONSTANTS from "./constants.js";
 
 export default class TrackedItemApp extends FormApplication {
 	static get defaultOptions() {
 		return mergeObject(super.defaultOptions, {
-			id: "crash-downtime-item-app",
-			template: "modules/5e-training/templates/tracked-item-app.hbs",
+			id: "downtime-5e-downtime-item-app",
+			template: `modules/CONSTANTS.MODULE_NAME/templates/tracked-item-app.hbs`,
 			title: game.i18n.localize("downtime-5e.CreateEditItemAppTitle"),
 			width: 400,
 			resizable: true,
@@ -149,7 +150,7 @@ export default class TrackedItemApp extends FormApplication {
 	async _updateObject(event, formData) {
 		let actor = this.object.actor;
 		let objItem = this.object.item;
-		let allItems = actor.getFlag("5e-training", "trainingItems") || [];
+		let allItems = actor.getFlag(CONSTANTS.MODULE_NAME, "trainingItems") || [];
 
 		let newItem = objItem;
 
@@ -213,7 +214,7 @@ export default class TrackedItemApp extends FormApplication {
 		}
 
 		// Update actor and flags
-		await actor.setFlag("5e-training", "trainingItems", allItems);
+		await actor.setFlag(CONSTANTS.MODULE_NAME, "trainingItems", allItems);
 
 		// Announce completion if complete
 		let alreadyCompleted = this.object.alreadyCompleted;

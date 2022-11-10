@@ -1,10 +1,12 @@
+import CONSTANTS from "./constants";
+
 export const preloadTemplates = async function () {
 	const templatePaths = [
-		"modules/5e-training/templates/partials/ability.hbs",
-		"modules/5e-training/templates/partials/skill.hbs",
-		"modules/5e-training/templates/partials/tool.hbs",
-		"modules/5e-training/templates/partials/macro.hbs",
-		"modules/5e-training/templates/partials/fixed.hbs",
+		`modules/${CONSTANTS.MODULE_NAME}/templates/partials/ability.hbs`,
+		`modules/${CONSTANTS.MODULE_NAME}/templates/partials/skill.hbs`,
+		`modules/${CONSTANTS.MODULE_NAME}/templates/partials/tool.hbs`,
+		`modules/${CONSTANTS.MODULE_NAME}/templates/partials/macro.hbs`,
+		`modules/${CONSTANTS.MODULE_NAME}templates/partials/fixed.hbs`,
 	];
 	return loadTemplates(templatePaths);
 };
