@@ -5,7 +5,7 @@ export default class TrackedItemApp extends FormApplication {
 	static get defaultOptions() {
 		return mergeObject(super.defaultOptions, {
 			id: "crash-downtime-item-app",
-			template: "modules/5e-training/templates/tracked-item-app.html",
+			template: "modules/5e-training/templates/tracked-item-app.hbs",
 			title: game.i18n.localize("downtime-5e.CreateEditItemAppTitle"),
 			width: 400,
 			resizable: true,

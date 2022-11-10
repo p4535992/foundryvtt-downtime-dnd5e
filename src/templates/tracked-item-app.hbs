@@ -79,35 +79,35 @@
   {{#if (eq item.progressionStyle "FIXED")}}
     <h3 class="form-header">{{ localize "downtime-5e.ProgressionStyleFixedHeader" }}</h3>
     <p class="notes">{{ localize "downtime-5e.ProgressionStyleFixedHelp" }}</p>
-    {{> "modules/5e-training/templates/partials/fixed.html" item=item}}
+    {{> "modules/5e-training/templates/partials/fixed.hbs" item=item}}
   {{/if}}
 
   <!-- SHOW FOR ABILITY -->
   {{#if (eq item.progressionStyle "ABILITY")}}
     <h3 class="form-header">{{ localize "downtime-5e.ProgressionStyleAbilityCheckHeader" }}</h3>
     <p class="notes">{{ localize "downtime-5e.ProgressionStyleAbilityCheckHelp" }}</p>
-    {{> "modules/5e-training/templates/partials/ability.html" item=item}}
+    {{> "modules/5e-training/templates/partials/ability.hbs" item=item}}
   {{/if}}
 
   <!-- SHOW FOR SKILL -->
   {{#if (eq item.progressionStyle "SKILL")}}
     <h3 class="form-header">{{ localize "downtime-5e.ProgressionStyleSkillCheckHeader" }}</h3>
     <p class="notes">{{ localize "downtime-5e.ProgressionStyleSkillCheckHelp" }}</p>
-    {{> "modules/5e-training/templates/partials/skill.html" item=item}}
+    {{> "modules/5e-training/templates/partials/skill.hbs" item=item}}
   {{/if}}
 
   <!-- SHOW FOR TOOL -->
   {{#if (eq item.progressionStyle "TOOL")}}
     <h3 class="form-header">{{ localize "downtime-5e.ProgressionStyleToolCheckHeader" }}</h3>
     <p class="notes">{{ localize "downtime-5e.ProgressionStyleToolCheckHelp" }}</p>
-    {{> "modules/5e-training/templates/partials/tool.html" item=item}}
+    {{> "modules/5e-training/templates/partials/tool.hbs" item=item}}
   {{/if}}
 
   <!-- SHOW FOR MACRO -->
   {{#if (eq item.progressionStyle "MACRO")}}
     <h3 class="form-header">{{ localize "downtime-5e.ProgressionStyleMacroHeader" }}</h3>
     <p class="notes">{{ localize "downtime-5e.ProgressionStyleMacroHelp" }}</p>
-    {{> "modules/5e-training/templates/partials/macro.html" item=item}}
+    {{> "modules/5e-training/templates/partials/macro.hbs" item=item}}
   {{/if}}
 
   <footer>

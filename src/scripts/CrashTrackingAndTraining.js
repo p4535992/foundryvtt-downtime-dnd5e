@@ -38,7 +38,7 @@ export default class CrashTrackingAndTraining {
 		let thisCategory = allCategories.filter((obj) => obj.id === categoryId)[0];
 		let categoryIdx = allCategories.findIndex((obj) => obj.id === categoryId);
 		let del = false;
-		let dialogContent = await renderTemplate("modules/5e-training/templates/delete-category-dialog.html");
+		let dialogContent = await renderTemplate("modules/5e-training/templates/delete-category-dialog.hbs");
 
 		// Create dialog
 		new Dialog({
@@ -111,7 +111,7 @@ export default class CrashTrackingAndTraining {
 
 		// Set up some variables
 		let actor = game.actors.get(actorId);
-		let dialogContent = await renderTemplate("modules/5e-training/templates/delete-training-dialog.html");
+		let dialogContent = await renderTemplate("modules/5e-training/templates/delete-training-dialog.hbs");
 		let del = false;
 
 		// Create dialog
@@ -389,7 +389,7 @@ export default class CrashTrackingAndTraining {
 
 			if (sendIt) {
 				// console.log("Crash's Tracking & Training (5e) | " + actor.name + " " + game.i18n.localize("downtime-5e.CompletedATrackedItem"));
-				let chatHtml = await renderTemplate("modules/5e-training/templates/completion-message.html", {
+				let chatHtml = await renderTemplate("modules/5e-training/templates/completion-message.hbs", {
 					actor: actor,
 					activity: item,
 				});

@@ -55,7 +55,7 @@ async function addTrainingTab(app, html, data) {
 
 		// Create the tab content
 		let sheet = html.find(".sheet-body");
-		let trainingTabHtml = $(await renderTemplate("modules/5e-training/templates/training-section.html", data));
+		let trainingTabHtml = $(await renderTemplate("modules/5e-training/templates/training-section.hbs", data));
 		sheet.append(trainingTabHtml);
 
 		// Set up our big list of dropdown options

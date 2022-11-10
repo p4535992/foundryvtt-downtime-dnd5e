@@ -2,7 +2,7 @@ export default class CategoryApp extends FormApplication {
 	static get defaultOptions() {
 		return mergeObject(super.defaultOptions, {
 			id: "crash-downtime-category-app",
-			template: "modules/5e-training/templates/category-app.html",
+			template: "modules/5e-training/templates/category-app.hbs",
 			title: game.i18n.localize("downtime-5e.CreateEditCategoryAppTitle"),
 			width: 400,
 			resizable: false,
