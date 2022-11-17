@@ -45,17 +45,17 @@ export default class TrackingAndTraining {
 
 		// Create dialog
 		new Dialog({
-			title: game.i18n.localize("downtime-5e.DeleteCategory"),
+			title: game.i18n.localize("downtime-dnd5e.DeleteCategory"),
 			content: dialogContent,
 			buttons: {
 				yes: {
 					icon: "<i class='fas fa-check'></i>",
-					label: game.i18n.localize("downtime-5e.Delete"),
+					label: game.i18n.localize("downtime-dnd5e.Delete"),
 					callback: () => (del = true),
 				},
 				no: {
 					icon: "<i class='fas fa-times'></i>",
-					label: game.i18n.localize("downtime-5e.Cancel"),
+					label: game.i18n.localize("downtime-dnd5e.Cancel"),
 					callback: () => (del = false),
 				},
 			},
@@ -121,17 +121,17 @@ export default class TrackingAndTraining {
 
 		// Create dialog
 		new Dialog({
-			title: game.i18n.localize("downtime-5e.DeleteItem"),
+			title: game.i18n.localize("downtime-dnd5e.DeleteItem"),
 			content: dialogContent,
 			buttons: {
 				yes: {
 					icon: "<i class='fas fa-check'></i>",
-					label: game.i18n.localize("downtime-5e.Delete"),
+					label: game.i18n.localize("downtime-dnd5e.Delete"),
 					callback: () => (del = true),
 				},
 				no: {
 					icon: "<i class='fas fa-times'></i>",
-					label: game.i18n.localize("downtime-5e.Cancel"),
+					label: game.i18n.localize("downtime-dnd5e.Cancel"),
 					callback: () => (del = false),
 				},
 			},
@@ -160,15 +160,15 @@ export default class TrackingAndTraining {
 
 		// Format input and change
 		if (value.charAt(0) === "+") {
-			let changeName = game.i18n.localize("downtime-5e.AdjustProgressValue") + " (+)";
+			let changeName = game.i18n.localize("downtime-dnd5e.AdjustProgressValue") + " (+)";
 			adjustment = parseInt(value.substr(1).trim());
 			thisItem = TrackingAndTraining.calculateNewProgress(thisItem, changeName, adjustment);
 		} else if (value.charAt(0) === "-") {
-			let changeName = game.i18n.localize("downtime-5e.AdjustProgressValue") + " (-)";
+			let changeName = game.i18n.localize("downtime-dnd5e.AdjustProgressValue") + " (-)";
 			adjustment = 0 - parseInt(value.substr(1).trim());
 			thisItem = TrackingAndTraining.calculateNewProgress(thisItem, changeName, adjustment);
 		} else {
-			let changeName = game.i18n.localize("downtime-5e.AdjustProgressValue") + " (=)";
+			let changeName = game.i18n.localize("downtime-dnd5e.AdjustProgressValue") + " (=)";
 			adjustment = parseInt(value);
 			thisItem = TrackingAndTraining.calculateNewProgress(thisItem, changeName, adjustment, true);
 		}
@@ -197,7 +197,7 @@ export default class TrackingAndTraining {
 			let options = TrackingAndTraining.getRollOptions();
 			let r = await actor.rollAbilityTest(thisItem.ability, options);
 			if (r) {
-				let attemptName = game.i18n.localize("downtime-5e.Roll") + " " + abilityName;
+				let attemptName = game.i18n.localize("downtime-dnd5e.Roll") + " " + abilityName;
 				// Increase progress
 				let progressChange = TrackingAndTraining.getRollResult(r);
 				thisItem = TrackingAndTraining.calculateNewProgress(thisItem, attemptName, progressChange);
@@ -215,7 +215,7 @@ export default class TrackingAndTraining {
 			let options = TrackingAndTraining.getRollOptions();
 			let r = await actor.rollSkill(thisItem.skill, options);
 			if (r) {
-				let attemptName = game.i18n.localize("downtime-5e.Roll") + " " + abilityName;
+				let attemptName = game.i18n.localize("downtime-dnd5e.Roll") + " " + abilityName;
 				// Increase progress
 				let progressChange = TrackingAndTraining.getRollResult(r);
 				thisItem = TrackingAndTraining.calculateNewProgress(thisItem, attemptName, progressChange);
@@ -236,7 +236,7 @@ export default class TrackingAndTraining {
 				let options = TrackingAndTraining.getRollOptions();
 				let r = await tool.rollToolCheck(options);
 				if (r) {
-					let attemptName = game.i18n.localize("downtime-5e.Roll") + " " + toolName;
+					let attemptName = game.i18n.localize("downtime-dnd5e.Roll") + " " + toolName;
 					// Increase progress
 					let progressChange = TrackingAndTraining.getToolRollResult(r);
 					thisItem = TrackingAndTraining.calculateNewProgress(thisItem, attemptName, progressChange);
@@ -246,13 +246,13 @@ export default class TrackingAndTraining {
 					await actor.setFlag(CONSTANTS.MODULE_NAME, "trainingItems", allItems);
 				}
 			} else {
-				ui.notifications.warn(game.i18n.localize("downtime-5e.ToolNotFoundWarning"));
+				ui.notifications.warn(game.i18n.localize("downtime-dnd5e.ToolNotFoundWarning"));
 			}
 		}
 
 		// Progression Type: Simple
 		else if (rollType === "FIXED") {
-			let itemName = game.i18n.localize("downtime-5e.ProgressionStyleFixed");
+			let itemName = game.i18n.localize("downtime-dnd5e.ProgressionStyleFixed");
 			// Increase progress
 			thisItem = TrackingAndTraining.calculateNewProgress(thisItem, itemName, thisItem.fixedIncrease);
 			// Log item completion
@@ -268,7 +268,7 @@ export default class TrackingAndTraining {
 			if (macro) {
 				macro.execute();
 			} else {
-				ui.notifications.warn(game.i18n.localize("downtime-5e.MacroNotFoundWarning") + ": " + macroName);
+				ui.notifications.warn(game.i18n.localize("downtime-dnd5e.MacroNotFoundWarning") + ": " + macroName);
 			}
 		}
 	}
@@ -386,7 +386,7 @@ export default class TrackingAndTraining {
 			}
 
 			if (sendIt) {
-				// log("" + actor.name + " " + game.i18n.localize("downtime-5e.CompletedATrackedItem"));
+				// log("" + actor.name + " " + game.i18n.localize("downtime-dnd5e.CompletedATrackedItem"));
 				let chatHtml = await renderTemplate(
 					`modules/${CONSTANTS.MODULE_NAME}/templates/completion-message.hbs`,
 					{
@@ -467,35 +467,35 @@ export default class TrackingAndTraining {
 
 	static formatAbilitiesForDropdown() {
 		return [
-			{ value: "str", type: "ability", label: game.i18n.localize("downtime-5e.AbilityStr") },
-			{ value: "dex", type: "ability", label: game.i18n.localize("downtime-5e.AbilityDex") },
-			{ value: "con", type: "ability", label: game.i18n.localize("downtime-5e.AbilityCon") },
-			{ value: "int", type: "ability", label: game.i18n.localize("downtime-5e.AbilityInt") },
-			{ value: "wis", type: "ability", label: game.i18n.localize("downtime-5e.AbilityWis") },
-			{ value: "cha", type: "ability", label: game.i18n.localize("downtime-5e.AbilityCha") },
+			{ value: "str", type: "ability", label: game.i18n.localize("downtime-dnd5e.AbilityStr") },
+			{ value: "dex", type: "ability", label: game.i18n.localize("downtime-dnd5e.AbilityDex") },
+			{ value: "con", type: "ability", label: game.i18n.localize("downtime-dnd5e.AbilityCon") },
+			{ value: "int", type: "ability", label: game.i18n.localize("downtime-dnd5e.AbilityInt") },
+			{ value: "wis", type: "ability", label: game.i18n.localize("downtime-dnd5e.AbilityWis") },
+			{ value: "cha", type: "ability", label: game.i18n.localize("downtime-dnd5e.AbilityCha") },
 		];
 	}
 
 	static formatSkillsForDropdown() {
 		return [
-			{ value: "acr", type: "skill", label: game.i18n.localize("downtime-5e.SkillAcr") },
-			{ value: "ani", type: "skill", label: game.i18n.localize("downtime-5e.SkillAni") },
-			{ value: "arc", type: "skill", label: game.i18n.localize("downtime-5e.SkillArc") },
-			{ value: "ath", type: "skill", label: game.i18n.localize("downtime-5e.SkillAth") },
-			{ value: "dec", type: "skill", label: game.i18n.localize("downtime-5e.SkillDec") },
-			{ value: "his", type: "skill", label: game.i18n.localize("downtime-5e.SkillHis") },
-			{ value: "ins", type: "skill", label: game.i18n.localize("downtime-5e.SkillIns") },
-			{ value: "inv", type: "skill", label: game.i18n.localize("downtime-5e.SkillInv") },
-			{ value: "itm", type: "skill", label: game.i18n.localize("downtime-5e.SkillItm") },
-			{ value: "med", type: "skill", label: game.i18n.localize("downtime-5e.SkillMed") },
-			{ value: "nat", type: "skill", label: game.i18n.localize("downtime-5e.SkillNat") },
-			{ value: "per", type: "skill", label: game.i18n.localize("downtime-5e.SkillPer") },
-			{ value: "prc", type: "skill", label: game.i18n.localize("downtime-5e.SkillPrc") },
-			{ value: "prf", type: "skill", label: game.i18n.localize("downtime-5e.SkillPrf") },
-			{ value: "rel", type: "skill", label: game.i18n.localize("downtime-5e.SkillRel") },
-			{ value: "slt", type: "skill", label: game.i18n.localize("downtime-5e.SkillSlt") },
-			{ value: "ste", type: "skill", label: game.i18n.localize("downtime-5e.SkillSte") },
-			{ value: "sur", type: "skill", label: game.i18n.localize("downtime-5e.SkillSur") },
+			{ value: "acr", type: "skill", label: game.i18n.localize("downtime-dnd5e.SkillAcr") },
+			{ value: "ani", type: "skill", label: game.i18n.localize("downtime-dnd5e.SkillAni") },
+			{ value: "arc", type: "skill", label: game.i18n.localize("downtime-dnd5e.SkillArc") },
+			{ value: "ath", type: "skill", label: game.i18n.localize("downtime-dnd5e.SkillAth") },
+			{ value: "dec", type: "skill", label: game.i18n.localize("downtime-dnd5e.SkillDec") },
+			{ value: "his", type: "skill", label: game.i18n.localize("downtime-dnd5e.SkillHis") },
+			{ value: "ins", type: "skill", label: game.i18n.localize("downtime-dnd5e.SkillIns") },
+			{ value: "inv", type: "skill", label: game.i18n.localize("downtime-dnd5e.SkillInv") },
+			{ value: "itm", type: "skill", label: game.i18n.localize("downtime-dnd5e.SkillItm") },
+			{ value: "med", type: "skill", label: game.i18n.localize("downtime-dnd5e.SkillMed") },
+			{ value: "nat", type: "skill", label: game.i18n.localize("downtime-dnd5e.SkillNat") },
+			{ value: "per", type: "skill", label: game.i18n.localize("downtime-dnd5e.SkillPer") },
+			{ value: "prc", type: "skill", label: game.i18n.localize("downtime-dnd5e.SkillPrc") },
+			{ value: "prf", type: "skill", label: game.i18n.localize("downtime-dnd5e.SkillPrf") },
+			{ value: "rel", type: "skill", label: game.i18n.localize("downtime-dnd5e.SkillRel") },
+			{ value: "slt", type: "skill", label: game.i18n.localize("downtime-dnd5e.SkillSlt") },
+			{ value: "ste", type: "skill", label: game.i18n.localize("downtime-dnd5e.SkillSte") },
+			{ value: "sur", type: "skill", label: game.i18n.localize("downtime-dnd5e.SkillSur") },
 		];
 	}
 
@@ -508,7 +508,7 @@ export default class TrackingAndTraining {
 			categories: allCategories,
 		};
 		if (allItems.length < 1 && allCategories.length < 1) {
-			ui.notifications.info(game.i18n.localize("downtime-5e.ExportNoTrackedItems"));
+			ui.notifications.info(game.i18n.localize("downtime-dnd5e.ExportNoTrackedItems"));
 			return;
 		}
 		let jsonData = JSON.stringify(dataToExport);
@@ -521,7 +521,7 @@ export default class TrackingAndTraining {
 		input.on("change", function () {
 			const file = this.files[0];
 			if (!file) {
-				ui.notifications.info(game.i18n.localize("downtime-5e.ImportNoFile"));
+				ui.notifications.info(game.i18n.localize("downtime-dnd5e.ImportNoFile"));
 				return;
 			}
 			readTextFromFile(file).then(async (contents) => {
@@ -535,12 +535,12 @@ export default class TrackingAndTraining {
 					importedCategories = importedData.categories;
 				} else {
 					new Dialog({
-						title: game.i18n.localize("downtime-5e.ImportOldWarningTitle"),
-						content: `<p>${game.i18n.localize("downtime-5e.ImportOldWarningText")}</p>`,
+						title: game.i18n.localize("downtime-dnd5e.ImportOldWarningTitle"),
+						content: `<p>${game.i18n.localize("downtime-dnd5e.ImportOldWarningText")}</p>`,
 						buttons: {
 							ok: {
 								icon: "<i class='fas fa-check'></i>",
-								label: game.i18n.localize("downtime-5e.ImportOldWarningConfirm"),
+								label: game.i18n.localize("downtime-dnd5e.ImportOldWarningConfirm"),
 							},
 						},
 						default: "ok",
@@ -550,7 +550,7 @@ export default class TrackingAndTraining {
 				}
 
 				if (importedItems.length < 1 && importedCategories.legnth < 1) {
-					ui.notifications.info(game.i18n.localize("downtime-5e.ImportNoTrackedItems"));
+					ui.notifications.info(game.i18n.localize("downtime-dnd5e.ImportNoTrackedItems"));
 					return;
 				}
 
@@ -620,19 +620,19 @@ export default class TrackingAndTraining {
 				await actor.setFlag(CONSTANTS.MODULE_NAME, "categories", combinedCategories);
 				await actor.setFlag(CONSTANTS.MODULE_NAME, "trainingItems", combinedItems);
 
-				ui.notifications.info(game.i18n.localize("downtime-5e.ImportComplete"));
+				ui.notifications.info(game.i18n.localize("downtime-dnd5e.ImportComplete"));
 
 				// let act = "quit";
-				//let content = `<p><b>${game.i18n.localize("downtime-5e.ImportTypeSelectionOverwrite")}:</b> ${game.i18n.localize("downtime-5e.ImportTypeSelectionTextOverwrite")}</p>
-				//               <p><b>${game.i18n.localize("downtime-5e.ImportTypeSelectionCombine")}:</b> ${game.i18n.localize("downtime-5e.ImportTypeSelectionTextCombine")}</p>`;
+				//let content = `<p><b>${game.i18n.localize("downtime-dnd5e.ImportTypeSelectionOverwrite")}:</b> ${game.i18n.localize("downtime-dnd5e.ImportTypeSelectionTextOverwrite")}</p>
+				//               <p><b>${game.i18n.localize("downtime-dnd5e.ImportTypeSelectionCombine")}:</b> ${game.i18n.localize("downtime-dnd5e.ImportTypeSelectionTextCombine")}</p>`;
 				// Create dialog
 				// new Dialog({
-				//   title: game.i18n.localize("downtime-5e.ImportTypeSelectionTitle"),
+				//   title: game.i18n.localize("downtime-dnd5e.ImportTypeSelectionTitle"),
 				//   content: content,
 				//   buttons: {
-				//     overwrite: {icon: "<i class='fas fa-file-import'></i>", label: game.i18n.localize("downtime-5e.ImportTypeSelectionOverwrite"), callback: () => act = "overwrite"},
-				//     add: {icon: "<i class='fas fa-plus'></i>", label: game.i18n.localize("downtime-5e.ImportTypeSelectionCombine"), callback: () => act = "add"},
-				//     quit: {icon: "<i class='fas fa-times'></i>", label: game.i18n.localize("downtime-5e.Cancel"), callback: () => act = "quit"},
+				//     overwrite: {icon: "<i class='fas fa-file-import'></i>", label: game.i18n.localize("downtime-dnd5e.ImportTypeSelectionOverwrite"), callback: () => act = "overwrite"},
+				//     add: {icon: "<i class='fas fa-plus'></i>", label: game.i18n.localize("downtime-dnd5e.ImportTypeSelectionCombine"), callback: () => act = "add"},
+				//     quit: {icon: "<i class='fas fa-times'></i>", label: game.i18n.localize("downtime-dnd5e.Cancel"), callback: () => act = "quit"},
 				//   },
 				//   default: "quit",
 				//   close: async (html) => {
@@ -649,7 +649,7 @@ export default class TrackingAndTraining {
 				//         }
 				//       }
 				//       actor.setFlag(CONSTANTS.MODULE_NAME,"trainingItems",importedItems);
-				//       await ui.notifications.info(game.i18n.localize("downtime-5e.ImportComplete"));
+				//       await ui.notifications.info(game.i18n.localize("downtime-dnd5e.ImportComplete"));
 				//     } else if (act === "add") {
 				//       let currentItems = actor.getFlag(CONSTANTS.MODULE_NAME,"trainingItems") || [];
 				//       let currentCategories = actor.getFlag(CONSTANTS.MODULE_NAME,"categories") || [];
@@ -678,13 +678,13 @@ export default class TrackingAndTraining {
 				//       }
 				//       let combinedItems = currentItems.concat(importedItems);
 				//       await actor.setFlag(CONSTANTS.MODULE_NAME,"trainingItems", combinedItems);
-				//       ui.notifications.info(game.i18n.localize("downtime-5e.ImportComplete"));
+				//       ui.notifications.info(game.i18n.localize("downtime-dnd5e.ImportComplete"));
 				//       if(possibleDupes){
 				//         new Dialog({
-				//           title: game.i18n.localize("downtime-5e.ImportDupeWarningTitle"),
-				//           content: `<p>${game.i18n.localize("downtime-5e.ImportDupeWarningText")}</p>`,
+				//           title: game.i18n.localize("downtime-dnd5e.ImportDupeWarningTitle"),
+				//           content: `<p>${game.i18n.localize("downtime-dnd5e.ImportDupeWarningText")}</p>`,
 				//           buttons: {
-				//             ok: {icon: "<i class='fas fa-check'></i>", label: game.i18n.localize("downtime-5e.ImportDupeWarningConfirm")},
+				//             ok: {icon: "<i class='fas fa-check'></i>", label: game.i18n.localize("downtime-dnd5e.ImportDupeWarningConfirm")},
 				//           },
 				//           default: "ok"
 				//         }).render(true);

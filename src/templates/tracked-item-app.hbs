@@ -1,24 +1,24 @@
-<form class="downtime-5e-tracked-item-app">
+<form class="downtime-dnd5e-tracked-item-app">
 
   <div class="form-group lighter">
-    <label for="name">{{ localize "downtime-5e.ItemId" }}</label>
+    <label for="name">{{ localize "downtime-dnd5e.ItemId" }}</label>
     <div class="form-fields">
       <input type="text" name="id" id="idInput" value="{{item.id}}" readonly>
     </div>
   </div>
 
-  <h3 class="form-header">{{ localize "downtime-5e.GeneralInformationHeader" }}</h3>
+  <h3 class="form-header">{{ localize "downtime-dnd5e.GeneralInformationHeader" }}</h3>
 
   <!-- SHOW FOR ALL -->
   <div class="form-group">
-    <label for="name">{{ localize "downtime-5e.Name" }}</label>
+    <label for="name">{{ localize "downtime-dnd5e.Name" }}</label>
     <div class="form-fields">
       <input type="text" name="name" id="nameInput" value="{{item.name}}">
     </div>
   </div>
 
   <div class="form-group">
-    <label for="img">{{ localize "downtime-5e.Image" }}</label>
+    <label for="img">{{ localize "downtime-dnd5e.Image" }}</label>
     <div class="form-fields">
       <input type="text" name="img" id="imgInput" value="{{item.img}}">
       <button type="button" id="imgPicker">
@@ -28,10 +28,10 @@
   </div>
 
   <div class="form-group">
-    <label for="categoryInput">{{ localize "downtime-5e.Category" }}</label>
+    <label for="categoryInput">{{ localize "downtime-dnd5e.Category" }}</label>
     <div class="form-fields">
       <select name="category" id="categoryInput">
-        <option value="" {{#unless item.category}} selected {{/unless}} >{{ localize "downtime-5e.None" }}</option>
+        <option value="" {{#unless item.category}} selected {{/unless}} >{{ localize "downtime-dnd5e.None" }}</option>
         {{#each categories as |category cid| }}
           <option value="{{category.id}}" {{#if (eq ../item.category category.id)}} selected {{/if}} >{{ category.name }}</option>
         {{/each}}
@@ -40,7 +40,7 @@
   </div>
 
   <div class="form-group">
-    <label for="description">{{ localize "downtime-5e.Description" }}</label>
+    <label for="description">{{ localize "downtime-dnd5e.Description" }}</label>
     <div class="form-fields">
       <textarea name="description" id="descriptionInput">{{item.description}}</textarea>
       <!--
@@ -52,66 +52,66 @@
   </div>
 
   <div class="form-group">
-    <label for="progress">{{ localize 'downtime-5e.CurrentProgress' }}</label>
+    <label for="progress">{{ localize 'downtime-dnd5e.CurrentProgress' }}</label>
     <div class="form-fields">
       <input type="number" name="progress" id="progressInput" value="{{item.progress}}" min="0" max="{{item.completionAt}}">
       <label class="help">
         <i class="fas fa-question-circle"></i>
-        <span class="tooltip">{{ localize 'downtime-5e.ProgressInputHelpText' }}</span>
+        <span class="tooltip">{{ localize 'downtime-dnd5e.ProgressInputHelpText' }}</span>
       </label>
     </div>
   </div>
 
   <div class="form-group">
-    <label for="progressionStyle">{{ localize "downtime-5e.ProgressionType" }}</label>
+    <label for="progressionStyle">{{ localize "downtime-dnd5e.ProgressionType" }}</label>
     <div class="form-fields">
       <select name="progressionStyle" id="progressionStyleInput">
-        <option value="FIXED" {{#if (eq item.progressionStyle "FIXED")}} selected {{/if}}>{{ localize "downtime-5e.ProgressionStyleFixed" }}</option>
-        <option value="ABILITY" {{#if (eq item.progressionStyle "ABILITY")}} selected {{/if}}>{{ localize "downtime-5e.ProgressionStyleAbilityCheck" }}</option>
-        <option value="SKILL" {{#if (eq item.progressionStyle "SKILL")}} selected {{/if}}>{{ localize "downtime-5e.ProgressionStyleSkillCheck" }}</option>
-        <option value="TOOL" {{#if (eq item.progressionStyle "TOOL")}} selected {{/if}}>{{ localize "downtime-5e.ProgressionStyleToolCheck" }}</option>
-        <option value="MACRO" {{#if (eq item.progressionStyle "MACRO")}} selected {{/if}}>{{ localize "downtime-5e.ProgressionStyleMacro" }}</option>
+        <option value="FIXED" {{#if (eq item.progressionStyle "FIXED")}} selected {{/if}}>{{ localize "downtime-dnd5e.ProgressionStyleFixed" }}</option>
+        <option value="ABILITY" {{#if (eq item.progressionStyle "ABILITY")}} selected {{/if}}>{{ localize "downtime-dnd5e.ProgressionStyleAbilityCheck" }}</option>
+        <option value="SKILL" {{#if (eq item.progressionStyle "SKILL")}} selected {{/if}}>{{ localize "downtime-dnd5e.ProgressionStyleSkillCheck" }}</option>
+        <option value="TOOL" {{#if (eq item.progressionStyle "TOOL")}} selected {{/if}}>{{ localize "downtime-dnd5e.ProgressionStyleToolCheck" }}</option>
+        <option value="MACRO" {{#if (eq item.progressionStyle "MACRO")}} selected {{/if}}>{{ localize "downtime-dnd5e.ProgressionStyleMacro" }}</option>
       </select>
     </div>
   </div>
 
   <!-- SHOW FOR FIXED VALUE -->
   {{#if (eq item.progressionStyle "FIXED")}}
-    <h3 class="form-header">{{ localize "downtime-5e.ProgressionStyleFixedHeader" }}</h3>
-    <p class="notes">{{ localize "downtime-5e.ProgressionStyleFixedHelp" }}</p>
-    {{> "modules/downtime-5e/templates/partials/fixed.hbs" item=item}}
+    <h3 class="form-header">{{ localize "downtime-dnd5e.ProgressionStyleFixedHeader" }}</h3>
+    <p class="notes">{{ localize "downtime-dnd5e.ProgressionStyleFixedHelp" }}</p>
+    {{> "modules/downtime-dnd5e/templates/partials/fixed.hbs" item=item}}
   {{/if}}
 
   <!-- SHOW FOR ABILITY -->
   {{#if (eq item.progressionStyle "ABILITY")}}
-    <h3 class="form-header">{{ localize "downtime-5e.ProgressionStyleAbilityCheckHeader" }}</h3>
-    <p class="notes">{{ localize "downtime-5e.ProgressionStyleAbilityCheckHelp" }}</p>
-    {{> "modules/downtime-5e/templates/partials/ability.hbs" item=item}}
+    <h3 class="form-header">{{ localize "downtime-dnd5e.ProgressionStyleAbilityCheckHeader" }}</h3>
+    <p class="notes">{{ localize "downtime-dnd5e.ProgressionStyleAbilityCheckHelp" }}</p>
+    {{> "modules/downtime-dnd5e/templates/partials/ability.hbs" item=item}}
   {{/if}}
 
   <!-- SHOW FOR SKILL -->
   {{#if (eq item.progressionStyle "SKILL")}}
-    <h3 class="form-header">{{ localize "downtime-5e.ProgressionStyleSkillCheckHeader" }}</h3>
-    <p class="notes">{{ localize "downtime-5e.ProgressionStyleSkillCheckHelp" }}</p>
-    {{> "modules/downtime-5e/templates/partials/skill.hbs" item=item}}
+    <h3 class="form-header">{{ localize "downtime-dnd5e.ProgressionStyleSkillCheckHeader" }}</h3>
+    <p class="notes">{{ localize "downtime-dnd5e.ProgressionStyleSkillCheckHelp" }}</p>
+    {{> "modules/downtime-dnd5e/templates/partials/skill.hbs" item=item}}
   {{/if}}
 
   <!-- SHOW FOR TOOL -->
   {{#if (eq item.progressionStyle "TOOL")}}
-    <h3 class="form-header">{{ localize "downtime-5e.ProgressionStyleToolCheckHeader" }}</h3>
-    <p class="notes">{{ localize "downtime-5e.ProgressionStyleToolCheckHelp" }}</p>
-    {{> "modules/downtime-5e/templates/partials/tool.hbs" item=item}}
+    <h3 class="form-header">{{ localize "downtime-dnd5e.ProgressionStyleToolCheckHeader" }}</h3>
+    <p class="notes">{{ localize "downtime-dnd5e.ProgressionStyleToolCheckHelp" }}</p>
+    {{> "modules/downtime-dnd5e/templates/partials/tool.hbs" item=item}}
   {{/if}}
 
   <!-- SHOW FOR MACRO -->
   {{#if (eq item.progressionStyle "MACRO")}}
-    <h3 class="form-header">{{ localize "downtime-5e.ProgressionStyleMacroHeader" }}</h3>
-    <p class="notes">{{ localize "downtime-5e.ProgressionStyleMacroHelp" }}</p>
-    {{> "modules/downtime-5e/templates/partials/macro.hbs" item=item}}
+    <h3 class="form-header">{{ localize "downtime-dnd5e.ProgressionStyleMacroHeader" }}</h3>
+    <p class="notes">{{ localize "downtime-dnd5e.ProgressionStyleMacroHelp" }}</p>
+    {{> "modules/downtime-dnd5e/templates/partials/macro.hbs" item=item}}
   {{/if}}
 
   <footer>
-    <button id="downtime-5e-create-item"><i class='fas fa-check'></i> {{ localize "downtime-5e.SaveTrackedItem" }}</button>
+    <button id="downtime-dnd5e-create-item"><i class='fas fa-check'></i> {{ localize "downtime-dnd5e.SaveTrackedItem" }}</button>
   </footer>
 
 </form>

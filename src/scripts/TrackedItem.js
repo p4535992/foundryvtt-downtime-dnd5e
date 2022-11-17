@@ -3,7 +3,7 @@ import CONSTANTS from "./constants.js";
 export default class TrackedItem {
 	constructor() {
 		this.id = randomID();
-		this.name = game.i18n.localize("downtime-5e.NewItem");
+		this.name = game.i18n.localize("downtime-dnd5e.NewItem");
 		this.img = "icons/svg/book.svg";
 		this.category = "";
 		this.description = "";

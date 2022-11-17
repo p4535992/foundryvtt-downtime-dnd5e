@@ -1,8 +1,8 @@
 {
-	"id": "downtime-5e",
+	"id": "downtime-dnd5e",
 	"title": "Tracking, Training & Downtime (5e)",
 	"description": "Adds a tab to the character sheet to keep track of downtime activities, training, spell scribing, faction reputation, quest progress, and anything else you can think of.",
-	"version": "1.1.1",
+	"version": "1.1.2",
 	"authors": [
 		{
 			"name": "Ethck",
@@ -86,12 +86,12 @@
 		"verified": 10,
 		"maximum": 10
 	},
-	"url": "https://github.com/p4535992/foundryvtt-downtime-5e",
-	"manifest": "https://github.com/p4535992/foundryvtt-downtime-5e/releases/latest/download/module.json",
-	"download": "https://github.com/p4535992/foundryvtt-downtime-5e/releases/latest/download/module.zip",
-	"readme": "https://github.com/p4535992/foundryvtt-downtime-5e/blob/v1.1.1/README.md",
-	"changelog": "https://github.com/p4535992/foundryvtt-downtime-5e/blob/v1.1.1/changelog.md",
-	"bugs": "https://github.com/p4535992/foundryvtt-downtime-5e/issues",
+	"url": "https://github.com/p4535992/foundryvtt-downtime-dnd5e",
+	"manifest": "https://github.com/p4535992/foundryvtt-downtime-dnd5e/releases/latest/download/module.json",
+	"download": "https://github.com/p4535992/foundryvtt-downtime-dnd5e/releases/latest/download/module.zip",
+	"readme": "https://github.com/p4535992/foundryvtt-downtime-dnd5e/blob/v1.1.2/README.md",
+	"changelog": "https://github.com/p4535992/foundryvtt-downtime-dnd5e/blob/v1.1.2/changelog.md",
+	"bugs": "https://github.com/p4535992/foundryvtt-downtime-dnd5e/issues",
 	"allowBugReporter": true,
 	"manifestPlusVersion": "1.2.0",
 	"relationships": {

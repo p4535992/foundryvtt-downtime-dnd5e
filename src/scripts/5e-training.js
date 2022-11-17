@@ -72,90 +72,90 @@ async function addTrainingTab(app, html, data) {
 		const DROPDOWN_OPTIONS = { abilities: ABILITIES, skills: SKILLS, tools: actorTools };
 
 		// NEW CATEGORY
-		html.find(".downtime-5e-new-category").click(async (event) => {
+		html.find(".downtime-dnd5e-new-category").click(async (event) => {
 			event.preventDefault();
 			// console.log("Create Category excuted!");
 			await TrackingAndTraining.addCategory(actor.id);
 		});
 
 		// EDIT CATEGORY
-		html.find(".downtime-5e-edit-category").click(async (event) => {
+		html.find(".downtime-dnd5e-edit-category").click(async (event) => {
 			event.preventDefault();
 			// console.log("Edit Category excuted!");
 			let fieldId = event.currentTarget.id;
-			let categoryId = fieldId.replace("downtime-5e-edit-category-", "");
+			let categoryId = fieldId.replace("downtime-dnd5e-edit-category-", "");
 			await TrackingAndTraining.editCategory(actor.id, categoryId);
 		});
 
 		// DELETE CATEGORY
-		html.find(".downtime-5e-delete-category").click(async (event) => {
+		html.find(".downtime-dnd5e-delete-category").click(async (event) => {
 			event.preventDefault();
 			// console.log("Delete Category excuted!");
 			let fieldId = event.currentTarget.id;
-			let categoryId = fieldId.replace("downtime-5e-delete-category-", "");
+			let categoryId = fieldId.replace("downtime-dnd5e-delete-category-", "");
 			await TrackingAndTraining.deleteCategory(actor.id, categoryId);
 		});
 
 		// ADD NEW DOWNTIME ACTIVITY
-		html.find(".downtime-5e-add").click(async (event) => {
+		html.find(".downtime-dnd5e-add").click(async (event) => {
 			event.preventDefault();
 			// console.log("Create Item excuted!");
 			await TrackingAndTraining.addItem(actor.id, DROPDOWN_OPTIONS);
 		});
 
 		// EDIT DOWNTIME ACTIVITY
-		html.find(".downtime-5e-edit").click(async (event) => {
+		html.find(".downtime-dnd5e-edit").click(async (event) => {
 			event.preventDefault();
 			// console.log("Edit Item excuted!");
 			let allItems = actor.getFlag(CONSTANTS.MODULE_NAME, "trainingItems") || [];
-			let itemId = event.currentTarget.id.replace("downtime-5e-edit-", "");
+			let itemId = event.currentTarget.id.replace("downtime-dnd5e-edit-", "");
 			if (!itemId) {
-				ui.notifications.warn(game.i18n.localize("downtime-5e.NoIdWarning"), { permanent: true });
+				ui.notifications.warn(game.i18n.localize("downtime-dnd5e.NoIdWarning"), { permanent: true });
 				return;
 			}
 			await TrackingAndTraining.editFromSheet(actor.id, itemId, DROPDOWN_OPTIONS);
 		});
 
 		// DELETE DOWNTIME ACTIVITY
-		html.find(".downtime-5e-delete").click(async (event) => {
+		html.find(".downtime-dnd5e-delete").click(async (event) => {
 			event.preventDefault();
 			// console.log("Delete Item excuted!");
 			let allItems = actor.getFlag(CONSTANTS.MODULE_NAME, "trainingItems") || [];
-			let itemId = event.currentTarget.id.replace("downtime-5e-delete-", "");
+			let itemId = event.currentTarget.id.replace("downtime-dnd5e-delete-", "");
 			if (!itemId) {
-				ui.notifications.warn(game.i18n.localize("downtime-5e.NoIdWarning", { permanent: true }));
+				ui.notifications.warn(game.i18n.localize("downtime-dnd5e.NoIdWarning", { permanent: true }));
 				return;
 			}
 			await TrackingAndTraining.deleteFromSheet(actor.id, itemId);
 		});
 
 		// EDIT PROGRESS VALUE
-		html.find(".downtime-5e-override").change(async (event) => {
+		html.find(".downtime-dnd5e-override").change(async (event) => {
 			event.preventDefault();
 			// console.log("Progress Override excuted!");
 			let field = event.currentTarget;
-			let itemId = event.currentTarget.id.replace("downtime-5e-override-", "");
+			let itemId = event.currentTarget.id.replace("downtime-dnd5e-override-", "");
 			if (!itemId) {
-				ui.notifications.warn(game.i18n.localize("downtime-5e.NoIdWarning"), { permanent: true });
+				ui.notifications.warn(game.i18n.localize("downtime-dnd5e.NoIdWarning"), { permanent: true });
 				return;
 			}
 			let allItems = actor.getFlag(CONSTANTS.MODULE_NAME, "trainingItems") || [];
 			let thisItem = allItems.filter((obj) => obj.id === itemId)[0];
 			if (isNaN(field.value)) {
 				field.value = thisItem.progress;
-				ui.notifications.warn(game.i18n.localize("downtime-5e.InvalidNumberWarning"));
+				ui.notifications.warn(game.i18n.localize("downtime-dnd5e.InvalidNumberWarning"));
 			} else {
 				TrackingAndTraining.updateItemProgressFromSheet(actor.id, itemId, field.value);
 			}
 		});
 
 		// ROLL TO TRAIN
-		html.find(".downtime-5e-roll").click(async (event) => {
+		html.find(".downtime-dnd5e-roll").click(async (event) => {
 			event.preventDefault();
 			// console.log("Roll Item excuted!");
-			let itemId = event.currentTarget.id.replace("downtime-5e-roll-", "");
+			let itemId = event.currentTarget.id.replace("downtime-dnd5e-roll-", "");
 			if (!itemId) {
-				ui.notifications.warn(game.i18n.localize("downtime-5e.NoIdWarning"), { permanent: true });
+				ui.notifications.warn(game.i18n.localize("downtime-dnd5e.NoIdWarning"), { permanent: true });
 				return;
 			}
 			await TrackingAndTraining.progressItem(actor.id, itemId);
@@ -164,15 +164,15 @@ async function addTrainingTab(app, html, data) {
 		// TOGGLE DESCRIPTION
 		// Modified version of _onItemSummary from dnd5e system located in
 		// dnd5e/module/actor/sheets/base.js
-		html.find(".downtime-5e-toggle-desc").click(async (event) => {
+		html.find(".downtime-dnd5e-toggle-desc").click(async (event) => {
 			event.preventDefault();
 			// console.log("Toggle Acvtivity Info excuted!");
 
 			// Set up some variables
 			let fieldId = event.currentTarget.id;
-			let itemId = fieldId.replace("downtime-5e-toggle-desc-", "");
+			let itemId = fieldId.replace("downtime-dnd5e-toggle-desc-", "");
 			if (!itemId) {
-				ui.notifications.warn(game.i18n.localize("downtime-5e.NoIdWarning"), { permanent: true });
+				ui.notifications.warn(game.i18n.localize("downtime-dnd5e.NoIdWarning"), { permanent: true });
 				return;
 			}
 			let allItems = actor.getFlag(CONSTANTS.MODULE_NAME, "trainingItems") || [];
@@ -192,7 +192,7 @@ async function addTrainingTab(app, html, data) {
 		});
 
 		// EXPORT
-		html.find(".downtime-5e-export").click(async (event) => {
+		html.find(".downtime-dnd5e-export").click(async (event) => {
 			event.preventDefault();
 			console.log("Export excuted!");
 			let actorId = actor.id;
@@ -200,7 +200,7 @@ async function addTrainingTab(app, html, data) {
 		});
 
 		// IMPORT
-		html.find(".downtime-5e-import").click(async (event) => {
+		html.find(".downtime-dnd5e-import").click(async (event) => {
 			event.preventDefault();
 			console.log("Import excuted!");
 			let actorId = actor.id;
@@ -208,7 +208,7 @@ async function addTrainingTab(app, html, data) {
 		});
 
 		// OPEN AUDIT LOG
-		html.find(".downtime-5e-audit").click(async (event) => {
+		html.find(".downtime-dnd5e-audit").click(async (event) => {
 			event.preventDefault();
 			// console.log("GM Audit excuted!");
 			new AuditLog(actor).render(true);
@@ -259,7 +259,7 @@ async function migrateAllActors() {
 		let currentUserOwnsActor = a.permission[currentUserId] === 3;
 		let currentUserIsGm = game.user.isGM;
 		if (!currentUserOwnsActor && !currentUserIsGm) {
-			console.log(game.i18n.localize("downtime-5e.Skipping") + ": " + a.data.name);
+			console.log(game.i18n.localize("downtime-dnd5e.Skipping") + ": " + a.data.name);
 			continue;
 		}
 
@@ -289,12 +289,12 @@ async function migrateAllActors() {
 	if (updatesRequired.length > 0) {
 		// Prompt to see if the user wants to update their actors.
 		let doUpdate = false;
-		let content = `<h3>${game.i18n.localize("downtime-5e.MigrationPromptTitle")}</h3>
-                   <p>${game.i18n.format("downtime-5e.MigrationPromptText1")}</p>
-                   <h3>${game.i18n.localize("downtime-5e.MigrationPromptBackupWarning")}</h3>
-                   <p>${game.i18n.format("downtime-5e.MigrationPromptText2")}</p>
+		let content = `<h3>${game.i18n.localize("downtime-dnd5e.MigrationPromptTitle")}</h3>
+                   <p>${game.i18n.format("downtime-dnd5e.MigrationPromptText1")}</p>
+                   <h3>${game.i18n.localize("downtime-dnd5e.MigrationPromptBackupWarning")}</h3>
+                   <p>${game.i18n.format("downtime-dnd5e.MigrationPromptText2")}</p>
                    <hr>
-                   <p>${game.i18n.format("downtime-5e.MigrationPromptText3", { num: updatesRequired.length })}</p>`;
+                   <p>${game.i18n.format("downtime-dnd5e.MigrationPromptText3", { num: updatesRequired.length })}</p>`;
 		// Insert dialog
 		new Dialog({
 			title: `${CONSTANTS.MODULE_NAME}`,
@@ -302,12 +302,12 @@ async function migrateAllActors() {
 			buttons: {
 				yes: {
 					icon: "<i class='fas fa-check'></i>",
-					label: game.i18n.localize("downtime-5e.MigrationPromptYes"),
+					label: game.i18n.localize("downtime-dnd5e.MigrationPromptYes"),
 					callback: () => (doUpdate = true),
 				},
 				no: {
 					icon: "<i class='fas fa-times'></i>",
-					label: game.i18n.localize("downtime-5e.MigrationPromptNo"),
+					label: game.i18n.localize("downtime-dnd5e.MigrationPromptNo"),
 					callback: () => (doUpdate = false),
 				},
 			},
@@ -323,14 +323,16 @@ async function migrateAllActors() {
 						// Backup old data and store in backup flag
 						let backup = { trainingItems: allTrainingItems, timestamp: new Date() };
 						ui.notifications.notify(
-							game.i18n.localize("downtime-5e.BackingUpDataFor") + ": " + a.data.name
+							game.i18n.localize("downtime-dnd5e.BackingUpDataFor") + ": " + a.data.name
 						);
-						console.log(game.i18n.localize("downtime-5e.BackingUpDataFor") + ": " + a.data.name);
+						console.log(game.i18n.localize("downtime-dnd5e.BackingUpDataFor") + ": " + a.data.name);
 						await a.setFlag(CONSTANTS.MODULE_NAME, "backup", backup);
 
 						// Alert that we're migrating actor
-						ui.notifications.notify(game.i18n.localize("downtime-5e.UpdatingDataFor") + ": " + a.data.name);
-						console.log(game.i18n.localize("downtime-5e.UpdatingDataFor") + ": " + a.data.name);
+						ui.notifications.notify(
+							game.i18n.localize("downtime-dnd5e.UpdatingDataFor") + ": " + a.data.name
+						);
+						console.log(game.i18n.localize("downtime-dnd5e.UpdatingDataFor") + ": " + a.data.name);
 
 						// Loop through items and update if they need updates
 						for (var j = 0; j < allTrainingItems.length; j++) {
@@ -343,10 +345,10 @@ async function migrateAllActors() {
 								} catch (err) {
 									console.error(err);
 									ui.notifications.warn(
-										game.i18n.localize("downtime-5e.ProblemUpdatingDataFor") + ": " + a.data.name
+										game.i18n.localize("downtime-dnd5e.ProblemUpdatingDataFor") + ": " + a.data.name
 									);
 									console.error(
-										game.i18n.localize("downtime-5e.ProblemUpdatingDataFor") + ": " + a.data.name
+										game.i18n.localize("downtime-dnd5e.ProblemUpdatingDataFor") + ": " + a.data.name
 									);
 								}
 								delete allTrainingItems[j].updateMe;
@@ -354,9 +356,9 @@ async function migrateAllActors() {
 						}
 						await a.setFlag(CONSTANTS.MODULE_NAME, "trainingItems", allTrainingItems);
 						ui.notifications.notify(
-							game.i18n.localize("downtime-5e.SuccessUpdatingDataFor") + ": " + a.data.name
+							game.i18n.localize("downtime-dnd5e.SuccessUpdatingDataFor") + ": " + a.data.name
 						);
-						console.log(game.i18n.localize("downtime-5e.SuccessUpdatingDataFor") + ": " + a.data.name);
+						console.log(game.i18n.localize("downtime-dnd5e.SuccessUpdatingDataFor") + ": " + a.data.name);
 					}
 				}
 			},
@@ -386,19 +388,19 @@ export function crashTNT() {
 	async function updateActivityProgress(actorName, itemName, newProgress) {
 		let actor = game.actors.getName(actorName);
 		if (!actor) {
-			ui.notifications.warn(game.i18n.localize("downtime-5e.ActorNotFoundWarning"));
+			ui.notifications.warn(game.i18n.localize("downtime-dnd5e.ActorNotFoundWarning"));
 			return;
 		}
 		let allItems = actor.getFlag(CONSTANTS.MODULE_NAME, "trainingItems");
 		let itemIdx = allItems.findIndex((i) => i.name === itemName);
 		if (itemIdx < 0) {
-			ui.notifications.warn(game.i18n.localize("downtime-5e.ItemNotFoundWarning") + ": " + itemName);
+			ui.notifications.warn(game.i18n.localize("downtime-dnd5e.ItemNotFoundWarning") + ": " + itemName);
 			return;
 		}
 
 		newProgress = parseInt(newProgress);
 		if (isNaN(newProgress)) {
-			ui.notifications.warn(game.i18n.localize("downtime-5e.ProgressValueIsNanWarning"));
+			ui.notifications.warn(game.i18n.localize("downtime-dnd5e.ProgressValueIsNanWarning"));
 			return;
 		}
 
@@ -407,7 +409,7 @@ export function crashTNT() {
 		let alreadyCompleted = thisItem.progress >= thisItem.completionAt;
 		thisItem = TrackingAndTraining.calculateNewProgress(
 			thisItem,
-			game.i18n.localize("downtime-5e.LogActionMacro"),
+			game.i18n.localize("downtime-dnd5e.LogActionMacro"),
 			newProgress,
 			true
 		);
@@ -424,20 +426,20 @@ export function crashTNT() {
 			let allItems = actor.getFlag(CONSTANTS.MODULE_NAME, "trainingItems") || [];
 			return allItems;
 		} else {
-			ui.notifications.warn(game.i18n.localize("downtime-5e.ActorNotFoundWarning"));
+			ui.notifications.warn(game.i18n.localize("downtime-dnd5e.ActorNotFoundWarning"));
 		}
 	}
 
 	function getActivity(actorName, itemName) {
 		let actor = game.actors.getName(actorName);
 		if (!actor) {
-			ui.notifications.warn(game.i18n.localize("downtime-5e.ActorNotFoundWarning"));
+			ui.notifications.warn(game.i18n.localize("downtime-dnd5e.ActorNotFoundWarning"));
 			return;
 		}
 		let allItems = actor.getFlag(CONSTANTS.MODULE_NAME, "trainingItems") || [];
 		let itemIdx = allItems.findIndex((i) => i.name === itemName);
 		if (itemIdx < 0) {
-			ui.notifications.warn(game.i18n.localize("downtime-5e.ItemNotFoundWarning") + ": " + itemName);
+			ui.notifications.warn(game.i18n.localize("downtime-dnd5e.ItemNotFoundWarning") + ": " + itemName);
 		} else {
 			return allItems[itemIdx];
 		}

@@ -15,7 +15,7 @@ export function registerHelpers() {
 		let formatted = "";
 
 		if (item.progressionStyle === "FIXED") {
-			formatted = game.i18n.localize("downtime-5e.ProgressionStyleFixed");
+			formatted = game.i18n.localize("downtime-dnd5e.ProgressionStyleFixed");
 		} else if (item.progressionStyle === "ABILITY") {
 			formatted = CONFIG.DND5E.abilities[item.ability];
 		} else if (item.progressionStyle === "SKILL") {
@@ -28,31 +28,31 @@ export function registerHelpers() {
 			if (tool) {
 				formatted = tool.name;
 			} else {
-				formatted = "[" + game.i18n.localize("downtime-5e.InvalidTool") + "]";
+				formatted = "[" + game.i18n.localize("downtime-dnd5e.InvalidTool") + "]";
 			}
 		} else if (item.progressionStyle === "MACRO") {
-			formatted = game.i18n.localize("downtime-5e.ProgressionStyleMacro");
+			formatted = game.i18n.localize("downtime-dnd5e.ProgressionStyleMacro");
 		}
 
 		if (item.dc) {
-			formatted += " (" + game.i18n.localize("downtime-5e.DC") + item.dc + ")";
+			formatted += " (" + game.i18n.localize("downtime-dnd5e.DC") + item.dc + ")";
 		}
 
 		return formatted;
 	});
 
 	Handlebars.registerHelper(`${CONSTANTS.MODULE_NAME}-trainingRollBtnClass`, function (trainingItem) {
-		let className = "downtime-5e-roll";
+		let className = "downtime-dnd5e-roll";
 		if (trainingItem.progress >= trainingItem.completionAt) {
-			className = "downtime-5e-roll-disabled";
+			className = "downtime-dnd5e-roll-disabled";
 		}
 		return className;
 	});
 
 	Handlebars.registerHelper(`${CONSTANTS.MODULE_NAME}-trainingRollBtnTooltip`, function (trainingItem) {
-		let text = game.i18n.localize("downtime-5e.RollItemProgress");
+		let text = game.i18n.localize("downtime-dnd5e.RollItemProgress");
 		if (trainingItem.progress >= trainingItem.completionAt) {
-			text = game.i18n.localize("downtime-5e.RollItemDisabled");
+			text = game.i18n.localize("downtime-dnd5e.RollItemDisabled");
 		}
 		return text;
 	});

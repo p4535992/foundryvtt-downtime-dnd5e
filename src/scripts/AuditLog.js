@@ -5,7 +5,7 @@ export default class AuditLog extends FormApplication {
 		return mergeObject(super.defaultOptions, {
 			id: "downtime-audit-log-form",
 			template: `modules/${CONSTANTS.MODULE_NAME}/templates/audit-dialog.hbs`,
-			title: game.i18n.localize("downtime-5e.ChangeLog"),
+			title: game.i18n.localize("downtime-dnd5e.ChangeLog"),
 			width: 900,
 			resizable: true,
 			closeOnSubmit: true,

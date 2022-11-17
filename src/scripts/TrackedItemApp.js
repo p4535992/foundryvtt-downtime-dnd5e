@@ -5,9 +5,9 @@ import CONSTANTS from "./constants.js";
 export default class TrackedItemApp extends FormApplication {
 	static get defaultOptions() {
 		return mergeObject(super.defaultOptions, {
-			id: "downtime-5e-downtime-item-app",
+			id: "downtime-dnd5e-downtime-item-app",
 			template: `modules/${CONSTANTS.MODULE_NAME}/templates/tracked-item-app.hbs`,
-			title: game.i18n.localize("downtime-5e.CreateEditItemAppTitle"),
+			title: game.i18n.localize("downtime-dnd5e.CreateEditItemAppTitle"),
 			width: 400,
 			resizable: true,
 			closeOnSubmit: true,
@@ -53,7 +53,7 @@ export default class TrackedItemApp extends FormApplication {
 		html.on("change", "#nameInput", (ev) => {
 			let newThing = $(ev.currentTarget).val();
 			if (!newThing) {
-				ui.notifications.warn(game.i18n.localize("downtime-5e.InputErrorName"));
+				ui.notifications.warn(game.i18n.localize("downtime-dnd5e.InputErrorName"));
 				this.render();
 			} else {
 				this.object.item.name = newThing;
@@ -71,7 +71,7 @@ export default class TrackedItemApp extends FormApplication {
 		html.on("change", "#progressInput", (ev) => {
 			let newThing = parseInt($(ev.currentTarget).val());
 			if (newThing == null || isNaN(newThing) || newThing < 0 || newThing > this.object.item.completionAt) {
-				ui.notifications.warn(game.i18n.localize("downtime-5e.InputErrorProgress"));
+				ui.notifications.warn(game.i18n.localize("downtime-dnd5e.InputErrorProgress"));
 				this.render();
 			} else {
 				this.object.item.progress = newThing;
@@ -98,7 +98,7 @@ export default class TrackedItemApp extends FormApplication {
 		html.on("change", "#macroNameInput", (ev) => {
 			let newThing = $(ev.currentTarget).val();
 			if (!newThing) {
-				ui.notifications.warn(game.i18n.localize("downtime-5e.InputErrorMacroName"));
+				ui.notifications.warn(game.i18n.localize("downtime-dnd5e.InputErrorMacroName"));
 				this.render();
 			} else {
 				this.object.item.macroName = newThing;
@@ -108,7 +108,7 @@ export default class TrackedItemApp extends FormApplication {
 		html.on("change", "#fixedIncreaseInput", (ev) => {
 			let newThing = parseInt($(ev.currentTarget).val());
 			if (!newThing || isNaN(newThing) || newThing <= 0) {
-				ui.notifications.warn(game.i18n.localize("downtime-5e.InputErrorFixedIncrease"));
+				ui.notifications.warn(game.i18n.localize("downtime-dnd5e.InputErrorFixedIncrease"));
 				this.render();
 			} else {
 				this.object.item.fixedIncrease = newThing;
@@ -127,7 +127,7 @@ export default class TrackedItemApp extends FormApplication {
 		html.on("change", "#completionAtInput", (ev) => {
 			let newThing = parseInt($(ev.currentTarget).val());
 			if (!newThing || isNaN(newThing) || newThing <= 0) {
-				ui.notifications.warn(game.i18n.localize("downtime-5e.InputErrorCompletionAt"));
+				ui.notifications.warn(game.i18n.localize("downtime-dnd5e.InputErrorCompletionAt"));
 				this.render();
 			} else {
 				this.object.item.completionAt = newThing;
@@ -145,7 +145,7 @@ export default class TrackedItemApp extends FormApplication {
 		let newItem = objItem;
 
 		// Set placeholders for name and image, just in case something's gone really wrong here
-		newItem.name = formData.name || game.i18n.localize("downtime-5e.NewItem");
+		newItem.name = formData.name || game.i18n.localize("downtime-dnd5e.NewItem");
 		newItem.img = formData.img || "icons/svg/book.svg";
 		newItem.progressionStyle = formData.progressionStyle || "ABILITY";
 
