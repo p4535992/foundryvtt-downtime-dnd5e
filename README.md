@@ -59,7 +59,9 @@ Create an issue right here on GitHub. If it's a critical/breaking bug, I'll try 
 ## Api
 
 `game.modules.get('downtime-dnd5e').api.updateActivityProgress(actorName, itemName, newProgress) => Promise<Void>`
+
 `game.modules.get('downtime-dnd5e').api.getActivitiesForActor(actorName) => List of Activities Objects`
+
 `game.modules.get('downtime-dnd5e').api.getActivity(actorName, itemName) => Activity Object`
 
 
