@@ -384,8 +384,11 @@ Hooks.on(`TrainingTabReady`, (app, html, data) => {
 });
 
 // Open up for other people to use
+/** @deprecated remain for retrocompatibility */
 export function crashTNT() {
 	async function updateActivityProgress(actorName, itemName, newProgress) {
+		await API.updateActivityProgress(actorName, itemName, newProgress);
+		/*
 		let actor = game.actors.getName(actorName);
 		if (!actor) {
 			ui.notifications.warn(game.i18n.localize("downtime-dnd5e.ActorNotFoundWarning"));
@@ -418,9 +421,12 @@ export function crashTNT() {
 		// Update flags and actor
 		allItems[itemIdx] = thisItem;
 		await actor.setFlag(CONSTANTS.MODULE_NAME, "trainingItems", allItems);
+		*/
 	}
 
 	function getActivitiesForActor(actorName) {
+		return API.getActivitiesForActor(actorName);
+		/*
 		let actor = game.actors.getName(actorName);
 		if (actor) {
 			let allItems = actor.getFlag(CONSTANTS.MODULE_NAME, "trainingItems") || [];
@@ -428,9 +434,12 @@ export function crashTNT() {
 		} else {
 			ui.notifications.warn(game.i18n.localize("downtime-dnd5e.ActorNotFoundWarning"));
 		}
+		*/
 	}
 
 	function getActivity(actorName, itemName) {
+		return API.getActivity(actorName, itemName);
+		/*
 		let actor = game.actors.getName(actorName);
 		if (!actor) {
 			ui.notifications.warn(game.i18n.localize("downtime-dnd5e.ActorNotFoundWarning"));
@@ -443,6 +452,7 @@ export function crashTNT() {
 		} else {
 			return allItems[itemIdx];
 		}
+		*/
 	}
 
 	return {

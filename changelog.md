@@ -1,8 +1,8 @@
-### Version 1.1.1-2
+### Version 1.1.1-2-3
 
-- Donwtime dnd5e
+- Born of Donwtime dnd5e
 
-### Version 1.0.0 (Foundry v10)
+### Version 1.0.0 (Foundry v10) 
 - Compatibility update for Foundry v10
 - Importing has been streamlined and now also handles categories
 - As of this release I will no longer be officially maintaing this module. You're welcome to keep submitting bug reports, and I'll try to fix issues if/when I can, but feature requests that haven't been gotten to by now will likely never get done. Thanks all for sticking with me this far, really appreciate all the support.
@@ -31,8 +31,8 @@
 - Fixed a bug where current progress couldn't be set to zero in the tracked item edit dialog.
 
 ### Version 0.6.3
-- Fixed a bug in `CrashTNT.getActivitiesForActor` that caused it to throw an error when used with actors with no activities
-- Fixed a bug in `CrashTNT.getActivity` that caused it to throw an error when used with actors with no activities
+- Fixed a bug in `game.modules.get('downtime-dnd5e').api.getActivitiesForActor` that caused it to throw an error when used with actors with no activities
+- Fixed a bug in `game.modules.get('downtime-dnd5e').api.getActivity` that caused it to throw an error when used with actors with no activities
 
 ### Version 0.6.2
 - Compatibility with Foundry 0.8.8

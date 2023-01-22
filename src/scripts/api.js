@@ -1,3 +1,5 @@
+import { warn } from "./lib/lib.js";
+
 const API = {
 	// renderDialogMMMForXXXArr(...inAttributes) {
 	//     // if (!Array.isArray(inAttributes)) {
@@ -10,24 +12,25 @@ const API = {
 	//     MaxwelMaliciousMaladies.displayDialog();
 	// },
 
-	crashTNT: {},
+	/** @deprecated remain for retrocompatibility */
+	crashTNT: {}, // remain for retrocompatibility
 
 	async updateActivityProgress(actorName, itemName, newProgress) {
 		let actor = game.actors.getName(actorName);
 		if (!actor) {
-			ui.notifications.warn(game.i18n.localize("downtime-dnd5e.ActorNotFoundWarning"));
+			warn(game.i18n.localize("downtime-dnd5e.ActorNotFoundWarning"), true);
 			return;
 		}
 		let allItems = actor.getFlag(CONSTANTS.MODULE_NAME, "trainingItems");
 		let itemIdx = allItems.findIndex((i) => i.name === itemName);
 		if (itemIdx < 0) {
-			ui.notifications.warn(game.i18n.localize("downtime-dnd5e.ItemNotFoundWarning") + ": " + itemName);
+			warn(game.i18n.localize("downtime-dnd5e.ItemNotFoundWarning") + ": " + itemName, true);
 			return;
 		}
 
 		newProgress = parseInt(newProgress);
 		if (isNaN(newProgress)) {
-			ui.notifications.warn(game.i18n.localize("downtime-dnd5e.ProgressValueIsNanWarning"));
+			warn(game.i18n.localize("downtime-dnd5e.ProgressValueIsNanWarning"), true);
 			return;
 		}
 
@@ -53,20 +56,20 @@ const API = {
 			let allItems = actor.getFlag(CONSTANTS.MODULE_NAME, "trainingItems") || [];
 			return allItems;
 		} else {
-			ui.notifications.warn(game.i18n.localize("downtime-dnd5e.ActorNotFoundWarning"));
+			warn(game.i18n.localize("downtime-dnd5e.ActorNotFoundWarning"), true);
 		}
 	},
 
 	getActivity(actorName, itemName) {
 		let actor = game.actors.getName(actorName);
 		if (!actor) {
-			ui.notifications.warn(game.i18n.localize("downtime-dnd5e.ActorNotFoundWarning"));
+			warn(game.i18n.localize("downtime-dnd5e.ActorNotFoundWarning"), true);
 			return;
 		}
 		let allItems = actor.getFlag(CONSTANTS.MODULE_NAME, "trainingItems") || [];
 		let itemIdx = allItems.findIndex((i) => i.name === itemName);
 		if (itemIdx < 0) {
-			ui.notifications.warn(game.i18n.localize("downtime-dnd5e.ItemNotFoundWarning") + ": " + itemName);
+			warn(game.i18n.localize("downtime-dnd5e.ItemNotFoundWarning") + ": " + itemName, true);
 		} else {
 			return allItems[itemIdx];
 		}

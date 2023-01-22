@@ -88,6 +88,14 @@
 	"downtime-dnd5e.SettingTabNameHint": "Sets the title of the tab to whatever you enter here. Default is 'Tracking,' but you may wish to call it something else depending on how you use the module.",
 	"downtime-dnd5e.SettingAnnounceActivityCompletionFor": "Announce Completion For:",
 	"downtime-dnd5e.SettingAnnounceActivityCompletionForHint": "These actor types will cause a chat message to display any time they complete a tracked item.",
+	
+	"downtime-dnd5e.SettingReset.name": "Reset settings to default",
+	"downtime-dnd5e.SettingReset.hint": "This will reset all of the settings of back to the active game system's default.",
+	"downtime-dnd5e.SettingReset.dialogs.title": "Reset Module Settings",
+	"downtime-dnd5e.SettingReset.dialogs.content": "Are you sure you want to reset all of the module settings to the current system's defaults? <strong>THIS CANNOT BE UNDONE!</strong>",
+	"downtime-dnd5e.SettingReset.dialogs.confirm": "Reset Module Settings",
+	"downtime-dnd5e.SettingReset.dialogs.cancel": "Cancel",
+	
 	"downtime-dnd5e.NpcsOnly": "NPC's Only",
 	"downtime-dnd5e.PcsAndNpcs": "PC's and NPC's",
 	"downtime-dnd5e.PcsOnly": "PC's Only",
