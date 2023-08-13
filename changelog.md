@@ -1,3 +1,7 @@
+### 1.2.0
+
+- Upgrade for fvtt11
+
 ### Version 1.1.1-2-3
 
 - Born of Donwtime dnd5e
