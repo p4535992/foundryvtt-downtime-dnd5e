@@ -5,7 +5,7 @@ import { registerHelpers } from "./handlebars-helpers.js";
 import { migrateToVersion1 } from "./migrations/migrationNumber1.js";
 import AuditLog from "./AuditLog.js";
 import TrackingAndTraining from "./TrackingAndTraining.js";
-import { setApi } from "../main.js";
+import { setApi } from "../module.js";
 import CONSTANTS from "./constants.js";
 import API from "./api.js";
 
