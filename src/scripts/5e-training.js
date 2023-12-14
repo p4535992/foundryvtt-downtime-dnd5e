@@ -35,7 +35,6 @@ async function addTrainingTab(app, html, data) {
   // Determine if we should show the downtime tab
   let showTrainingTab = false;
   let showToUser = game.users.current.isGM || !game.settings.get(CONSTANTS.MODULE_NAME, "gmOnlyMode");
-  let notShowToUserEditMode = game.settings.get(CONSTANTS.MODULE_NAME, "gmOnlyEditMode") && !game.users.current.isGM;
   if (data.isCharacter && data.editable) {
     showTrainingTab = game.settings.get(CONSTANTS.MODULE_NAME, "enableTraining") && showToUser;
   } else if (data.isNPC && data.editable) {
@@ -45,7 +44,6 @@ async function addTrainingTab(app, html, data) {
   if (showTrainingTab) {
     // Get our actor and our flags
     let actor = game.actors.contents.find((a) => a._id === data.actor._id);
-    let trainingItems = await actor.getFlag(CONSTANTS.MODULE_NAME, "trainingItems");
 
     // Update the nav menu
     let tabName = game.settings.get(CONSTANTS.MODULE_NAME, "tabName");
@@ -53,166 +51,18 @@ async function addTrainingTab(app, html, data) {
     let tabs = html.find('.tabs[data-group="primary"]');
     tabs.append(trainingTabBtn);
 
-    // Get some permissions
-    let showImportButton = game.settings.get(CONSTANTS.MODULE_NAME, "showImportButton");
-    data.showImportButton = showImportButton;
-    data.showToUserEditMode = !notShowToUserEditMode;
+    // Get the data to render the template
+    const templateData = getTemplateData(data);
 
     // Create the tab content
     let sheet = html.find(".sheet-body");
     let trainingTabHtml = $(
-      await renderTemplate(`modules/${CONSTANTS.MODULE_NAME}/templates/training-section.hbs`, data)
+      await renderTemplate(`modules/${CONSTANTS.MODULE_NAME}/templates/training-section.hbs`, templateData)
     );
     sheet.append(trainingTabHtml);
 
     // Set up our big list of dropdown options
-    let actorTools = TrackingAndTraining.getActorTools(actor.id);
-    const ABILITIES = TrackingAndTraining.formatAbilitiesForDropdown();
-    const SKILLS = TrackingAndTraining.formatSkillsForDropdown();
-    const DROPDOWN_OPTIONS = { abilities: ABILITIES, skills: SKILLS, tools: actorTools };
-
-    // NEW CATEGORY
-    html.find(".downtime-dnd5e-new-category").click(async (event) => {
-      event.preventDefault();
-      // console.log("Create Category excuted!");
-      await TrackingAndTraining.addCategory(actor.id);
-    });
-
-    // EDIT CATEGORY
-    html.find(".downtime-dnd5e-edit-category").click(async (event) => {
-      event.preventDefault();
-      // console.log("Edit Category excuted!");
-      let fieldId = event.currentTarget.id;
-      let categoryId = fieldId.replace("downtime-dnd5e-edit-category-", "");
-      await TrackingAndTraining.editCategory(actor.id, categoryId);
-    });
-
-    // DELETE CATEGORY
-    html.find(".downtime-dnd5e-delete-category").click(async (event) => {
-      event.preventDefault();
-      // console.log("Delete Category excuted!");
-      let fieldId = event.currentTarget.id;
-      let categoryId = fieldId.replace("downtime-dnd5e-delete-category-", "");
-      await TrackingAndTraining.deleteCategory(actor.id, categoryId);
-    });
-
-    // ADD NEW DOWNTIME ACTIVITY
-    html.find(".downtime-dnd5e-add").click(async (event) => {
-      event.preventDefault();
-      // console.log("Create Item excuted!");
-      await TrackingAndTraining.addItem(actor.id, DROPDOWN_OPTIONS);
-    });
-
-    // EDIT DOWNTIME ACTIVITY
-    html.find(".downtime-dnd5e-edit").click(async (event) => {
-      event.preventDefault();
-      // console.log("Edit Item excuted!");
-      let allItems = actor.getFlag(CONSTANTS.MODULE_NAME, "trainingItems") || [];
-      let itemId = event.currentTarget.id.replace("downtime-dnd5e-edit-", "");
-      if (!itemId) {
-        ui.notifications.warn(game.i18n.localize("downtime-dnd5e.NoIdWarning"), { permanent: true });
-        return;
-      }
-      await TrackingAndTraining.editFromSheet(actor.id, itemId, DROPDOWN_OPTIONS);
-    });
-
-    // DELETE DOWNTIME ACTIVITY
-    html.find(".downtime-dnd5e-delete").click(async (event) => {
-      event.preventDefault();
-      // console.log("Delete Item excuted!");
-      let allItems = actor.getFlag(CONSTANTS.MODULE_NAME, "trainingItems") || [];
-      let itemId = event.currentTarget.id.replace("downtime-dnd5e-delete-", "");
-      if (!itemId) {
-        ui.notifications.warn(game.i18n.localize("downtime-dnd5e.NoIdWarning", { permanent: true }));
-        return;
-      }
-      await TrackingAndTraining.deleteFromSheet(actor.id, itemId);
-    });
-
-    // EDIT PROGRESS VALUE
-    html.find(".downtime-dnd5e-override").change(async (event) => {
-      event.preventDefault();
-      // console.log("Progress Override excuted!");
-      let field = event.currentTarget;
-      let itemId = event.currentTarget.id.replace("downtime-dnd5e-override-", "");
-      if (!itemId) {
-        ui.notifications.warn(game.i18n.localize("downtime-dnd5e.NoIdWarning"), { permanent: true });
-        return;
-      }
-      let allItems = actor.getFlag(CONSTANTS.MODULE_NAME, "trainingItems") || [];
-      let thisItem = allItems.filter((obj) => obj.id === itemId)[0];
-      if (isNaN(field.value)) {
-        field.value = thisItem.progress;
-        ui.notifications.warn(game.i18n.localize("downtime-dnd5e.InvalidNumberWarning"));
-      } else {
-        TrackingAndTraining.updateItemProgressFromSheet(actor.id, itemId, field.value);
-      }
-    });
-
-    // ROLL TO TRAIN
-    html.find(".downtime-dnd5e-roll").click(async (event) => {
-      event.preventDefault();
-      // console.log("Roll Item excuted!");
-      let itemId = event.currentTarget.id.replace("downtime-dnd5e-roll-", "");
-      if (!itemId) {
-        ui.notifications.warn(game.i18n.localize("downtime-dnd5e.NoIdWarning"), { permanent: true });
-        return;
-      }
-      await TrackingAndTraining.progressItem(actor.id, itemId);
-    });
-
-    // TOGGLE DESCRIPTION
-    // Modified version of _onItemSummary from dnd5e system located in
-    // dnd5e/module/actor/sheets/base.js
-    html.find(".downtime-dnd5e-toggle-desc").click(async (event) => {
-      event.preventDefault();
-      // console.log("Toggle Acvtivity Info excuted!");
-
-      // Set up some variables
-      let fieldId = event.currentTarget.id;
-      let itemId = fieldId.replace("downtime-dnd5e-toggle-desc-", "");
-      if (!itemId) {
-        ui.notifications.warn(game.i18n.localize("downtime-dnd5e.NoIdWarning"), { permanent: true });
-        return;
-      }
-      let allItems = actor.getFlag(CONSTANTS.MODULE_NAME, "trainingItems") || [];
-      let item = allItems.filter((obj) => obj.id === itemId)[0];
-      let desc = item.description || "";
-      let li = $(event.currentTarget).parents(".item");
-
-      if (li.hasClass("expanded")) {
-        let summary = li.children(".item-summary");
-        summary.slideUp(200, () => summary.remove());
-      } else {
-        let div = $(`<div class="item-summary">${desc}</div>`);
-        li.append(div.hide());
-        div.slideDown(200);
-      }
-      li.toggleClass("expanded");
-    });
-
-    // EXPORT
-    html.find(".downtime-dnd5e-export").click(async (event) => {
-      event.preventDefault();
-      console.log("Export excuted!");
-      let actorId = actor.id;
-      TrackingAndTraining.exportItems(actor.id);
-    });
-
-    // IMPORT
-    html.find(".downtime-dnd5e-import").click(async (event) => {
-      event.preventDefault();
-      console.log("Import excuted!");
-      let actorId = actor.id;
-      await TrackingAndTraining.importItems(actor.id);
-    });
-
-    // OPEN AUDIT LOG
-    html.find(".downtime-dnd5e-audit").click(async (event) => {
-      event.preventDefault();
-      // console.log("GM Audit excuted!");
-      new AuditLog(actor).render(true);
-    });
+    activateTabListeners(actor, html);
 
     // Set Training Tab as Active
     html.find('.tabs .item[data-tab="training"]').click((ev) => {
@@ -227,6 +77,164 @@ async function addTrainingTab(app, html, data) {
 
   //Tab is ready
   Hooks.call(`TrainingTabReady`, app, html, data);
+}
+
+function activateTabListeners(actor, html) {
+  let actorTools = TrackingAndTraining.getActorTools(actor.id);
+  const ABILITIES = TrackingAndTraining.formatAbilitiesForDropdown();
+  const SKILLS = TrackingAndTraining.formatSkillsForDropdown();
+  const DROPDOWN_OPTIONS = { abilities: ABILITIES, skills: SKILLS, tools: actorTools };
+
+  // NEW CATEGORY
+  html.find(".downtime-dnd5e-new-category").click(async (event) => {
+    event.preventDefault();
+    // console.log("Create Category excuted!");
+    await TrackingAndTraining.addCategory(actor.id);
+  });
+
+  // EDIT CATEGORY
+  html.find(".downtime-dnd5e-edit-category").click(async (event) => {
+    event.preventDefault();
+    // console.log("Edit Category excuted!");
+    let fieldId = event.currentTarget.id;
+    let categoryId = fieldId.replace("downtime-dnd5e-edit-category-", "");
+    await TrackingAndTraining.editCategory(actor.id, categoryId);
+  });
+
+  // DELETE CATEGORY
+  html.find(".downtime-dnd5e-delete-category").click(async (event) => {
+    event.preventDefault();
+    // console.log("Delete Category excuted!");
+    let fieldId = event.currentTarget.id;
+    let categoryId = fieldId.replace("downtime-dnd5e-delete-category-", "");
+    await TrackingAndTraining.deleteCategory(actor.id, categoryId);
+  });
+
+  // ADD NEW DOWNTIME ACTIVITY
+  html.find(".downtime-dnd5e-add").click(async (event) => {
+    event.preventDefault();
+    // console.log("Create Item excuted!");
+    await TrackingAndTraining.addItem(actor.id, DROPDOWN_OPTIONS);
+  });
+
+  // EDIT DOWNTIME ACTIVITY
+  html.find(".downtime-dnd5e-edit").click(async (event) => {
+    event.preventDefault();
+    // console.log("Edit Item excuted!");
+    let allItems = actor.getFlag(CONSTANTS.MODULE_NAME, "trainingItems") || [];
+    let itemId = event.currentTarget.id.replace("downtime-dnd5e-edit-", "");
+    if (!itemId) {
+      ui.notifications.warn(game.i18n.localize("downtime-dnd5e.NoIdWarning"), { permanent: true });
+      return;
+    }
+    await TrackingAndTraining.editFromSheet(actor.id, itemId, DROPDOWN_OPTIONS);
+  });
+
+  // DELETE DOWNTIME ACTIVITY
+  html.find(".downtime-dnd5e-delete").click(async (event) => {
+    event.preventDefault();
+    // console.log("Delete Item excuted!");
+    let allItems = actor.getFlag(CONSTANTS.MODULE_NAME, "trainingItems") || [];
+    let itemId = event.currentTarget.id.replace("downtime-dnd5e-delete-", "");
+    if (!itemId) {
+      ui.notifications.warn(game.i18n.localize("downtime-dnd5e.NoIdWarning", { permanent: true }));
+      return;
+    }
+    await TrackingAndTraining.deleteFromSheet(actor.id, itemId);
+  });
+
+  // EDIT PROGRESS VALUE
+  html.find(".downtime-dnd5e-override").change(async (event) => {
+    event.preventDefault();
+    // console.log("Progress Override excuted!");
+    let field = event.currentTarget;
+    let itemId = event.currentTarget.id.replace("downtime-dnd5e-override-", "");
+    if (!itemId) {
+      ui.notifications.warn(game.i18n.localize("downtime-dnd5e.NoIdWarning"), { permanent: true });
+      return;
+    }
+    let allItems = actor.getFlag(CONSTANTS.MODULE_NAME, "trainingItems") || [];
+    let thisItem = allItems.filter((obj) => obj.id === itemId)[0];
+    if (isNaN(field.value)) {
+      field.value = thisItem.progress;
+      ui.notifications.warn(game.i18n.localize("downtime-dnd5e.InvalidNumberWarning"));
+    } else {
+      TrackingAndTraining.updateItemProgressFromSheet(actor.id, itemId, field.value);
+    }
+  });
+
+  // ROLL TO TRAIN
+  html.find(".downtime-dnd5e-roll").click(async (event) => {
+    event.preventDefault();
+    // console.log("Roll Item excuted!");
+    let itemId = event.currentTarget.id.replace("downtime-dnd5e-roll-", "");
+    if (!itemId) {
+      ui.notifications.warn(game.i18n.localize("downtime-dnd5e.NoIdWarning"), { permanent: true });
+      return;
+    }
+    await TrackingAndTraining.progressItem(actor.id, itemId);
+  });
+
+  // TOGGLE DESCRIPTION
+  // Modified version of _onItemSummary from dnd5e system located in
+  // dnd5e/module/actor/sheets/base.js
+  html.find(".downtime-dnd5e-toggle-desc").click(async (event) => {
+    event.preventDefault();
+    // console.log("Toggle Acvtivity Info excuted!");
+
+    // Set up some variables
+    let fieldId = event.currentTarget.id;
+    let itemId = fieldId.replace("downtime-dnd5e-toggle-desc-", "");
+    if (!itemId) {
+      ui.notifications.warn(game.i18n.localize("downtime-dnd5e.NoIdWarning"), { permanent: true });
+      return;
+    }
+    let allItems = actor.getFlag(CONSTANTS.MODULE_NAME, "trainingItems") || [];
+    let item = allItems.filter((obj) => obj.id === itemId)[0];
+    let desc = item.description || "";
+    let li = $(event.currentTarget).parents(".item");
+
+    if (li.hasClass("expanded")) {
+      let summary = li.children(".item-summary");
+      summary.slideUp(200, () => summary.remove());
+    } else {
+      let div = $(`<div class="item-summary">${desc}</div>`);
+      li.append(div.hide());
+      div.slideDown(200);
+    }
+    li.toggleClass("expanded");
+  });
+
+  // EXPORT
+  html.find(".downtime-dnd5e-export").click(async (event) => {
+    event.preventDefault();
+    console.log("Export excuted!");
+    let actorId = actor.id;
+    TrackingAndTraining.exportItems(actor.id);
+  });
+
+  // IMPORT
+  html.find(".downtime-dnd5e-import").click(async (event) => {
+    event.preventDefault();
+    console.log("Import excuted!");
+    let actorId = actor.id;
+    await TrackingAndTraining.importItems(actor.id);
+  });
+
+  // OPEN AUDIT LOG
+  html.find(".downtime-dnd5e-audit").click(async (event) => {
+    event.preventDefault();
+    // console.log("GM Audit excuted!");
+    new AuditLog(actor).render(true);
+  });
+}
+
+function getTemplateData(data) {
+  let notShowToUserEditMode = game.settings.get(CONSTANTS.MODULE_NAME, "gmOnlyEditMode") && !game.users.current.isGM;
+  let showImportButton = game.settings.get(CONSTANTS.MODULE_NAME, "showImportButton");
+  data.showImportButton = showImportButton;
+  data.showToUserEditMode = !notShowToUserEditMode;
+  return data;
 }
 
 // Determines whether or not the sheet should have its width adjusted.
@@ -359,6 +367,10 @@ async function migrateAllActors() {
 }
 
 Hooks.on(`renderActorSheet`, (app, html, data) => {
+  if (tidy5eApi?.isTidy5eSheet?.(app)) {
+    return;
+  }
+
   let widenSheet = adjustSheetWidth(app);
   if (widenSheet) {
     let newPos = { width: app.position.width + game.settings.get(CONSTANTS.MODULE_NAME, "extraSheetWidth") };
@@ -373,6 +385,48 @@ Hooks.on(`renderActorSheet`, (app, html, data) => {
 
 Hooks.on(`TrainingTabReady`, (app, html, data) => {
   // log("Downtime tab ready!");
+});
+
+/**
+ * An instance of the Tidy 5e Sheet API.
+ * This becomes available when the `tidy5e-sheet.ready` hook fires.
+ */
+let tidy5eApi = undefined;
+
+Hooks.on("tidy5e-sheet.ready", (api) => {
+  tidy5eApi = api;
+  api.registerCharacterTab(
+    new api.models.HandlebarsTab({
+      tabId: "downtime-dnd5e-training-tab",
+      path: `modules/${CONSTANTS.MODULE_NAME}/templates/partials/training-section-contents.hbs`,
+      title: "Downtime 🤞",
+      getData: (data) => getTemplateData(data),
+      enabled: (data) => {
+        const showToUser = game.users.current.isGM || !game.settings.get(CONSTANTS.MODULE_NAME, "gmOnlyMode");
+        return data.editable && showToUser && game.settings.get(CONSTANTS.MODULE_NAME, "enableTraining");
+      },
+      onRender: ({ app, element, data }) => {
+        activateTabListeners(data.actor, $(element));
+      },
+      tabContentsClasses: ["downtime-dnd5e"],
+    })
+  );
+  api.registerNpcTab(
+    new api.models.HandlebarsTab({
+      tabId: "downtime-dnd5e-training-tab",
+      path: `modules/${CONSTANTS.MODULE_NAME}/templates/partials/training-section-contents.hbs`,
+      title: "Downtime NPC 🤞",
+      getData: (data) => getTemplateData(data),
+      enabled: (data) => {
+        const showToUser = game.users.current.isGM || !game.settings.get(CONSTANTS.MODULE_NAME, "gmOnlyMode");
+        return data.editable && showToUser && game.settings.get(CONSTANTS.MODULE_NAME, "enableTrainingNpc");
+      },
+      onRender: ({ app, element, data }) => {
+        activateTabListeners(data.actor, $(element));
+      },
+      tabContentsClasses: ["downtime-dnd5e"],
+    })
+  );
 });
 
 // Open up for other people to use
