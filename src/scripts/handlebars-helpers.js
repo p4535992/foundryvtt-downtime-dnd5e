@@ -17,7 +17,7 @@ export function registerHelpers() {
     if (item.progressionStyle === "FIXED") {
       formatted = game.i18n.localize("downtime-dnd5e.ProgressionStyleFixed");
     } else if (item.progressionStyle === "ABILITY") {
-      formatted = CONFIG.DND5E.abilities[item.ability];
+      formatted = CONFIG.DND5E.abilities[item.ability].label;
     } else if (item.progressionStyle === "SKILL") {
       formatted = CONFIG.DND5E.skills[item.skill].label;
     } else if (item.progressionStyle === "TOOL") {
