@@ -399,7 +399,7 @@ Hooks.on("tidy5e-sheet.ready", (api) => {
     new api.models.HandlebarsTab({
       tabId: "downtime-dnd5e-training-tab",
       path: `modules/${CONSTANTS.MODULE_NAME}/templates/partials/training-section-contents.hbs`,
-      title: "Downtime 🤞",
+      title: () => game.settings.get(CONSTANTS.MODULE_NAME, "tabName"),
       getData: (data) => getTemplateData(data),
       enabled: (data) => {
         const showToUser = game.users.current.isGM || !game.settings.get(CONSTANTS.MODULE_NAME, "gmOnlyMode");
@@ -409,13 +409,14 @@ Hooks.on("tidy5e-sheet.ready", (api) => {
         activateTabListeners(data.actor, $(element));
       },
       tabContentsClasses: ["downtime-dnd5e"],
+      activateDefaultSheetListeners: false,
     })
   );
   api.registerNpcTab(
     new api.models.HandlebarsTab({
       tabId: "downtime-dnd5e-training-tab",
       path: `modules/${CONSTANTS.MODULE_NAME}/templates/partials/training-section-contents.hbs`,
-      title: "Downtime NPC 🤞",
+      title: () => game.settings.get(CONSTANTS.MODULE_NAME, "tabName"),
       getData: (data) => getTemplateData(data),
       enabled: (data) => {
         const showToUser = game.users.current.isGM || !game.settings.get(CONSTANTS.MODULE_NAME, "gmOnlyMode");
@@ -425,6 +426,7 @@ Hooks.on("tidy5e-sheet.ready", (api) => {
         activateTabListeners(data.actor, $(element));
       },
       tabContentsClasses: ["downtime-dnd5e"],
+      activateDefaultSheetListeners: false,
     })
   );
 });
