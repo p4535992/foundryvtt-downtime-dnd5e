@@ -1,3 +1,7 @@
+### 1.2.1
+
+- Many bug fixing done from @kgar for a Tidy5e integration https://github.com/p4535992/foundryvtt-downtime-dnd5e/pull/6
+
 ### 1.2.0
 
 - Upgrade for fvtt11
