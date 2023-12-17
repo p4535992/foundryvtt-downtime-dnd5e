@@ -2,12 +2,12 @@ import CONSTANTS from "./constants.js";
 import TrackingAndTraining from "./TrackingAndTraining.js";
 
 export function registerHelpers() {
-  Handlebars.registerHelper(`${CONSTANTS.MODULE_NAME}-trainingCompletion`, function (trainingItem) {
+  Handlebars.registerHelper(`${CONSTANTS.MODULE_ID}-trainingCompletion`, function (trainingItem) {
     let percentComplete = Math.min(100, (100 * trainingItem.progress) / trainingItem.completionAt).toFixed(0);
     return percentComplete;
   });
 
-  Handlebars.registerHelper(`${CONSTANTS.MODULE_NAME}-progressionStyle`, function (item, actor) {
+  Handlebars.registerHelper(`${CONSTANTS.MODULE_ID}-progressionStyle`, function (item, actor) {
     if (!item || !actor) {
       return "?";
     }
@@ -41,7 +41,7 @@ export function registerHelpers() {
     return formatted;
   });
 
-  Handlebars.registerHelper(`${CONSTANTS.MODULE_NAME}-trainingRollBtnClass`, function (trainingItem) {
+  Handlebars.registerHelper(`${CONSTANTS.MODULE_ID}-trainingRollBtnClass`, function (trainingItem) {
     let className = "downtime-dnd5e-roll";
     if (trainingItem.progress >= trainingItem.completionAt) {
       className = "downtime-dnd5e-roll-disabled";
@@ -49,7 +49,7 @@ export function registerHelpers() {
     return className;
   });
 
-  Handlebars.registerHelper(`${CONSTANTS.MODULE_NAME}-trainingRollBtnTooltip`, function (trainingItem) {
+  Handlebars.registerHelper(`${CONSTANTS.MODULE_ID}-trainingRollBtnTooltip`, function (trainingItem) {
     let text = game.i18n.localize("downtime-dnd5e.RollItemProgress");
     if (trainingItem.progress >= trainingItem.completionAt) {
       text = game.i18n.localize("downtime-dnd5e.RollItemDisabled");
@@ -57,9 +57,9 @@ export function registerHelpers() {
     return text;
   });
 
-  Handlebars.registerHelper(`${CONSTANTS.MODULE_NAME}-isInCategory`, function (actor, category) {
+  Handlebars.registerHelper(`${CONSTANTS.MODULE_ID}-isInCategory`, function (actor, category) {
     let thisCategoryId = category.id;
-    let allTrainingItems = actor.flags[CONSTANTS.MODULE_NAME]?.trainingItems || [];
+    let allTrainingItems = actor.flags[CONSTANTS.MODULE_ID]?.trainingItems || [];
     let matchingItems = [];
     for (var i = 0; i < allTrainingItems.length; i++) {
       let thisItem = allTrainingItems[i];
@@ -71,8 +71,8 @@ export function registerHelpers() {
     return matchingItems;
   });
 
-  Handlebars.registerHelper(`${CONSTANTS.MODULE_NAME}-isUncategorized`, function (actor) {
-    let allTrainingItems = actor.flags[CONSTANTS.MODULE_NAME]?.trainingItems || [];
+  Handlebars.registerHelper(`${CONSTANTS.MODULE_ID}-isUncategorized`, function (actor) {
+    let allTrainingItems = actor.flags[CONSTANTS.MODULE_ID]?.trainingItems || [];
     let matchingItems = [];
     for (var i = 0; i < allTrainingItems.length; i++) {
       let thisItem = allTrainingItems[i];
@@ -84,7 +84,7 @@ export function registerHelpers() {
     return matchingItems;
   });
 
-  Handlebars.registerHelper(`${CONSTANTS.MODULE_NAME}-getBarColor`, function (item) {
+  Handlebars.registerHelper(`${CONSTANTS.MODULE_ID}-getBarColor`, function (item) {
     // Derived from this: https://gist.github.com/mlocati/7210513
     let perc = Math.min(100, (100 * item.progress) / item.completionAt).toFixed(0);
     var r,

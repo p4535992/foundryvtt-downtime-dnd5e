@@ -34,11 +34,11 @@ export const readyHooks = () => {
 async function addTrainingTab(app, html, data) {
   // Determine if we should show the downtime tab
   let showTrainingTab = false;
-  let showToUser = game.users.current.isGM || !game.settings.get(CONSTANTS.MODULE_NAME, "gmOnlyMode");
+  let showToUser = game.users.current.isGM || !game.settings.get(CONSTANTS.MODULE_ID, "gmOnlyMode");
   if (data.isCharacter && data.editable) {
-    showTrainingTab = game.settings.get(CONSTANTS.MODULE_NAME, "enableTraining") && showToUser;
+    showTrainingTab = game.settings.get(CONSTANTS.MODULE_ID, "enableTraining") && showToUser;
   } else if (data.isNPC && data.editable) {
-    showTrainingTab = game.settings.get(CONSTANTS.MODULE_NAME, "enableTrainingNpc") && showToUser;
+    showTrainingTab = game.settings.get(CONSTANTS.MODULE_ID, "enableTrainingNpc") && showToUser;
   }
 
   if (showTrainingTab) {
@@ -46,7 +46,7 @@ async function addTrainingTab(app, html, data) {
     let actor = game.actors.contents.find((a) => a._id === data.actor._id);
 
     // Update the nav menu
-    let tabName = game.settings.get(CONSTANTS.MODULE_NAME, "tabName");
+    let tabName = game.settings.get(CONSTANTS.MODULE_ID, "tabName");
     let trainingTabBtn = $('<a class="item" data-tab="training">' + tabName + "</a>");
     let tabs = html.find('.tabs[data-group="primary"]');
     tabs.append(trainingTabBtn);
@@ -57,7 +57,7 @@ async function addTrainingTab(app, html, data) {
     // Create the tab content
     let sheet = html.find(".sheet-body");
     let trainingTabHtml = $(
-      await renderTemplate(`modules/${CONSTANTS.MODULE_NAME}/templates/training-section.hbs`, templateData)
+      await renderTemplate(`modules/${CONSTANTS.MODULE_ID}/templates/training-section.hbs`, templateData)
     );
     sheet.append(trainingTabHtml);
 
@@ -121,7 +121,7 @@ function activateTabListeners(actor, html) {
   html.find(".downtime-dnd5e-edit").click(async (event) => {
     event.preventDefault();
     // console.log("Edit Item excuted!");
-    let allItems = actor.getFlag(CONSTANTS.MODULE_NAME, "trainingItems") || [];
+    let allItems = actor.getFlag(CONSTANTS.MODULE_ID, "trainingItems") || [];
     let itemId = event.currentTarget.id.replace("downtime-dnd5e-edit-", "");
     if (!itemId) {
       ui.notifications.warn(game.i18n.localize("downtime-dnd5e.NoIdWarning"), { permanent: true });
@@ -134,7 +134,7 @@ function activateTabListeners(actor, html) {
   html.find(".downtime-dnd5e-delete").click(async (event) => {
     event.preventDefault();
     // console.log("Delete Item excuted!");
-    let allItems = actor.getFlag(CONSTANTS.MODULE_NAME, "trainingItems") || [];
+    let allItems = actor.getFlag(CONSTANTS.MODULE_ID, "trainingItems") || [];
     let itemId = event.currentTarget.id.replace("downtime-dnd5e-delete-", "");
     if (!itemId) {
       ui.notifications.warn(game.i18n.localize("downtime-dnd5e.NoIdWarning", { permanent: true }));
@@ -153,7 +153,7 @@ function activateTabListeners(actor, html) {
       ui.notifications.warn(game.i18n.localize("downtime-dnd5e.NoIdWarning"), { permanent: true });
       return;
     }
-    let allItems = actor.getFlag(CONSTANTS.MODULE_NAME, "trainingItems") || [];
+    let allItems = actor.getFlag(CONSTANTS.MODULE_ID, "trainingItems") || [];
     let thisItem = allItems.filter((obj) => obj.id === itemId)[0];
     if (isNaN(field.value)) {
       field.value = thisItem.progress;
@@ -189,7 +189,7 @@ function activateTabListeners(actor, html) {
       ui.notifications.warn(game.i18n.localize("downtime-dnd5e.NoIdWarning"), { permanent: true });
       return;
     }
-    let allItems = actor.getFlag(CONSTANTS.MODULE_NAME, "trainingItems") || [];
+    let allItems = actor.getFlag(CONSTANTS.MODULE_ID, "trainingItems") || [];
     let item = allItems.filter((obj) => obj.id === itemId)[0];
     let desc = item.description || "";
     let li = $(event.currentTarget).parents(".item");
@@ -230,8 +230,8 @@ function activateTabListeners(actor, html) {
 }
 
 function getTemplateData(data) {
-  let notShowToUserEditMode = game.settings.get(CONSTANTS.MODULE_NAME, "gmOnlyEditMode") && !game.users.current.isGM;
-  let showImportButton = game.settings.get(CONSTANTS.MODULE_NAME, "showImportButton");
+  let notShowToUserEditMode = game.settings.get(CONSTANTS.MODULE_ID, "gmOnlyEditMode") && !game.users.current.isGM;
+  let showImportButton = game.settings.get(CONSTANTS.MODULE_ID, "showImportButton");
   data.showImportButton = showImportButton;
   data.showToUserEditMode = !notShowToUserEditMode;
   return data;
@@ -241,13 +241,13 @@ function getTemplateData(data) {
 // If the setting for extra width is set, and if the sheet is of a type for which
 // we have training enabled, this returns true.
 function adjustSheetWidth(app) {
-  let settingEnabled = !!game.settings.get(CONSTANTS.MODULE_NAME, "extraSheetWidth");
+  let settingEnabled = !!game.settings.get(CONSTANTS.MODULE_ID, "extraSheetWidth");
   let sheetHasTab =
-    (app.object.type === "npc" && game.settings.get(CONSTANTS.MODULE_NAME, "enableTrainingNpc")) ||
-    (app.object.type === "character" && game.settings.get(CONSTANTS.MODULE_NAME, "enableTraining"));
+    (app.object.type === "npc" && game.settings.get(CONSTANTS.MODULE_ID, "enableTrainingNpc")) ||
+    (app.object.type === "character" && game.settings.get(CONSTANTS.MODULE_ID, "enableTraining"));
   let currentWidth = app.position.width;
   let defaultWidth = app.options.width;
-  let sheetIsSmaller = currentWidth < defaultWidth + game.settings.get(CONSTANTS.MODULE_NAME, "extraSheetWidth");
+  let sheetIsSmaller = currentWidth < defaultWidth + game.settings.get(CONSTANTS.MODULE_ID, "extraSheetWidth");
   let sheetIsMonsterBlock = app.options.classes.includes("monsterblock");
 
   return settingEnabled && sheetHasTab && sheetIsSmaller && !sheetIsMonsterBlock;
@@ -273,7 +273,7 @@ async function migrateAllActors() {
 
     // Flag items that need to be updated
     let itemsToUpdate = 0;
-    let allTrainingItems = a.getFlag(CONSTANTS.MODULE_NAME, "trainingItems") || [];
+    let allTrainingItems = a.getFlag(CONSTANTS.MODULE_ID, "trainingItems") || [];
     for (var j = 0; j < allTrainingItems.length; j++) {
       let itemSchemaVersion = allTrainingItems[j].schemaVersion;
       if (itemSchemaVersion === undefined) {
@@ -305,7 +305,7 @@ async function migrateAllActors() {
                    <p>${game.i18n.format("downtime-dnd5e.MigrationPromptText3", { num: updatesRequired.length })}</p>`;
     // Insert dialog
     new Dialog({
-      title: `${CONSTANTS.MODULE_NAME}`,
+      title: `${CONSTANTS.MODULE_ID}`,
       content: content,
       buttons: {
         yes: {
@@ -332,7 +332,7 @@ async function migrateAllActors() {
             let backup = { trainingItems: allTrainingItems, timestamp: new Date() };
             ui.notifications.notify(game.i18n.localize("downtime-dnd5e.BackingUpDataFor") + ": " + a.data.name);
             console.log(game.i18n.localize("downtime-dnd5e.BackingUpDataFor") + ": " + a.data.name);
-            await a.setFlag(CONSTANTS.MODULE_NAME, "backup", backup);
+            await a.setFlag(CONSTANTS.MODULE_ID, "backup", backup);
 
             // Alert that we're migrating actor
             ui.notifications.notify(game.i18n.localize("downtime-dnd5e.UpdatingDataFor") + ": " + a.data.name);
@@ -356,7 +356,7 @@ async function migrateAllActors() {
                 delete allTrainingItems[j].updateMe;
               }
             }
-            await a.setFlag(CONSTANTS.MODULE_NAME, "trainingItems", allTrainingItems);
+            await a.setFlag(CONSTANTS.MODULE_ID, "trainingItems", allTrainingItems);
             ui.notifications.notify(game.i18n.localize("downtime-dnd5e.SuccessUpdatingDataFor") + ": " + a.data.name);
             console.log(game.i18n.localize("downtime-dnd5e.SuccessUpdatingDataFor") + ": " + a.data.name);
           }
@@ -373,7 +373,7 @@ Hooks.on(`renderActorSheet`, (app, html, data) => {
 
   let widenSheet = adjustSheetWidth(app);
   if (widenSheet) {
-    let newPos = { width: app.position.width + game.settings.get(CONSTANTS.MODULE_NAME, "extraSheetWidth") };
+    let newPos = { width: app.position.width + game.settings.get(CONSTANTS.MODULE_ID, "extraSheetWidth") };
     app.setPosition(newPos);
   }
   addTrainingTab(app, html, data).then(function () {
@@ -398,12 +398,12 @@ Hooks.on("tidy5e-sheet.ready", (api) => {
   api.registerCharacterTab(
     new api.models.HandlebarsTab({
       tabId: "downtime-dnd5e-training-tab",
-      path: `modules/${CONSTANTS.MODULE_NAME}/templates/partials/training-section-contents.hbs`,
-      title: () => game.settings.get(CONSTANTS.MODULE_NAME, "tabName"),
+      path: `modules/${CONSTANTS.MODULE_ID}/templates/partials/training-section-contents.hbs`,
+      title: () => game.settings.get(CONSTANTS.MODULE_ID, "tabName"),
       getData: (data) => getTemplateData(data),
       enabled: (data) => {
-        const showToUser = game.users.current.isGM || !game.settings.get(CONSTANTS.MODULE_NAME, "gmOnlyMode");
-        return data.editable && showToUser && game.settings.get(CONSTANTS.MODULE_NAME, "enableTraining");
+        const showToUser = game.users.current.isGM || !game.settings.get(CONSTANTS.MODULE_ID, "gmOnlyMode");
+        return data.editable && showToUser && game.settings.get(CONSTANTS.MODULE_ID, "enableTraining");
       },
       onRender: ({ app, element, data }) => {
         activateTabListeners(data.actor, $(element));
@@ -415,12 +415,12 @@ Hooks.on("tidy5e-sheet.ready", (api) => {
   api.registerNpcTab(
     new api.models.HandlebarsTab({
       tabId: "downtime-dnd5e-training-tab",
-      path: `modules/${CONSTANTS.MODULE_NAME}/templates/partials/training-section-contents.hbs`,
-      title: () => game.settings.get(CONSTANTS.MODULE_NAME, "tabName"),
+      path: `modules/${CONSTANTS.MODULE_ID}/templates/partials/training-section-contents.hbs`,
+      title: () => game.settings.get(CONSTANTS.MODULE_ID, "tabName"),
       getData: (data) => getTemplateData(data),
       enabled: (data) => {
-        const showToUser = game.users.current.isGM || !game.settings.get(CONSTANTS.MODULE_NAME, "gmOnlyMode");
-        return data.editable && showToUser && game.settings.get(CONSTANTS.MODULE_NAME, "enableTrainingNpc");
+        const showToUser = game.users.current.isGM || !game.settings.get(CONSTANTS.MODULE_ID, "gmOnlyMode");
+        return data.editable && showToUser && game.settings.get(CONSTANTS.MODULE_ID, "enableTrainingNpc");
       },
       onRender: ({ app, element, data }) => {
         activateTabListeners(data.actor, $(element));
@@ -442,7 +442,7 @@ export function crashTNT() {
 			ui.notifications.warn(game.i18n.localize("downtime-dnd5e.ActorNotFoundWarning"));
 			return;
 		}
-		let allItems = actor.getFlag(CONSTANTS.MODULE_NAME, "trainingItems");
+		let allItems = actor.getFlag(CONSTANTS.MODULE_ID, "trainingItems");
 		let itemIdx = allItems.findIndex((i) => i.name === itemName);
 		if (itemIdx < 0) {
 			ui.notifications.warn(game.i18n.localize("downtime-dnd5e.ItemNotFoundWarning") + ": " + itemName);
@@ -468,7 +468,7 @@ export function crashTNT() {
 		TrackingAndTraining.checkCompletion(actor, thisItem, alreadyCompleted);
 		// Update flags and actor
 		allItems[itemIdx] = thisItem;
-		await actor.setFlag(CONSTANTS.MODULE_NAME, "trainingItems", allItems);
+		await actor.setFlag(CONSTANTS.MODULE_ID, "trainingItems", allItems);
 		*/
   }
 
@@ -477,7 +477,7 @@ export function crashTNT() {
     /*
 		let actor = game.actors.getName(actorName);
 		if (actor) {
-			let allItems = actor.getFlag(CONSTANTS.MODULE_NAME, "trainingItems") || [];
+			let allItems = actor.getFlag(CONSTANTS.MODULE_ID, "trainingItems") || [];
 			return allItems;
 		} else {
 			ui.notifications.warn(game.i18n.localize("downtime-dnd5e.ActorNotFoundWarning"));
@@ -493,7 +493,7 @@ export function crashTNT() {
 			ui.notifications.warn(game.i18n.localize("downtime-dnd5e.ActorNotFoundWarning"));
 			return;
 		}
-		let allItems = actor.getFlag(CONSTANTS.MODULE_NAME, "trainingItems") || [];
+		let allItems = actor.getFlag(CONSTANTS.MODULE_ID, "trainingItems") || [];
 		let itemIdx = allItems.findIndex((i) => i.name === itemName);
 		if (itemIdx < 0) {
 			ui.notifications.warn(game.i18n.localize("downtime-dnd5e.ItemNotFoundWarning") + ": " + itemName);

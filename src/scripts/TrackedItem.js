@@ -15,7 +15,7 @@ export default class TrackedItem {
     this.macroName = null;
     this.dc = null;
     this.progress = 0;
-    this.completionAt = game.settings.get(CONSTANTS.MODULE_NAME, "totalToComplete");
+    this.completionAt = game.settings.get(CONSTANTS.MODULE_ID, "totalToComplete");
     this.changes = [];
     this.schemaVersion = 1;
   }

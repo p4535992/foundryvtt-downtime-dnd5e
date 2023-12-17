@@ -4,7 +4,7 @@ export default class AuditLog extends FormApplication {
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       id: "downtime-audit-log-form",
-      template: `modules/${CONSTANTS.MODULE_NAME}/templates/audit-dialog.hbs`,
+      template: `modules/${CONSTANTS.MODULE_ID}/templates/audit-dialog.hbs`,
       title: game.i18n.localize("downtime-dnd5e.ChangeLog"),
       width: 900,
       resizable: true,
@@ -14,7 +14,7 @@ export default class AuditLog extends FormApplication {
 
   async getData(options = {}) {
     let originalData = super.getData();
-    let activities = originalData.object.flags[CONSTANTS.MODULE_NAME].trainingItems || [];
+    let activities = originalData.object.flags[CONSTANTS.MODULE_ID].trainingItems || [];
     let changes = [];
 
     // Loop through each activity. If it's got no changes array, move on to the next one.
@@ -63,7 +63,7 @@ export default class AuditLog extends FormApplication {
   async _updateObject(event, formData) {
     let actorId = formData.actorId;
     let actor = game.actors.get(actorId);
-    let activities = await actor.getFlag(CONSTANTS.MODULE_NAME, "trainingItems");
+    let activities = await actor.getFlag(CONSTANTS.MODULE_ID, "trainingItems");
 
     // Same loop as before. Cycle through each activity, if it's got no change array,
     //  move on to the next one. If it does, cycle through it and see if the timestamp
@@ -83,7 +83,7 @@ export default class AuditLog extends FormApplication {
     }
 
     // Update actor and flags
-    await actor.setFlag(CONSTANTS.MODULE_NAME, "trainingItems", activities);
+    await actor.setFlag(CONSTANTS.MODULE_ID, "trainingItems", activities);
   }
 
   activateListeners(html) {

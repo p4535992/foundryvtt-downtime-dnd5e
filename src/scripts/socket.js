@@ -9,7 +9,7 @@ export function registerSocket() {
     return downtime5eSocket;
   }
   //@ts-ignore
-  downtime5eSocket = socketlib.registerModule(CONSTANTS.MODULE_NAME);
+  downtime5eSocket = socketlib.registerModule(CONSTANTS.MODULE_ID);
   // downtime5eSocket.register("XXX", (...args) => API.XXXArr(...args));
   setSocket(downtime5eSocket);
   return downtime5eSocket;

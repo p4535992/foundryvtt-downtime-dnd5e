@@ -20,7 +20,7 @@ export default class TrackingAndTraining {
     // log("Edit Category excuted!");
 
     let actor = game.actors.get(actorId);
-    let allCategories = actor.getFlag(CONSTANTS.MODULE_NAME, "categories") || [];
+    let allCategories = actor.getFlag(CONSTANTS.MODULE_ID, "categories") || [];
     let thisCategory = allCategories.filter((obj) => obj.id === categoryId)[0];
     let data = {
       actor: actor,
@@ -34,12 +34,12 @@ export default class TrackingAndTraining {
 
     // Set up some variables
     let actor = game.actors.get(actorId);
-    let allItems = actor.getFlag(CONSTANTS.MODULE_NAME, "trainingItems") || [];
-    let allCategories = actor.getFlag(CONSTANTS.MODULE_NAME, "categories") || [];
+    let allItems = actor.getFlag(CONSTANTS.MODULE_ID, "trainingItems") || [];
+    let allCategories = actor.getFlag(CONSTANTS.MODULE_ID, "categories") || [];
     let thisCategory = allCategories.filter((obj) => obj.id === categoryId)[0];
     let categoryIdx = allCategories.findIndex((obj) => obj.id === categoryId);
     let del = false;
-    let dialogContent = await renderTemplate(`modules/${CONSTANTS.MODULE_NAME}/templates/delete-category-dialog.hbs`);
+    let dialogContent = await renderTemplate(`modules/${CONSTANTS.MODULE_ID}/templates/delete-category-dialog.hbs`);
 
     // Create dialog
     new Dialog({
@@ -69,8 +69,8 @@ export default class TrackingAndTraining {
             }
           }
           // Update actor
-          await actor.setFlag(CONSTANTS.MODULE_NAME, "categories", allCategories);
-          await actor.setFlag(CONSTANTS.MODULE_NAME, "trainingItems", allItems);
+          await actor.setFlag(CONSTANTS.MODULE_ID, "categories", allCategories);
+          await actor.setFlag(CONSTANTS.MODULE_ID, "trainingItems", allItems);
         }
       },
     }).render(true);
@@ -79,7 +79,7 @@ export default class TrackingAndTraining {
   static async addItem(actorId, DROPDOWN_OPTIONS) {
     // log("New Item excuted!");
     let actor = game.actors.get(actorId);
-    let allCategories = actor.getFlag(CONSTANTS.MODULE_NAME, "categories") || [];
+    let allCategories = actor.getFlag(CONSTANTS.MODULE_ID, "categories") || [];
     let item = new TrackedItem();
     let data = {
       actor: actor,
@@ -94,8 +94,8 @@ export default class TrackingAndTraining {
   static async editFromSheet(actorId, itemId, DROPDOWN_OPTIONS) {
     // log("Edit Downtime Activity excuted!");
     let actor = game.actors.get(actorId);
-    let allCategories = actor.getFlag(CONSTANTS.MODULE_NAME, "categories") || [];
-    let allItems = actor.getFlag(CONSTANTS.MODULE_NAME, "trainingItems") || [];
+    let allCategories = actor.getFlag(CONSTANTS.MODULE_ID, "categories") || [];
+    let allItems = actor.getFlag(CONSTANTS.MODULE_ID, "trainingItems") || [];
     let thisItem = allItems.filter((obj) => obj.id === itemId)[0];
     let data = {
       actor: actor,
@@ -112,7 +112,7 @@ export default class TrackingAndTraining {
 
     // Set up some variables
     let actor = game.actors.get(actorId);
-    let dialogContent = await renderTemplate(`modules/${CONSTANTS.MODULE_NAME}/templates/delete-training-dialog.hbs`);
+    let dialogContent = await renderTemplate(`modules/${CONSTANTS.MODULE_ID}/templates/delete-training-dialog.hbs`);
     let del = false;
 
     // Create dialog
@@ -134,11 +134,11 @@ export default class TrackingAndTraining {
       default: "yes",
       close: async (html) => {
         if (del) {
-          let allItems = actor.getFlag(CONSTANTS.MODULE_NAME, "trainingItems");
+          let allItems = actor.getFlag(CONSTANTS.MODULE_ID, "trainingItems");
           let thisItem = allItems.filter((obj) => obj.id === itemId)[0];
           let itemIndex = allItems.findIndex((obj) => obj.id === thisItem.id);
           allItems.splice(itemIndex, 1);
-          await actor.setFlag(CONSTANTS.MODULE_NAME, "trainingItems", allItems);
+          await actor.setFlag(CONSTANTS.MODULE_ID, "trainingItems", allItems);
         }
       },
     }).render(true);
@@ -149,7 +149,7 @@ export default class TrackingAndTraining {
 
     // Set up some variables
     let actor = game.actors.get(actorId);
-    let allItems = actor.getFlag(CONSTANTS.MODULE_NAME, "trainingItems") || [];
+    let allItems = actor.getFlag(CONSTANTS.MODULE_ID, "trainingItems") || [];
     let thisItem = allItems.filter((obj) => obj.id === itemId)[0];
     let adjustment = 0;
     let alreadyCompleted = thisItem.progress >= thisItem.completionAt;
@@ -173,7 +173,7 @@ export default class TrackingAndTraining {
     TrackingAndTraining.checkCompletion(actor, thisItem, alreadyCompleted);
 
     // Update flags and actor
-    await actor.setFlag(CONSTANTS.MODULE_NAME, "trainingItems", allItems);
+    await actor.setFlag(CONSTANTS.MODULE_ID, "trainingItems", allItems);
   }
 
   static async progressItem(actorId, itemId) {
@@ -181,7 +181,7 @@ export default class TrackingAndTraining {
 
     // Set up some variables
     let actor = game.actors.get(actorId);
-    let allItems = actor.getFlag(CONSTANTS.MODULE_NAME, "trainingItems") || [];
+    let allItems = actor.getFlag(CONSTANTS.MODULE_ID, "trainingItems") || [];
     let thisItem = allItems.filter((obj) => obj.id === itemId)[0];
     let rollType = TrackingAndTraining.determineRollType(thisItem);
     let alreadyCompleted = thisItem.progress >= thisItem.completionAt;
@@ -200,7 +200,7 @@ export default class TrackingAndTraining {
         // Log item completion
         TrackingAndTraining.checkCompletion(actor, thisItem, alreadyCompleted);
         // Update flags and actor
-        await actor.setFlag(CONSTANTS.MODULE_NAME, "trainingItems", allItems);
+        await actor.setFlag(CONSTANTS.MODULE_ID, "trainingItems", allItems);
       }
     }
 
@@ -218,7 +218,7 @@ export default class TrackingAndTraining {
         // Log item completion
         TrackingAndTraining.checkCompletion(actor, thisItem, alreadyCompleted);
         // Update flags and actor
-        await actor.setFlag(CONSTANTS.MODULE_NAME, "trainingItems", allItems);
+        await actor.setFlag(CONSTANTS.MODULE_ID, "trainingItems", allItems);
       }
     }
 
@@ -239,7 +239,7 @@ export default class TrackingAndTraining {
           // Log item completion
           TrackingAndTraining.checkCompletion(actor, thisItem, alreadyCompleted);
           // Update flags and actor
-          await actor.setFlag(CONSTANTS.MODULE_NAME, "trainingItems", allItems);
+          await actor.setFlag(CONSTANTS.MODULE_ID, "trainingItems", allItems);
         }
       } else {
         ui.notifications.warn(game.i18n.localize("downtime-dnd5e.ToolNotFoundWarning"));
@@ -254,7 +254,7 @@ export default class TrackingAndTraining {
       // Log item completion
       TrackingAndTraining.checkCompletion(actor, thisItem, alreadyCompleted);
       // Update flags and actor
-      await actor.setFlag(CONSTANTS.MODULE_NAME, "trainingItems", allItems);
+      await actor.setFlag(CONSTANTS.MODULE_ID, "trainingItems", allItems);
     }
 
     // Progression Type: Macro
@@ -272,7 +272,7 @@ export default class TrackingAndTraining {
   // Figures out what options we need to tack onto any rolls we do for things to work as expected
   static getRollOptions() {
     let options = {};
-    if (game.settings.get(CONSTANTS.MODULE_NAME, "gmOnlyMode")) {
+    if (game.settings.get(CONSTANTS.MODULE_ID, "gmOnlyMode")) {
       options.rollMode = "gmroll";
     } //GM Only Mode
     if (!game.modules.get("midi-qol")?.active || isNewerVersion(game.modules.get("midi-qol").data.version, "0.9.25")) {
@@ -357,7 +357,7 @@ export default class TrackingAndTraining {
       return;
     }
     if (item.progress >= item.completionAt) {
-      let alertFor = game.settings.get(CONSTANTS.MODULE_NAME, "announceCompletionFor");
+      let alertFor = game.settings.get(CONSTANTS.MODULE_ID, "announceCompletionFor");
       let isPc = actor.hasPlayerOwner;
       let sendIt;
 
@@ -380,12 +380,12 @@ export default class TrackingAndTraining {
 
       if (sendIt) {
         // log("" + actor.name + " " + game.i18n.localize("downtime-dnd5e.CompletedATrackedItem"));
-        let chatHtml = await renderTemplate(`modules/${CONSTANTS.MODULE_NAME}/templates/completion-message.hbs`, {
+        let chatHtml = await renderTemplate(`modules/${CONSTANTS.MODULE_ID}/templates/completion-message.hbs`, {
           actor: actor,
           activity: item,
         });
         let chatObj = { content: chatHtml };
-        if (game.settings.get(CONSTANTS.MODULE_NAME, "gmOnlyMode")) {
+        if (game.settings.get(CONSTANTS.MODULE_ID, "gmOnlyMode")) {
           chatObj.whisper = ChatMessage.getWhisperRecipients("GM");
         }
         ChatMessage.create(chatObj);
@@ -491,8 +491,8 @@ export default class TrackingAndTraining {
 
   static exportItems(actorId) {
     let actor = game.actors.get(actorId);
-    let allItems = actor.getFlag(CONSTANTS.MODULE_NAME, "trainingItems") || [];
-    let allCategories = actor.getFlag(CONSTANTS.MODULE_NAME, "categories") || [];
+    let allItems = actor.getFlag(CONSTANTS.MODULE_ID, "trainingItems") || [];
+    let allCategories = actor.getFlag(CONSTANTS.MODULE_ID, "categories") || [];
     let dataToExport = {
       items: allItems,
       categories: allCategories,
@@ -544,7 +544,7 @@ export default class TrackingAndTraining {
           return;
         }
 
-        let currentCategories = actor.getFlag(CONSTANTS.MODULE_NAME, "categories") || [];
+        let currentCategories = actor.getFlag(CONSTANTS.MODULE_ID, "categories") || [];
         let currentCategoryIds = currentCategories.map((c) => c.id);
         let currentCategoryNames = currentCategories.map((c) => c.name);
         let categoriesToDelete = [];
@@ -579,7 +579,7 @@ export default class TrackingAndTraining {
           }
         }
 
-        let currentItems = actor.getFlag(CONSTANTS.MODULE_NAME, "trainingItems") || [];
+        let currentItems = actor.getFlag(CONSTANTS.MODULE_ID, "trainingItems") || [];
         let currentIds = currentItems.map((i) => i.id);
         let currentNames = currentItems.map((i) => i.name);
 
@@ -602,8 +602,8 @@ export default class TrackingAndTraining {
           .concat(importedCategories)
           .filter((c) => !categoriesToDelete.includes(c.id));
 
-        await actor.setFlag(CONSTANTS.MODULE_NAME, "categories", combinedCategories);
-        await actor.setFlag(CONSTANTS.MODULE_NAME, "trainingItems", combinedItems);
+        await actor.setFlag(CONSTANTS.MODULE_ID, "categories", combinedCategories);
+        await actor.setFlag(CONSTANTS.MODULE_ID, "trainingItems", combinedItems);
 
         ui.notifications.info(game.i18n.localize("downtime-dnd5e.ImportComplete"));
 
@@ -624,7 +624,7 @@ export default class TrackingAndTraining {
         //     if(act === "quit"){
         //       return;
         //     } else if (act === "overwrite") {
-        //       let currentCategories = actor.getFlag(CONSTANTS.MODULE_NAME,"categories") || [];
+        //       let currentCategories = actor.getFlag(CONSTANTS.MODULE_ID,"categories") || [];
         //       let currentCategoryIds = currentCategories.map(c => c.id);
 
         //       for(var i = 0; i < importedItems.length; i++){
@@ -633,11 +633,11 @@ export default class TrackingAndTraining {
         //           importedItems[i].category = "";
         //         }
         //       }
-        //       actor.setFlag(CONSTANTS.MODULE_NAME,"trainingItems",importedItems);
+        //       actor.setFlag(CONSTANTS.MODULE_ID,"trainingItems",importedItems);
         //       await ui.notifications.info(game.i18n.localize("downtime-dnd5e.ImportComplete"));
         //     } else if (act === "add") {
-        //       let currentItems = actor.getFlag(CONSTANTS.MODULE_NAME,"trainingItems") || [];
-        //       let currentCategories = actor.getFlag(CONSTANTS.MODULE_NAME,"categories") || [];
+        //       let currentItems = actor.getFlag(CONSTANTS.MODULE_ID,"trainingItems") || [];
+        //       let currentCategories = actor.getFlag(CONSTANTS.MODULE_ID,"categories") || [];
         //       let currentIds = currentItems.map(i => i.id);
         //       let currentNames = currentItems.map(i => i.name);
         //       let currentCategoryIds = currentCategories.map(c => c.id);
@@ -662,7 +662,7 @@ export default class TrackingAndTraining {
         //         }
         //       }
         //       let combinedItems = currentItems.concat(importedItems);
-        //       await actor.setFlag(CONSTANTS.MODULE_NAME,"trainingItems", combinedItems);
+        //       await actor.setFlag(CONSTANTS.MODULE_ID,"trainingItems", combinedItems);
         //       ui.notifications.info(game.i18n.localize("downtime-dnd5e.ImportComplete"));
         //       if(possibleDupes){
         //         new Dialog({

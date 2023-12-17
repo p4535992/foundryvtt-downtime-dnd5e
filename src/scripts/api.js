@@ -21,7 +21,7 @@ const API = {
       warn(game.i18n.localize("downtime-dnd5e.ActorNotFoundWarning"), true);
       return;
     }
-    let allItems = actor.getFlag(CONSTANTS.MODULE_NAME, "trainingItems");
+    let allItems = actor.getFlag(CONSTANTS.MODULE_ID, "trainingItems");
     let itemIdx = allItems.findIndex((i) => i.name === itemName);
     if (itemIdx < 0) {
       warn(game.i18n.localize("downtime-dnd5e.ItemNotFoundWarning") + ": " + itemName, true);
@@ -47,13 +47,13 @@ const API = {
     TrackingAndTraining.checkCompletion(actor, thisItem, alreadyCompleted);
     // Update flags and actor
     allItems[itemIdx] = thisItem;
-    await actor.setFlag(CONSTANTS.MODULE_NAME, "trainingItems", allItems);
+    await actor.setFlag(CONSTANTS.MODULE_ID, "trainingItems", allItems);
   },
 
   getActivitiesForActor(actorName) {
     let actor = game.actors.getName(actorName);
     if (actor) {
-      let allItems = actor.getFlag(CONSTANTS.MODULE_NAME, "trainingItems") || [];
+      let allItems = actor.getFlag(CONSTANTS.MODULE_ID, "trainingItems") || [];
       return allItems;
     } else {
       warn(game.i18n.localize("downtime-dnd5e.ActorNotFoundWarning"), true);
@@ -66,7 +66,7 @@ const API = {
       warn(game.i18n.localize("downtime-dnd5e.ActorNotFoundWarning"), true);
       return;
     }
-    let allItems = actor.getFlag(CONSTANTS.MODULE_NAME, "trainingItems") || [];
+    let allItems = actor.getFlag(CONSTANTS.MODULE_ID, "trainingItems") || [];
     let itemIdx = allItems.findIndex((i) => i.name === itemName);
     if (itemIdx < 0) {
       warn(game.i18n.localize("downtime-dnd5e.ItemNotFoundWarning") + ": " + itemName, true);
