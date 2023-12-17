@@ -1,17 +1,19 @@
 /* Control Buttons Container */
-.dnd5e.sheet .downtime-dnd5e .downtime-dnd5e-controls,
-.tidy5e.sheet .downtime-dnd5e .downtime-dnd5e-controls {
+:is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"]) .downtime-dnd5e .downtime-dnd5e-controls {
   display: flex;
   justify-content: flex-end;
   margin: 4px 0;
 }
-.tidy5e.sheet .downtime-dnd5e .downtime-dnd5e-controls {
+
+:is(.tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"]) .downtime-dnd5e .downtime-dnd5e-controls {
   margin: 0px 15px 4px 0;
 }
 
 /* Control Buttons */
-.dnd5e.sheet .downtime-dnd5e .downtime-dnd5e-controls div,
-.tidy5e.sheet .downtime-dnd5e .downtime-dnd5e-controls div {
+:is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
+  .downtime-dnd5e
+  .downtime-dnd5e-controls
+  div {
   font-size: 12px;
   color: #7a7971;
   text-align: center;
@@ -22,16 +24,22 @@
   border: 2px groove #eeede0;
   border-radius: 4px;
 }
-.dnd5e.sheet .downtime-dnd5e .downtime-dnd5e-controls div.push-left,
-.tidy5e.sheet .downtime-dnd5e .downtime-dnd5e-controls div.push-left {
+:is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
+  .downtime-dnd5e
+  .downtime-dnd5e-controls
+  div.push-left {
   margin-right: auto;
 }
-.tidy5eDark .tidy5e.sheet .downtime-dnd5e .downtime-dnd5e-controls div {
+:is(.tidy5eDark .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"][data-tidy-theme-type="dark"])
+  .downtime-dnd5e
+  .downtime-dnd5e-controls
+  div {
   border: 2px groove #7a7971;
 }
-
-.dnd5e.sheet .downtime-dnd5e .downtime-dnd5e-controls div:hover,
-.tidy5e.sheet .downtime-dnd5e .downtime-dnd5e-controls div:hover {
+:is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
+  .downtime-dnd5e
+  .downtime-dnd5e-controls
+  div:hover {
   cursor: pointer;
   color: black;
   text-shadow: 0 0 5px red;
@@ -41,19 +49,22 @@
   color: #3f88e6;
   text-shadow: 0 0 5px #004aa9;
 }
-.tidy5eDark .tidy5e.sheet .downtime-dnd5e .downtime-dnd5e-controls div:hover {
+:is(.tidy5eDark .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"][data-tidy-theme-type="dark"])
+  .downtime-dnd5e
+  .downtime-dnd5e-controls
+  div:hover {
   text-shadow: none;
   color: rgba(255, 100, 0, 1);
 }
-
-.dnd5e.sheet .downtime-dnd5e .downtime-dnd5e-controls div:last-of-type,
-.tidy5e.sheet .downtime-dnd5e .downtime-dnd5e-controls div:last-of-type {
+:is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
+  .downtime-dnd5e
+  .downtime-dnd5e-controls
+  div:last-of-type {
   margin-right: 0px;
 }
 
 /* Item List */
-.dnd5e.sheet .downtime-dnd5e .items-list,
-.tidy5e.sheet .downtime-dnd5e .items-list {
+:is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"]) .downtime-dnd5e .items-list {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -62,9 +73,12 @@
   color: #7a7971;
 }
 
+.sheet[data-sheet-module="tidy5e-sheet"] .downtime-dnd5e .items-list {
+  padding-right: 0.75rem;
+}
+
 /* Item List Header */
-.dnd5e.sheet .downtime-dnd5e .items-list .items-header,
-.tidy5e.sheet .downtime-dnd5e .items-list .items-header {
+:is(.dnd5e.sheet, .tidy5e.sheet) .downtime-dnd5e .items-list .items-header {
   height: 28px;
   margin: 2px 0;
   padding: 0;
@@ -74,14 +88,16 @@
   font-weight: bold;
   border-radius: 0px;
 }
-.tidy5eDark .tidy5e.sheet .downtime-dnd5e .items-list .items-header {
+:is(.tidy5eDark .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"][data-tidy-theme-type="dark"])
+  .downtime-dnd5e
+  .items-list
+  .items-header {
   border: 1px;
   color: white;
 }
 
 /* Type Column Header */
-.dnd5e.sheet .downtime-dnd5e .activity-type,
-.tidy5e.sheet .downtime-dnd5e .activity-type {
+:is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"]) .downtime-dnd5e .activity-type {
   flex: 0 0 150px;
   font-size: 12px;
   color: #7a7971;
@@ -91,13 +107,14 @@
 .dark-mode .dnd5e.sheet .downtime-dnd5e .activity-type {
   border-right: none;
 }
-.tidy5eDark .tidy5e.sheet .downtime-dnd5e .activity-type {
+:is(.tidy5eDark .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"][data-tidy-theme-type="dark"])
+  .downtime-dnd5e
+  .activity-type {
   border-right: none;
 }
 
 /* Progress Override Column Header*/
-.dnd5e.sheet .downtime-dnd5e .activity-override,
-.tidy5e.sheet .downtime-dnd5e .activity-override {
+:is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"]) .downtime-dnd5e .activity-override {
   flex: 0 0 110px;
   font-size: 12px;
   color: #7a7971;
@@ -105,8 +122,7 @@
 }
 
 /* Progress Column Header*/
-.dnd5e.sheet .downtime-dnd5e .activity-progress,
-.tidy5e.sheet .downtime-dnd5e .activity-progress {
+:is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"]) .downtime-dnd5e .activity-progress {
   flex: 0 0 190px;
   font-size: 12px;
   color: #7a7971;
@@ -117,24 +133,26 @@
 .dark-mode .dnd5e.sheet .downtime-dnd5e .activity-progress {
   border-right: none;
 }
-.tidy5eDark .tidy5e.sheet .downtime-dnd5e .activity-progress {
+:is(.tidy5eDark .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"][data-tidy-theme-type="dark"])
+  .downtime-dnd5e
+  .activity-progress {
   border-right: none;
 }
 
 /* Edit and Delete Buttons */
-.dnd5e.sheet .downtime-dnd5e .downtime-dnd5e-item-controls,
-.tidy5e.sheet .downtime-dnd5e .downtime-dnd5e-item-controls {
+:is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
+  .downtime-dnd5e
+  .downtime-dnd5e-item-controls {
   flex: 0 0 50px;
   justify-content: space-between;
   padding-right: 5px;
   padding-left: 8px; /* Just to shift the icons right a bit. Looks less weird.*/
 }
 
-/*======================== COLUMS ==========================*/
+/*======================== COLUMNS ==========================*/
 
 /* Item Name */
-.dnd5e.sheet .downtime-dnd5e .items-list .item-name,
-.tidy5e.sheet .downtime-dnd5e .items-list .item-name {
+:is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"]) .downtime-dnd5e .items-list .item-name {
   flex: 2;
   margin: 0;
   overflow: hidden;
@@ -144,16 +162,15 @@
   align-items: center;
 }
 
-.dnd5e.sheet .downtime-dnd5e .item .item-name h4,
-.tidy5e.sheet .downtime-dnd5e .item .item-name h4 {
+:is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"]) .downtime-dnd5e .item .item-name h4 {
   font-weight: 400;
 }
 
 /* Roll Buttons */
-.dnd5e.sheet .downtime-dnd5e .downtime-dnd5e-roll,
-.dnd5e.sheet .downtime-dnd5e .downtime-dnd5e-roll-disabled,
-.tidy5e.sheet .downtime-dnd5e .downtime-dnd5e-roll,
-.tidy5e.sheet .downtime-dnd5e .downtime-dnd5e-roll-disabled {
+:is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"]) .downtime-dnd5e .downtime-dnd5e-roll,
+:is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
+  .downtime-dnd5e
+  .downtime-dnd5e-roll-disabled {
   flex: 0 0 30px;
   height: 30px;
   background-size: 30px;
@@ -163,28 +180,37 @@
   margin-right: 5px;
 }
 
-.dnd5e.sheet .downtime-dnd5e .downtime-dnd5e-roll .checkmark,
-.tidy5e.sheet .downtime-dnd5e .downtime-dnd5e-roll .checkmark {
+:is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
+  .downtime-dnd5e
+  .downtime-dnd5e-roll
+  .checkmark {
   display: none;
 }
 
-.dnd5e.sheet .downtime-dnd5e .item-name:hover .downtime-dnd5e-roll,
-.tidy5e.sheet .downtime-dnd5e .item-name:hover .downtime-dnd5e-roll {
+:is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
+  .downtime-dnd5e
+  .item-name:hover
+  .downtime-dnd5e-roll {
   background-image: url("/../icons/svg/d20-grey.svg") !important;
 }
 
-.dnd5e.sheet .downtime-dnd5e .item-name:hover .downtime-dnd5e-roll:hover,
-.tidy5e.sheet .downtime-dnd5e .item-name:hover .downtime-dnd5e-roll:hover {
+:is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
+  .downtime-dnd5e
+  .item-name:hover
+  .downtime-dnd5e-roll:hover {
   background-image: url("/../icons/svg/d20-black.svg") !important;
 }
 
-.dnd5e.sheet .downtime-dnd5e .downtime-dnd5e-roll-disabled,
-.tidy5e.sheet .downtime-dnd5e .downtime-dnd5e-roll-disabled {
+:is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
+  .downtime-dnd5e
+  .downtime-dnd5e-roll-disabled {
   opacity: 50%;
 }
 
-.dnd5e.sheet .downtime-dnd5e .downtime-dnd5e-roll-disabled .checkmark,
-.tidy5e.sheet .downtime-dnd5e .downtime-dnd5e-roll-disabled .checkmark {
+:is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
+  .downtime-dnd5e
+  .downtime-dnd5e-roll-disabled
+  .checkmark {
   color: white;
   display: block;
   font-size: 30px;
@@ -192,8 +218,7 @@
 }
 
 /* Type Column */
-.dnd5e.sheet .downtime-dnd5e .activity-type-row,
-.tidy5e.sheet .downtime-dnd5e .activity-type-row {
+:is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"]) .downtime-dnd5e .activity-type-row {
   flex: 0 0 150px;
   text-transform: capitalize;
   text-align: center;
@@ -204,27 +229,29 @@
 .dark-mode .dnd5e.sheet .downtime-dnd5e .activity-type-row {
   border-right: none;
 }
-.tidy5eDark .tidy5e.sheet .downtime-dnd5e .activity-type-row {
+:is(.tidy5eDark .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"][data-tidy-theme-type="dark"])
+  .downtime-dnd5e
+  .activity-type-row {
   border-right: none;
 }
 
 /* Progress Override Column */
-.dnd5e.sheet .downtime-dnd5e .activity-override-row,
-.tidy5e.sheet .downtime-dnd5e .activity-override-row {
+:is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"]) .downtime-dnd5e .activity-override-row {
   flex: 0 0 110px;
   font-size: 12px;
 }
 
-.dnd5e.sheet .downtime-dnd5e .activity-override-row input,
-.tidy5e.sheet .downtime-dnd5e .activity-override-row input {
+:is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
+  .downtime-dnd5e
+  .activity-override-row
+  input {
   max-width: 50px;
   text-align: right;
   display: inline-block;
 }
 
 /* Progress Bar Column */
-.dnd5e.sheet .downtime-dnd5e .activity-progress-row,
-.tidy5e.sheet .downtime-dnd5e .activity-progress-row {
+:is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"]) .downtime-dnd5e .activity-progress-row {
   flex: 0 0 190px;
   font-size: 12px;
   border-right: 1px solid #c9c7b8;
@@ -232,13 +259,17 @@
 .dark-mode .dnd5e.sheet .downtime-dnd5e .activity-progress-row {
   border-right: none;
 }
-.tidy5eDark .tidy5e.sheet .downtime-dnd5e .activity-progress-row {
+:is(.tidy5eDark .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"][data-tidy-theme-type="dark"])
+  .downtime-dnd5e
+  .activity-progress-row {
   border-right: none;
 }
 
 /* Training Bar */
-.dnd5e.sheet .downtime-dnd5e .activity-progress-row .progress-bar,
-.tidy5e.sheet .downtime-dnd5e .activity-progress-row .progress-bar {
+:is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
+  .downtime-dnd5e
+  .activity-progress-row
+  .progress-bar {
   flex: 0 0 180px; /* 190 - 10px margin */
   background-color: rgba(0, 0, 0, 0.1);
   border-radius: 4px;
@@ -247,8 +278,10 @@
 }
 
 /* Training Bar - Filled Portion */
-.dnd5e.sheet .downtime-dnd5e .activity-progress-row .downtime-dnd5e-completion,
-.tidy5e.sheet .downtime-dnd5e .activity-progress-row .downtime-dnd5e-completion {
+:is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
+  .downtime-dnd5e
+  .activity-progress-row
+  .downtime-dnd5e-completion {
   color: #111111;
   background-color: rgba(255, 0, 0, 0.4);
   border-radius: 4px;
@@ -260,14 +293,20 @@
   background-color: #004aa9;
   opacity: 0.8;
 }
-.tidy5eDark .tidy5e.sheet .downtime-dnd5e .activity-progress-row .downtime-dnd5e-completion {
+:is(.tidy5eDark .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"][data-tidy-theme-type="dark"])
+  .downtime-dnd5e
+  .activity-progress-row
+  .downtime-dnd5e-completion {
   color: white;
   background-color: rgba(255, 100, 0, 0.6);
 }
 
 /* Training Bar Progress Percent Text */
-.dnd5e.sheet .downtime-dnd5e .activity-progress-row .downtime-dnd5e-completion span,
-.tidy5e.sheet .downtime-dnd5e .activity-progress-row .downtime-dnd5e-completion span {
+:is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
+  .downtime-dnd5e
+  .activity-progress-row
+  .downtime-dnd5e-completion
+  span {
   margin-left: 5px;
 }
 
@@ -279,7 +318,7 @@
   padding-left: 8px; /* Just to shift the icons right a bit. Looks less weird.*/
 }
 
-.tidy5e.sheet .downtime-dnd5e .downtime-dnd5e-item-row-controls {
+:is(.tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"]) .downtime-dnd5e .downtime-dnd5e-item-row-controls {
   flex: 0 0 45px;
   justify-content: space-between;
   display: flex;
@@ -287,19 +326,27 @@
   padding-right: 11px;
 }
 
-.dnd5e.sheet .downtime-dnd5e .downtime-dnd5e-item-row-controls .downtime-dnd5e-edit,
-.dnd5e.sheet .downtime-dnd5e .downtime-dnd5e-item-row-controls .downtime-dnd5e-delete,
-.tidy5e.sheet .downtime-dnd5e .downtime-dnd5e-item-row-controls .downtime-dnd5e-edit,
-.tidy5e.sheet .downtime-dnd5e .downtime-dnd5e-item-row-controls .downtime-dnd5e-delete {
+:is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
+  .downtime-dnd5e
+  .downtime-dnd5e-item-row-controls
+  .downtime-dnd5e-edit,
+:is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
+  .downtime-dnd5e
+  .downtime-dnd5e-item-row-controls
+  .downtime-dnd5e-delete {
   font-size: 12px;
   text-align: center;
   flex: 1;
 }
 
-.dnd5e.sheet .downtime-dnd5e .downtime-dnd5e-item-row-controls .downtime-dnd5e-edit:hover,
-.dnd5e.sheet .downtime-dnd5e .downtime-dnd5e-item-row-controls .downtime-dnd5e-delete:hover,
-.tidy5e.sheet .downtime-dnd5e .downtime-dnd5e-item-row-controls .downtime-dnd5e-edit:hover,
-.tidy5e.sheet .downtime-dnd5e .downtime-dnd5e-item-row-controls .downtime-dnd5e-delete:hover {
+:is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
+  .downtime-dnd5e
+  .downtime-dnd5e-item-row-controls
+  .downtime-dnd5e-edit:hover,
+:is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
+  .downtime-dnd5e
+  .downtime-dnd5e-item-row-controls
+  .downtime-dnd5e-delete:hover {
   text-shadow: 0 0 5px red;
 }
 
@@ -308,8 +355,16 @@
   text-shadow: 0 0 5px #004aa9;
 }
 
-.tidy5eDark .tidy5e.sheet .downtime-dnd5e .downtime-dnd5e-item-row-controls .downtime-dnd5e-edit:hover,
-.tidy5eDark .tidy5e.sheet .downtime-dnd5e .downtime-dnd5e-item-row-controls .downtime-dnd5e-delete:hover {
+.tidy5eDark
+  :is(.tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
+  .downtime-dnd5e
+  .downtime-dnd5e-item-row-controls
+  .downtime-dnd5e-edit:hover,
+.tidy5eDark
+  :is(.tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
+  .downtime-dnd5e
+  .downtime-dnd5e-item-row-controls
+  .downtime-dnd5e-delete:hover {
   text-shadow: none;
   color: rgba(255, 100, 0, 1);
 }

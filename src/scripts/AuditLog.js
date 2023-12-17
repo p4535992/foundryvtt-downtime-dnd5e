@@ -14,7 +14,7 @@ export default class AuditLog extends FormApplication {
 
   async getData(options = {}) {
     let originalData = super.getData();
-    let activities = originalData.object.data.flags[CONSTANTS.MODULE_NAME].trainingItems || [];
+    let activities = originalData.object.flags[CONSTANTS.MODULE_NAME].trainingItems || [];
     let changes = [];
 
     // Loop through each activity. If it's got no changes array, move on to the next one.
