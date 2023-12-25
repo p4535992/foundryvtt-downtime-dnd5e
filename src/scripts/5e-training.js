@@ -1,11 +1,9 @@
-// Imports
 import { preloadTemplates } from "./load-templates.js";
 import { registerSettings } from "./settings.js";
 import { registerHelpers } from "./handlebars-helpers.js";
 import { migrateToVersion1 } from "./migrations/migrationNumber1.js";
 import AuditLog from "./AuditLog.js";
 import TrackingAndTraining from "./TrackingAndTraining.js";
-import { setApi } from "../module.js";
 import CONSTANTS from "./constants.js";
 import API from "./api.js";
 import { debug, error, info, warn, log } from "./lib/lib.js";
@@ -21,13 +19,11 @@ export const initHooks = () => {
 
 export const setupHooks = () => {
   // warn("Setup Hooks processing");
-  //@ts-ignore
-  // setApi(API);
 };
 
 export const readyHooks = () => {
   API.crashTNT = crashTNT();
-  setApi(API);
+  game.modules.get(CONSTANTS.MODULE_ID).api = API;
   migrateAllActors();
 };
 

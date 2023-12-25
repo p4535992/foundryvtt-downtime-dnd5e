@@ -56,35 +56,3 @@ Hooks.once("ready", async () => {
 Hooks.once("devModeReady", ({ registerPackageDebugFlag }) => {
   registerPackageDebugFlag(CONSTANTS.MODULE_ID);
 });
-/**
- * Initialization helper, to set API.
- * @param api to set to game module.
- */
-export function setApi(api) {
-  const data = game.modules.get(CONSTANTS.MODULE_ID);
-  data.api = api;
-}
-/**
- * Returns the set API.
- * @returns Api from games module.
- */
-export function getApi() {
-  const data = game.modules.get(CONSTANTS.MODULE_ID);
-  return data.api;
-}
-/**
- * Initialization helper, to set Socket.
- * @param socket to set to game module.
- */
-export function setSocket(socket) {
-  const data = game.modules.get(CONSTANTS.MODULE_ID);
-  data.socket = socket;
-}
-/*
- * Returns the set socket.
- * @returns Socket from games module.
- */
-export function getSocket() {
-  const data = game.modules.get(CONSTANTS.MODULE_ID);
-  return data.socket;
-}
