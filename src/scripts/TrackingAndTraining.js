@@ -91,6 +91,22 @@ export default class TrackingAndTraining {
     new TrackedItemApp(data).render(true);
   }
 
+  static async addItemWorld(actorId, DROPDOWN_OPTIONS) {
+    // log("New Item World excuted!");
+    let actor = game.actors.get(actorId);
+    let allCategories = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.categories) || [];
+    let item = new TrackedItem();
+    let data = {
+      actor: actor,
+      item: item,
+      alreadyCompleted: item.progress >= item.completionAt,
+      categories: allCategories,
+      dropdownOptions: DROPDOWN_OPTIONS,
+      world: true,
+    };
+    new TrackedItemApp(data).render(true);
+  }
+
   static async editFromSheet(actorId, itemId, DROPDOWN_OPTIONS) {
     // log("Edit Downtime Activity excuted!");
     let actor = game.actors.get(actorId);
@@ -103,6 +119,7 @@ export default class TrackingAndTraining {
       alreadyCompleted: thisItem.progress >= thisItem.completionAt,
       categories: allCategories,
       dropdownOptions: DROPDOWN_OPTIONS,
+      editMode: true,
     };
     new TrackedItemApp(data).render(true);
   }

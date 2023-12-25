@@ -2,6 +2,7 @@
 
 - Update Audit Log
 - Add world activites
+- Add controls for up and down of the activities
 
 ### 1.2.1
 

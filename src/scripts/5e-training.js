@@ -62,7 +62,7 @@ async function addTrainingTab(app, html, data) {
     sheet.append(trainingTabHtml);
 
     // Set up our big list of dropdown options
-    activateTabListeners(actor, html);
+    activateTabListeners(actor, app, html, data);
 
     // Set Training Tab as Active
     html.find('.tabs .item[data-tab="training"]').click((ev) => {
@@ -79,11 +79,12 @@ async function addTrainingTab(app, html, data) {
   Hooks.call(`TrainingTabReady`, app, html, data);
 }
 
-function activateTabListeners(actor, html) {
+function activateTabListeners(actor, app, html, data) {
   let actorTools = TrackingAndTraining.getActorTools(actor.id);
   const ABILITIES = TrackingAndTraining.formatAbilitiesForDropdown();
   const SKILLS = TrackingAndTraining.formatSkillsForDropdown();
   const DROPDOWN_OPTIONS = { abilities: ABILITIES, skills: SKILLS, tools: actorTools };
+  let allTrainingItems = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems);
 
   // NEW CATEGORY
   html.find(".downtime-dnd5e-new-category").click(async (event) => {
@@ -117,6 +118,13 @@ function activateTabListeners(actor, html) {
     await TrackingAndTraining.addItem(actor.id, DROPDOWN_OPTIONS);
   });
 
+  // Add New Downtime Activity
+  html.find(".downtime-dnd5e-world-add").click(async (event) => {
+    event.preventDefault();
+    // console.log("Create Item excuted!");
+    await TrackingAndTraining.addItemWorld(actor.id, DROPDOWN_OPTIONS);
+  });
+
   // EDIT DOWNTIME ACTIVITY
   html.find(".downtime-dnd5e-edit").click(async (event) => {
     event.preventDefault();
@@ -141,6 +149,52 @@ function activateTabListeners(actor, html) {
       return;
     }
     await TrackingAndTraining.deleteFromSheet(actor.id, itemId);
+  });
+
+  // Move Downtime Activity
+  html.find(".downtime-dnd5e-move").click(async (event) => {
+    event.preventDefault();
+    // Set up some variables
+    let fieldId = event.currentTarget.id;
+    // let trainingIdx = parseInt(fieldId.replace("downtime-dnd5e-move-", ""));
+    let trainingIdx = parseInt(event.currentTarget.dataset.tid);
+
+    let tflags;
+    let world = false;
+    if ($(event.currentTarget).parent().hasClass("worldRoll")) {
+      tflags = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities);
+      world = true;
+    } else {
+      tflags = duplicate(allTrainingItems);
+    }
+
+    let activity = tflags[trainingIdx];
+
+    let move = 0;
+    if ($(event.target).hasClass("fa-chevron-up")) {
+      move = -1;
+    } else {
+      move = 1;
+    }
+    // loop to bottom
+    if (trainingIdx === 0 && move === -1) {
+      tflags.push(tflags.shift());
+      // loop to top
+    } else if (trainingIdx === tflags.length - 1 && move === 1) {
+      tflags.unshift(tflags.pop());
+      // anywhere in between
+    } else {
+      tflags[trainingIdx] = tflags[trainingIdx + move];
+      tflags[trainingIdx + move] = activity;
+    }
+
+    if (world) {
+      await game.settings.set(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities, tflags);
+      app.render(true);
+    } else {
+      await actor.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems, tflags);
+      app.render(true);
+    }
   });
 
   // EDIT PROGRESS VALUE
@@ -230,10 +284,26 @@ function activateTabListeners(actor, html) {
 }
 
 function getTemplateData(data) {
+  let actor = data.actor;
   let notShowToUserEditMode = game.settings.get(CONSTANTS.MODULE_ID, "gmOnlyEditMode") && !game.users.current.isGM;
   let showImportButton = game.settings.get(CONSTANTS.MODULE_ID, "showImportButton");
+
+  let activities = getProperty(actor, `flags.${CONSTANTS.MODULE_ID}.${CONSTANTS.FLAGS.trainingItems}`) || [];
+  let activitiesCategorized = activities.filter((activity) => activity.category);
+  let activitiesUnCategorized = activities.filter((activity) => !activity.category);
+
+  let activitiesWorld = getProperty(actor, `flags.${CONSTANTS.MODULE_ID}.${CONSTANTS.SETTINGS.activities}`) || [];
+  let activitiesWorldCategorized = activitiesWorld.filter((activity) => activity.category);
+  let activitiesWorldUnCategorized = activitiesWorld.filter((activity) => !activity.category);
+
   data.showImportButton = showImportButton;
   data.showToUserEditMode = !notShowToUserEditMode;
+  data.isGM = game.user.isGM;
+  data.activitiesCategorized = activitiesCategorized;
+  data.activitiesUnCategorized = activitiesUnCategorized;
+  data.activitiesWorldCategorized = activitiesWorldCategorized;
+  data.activitiesWorldUnCategorized = activitiesWorldUnCategorized;
+
   return data;
 }
 
@@ -416,6 +486,40 @@ Hooks.on("tidy5e-sheet.ready", (api) => {
     new api.models.HandlebarsTab({
       tabId: "downtime-dnd5e-training-tab",
       path: `modules/${CONSTANTS.MODULE_ID}/templates/partials/training-section-contents.hbs`,
+      title: () => game.settings.get(CONSTANTS.MODULE_ID, "tabName"),
+      getData: (data) => getTemplateData(data),
+      enabled: (data) => {
+        const showToUser = game.users.current.isGM || !game.settings.get(CONSTANTS.MODULE_ID, "gmOnlyMode");
+        return data.editable && showToUser && game.settings.get(CONSTANTS.MODULE_ID, "enableTrainingNpc");
+      },
+      onRender: ({ app, element, data }) => {
+        activateTabListeners(data.actor, $(element));
+      },
+      tabContentsClasses: ["downtime-dnd5e"],
+      activateDefaultSheetListeners: false,
+    })
+  );
+  api.registerCharacterTab(
+    new api.models.HandlebarsTab({
+      tabId: "downtime-dnd5e-training-tab",
+      path: `modules/${CONSTANTS.MODULE_ID}/templates/partials/training-section-contents-world.hbs`,
+      title: () => game.settings.get(CONSTANTS.MODULE_ID, "tabName"),
+      getData: (data) => getTemplateData(data),
+      enabled: (data) => {
+        const showToUser = game.users.current.isGM || !game.settings.get(CONSTANTS.MODULE_ID, "gmOnlyMode");
+        return data.editable && showToUser && game.settings.get(CONSTANTS.MODULE_ID, "enableTraining");
+      },
+      onRender: ({ app, element, data }) => {
+        activateTabListeners(data.actor, $(element));
+      },
+      tabContentsClasses: ["downtime-dnd5e"],
+      activateDefaultSheetListeners: false,
+    })
+  );
+  api.registerNpcTab(
+    new api.models.HandlebarsTab({
+      tabId: "downtime-dnd5e-training-tab",
+      path: `modules/${CONSTANTS.MODULE_ID}/templates/partials/training-section-contents-world.hbs`,
       title: () => game.settings.get(CONSTANTS.MODULE_ID, "tabName"),
       getData: (data) => getTemplateData(data),
       enabled: (data) => {

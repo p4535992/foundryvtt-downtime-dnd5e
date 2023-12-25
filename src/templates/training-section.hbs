@@ -1,3 +1,31 @@
 <div class="tab downtime-dnd5e" data-group="primary" data-tab="training">
+  <!-- Tab Controls -->
+  {{#if showToUserEditMode}}
+  <div class="downtime-dnd5e-controls">
+    <div class="downtime-dnd5e-export" title="{{ localize 'downtime-dnd5e.ExportTrackedItemsTooltip' }}">
+      <i class="fas fa-file-import"></i> {{ localize 'downtime-dnd5e.ExportTrackedItems' }}
+    </div>
+    {{#if showImportButton}}
+    <div class="downtime-dnd5e-import" title="{{ localize 'downtime-dnd5e.ImportTrackedItemsTooltip' }}">
+      <i class="fas fa-file-export"></i> {{ localize 'downtime-dnd5e.ImportTrackedItems' }}
+    </div>
+    {{/if}}
+    <div class="downtime-dnd5e-audit push-left" title="{{ localize 'downtime-dnd5e.ReviewChanges' }}">
+      <i class="fas fa-clipboard"></i> {{ localize 'downtime-dnd5e.ChangeLog' }}
+    </div>
+    {{#if isGM}}
+    <div class="downtime-dnd5e-world-add" title="Add World Downtime Activity">
+      <i class="fas fa-plus"></i> Add World Downtime
+    </div>
+    {{/if}}
+    <div class="downtime-dnd5e-new-category" title="{{ localize 'downtime-dnd5e.CreateNewCategory' }}">
+      <i class="fas fa-list"></i> {{ localize 'downtime-dnd5e.AddCategory' }}
+    </div>
+    <div class="downtime-dnd5e-add" title="{{ localize 'downtime-dnd5e.CreateNewItem' }}">
+      <i class="fas fa-plus"></i> {{ localize 'downtime-dnd5e.AddItem' }}
+    </div>
+  </div>
+  {{/if}}
   {{> "modules/downtime-dnd5e/templates/partials/training-section-contents.hbs" }}
+  {{> "modules/downtime-dnd5e/templates/partials/training-section-contents-world.hbs" }}
 </div>

@@ -45,6 +45,7 @@ export class GMConfig extends FormApplication {
     this.element.find(".export").click((event) => this.exportActivities(event));
 
     this.element.find(".activity-move").click((event) => this.moveWorldDowntime(event));
+    this.element.find(".downtime-dnd5e-move").click((event) => this.moveWorldDowntime(event));
 
     this.element.find(".duplicate-actor-act").click(() => this.duplicateActorActivities());
   }

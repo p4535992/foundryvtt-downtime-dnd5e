@@ -3,6 +3,32 @@ import TrackingAndTraining from "./TrackingAndTraining.js";
 import CONSTANTS from "./constants.js";
 
 export default class TrackedItemApp extends FormApplication {
+  constructor(
+    actor = {},
+    item = {},
+    alreadyCompleted = false,
+    categories = [],
+    dropdownOptions = {},
+    // activity = {},
+    editMode = false,
+    world = false,
+    sheet = {},
+    ...args
+  ) {
+    super(...args);
+    game.users.apps.push(this);
+    this.activity = item;
+    this.actor = actor;
+    this.editing = editMode;
+    this.image = this.activity.chat_icon || "";
+    this.world = world;
+    this.sheet = sheet;
+
+    this.alreadyCompleted = alreadyCompleted;
+    this.categories = categories;
+    this.dropdownOptions = dropdownOptions;
+  }
+
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       id: "downtime-dnd5e-downtime-item-app",
@@ -140,8 +166,8 @@ export default class TrackedItemApp extends FormApplication {
   async _updateObject(event, formData) {
     let actor = this.object.actor;
     let objItem = this.object.item;
-    let allItems = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems) || [];
-
+    // let allItems = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems) || [];
+    let world = this.object.world || false;
     let newItem = objItem;
 
     // Set placeholders for name and image, just in case something's gone really wrong here
@@ -193,18 +219,65 @@ export default class TrackedItemApp extends FormApplication {
       // SOMETHING IS WRONG
     }
 
-    // // See if item already exists
-    let itemIdx = allItems.findIndex((obj) => obj.id === newItem.id);
+    // local scope
+    if (!this.world) {
+      let allItems = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems) || [];
+      /*
+        if (this.editing) {
+            let act = allItems.find((act) => act.id == this.activity.id);
+            let idx = allItems.indexOf(act);
+            allItems[idx] = this.activity;
+        } else {
+            allItems.push(this.activity);
+        }
+        await actor.unsetFlag(CONSTANTS.MODULE_ID, "trainingItems");
+        await actor.setFlag(CONSTANTS.MODULE_ID, "trainingItems", allItems);
+        */
 
-    // Update / Replace as necessary
-    if (itemIdx > -1) {
-      allItems[itemIdx] = newItem;
-    } else {
-      allItems.push(newItem);
+      // See if item already exists
+      let itemIdx = allItems.findIndex((obj) => obj.id === newItem.id);
+
+      // Update / Replace as necessary
+      if (itemIdx > -1) {
+        allItems[itemIdx] = newItem;
+      } else {
+        allItems.push(newItem);
+      }
+
+      // Update actor and flags
+      await actor.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems, allItems);
     }
+    // World scope
+    else {
+      let allItemsWorld = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities) || [];
+      /*
+        this.activity["world"] = true;
+        const settings = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities);
+        if (this.editing) {
+            let act = settings.find((act) => act.id == this.activity.id);
+            let idx = settings.indexOf(act);
+            settings[idx] = this.activity;
+        } else {
+            settings.push(this.activity);
+        }
+        await game.settings.set(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities, settings);
+        // rerender the character sheet to reflect updated activities
+        this.sheet.render(true);
+        */
 
-    // Update actor and flags
-    await actor.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems, allItems);
+      // See if item already exists
+      let itemIdx = allItemsWorld.findIndex((obj) => obj.id === newItem.id);
+
+      // Update / Replace as necessary
+      if (itemIdx > -1) {
+        allItemsWorld[itemIdx] = newItem;
+      } else {
+        allItemsWorld.push(newItem);
+      }
+
+      // Update actor and flags
+      await actor.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities, allItemsWorld);
+    }
 
     // Announce completion if complete
     let alreadyCompleted = this.object.alreadyCompleted;
