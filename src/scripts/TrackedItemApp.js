@@ -3,30 +3,20 @@ import TrackingAndTraining from "./TrackingAndTraining.js";
 import CONSTANTS from "./constants.js";
 
 export default class TrackedItemApp extends FormApplication {
-  constructor(
-    actor = {},
-    item = {},
-    alreadyCompleted = false,
-    categories = [],
-    dropdownOptions = {},
-    // activity = {},
-    editMode = false,
-    world = false,
-    sheet = {},
-    ...args
-  ) {
-    super(...args);
+  constructor(object = {}, options = {}) {
+    super(object, options);
     game.users.apps.push(this);
-    this.activity = item;
-    this.actor = actor;
-    this.editing = editMode;
-    this.image = this.activity.chat_icon || "";
-    this.world = world;
-    this.sheet = sheet;
+    // this.item = data.item;
+    this.activity = object.item;
+    this.actor = object.actor;
+    this.editing = object.editMode;
+    this.image = object.item.img || object.activity.chat_icon || "";
+    this.world = object.world;
+    this.sheet = object.sheet || object.actor.sheet;
 
-    this.alreadyCompleted = alreadyCompleted;
-    this.categories = categories;
-    this.dropdownOptions = dropdownOptions;
+    this.alreadyCompleted = object.alreadyCompleted;
+    this.categories = object.categories;
+    this.dropdownOptions = object.dropdownOptions;
   }
 
   static get defaultOptions() {
@@ -164,10 +154,10 @@ export default class TrackedItemApp extends FormApplication {
 
   // Called on submission, handle doing stuff.
   async _updateObject(event, formData) {
-    let actor = this.object.actor;
     let objItem = this.object.item;
+    let actor = this.actor;
     // let allItems = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems) || [];
-    let world = this.object.world || false;
+    let world = this.world;
     let newItem = objItem;
 
     // Set placeholders for name and image, just in case something's gone really wrong here
@@ -249,7 +239,7 @@ export default class TrackedItemApp extends FormApplication {
     }
     // World scope
     else {
-      let allItemsWorld = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities) || [];
+      let allItemsWorld = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities) || [];
       /*
         this.activity["world"] = true;
         const settings = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities);
@@ -276,8 +266,11 @@ export default class TrackedItemApp extends FormApplication {
       }
 
       // Update actor and flags
-      await actor.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities, allItemsWorld);
+      (await game.settings.set(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities, allItemsWorld)) || [];
     }
+
+    // rerender the character sheet to reflect updated activities
+    this.sheet.render(true);
 
     // Announce completion if complete
     let alreadyCompleted = this.object.alreadyCompleted;

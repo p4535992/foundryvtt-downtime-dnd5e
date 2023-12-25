@@ -217,6 +217,57 @@
   text-shadow: 0 0 5px black;
 }
 
+/* Roll World Buttons */
+:is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"]) .downtime-dnd5e .downtime-dnd5e-world-roll,
+:is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
+  .downtime-dnd5e
+  .downtime-dnd5e-world-roll-disabled {
+  flex: 0 0 30px;
+  height: 30px;
+  background-size: 30px;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: none;
+  margin-right: 5px;
+}
+
+:is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
+  .downtime-dnd5e
+  .downtime-dnd5e-world-roll
+  .checkmark {
+  display: none;
+}
+
+:is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
+  .downtime-dnd5e
+  .item-name:hover
+  .downtime-dnd5e-world-roll {
+  background-image: url("/../icons/svg/d20-grey.svg") !important;
+}
+
+:is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
+  .downtime-dnd5e
+  .item-name:hover
+  .downtime-dnd5e-world-roll:hover {
+  background-image: url("/../icons/svg/d20-black.svg") !important;
+}
+
+:is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
+  .downtime-dnd5e
+  .downtime-dnd5e-world-roll-disabled {
+  opacity: 50%;
+}
+
+:is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
+  .downtime-dnd5e
+  .downtime-dnd5e-world-roll-disabled
+  .checkmark {
+  color: white;
+  display: block;
+  font-size: 30px;
+  text-shadow: 0 0 5px black;
+}
+
 /* Type Column */
 :is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"]) .downtime-dnd5e .activity-type-row {
   flex: 0 0 150px;

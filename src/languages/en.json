@@ -175,8 +175,10 @@
 
   "downtime-dnd5e.AddCategory": "Add Category",
   "downtime-dnd5e.AddItem": "Add Item",
-  "downtime-dnd5e.CreateNewCategory": "Create a new category",
-  "downtime-dnd5e.CreateNewItem": "Create a new item",
+  "downtime-dnd5e.CreateNewCategory": "Add a new category",
+  "downtime-dnd5e.CreateNewWorldCategory": "Add a new World category",
+  "downtime-dnd5e.CreateNewItem": "Add Activity",
+  "downtime-dnd5e.CreateNewWorldItem": "Add World Activity",
   "downtime-dnd5e.ReviewChanges": "Review Changes",
 
   "downtime-dnd5e.Uncategorized": "Uncategorized",

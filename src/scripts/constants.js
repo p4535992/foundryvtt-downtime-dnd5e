@@ -9,6 +9,7 @@ const CONSTANTS = {
   },
   SETTINGS: {
     activities: "activities",
+    worldCategories: "categories",
   },
 };
 CONSTANTS.PATH = `modules/${CONSTANTS.MODULE_ID}/`;

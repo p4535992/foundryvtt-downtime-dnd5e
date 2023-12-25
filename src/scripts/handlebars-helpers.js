@@ -49,7 +49,23 @@ export function registerHelpers() {
     return className;
   });
 
+  Handlebars.registerHelper(`${CONSTANTS.MODULE_ID}-worldTrainingRollBtnClass`, function (trainingItem) {
+    let className = "downtime-dnd5e-world-roll";
+    if (trainingItem.progress >= trainingItem.completionAt) {
+      className = "downtime-dnd5e-world-roll-disabled";
+    }
+    return className;
+  });
+
   Handlebars.registerHelper(`${CONSTANTS.MODULE_ID}-trainingRollBtnTooltip`, function (trainingItem) {
+    let text = game.i18n.localize("downtime-dnd5e.RollItemProgress");
+    if (trainingItem.progress >= trainingItem.completionAt) {
+      text = game.i18n.localize("downtime-dnd5e.RollItemDisabled");
+    }
+    return text;
+  });
+
+  Handlebars.registerHelper(`${CONSTANTS.MODULE_ID}-worldTrainingRollBtnTooltip`, function (trainingItem) {
     let text = game.i18n.localize("downtime-dnd5e.RollItemProgress");
     if (trainingItem.progress >= trainingItem.completionAt) {
       text = game.i18n.localize("downtime-dnd5e.RollItemDisabled");

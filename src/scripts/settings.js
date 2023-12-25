@@ -120,6 +120,12 @@ export function registerSettings() {
     config: false,
     default: [],
   });
+
+  game.settings.register(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.worldCategories, {
+    scope: "world",
+    config: false,
+    default: [],
+  });
 }
 
 class ResetSettingsDialog extends FormApplication {

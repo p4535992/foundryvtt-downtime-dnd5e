@@ -76,7 +76,7 @@ export default class TrackingAndTraining {
     }).render(true);
   }
 
-  static async addItem(actorId, DROPDOWN_OPTIONS) {
+  static async addItem(actorId, DROPDOWN_OPTIONS, world = false) {
     // log("New Item excuted!");
     let actor = game.actors.get(actorId);
     let allCategories = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.categories) || [];
@@ -87,32 +87,24 @@ export default class TrackingAndTraining {
       alreadyCompleted: item.progress >= item.completionAt,
       categories: allCategories,
       dropdownOptions: DROPDOWN_OPTIONS,
+      world: world,
     };
     new TrackedItemApp(data).render(true);
   }
 
-  static async addItemWorld(actorId, DROPDOWN_OPTIONS) {
-    // log("New Item World excuted!");
-    let actor = game.actors.get(actorId);
-    let allCategories = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.categories) || [];
-    let item = new TrackedItem();
-    let data = {
-      actor: actor,
-      item: item,
-      alreadyCompleted: item.progress >= item.completionAt,
-      categories: allCategories,
-      dropdownOptions: DROPDOWN_OPTIONS,
-      world: true,
-    };
-    new TrackedItemApp(data).render(true);
-  }
-
-  static async editFromSheet(actorId, itemId, DROPDOWN_OPTIONS) {
+  static async editFromSheet(actorId, itemId, DROPDOWN_OPTIONS, world = false) {
     // log("Edit Downtime Activity excuted!");
     let actor = game.actors.get(actorId);
     let allCategories = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.categories) || [];
-    let allItems = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems) || [];
+
+    let allItems = [];
+    if (world) {
+      allItems = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities) || [];
+    } else {
+      allItems = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems) || [];
+    }
     let thisItem = allItems.filter((obj) => obj.id === itemId)[0];
+
     let data = {
       actor: actor,
       item: thisItem,
@@ -120,11 +112,12 @@ export default class TrackingAndTraining {
       categories: allCategories,
       dropdownOptions: DROPDOWN_OPTIONS,
       editMode: true,
+      world: world,
     };
     new TrackedItemApp(data).render(true);
   }
 
-  static async deleteFromSheet(actorId, itemId) {
+  static async deleteFromSheet(actorId, itemId, world = false) {
     // log("Delete Downtime Activity excuted!");
 
     // Set up some variables
@@ -151,22 +144,41 @@ export default class TrackingAndTraining {
       default: "yes",
       close: async (html) => {
         if (del) {
-          let allItems = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems);
+          let allItems = [];
+          if (world) {
+            allItems = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities) || [];
+          } else {
+            allItems = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems) || [];
+          }
+
           let thisItem = allItems.filter((obj) => obj.id === itemId)[0];
           let itemIndex = allItems.findIndex((obj) => obj.id === thisItem.id);
           allItems.splice(itemIndex, 1);
-          await actor.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems, allItems);
+
+          if (world) {
+            await game.settings.set(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities, allItems);
+          } else {
+            await actor.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems, allItems);
+          }
+
+          actor.sheet.render(true);
         }
       },
     }).render(true);
   }
 
-  static async updateItemProgressFromSheet(actorId, itemId, value) {
+  static async updateItemProgressFromSheet(actorId, itemId, value, world = false) {
     // log("Progression Override excuted!");
 
     // Set up some variables
     let actor = game.actors.get(actorId);
-    let allItems = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems) || [];
+    let allItems = [];
+    if (world) {
+      allItems = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities) || [];
+    } else {
+      allItems = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems) || [];
+    }
+
     let thisItem = allItems.filter((obj) => obj.id === itemId)[0];
     let adjustment = 0;
     let alreadyCompleted = thisItem.progress >= thisItem.completionAt;
@@ -190,15 +202,27 @@ export default class TrackingAndTraining {
     TrackingAndTraining.checkCompletion(actor, thisItem, alreadyCompleted);
 
     // Update flags and actor
-    await actor.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems, allItems);
+    if (world) {
+      await game.settings.set(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities, allItems);
+    } else {
+      await actor.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems, allItems);
+    }
+
+    actor.sheet.render(true);
   }
 
-  static async progressItem(actorId, itemId) {
+  static async progressItem(actorId, itemId, world = false) {
     // log("Progress Downtime Activity excuted!");
 
     // Set up some variables
     let actor = game.actors.get(actorId);
-    let allItems = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems) || [];
+    let allItems = [];
+    if (world) {
+      allItems = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities) || [];
+    } else {
+      allItems = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems) || [];
+    }
+
     let thisItem = allItems.filter((obj) => obj.id === itemId)[0];
     let rollType = TrackingAndTraining.determineRollType(thisItem);
     let alreadyCompleted = thisItem.progress >= thisItem.completionAt;
@@ -217,7 +241,13 @@ export default class TrackingAndTraining {
         // Log item completion
         TrackingAndTraining.checkCompletion(actor, thisItem, alreadyCompleted);
         // Update flags and actor
-        await actor.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems, allItems);
+        if (world) {
+          await game.settings.set(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities, allItems);
+        } else {
+          await actor.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems, allItems);
+        }
+
+        actor.sheet.render(true);
       }
     }
 
@@ -235,7 +265,13 @@ export default class TrackingAndTraining {
         // Log item completion
         TrackingAndTraining.checkCompletion(actor, thisItem, alreadyCompleted);
         // Update flags and actor
-        await actor.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems, allItems);
+        if (world) {
+          await game.settings.set(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities, allItems);
+        } else {
+          await actor.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems, allItems);
+        }
+
+        actor.sheet.render(true);
       }
     }
 
@@ -256,7 +292,13 @@ export default class TrackingAndTraining {
           // Log item completion
           TrackingAndTraining.checkCompletion(actor, thisItem, alreadyCompleted);
           // Update flags and actor
-          await actor.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems, allItems);
+          if (world) {
+            await game.settings.set(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities, allItems);
+          } else {
+            await actor.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems, allItems);
+          }
+
+          actor.sheet.render(true);
         }
       } else {
         ui.notifications.warn(game.i18n.localize("downtime-dnd5e.ToolNotFoundWarning"));
@@ -271,7 +313,13 @@ export default class TrackingAndTraining {
       // Log item completion
       TrackingAndTraining.checkCompletion(actor, thisItem, alreadyCompleted);
       // Update flags and actor
-      await actor.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems, allItems);
+      if (world) {
+        await game.settings.set(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities, allItems);
+      } else {
+        await actor.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems, allItems);
+      }
+
+      actor.sheet.render(true);
     }
 
     // Progression Type: Macro
@@ -694,6 +742,8 @@ export default class TrackingAndTraining {
         //     }
         //   }
         // }).render(true);
+
+        actor.sheet.render(true);
       });
     });
     input.trigger("click");

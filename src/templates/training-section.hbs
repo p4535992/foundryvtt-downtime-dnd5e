@@ -14,7 +14,10 @@
       <i class="fas fa-clipboard"></i> {{ localize 'downtime-dnd5e.ChangeLog' }}
     </div>
     {{#if isGM}}
-    <div class="downtime-dnd5e-world-add" title="Add World Downtime Activity">
+    <div class="downtime-dnd5e-world-new-category" title="{{ localize 'downtime-dnd5e.CreateNewWorldCategory' }}">
+      <i class="fas fa-list"></i> {{ localize 'downtime-dnd5e.AddCategory' }}
+    </div>
+    <div class="downtime-dnd5e-world-add" title="{{ localize 'downtime-dnd5e.CreateNewWorldItem' }}">
       <i class="fas fa-plus"></i> Add World Downtime
     </div>
     {{/if}}
