@@ -75,7 +75,7 @@ export function registerHelpers() {
 
   Handlebars.registerHelper(`${CONSTANTS.MODULE_ID}-isInCategory`, function (actor, category) {
     let thisCategoryId = category.id;
-    let allTrainingItems = actor.flags[CONSTANTS.MODULE_ID]?.trainingItems || [];
+    let allTrainingItems = getProperty(actor, `flags.${CONSTANTS.MODULE_ID}.${CONSTANTS.FLAGS.trainingItems}`) || [];
     let matchingItems = [];
     for (var i = 0; i < allTrainingItems.length; i++) {
       let thisItem = allTrainingItems[i];
@@ -87,18 +87,32 @@ export function registerHelpers() {
     return matchingItems;
   });
 
-  Handlebars.registerHelper(`${CONSTANTS.MODULE_ID}-isUncategorized`, function (actor) {
-    let allTrainingItems = actor.flags[CONSTANTS.MODULE_ID]?.trainingItems || [];
+  Handlebars.registerHelper(`${CONSTANTS.MODULE_ID}-isInWorldCategory`, function (actor, category) {
+    let thisCategoryId = category.id;
+    let allTrainingItems = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities) || [];
     let matchingItems = [];
     for (var i = 0; i < allTrainingItems.length; i++) {
       let thisItem = allTrainingItems[i];
-      if (!thisItem.category) {
+      if (thisItem.category == thisCategoryId) {
         matchingItems.push(thisItem);
       }
     }
     matchingItems.sort((a, b) => (a.name > b.name ? 1 : -1));
     return matchingItems;
   });
+
+  // Handlebars.registerHelper(`${CONSTANTS.MODULE_ID}-isUncategorized`, function (actor) {
+  //   let allTrainingItems = actor.flags[CONSTANTS.MODULE_ID]?.trainingItems || [];
+  //   let matchingItems = [];
+  //   for (var i = 0; i < allTrainingItems.length; i++) {
+  //     let thisItem = allTrainingItems[i];
+  //     if (!thisItem.category) {
+  //       matchingItems.push(thisItem);
+  //     }
+  //   }
+  //   matchingItems.sort((a, b) => (a.name > b.name ? 1 : -1));
+  //   return matchingItems;
+  // });
 
   Handlebars.registerHelper(`${CONSTANTS.MODULE_ID}-getBarColor`, function (item) {
     // Derived from this: https://gist.github.com/mlocati/7210513

@@ -5,7 +5,7 @@ import CONSTANTS from "./constants.js";
 export default class TrackedItemApp extends FormApplication {
   constructor(object = {}, options = {}) {
     super(object, options);
-    game.users.apps.push(this);
+    // game.users.apps.push(this);
     // this.item = data.item;
     this.activity = object.item;
     this.actor = object.actor;

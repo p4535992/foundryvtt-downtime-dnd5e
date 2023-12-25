@@ -3,7 +3,7 @@
 
   <!-- Uncategorized -->
   <li class="items-header flexrow">
-    <div class="item-name flexrow"><h3>{{ localize 'downtime-dnd5e.Uncategorized' }} World Downtimes</h3></div>
+    <div class="item-name flexrow"><h3><span><i class="fa-solid fa-earth-americas"></i></span> {{ localize 'downtime-dnd5e.Uncategorized' }} World Downtimes</h3></div>
     <div class="activity-type">{{localize "downtime-dnd5e.CheckTypeColumnHeader"}}</div>
     <div class="activity-override">{{localize "downtime-dnd5e.ProgressColumnHeader"}}</div>
     <div class="activity-progress"></div>
@@ -54,7 +54,7 @@
   <!-- Categories -->
   {{#each categoriesWorld as |category cid| }}
     <li class="items-header flexrow" title="{{ category.description }}">
-      <div class="item-name flexrow"><h3>{{ category.name }} World Downtimes</h3></div>
+      <div class="item-name flexrow"><h3><span><i class="fa-solid fa-earth-americas"></i></span> {{ category.name }} World Downtimes</h3></div>
       <div class="activity-type">{{localize "downtime-dnd5e.CheckTypeColumnHeader"}}</div>
       <div class="activity-override">{{localize "downtime-dnd5e.ProgressColumnHeader"}}</div>
       <div class="activity-progress"></div>
@@ -66,7 +66,7 @@
       {{/if}}
     </li>
     <ol class="item-list inventory-list">
-      {{#each (downtime-dnd5e-isInCategory ../actor category) as |training tid| }}
+      {{#each (downtime-dnd5e-isInWorldCategory ../actor category) as |training tid| }}
         <li class="item flexrow">
           <div class="item-name flexrow rollable worldRoll">
             <div class="{{downtime-dnd5e-worldTrainingRollBtnClass training}}"

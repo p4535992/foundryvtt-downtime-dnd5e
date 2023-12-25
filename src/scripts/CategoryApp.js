@@ -1,6 +1,17 @@
 import CONSTANTS from "./constants.js";
 
 export default class CategoryApp extends FormApplication {
+  constructor(object = {}, options = {}) {
+    super(object, options);
+    // game.users.apps.push(this);
+    // this.item = data.item;
+    this.category = object.category;
+    this.actor = object.actor;
+    this.editing = object.editMode;
+    this.world = object.world;
+    this.sheet = object.sheet || object.actor.sheet;
+  }
+
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       id: "downtime-dnd5e-downtime-category-app",
@@ -25,7 +36,13 @@ export default class CategoryApp extends FormApplication {
   async _updateObject(event, formData) {
     let actorId = formData.actorId;
     let actor = game.actors.get(actorId);
-    let allCategories = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.categories) || [];
+    let allCategories = [];
+    if (this.world) {
+      allCategories = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.worldCategories) || [];
+    } else {
+      allCategories = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.categories) || [];
+    }
+
     let newCategory = {};
 
     // Build category data
@@ -44,7 +61,11 @@ export default class CategoryApp extends FormApplication {
     }
 
     // Update actor and flags
-    await actor.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.categories, allCategories);
+    if (this.world) {
+      await game.settings.set(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.worldCategories, allCategories);
+    } else {
+      await actor.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.categories, allCategories);
+    }
   }
 
   activateListeners(html) {

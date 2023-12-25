@@ -93,6 +93,13 @@ function activateTabListeners(actor, app, html, data) {
     await TrackingAndTraining.addCategory(actor.id);
   });
 
+  // NEW WORLD CATEGORY
+  html.find(".downtime-dnd5e-world-new-category").click(async (event) => {
+    event.preventDefault();
+    // console.log("Create World Category excuted!");
+    await TrackingAndTraining.addCategory(actor.id, true);
+  });
+
   // EDIT CATEGORY
   html.find(".downtime-dnd5e-edit-category").click(async (event) => {
     event.preventDefault();
@@ -100,6 +107,15 @@ function activateTabListeners(actor, app, html, data) {
     let fieldId = event.currentTarget.id;
     let categoryId = fieldId.replace("downtime-dnd5e-edit-category-", "");
     await TrackingAndTraining.editCategory(actor.id, categoryId);
+  });
+
+  // EDIT WORLD CATEGORY
+  html.find(".downtime-dnd5e-world-edit-category").click(async (event) => {
+    event.preventDefault();
+    // console.log("Edit Category excuted!");
+    let fieldId = event.currentTarget.id;
+    let categoryId = fieldId.replace("downtime-dnd5e-world-edit-category-", "");
+    await TrackingAndTraining.editCategory(actor.id, categoryId, true);
   });
 
   // DELETE CATEGORY

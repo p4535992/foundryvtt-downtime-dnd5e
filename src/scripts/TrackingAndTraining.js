@@ -5,37 +5,56 @@ import Category from "./Category.js";
 import CONSTANTS from "./constants.js";
 
 export default class TrackingAndTraining {
-  static async addCategory(actorId) {
+  static async addCategory(actorId, world = false) {
     // log("New Category excuted!");
 
     let actor = game.actors.get(actorId);
     let data = {
       actor: actor,
       category: new Category(),
+      world: world,
     };
     new CategoryApp(data).render(true);
   }
 
-  static async editCategory(actorId, categoryId) {
+  static async editCategory(actorId, categoryId, world = false) {
     // log("Edit Category excuted!");
 
     let actor = game.actors.get(actorId);
-    let allCategories = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.categories) || [];
+    let allCategories = [];
+    if (world) {
+      allCategories = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.worldCategories) || [];
+    } else {
+      allCategories = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.categories) || [];
+    }
     let thisCategory = allCategories.filter((obj) => obj.id === categoryId)[0];
     let data = {
       actor: actor,
       category: thisCategory,
+      world: world,
     };
     new CategoryApp(data).render(true);
   }
 
-  static async deleteCategory(actorId, categoryId) {
+  static async deleteCategory(actorId, categoryId, world = false) {
     // log("Delete Category excuted!");
 
     // Set up some variables
     let actor = game.actors.get(actorId);
-    let allItems = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems) || [];
-    let allCategories = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.categories) || [];
+    let allItems = [];
+    if (world) {
+      allItems = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities) || [];
+    } else {
+      allItems = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems) || [];
+    }
+
+    let allCategories = [];
+    if (world) {
+      allCategories = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.worldCategories) || [];
+    } else {
+      allCategories = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.categories) || [];
+    }
+
     let thisCategory = allCategories.filter((obj) => obj.id === categoryId)[0];
     let categoryIdx = allCategories.findIndex((obj) => obj.id === categoryId);
     let del = false;
@@ -69,8 +88,13 @@ export default class TrackingAndTraining {
             }
           }
           // Update actor
-          await actor.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.categories, allCategories);
-          await actor.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems, allItems);
+          if (world) {
+            await game.settings.set(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.worldCategories, allCategories);
+            await game.settings.set(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities, allItems);
+          } else {
+            await actor.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.categories, allCategories);
+            await actor.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems, allItems);
+          }
         }
       },
     }).render(true);
@@ -79,7 +103,12 @@ export default class TrackingAndTraining {
   static async addItem(actorId, DROPDOWN_OPTIONS, world = false) {
     // log("New Item excuted!");
     let actor = game.actors.get(actorId);
-    let allCategories = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.categories) || [];
+    let allCategories = [];
+    if (world) {
+      allCategories = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.worldCategories) || [];
+    } else {
+      allCategories = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.categories) || [];
+    }
     let item = new TrackedItem();
     let data = {
       actor: actor,
@@ -95,8 +124,12 @@ export default class TrackingAndTraining {
   static async editFromSheet(actorId, itemId, DROPDOWN_OPTIONS, world = false) {
     // log("Edit Downtime Activity excuted!");
     let actor = game.actors.get(actorId);
-    let allCategories = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.categories) || [];
-
+    let allCategories = [];
+    if (world) {
+      allCategories = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.worldCategories) || [];
+    } else {
+      allCategories = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.categories) || [];
+    }
     let allItems = [];
     if (world) {
       allItems = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities) || [];
