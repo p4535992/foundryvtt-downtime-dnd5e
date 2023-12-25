@@ -96,6 +96,10 @@
   "downtime-dnd5e.SettingReset.dialogs.confirm": "Reset Module Settings",
   "downtime-dnd5e.SettingReset.dialogs.cancel": "Cancel",
 
+  "downtime-dnd5e.SettingDebug.title": "Enable debugging",
+  "downtime-dnd5e.SettingDebug.label": "Prints debug messages to the console",
+  "downtime-dnd5e.SettingDebug.hint": " ",
+
   "downtime-dnd5e.NpcsOnly": "NPC's Only",
   "downtime-dnd5e.PcsAndNpcs": "PC's and NPC's",
   "downtime-dnd5e.PcsOnly": "PC's Only",

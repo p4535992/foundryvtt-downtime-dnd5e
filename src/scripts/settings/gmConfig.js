@@ -1,5 +1,5 @@
 import CONSTANTS from "../constants.js";
-import { info } from "../lib/lib.js";
+import { warn, info, error, log, debug } from "../lib/lib.js";
 import { _updateDowntimes } from "./training.js";
 
 export class GMConfig extends FormApplication {
@@ -159,11 +159,9 @@ class LocalActivityTransfer extends FormApplication {
       if (!destActs) destActs = [];
       let newActivities = destActs.concat([activityToTransfer]);
       await destActor.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems, newActivities);
-      ui.notifications.notify(
-        `Successfully copied ${activityToTransfer.name} from ${srcActor.name} to ${destActor.name}.`
-      );
+      info(`Successfully copied ${activityToTransfer.name} from ${srcActor.name} to ${destActor.name}.`, true);
     } else {
-      ui.notifications.error("Source Actor and Destination Actor are the same.");
+      error("Source Actor and Destination Actor are the same.", true);
       return;
     }
   }

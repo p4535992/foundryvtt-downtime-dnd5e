@@ -1,4 +1,5 @@
 import CONSTANTS from "./constants.js";
+import { debug } from "./lib/lib.js";
 import { GMConfig } from "./settings/gmConfig.js";
 
 export function registerSettings() {
@@ -115,6 +116,15 @@ export function registerSettings() {
     default: "pc",
   });
 
+  game.settings.register(CONSTANTS.MODULE_ID, "debug", {
+    name: `${CONSTANTS.MODULE_ID}.SettingDebug.title`,
+    hint: `${CONSTANTS.MODULE_ID}.SettingDebug.hint`,
+    scope: "client",
+    config: true,
+    default: false,
+    type: Boolean,
+  });
+
   game.settings.register(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.worldActivities, {
     scope: "world",
     config: false,
@@ -145,7 +155,7 @@ class ResetSettingsDialog extends FormApplication {
             for (let setting of game.settings.storage
               .get("world")
               .filter((setting) => setting.key.startsWith(`${CONSTANTS.MODULE_ID}.`))) {
-              console.log(`Reset setting '${setting.key}'`);
+              debug(`Reset setting '${setting.key}'`);
               await setting.delete();
             }
             //window.location.reload();

@@ -3,6 +3,7 @@ import TrackedItemApp from "./TrackedItemApp.js";
 import TrackedItem from "./TrackedItem.js";
 import Category from "./Category.js";
 import CONSTANTS from "./constants.js";
+import { warn, info, error, debug, log } from "./lib/lib.js";
 
 export default class TrackingAndTraining {
   static async addCategory(actorId, world = false) {
@@ -334,7 +335,7 @@ export default class TrackingAndTraining {
           actor.sheet.render(true);
         }
       } else {
-        ui.notifications.warn(game.i18n.localize("downtime-dnd5e.ToolNotFoundWarning"));
+        warn(game.i18n.localize("downtime-dnd5e.ToolNotFoundWarning"));
       }
     }
 
@@ -362,7 +363,7 @@ export default class TrackingAndTraining {
       if (macro) {
         macro.execute();
       } else {
-        ui.notifications.warn(game.i18n.localize("downtime-dnd5e.MacroNotFoundWarning") + ": " + macroName);
+        warn(game.i18n.localize("downtime-dnd5e.MacroNotFoundWarning") + ": " + macroName, true);
       }
     }
   }
@@ -596,7 +597,7 @@ export default class TrackingAndTraining {
       categories: allCategories,
     };
     if (allItems.length < 1 && allCategories.length < 1) {
-      ui.notifications.info(game.i18n.localize("downtime-dnd5e.ExportNoTrackedItems"));
+      info(game.i18n.localize("downtime-dnd5e.ExportNoTrackedItems"), true);
       return;
     }
     let jsonData = JSON.stringify(dataToExport);
@@ -609,7 +610,7 @@ export default class TrackingAndTraining {
     input.on("change", function () {
       const file = this.files[0];
       if (!file) {
-        ui.notifications.info(game.i18n.localize("downtime-dnd5e.ImportNoFile"));
+        info(game.i18n.localize("downtime-dnd5e.ImportNoFile"), true);
         return;
       }
       readTextFromFile(file).then(async (contents) => {
@@ -638,7 +639,7 @@ export default class TrackingAndTraining {
         }
 
         if (importedItems.length < 1 && importedCategories.legnth < 1) {
-          ui.notifications.info(game.i18n.localize("downtime-dnd5e.ImportNoTrackedItems"));
+          info(game.i18n.localize("downtime-dnd5e.ImportNoTrackedItems"), true);
           return;
         }
 
@@ -703,7 +704,7 @@ export default class TrackingAndTraining {
         await actor.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.categories, combinedCategories);
         await actor.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems, combinedItems);
 
-        ui.notifications.info(game.i18n.localize("downtime-dnd5e.ImportComplete"));
+        info(game.i18n.localize("downtime-dnd5e.ImportComplete"), true);
 
         // let act = "quit";
         //let content = `<p><b>${game.i18n.localize("downtime-dnd5e.ImportTypeSelectionOverwrite")}:</b> ${game.i18n.localize("downtime-dnd5e.ImportTypeSelectionTextOverwrite")}</p>
@@ -732,7 +733,7 @@ export default class TrackingAndTraining {
         //         }
         //       }
         //       actor.setFlag(CONSTANTS.MODULE_ID,CONSTANTS.FLAGS.trainingItems,importedItems);
-        //       await ui.notifications.info(game.i18n.localize("downtime-dnd5e.ImportComplete"));
+        //       await info(game.i18n.localize("downtime-dnd5e.ImportComplete"), true);
         //     } else if (act === "add") {
         //       let currentItems = actor.getFlag(CONSTANTS.MODULE_ID,CONSTANTS.FLAGS.trainingItems) || [];
         //       let currentCategories = actor.getFlag(CONSTANTS.MODULE_ID,CONSTANTS.FLAGS.categories) || [];
@@ -761,7 +762,7 @@ export default class TrackingAndTraining {
         //       }
         //       let combinedItems = currentItems.concat(importedItems);
         //       await actor.setFlag(CONSTANTS.MODULE_ID,CONSTANTS.FLAGS.trainingItems, combinedItems);
-        //       ui.notifications.info(game.i18n.localize("downtime-dnd5e.ImportComplete"));
+        //       info(game.i18n.localize("downtime-dnd5e.ImportComplete"), true);
         //       if(possibleDupes){
         //         new Dialog({
         //           title: game.i18n.localize("downtime-dnd5e.ImportDupeWarningTitle"),

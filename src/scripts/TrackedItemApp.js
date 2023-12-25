@@ -1,6 +1,7 @@
 import TrackedItem from "./TrackedItem.js";
 import TrackingAndTraining from "./TrackingAndTraining.js";
 import CONSTANTS from "./constants.js";
+import { warn, error, debug, info, log } from "./lib/lib.js";
 
 export default class TrackedItemApp extends FormApplication {
   constructor(object = {}, options = {}) {
@@ -69,7 +70,7 @@ export default class TrackedItemApp extends FormApplication {
     html.on("change", "#nameInput", (ev) => {
       let newThing = $(ev.currentTarget).val();
       if (!newThing) {
-        ui.notifications.warn(game.i18n.localize("downtime-dnd5e.InputErrorName"));
+        warn(game.i18n.localize("downtime-dnd5e.InputErrorName"), true);
         this.render();
       } else {
         this.object.item.name = newThing;
@@ -87,7 +88,7 @@ export default class TrackedItemApp extends FormApplication {
     html.on("change", "#progressInput", (ev) => {
       let newThing = parseInt($(ev.currentTarget).val());
       if (newThing == null || isNaN(newThing) || newThing < 0 || newThing > this.object.item.completionAt) {
-        ui.notifications.warn(game.i18n.localize("downtime-dnd5e.InputErrorProgress"));
+        warn(game.i18n.localize("downtime-dnd5e.InputErrorProgress"), true);
         this.render();
       } else {
         this.object.item.progress = newThing;
@@ -114,7 +115,7 @@ export default class TrackedItemApp extends FormApplication {
     html.on("change", "#macroNameInput", (ev) => {
       let newThing = $(ev.currentTarget).val();
       if (!newThing) {
-        ui.notifications.warn(game.i18n.localize("downtime-dnd5e.InputErrorMacroName"));
+        warn(game.i18n.localize("downtime-dnd5e.InputErrorMacroName"), true);
         this.render();
       } else {
         this.object.item.macroName = newThing;
@@ -124,7 +125,7 @@ export default class TrackedItemApp extends FormApplication {
     html.on("change", "#fixedIncreaseInput", (ev) => {
       let newThing = parseInt($(ev.currentTarget).val());
       if (!newThing || isNaN(newThing) || newThing <= 0) {
-        ui.notifications.warn(game.i18n.localize("downtime-dnd5e.InputErrorFixedIncrease"));
+        warn(game.i18n.localize("downtime-dnd5e.InputErrorFixedIncrease"), true);
         this.render();
       } else {
         this.object.item.fixedIncrease = newThing;
@@ -143,7 +144,7 @@ export default class TrackedItemApp extends FormApplication {
     html.on("change", "#completionAtInput", (ev) => {
       let newThing = parseInt($(ev.currentTarget).val());
       if (!newThing || isNaN(newThing) || newThing <= 0) {
-        ui.notifications.warn(game.i18n.localize("downtime-dnd5e.InputErrorCompletionAt"));
+        warn(game.i18n.localize("downtime-dnd5e.InputErrorCompletionAt"), true);
         this.render();
       } else {
         this.object.item.completionAt = newThing;
