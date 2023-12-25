@@ -121,7 +121,7 @@ function activateTabListeners(actor, html) {
   html.find(".downtime-dnd5e-edit").click(async (event) => {
     event.preventDefault();
     // console.log("Edit Item excuted!");
-    let allItems = actor.getFlag(CONSTANTS.MODULE_ID, "trainingItems") || [];
+    let allItems = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems) || [];
     let itemId = event.currentTarget.id.replace("downtime-dnd5e-edit-", "");
     if (!itemId) {
       ui.notifications.warn(game.i18n.localize("downtime-dnd5e.NoIdWarning"), { permanent: true });
@@ -134,7 +134,7 @@ function activateTabListeners(actor, html) {
   html.find(".downtime-dnd5e-delete").click(async (event) => {
     event.preventDefault();
     // console.log("Delete Item excuted!");
-    let allItems = actor.getFlag(CONSTANTS.MODULE_ID, "trainingItems") || [];
+    let allItems = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems) || [];
     let itemId = event.currentTarget.id.replace("downtime-dnd5e-delete-", "");
     if (!itemId) {
       ui.notifications.warn(game.i18n.localize("downtime-dnd5e.NoIdWarning", { permanent: true }));
@@ -153,7 +153,7 @@ function activateTabListeners(actor, html) {
       ui.notifications.warn(game.i18n.localize("downtime-dnd5e.NoIdWarning"), { permanent: true });
       return;
     }
-    let allItems = actor.getFlag(CONSTANTS.MODULE_ID, "trainingItems") || [];
+    let allItems = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems) || [];
     let thisItem = allItems.filter((obj) => obj.id === itemId)[0];
     if (isNaN(field.value)) {
       field.value = thisItem.progress;
@@ -189,7 +189,7 @@ function activateTabListeners(actor, html) {
       ui.notifications.warn(game.i18n.localize("downtime-dnd5e.NoIdWarning"), { permanent: true });
       return;
     }
-    let allItems = actor.getFlag(CONSTANTS.MODULE_ID, "trainingItems") || [];
+    let allItems = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems) || [];
     let item = allItems.filter((obj) => obj.id === itemId)[0];
     let desc = item.description || "";
     let li = $(event.currentTarget).parents(".item");
@@ -273,7 +273,7 @@ async function migrateAllActors() {
 
     // Flag items that need to be updated
     let itemsToUpdate = 0;
-    let allTrainingItems = a.getFlag(CONSTANTS.MODULE_ID, "trainingItems") || [];
+    let allTrainingItems = a.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems) || [];
     for (var j = 0; j < allTrainingItems.length; j++) {
       let itemSchemaVersion = allTrainingItems[j].schemaVersion;
       if (itemSchemaVersion === undefined) {
@@ -332,7 +332,7 @@ async function migrateAllActors() {
             let backup = { trainingItems: allTrainingItems, timestamp: new Date() };
             ui.notifications.notify(game.i18n.localize("downtime-dnd5e.BackingUpDataFor") + ": " + a.data.name);
             console.log(game.i18n.localize("downtime-dnd5e.BackingUpDataFor") + ": " + a.data.name);
-            await a.setFlag(CONSTANTS.MODULE_ID, "backup", backup);
+            await a.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.backup, backup);
 
             // Alert that we're migrating actor
             ui.notifications.notify(game.i18n.localize("downtime-dnd5e.UpdatingDataFor") + ": " + a.data.name);
@@ -356,7 +356,7 @@ async function migrateAllActors() {
                 delete allTrainingItems[j].updateMe;
               }
             }
-            await a.setFlag(CONSTANTS.MODULE_ID, "trainingItems", allTrainingItems);
+            await a.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems, allTrainingItems);
             ui.notifications.notify(game.i18n.localize("downtime-dnd5e.SuccessUpdatingDataFor") + ": " + a.data.name);
             console.log(game.i18n.localize("downtime-dnd5e.SuccessUpdatingDataFor") + ": " + a.data.name);
           }
@@ -442,7 +442,7 @@ export function crashTNT() {
 			ui.notifications.warn(game.i18n.localize("downtime-dnd5e.ActorNotFoundWarning"));
 			return;
 		}
-		let allItems = actor.getFlag(CONSTANTS.MODULE_ID, "trainingItems");
+		let allItems = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems);
 		let itemIdx = allItems.findIndex((i) => i.name === itemName);
 		if (itemIdx < 0) {
 			ui.notifications.warn(game.i18n.localize("downtime-dnd5e.ItemNotFoundWarning") + ": " + itemName);
@@ -468,7 +468,7 @@ export function crashTNT() {
 		TrackingAndTraining.checkCompletion(actor, thisItem, alreadyCompleted);
 		// Update flags and actor
 		allItems[itemIdx] = thisItem;
-		await actor.setFlag(CONSTANTS.MODULE_ID, "trainingItems", allItems);
+		await actor.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems, allItems);
 		*/
   }
 
@@ -477,7 +477,7 @@ export function crashTNT() {
     /*
 		let actor = game.actors.getName(actorName);
 		if (actor) {
-			let allItems = actor.getFlag(CONSTANTS.MODULE_ID, "trainingItems") || [];
+			let allItems = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems) || [];
 			return allItems;
 		} else {
 			ui.notifications.warn(game.i18n.localize("downtime-dnd5e.ActorNotFoundWarning"));
@@ -493,7 +493,7 @@ export function crashTNT() {
 			ui.notifications.warn(game.i18n.localize("downtime-dnd5e.ActorNotFoundWarning"));
 			return;
 		}
-		let allItems = actor.getFlag(CONSTANTS.MODULE_ID, "trainingItems") || [];
+		let allItems = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems) || [];
 		let itemIdx = allItems.findIndex((i) => i.name === itemName);
 		if (itemIdx < 0) {
 			ui.notifications.warn(game.i18n.localize("downtime-dnd5e.ItemNotFoundWarning") + ": " + itemName);

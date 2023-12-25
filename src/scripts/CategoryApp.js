@@ -25,7 +25,7 @@ export default class CategoryApp extends FormApplication {
   async _updateObject(event, formData) {
     let actorId = formData.actorId;
     let actor = game.actors.get(actorId);
-    let allCategories = actor.getFlag(CONSTANTS.MODULE_ID, "categories") || [];
+    let allCategories = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.categories) || [];
     let newCategory = {};
 
     // Build category data
@@ -44,7 +44,7 @@ export default class CategoryApp extends FormApplication {
     }
 
     // Update actor and flags
-    await actor.setFlag(CONSTANTS.MODULE_ID, "categories", allCategories);
+    await actor.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.categories, allCategories);
   }
 
   activateListeners(html) {

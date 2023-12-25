@@ -140,7 +140,7 @@ export default class TrackedItemApp extends FormApplication {
   async _updateObject(event, formData) {
     let actor = this.object.actor;
     let objItem = this.object.item;
-    let allItems = actor.getFlag(CONSTANTS.MODULE_ID, "trainingItems") || [];
+    let allItems = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems) || [];
 
     let newItem = objItem;
 
@@ -204,7 +204,7 @@ export default class TrackedItemApp extends FormApplication {
     }
 
     // Update actor and flags
-    await actor.setFlag(CONSTANTS.MODULE_ID, "trainingItems", allItems);
+    await actor.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems, allItems);
 
     // Announce completion if complete
     let alreadyCompleted = this.object.alreadyCompleted;

@@ -73,7 +73,7 @@ export default class AuditLog extends FormApplication {
   async _updateObject(event, formData) {
     let actorId = formData.actorId;
     let actor = game.actors.get(actorId);
-    let activities = await actor.getFlag(CONSTANTS.MODULE_ID, "trainingItems");
+    let activities = await actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems);
 
     // Same loop as before. Cycle through each activity, if it's got no change array,
     //  move on to the next one. If it does, cycle through it and see if the timestamp
@@ -93,7 +93,7 @@ export default class AuditLog extends FormApplication {
     }
 
     // Update actor and flags
-    await actor.setFlag(CONSTANTS.MODULE_ID, "trainingItems", activities);
+    await actor.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems, activities);
   }
 
   activateListeners(html) {

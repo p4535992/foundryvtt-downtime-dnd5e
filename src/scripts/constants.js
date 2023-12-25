@@ -4,6 +4,8 @@ const CONSTANTS = {
   FLAGS: {
     // changes: "changes",
     trainingItems: "trainingItems",
+    backup: "backup",
+    categories: "categories",
   },
 };
 CONSTANTS.PATH = `modules/${CONSTANTS.MODULE_ID}/`;
