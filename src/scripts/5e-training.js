@@ -388,13 +388,33 @@ function getTemplateData(data) {
   let notShowToUserEditMode = game.settings.get(CONSTANTS.MODULE_ID, "gmOnlyEditMode") && !game.users.current.isGM;
   let showImportButton = game.settings.get(CONSTANTS.MODULE_ID, "showImportButton");
 
+  let categoriesActor = getProperty(actor, `flags.${CONSTANTS.MODULE_ID}.${CONSTANTS.FLAGS.categories}`) || [];
+  let categoriesWorld = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.worldCategories) || [];
+
+  let categoriesActorIds = [];
+  for (const c of categoriesActor) {
+    categoriesActorIds.push(c.id);
+  }
+  let categoriesWorldIds = [];
+  for (const c of categoriesWorld) {
+    categoriesWorldIds.push(c.id);
+  }
+
   let activities = getProperty(actor, `flags.${CONSTANTS.MODULE_ID}.${CONSTANTS.FLAGS.trainingItems}`) || [];
-  let activitiesCategorized = activities.filter((activity) => activity.category);
-  let activitiesUnCategorized = activities.filter((activity) => !activity.category);
+  let activitiesCategorized = activities.filter(
+    (activity) => activity.category && categoriesActorIds.includes(activity.category)
+  );
+  let activitiesUnCategorized = activities.filter(
+    (activity) => !activity.category || !categoriesActorIds.includes(activity.category)
+  );
 
   let activitiesWorld = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities) || [];
-  let activitiesWorldCategorized = activitiesWorld.filter((activity) => activity.category);
-  let activitiesWorldUnCategorized = activitiesWorld.filter((activity) => !activity.category);
+  let activitiesWorldCategorized = activitiesWorld.filter(
+    (activity) => activity.category && categoriesWorldIds.includes(activity.category)
+  );
+  let activitiesWorldUnCategorized = activitiesWorld.filter(
+    (activity) => !activity.category || !categoriesWorldIds.includes(activity.category)
+  );
 
   data.showImportButton = showImportButton;
   data.showToUserEditMode = !notShowToUserEditMode;
@@ -403,6 +423,9 @@ function getTemplateData(data) {
   data.activitiesUnCategorized = activitiesUnCategorized;
   data.activitiesWorldCategorized = activitiesWorldCategorized;
   data.activitiesWorldUnCategorized = activitiesWorldUnCategorized;
+
+  data.categoriesActor = categoriesActor;
+  data.categoriesWorld = categoriesWorld;
 
   return data;
 }
