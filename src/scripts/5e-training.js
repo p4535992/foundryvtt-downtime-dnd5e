@@ -227,7 +227,7 @@ function activateTabListeners(actor, app, html, data) {
     }
 
     if (world) {
-      await game.settings.set(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities, tflags);
+      await game.settings.set(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.worldActivities, tflags);
       app.render(true);
     } else {
       await actor.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems, tflags);
@@ -244,7 +244,7 @@ function activateTabListeners(actor, app, html, data) {
       return;
     }
     // let actor = game.actors.get(actorId);
-    let allItems = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities) || [];
+    let allItems = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.worldActivities) || [];
     // let thisItem = allItems.filter((obj) => obj.id === itemId)[0];
 
     // Set up some variables
@@ -273,7 +273,7 @@ function activateTabListeners(actor, app, html, data) {
     }
 
     if (world) {
-      await game.settings.set(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities, tflags);
+      await game.settings.set(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.worldActivities, tflags);
       app.render(true);
     } else {
       await actor.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems, tflags);
@@ -311,7 +311,7 @@ function activateTabListeners(actor, app, html, data) {
       ui.notifications.warn(game.i18n.localize("downtime-dnd5e.NoIdWarning"), { permanent: true });
       return;
     }
-    let allItems = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities) || [];
+    let allItems = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.worldActivities) || [];
     let thisItem = allItems.filter((obj) => obj.id === itemId)[0];
     if (isNaN(field.value)) {
       field.value = thisItem.progress;
@@ -360,6 +360,36 @@ function activateTabListeners(actor, app, html, data) {
       return;
     }
     let allItems = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems) || [];
+    let item = allItems.filter((obj) => obj.id === itemId)[0];
+    let desc = item.description || "";
+    let li = $(event.currentTarget).parents(".item");
+
+    if (li.hasClass("expanded")) {
+      let summary = li.children(".item-summary");
+      summary.slideUp(200, () => summary.remove());
+    } else {
+      let div = $(`<div class="item-summary">${desc}</div>`);
+      li.append(div.hide());
+      div.slideDown(200);
+    }
+    li.toggleClass("expanded");
+  });
+
+  // TOGGLE WORLD DESCRIPTION
+  // Modified version of _onItemSummary from dnd5e system located in
+  // dnd5e/module/actor/sheets/base.js
+  html.find(".downtime-dnd5e-world-toggle-desc").click(async (event) => {
+    event.preventDefault();
+    // console.log("Toggle Acvtivity Info excuted!");
+
+    // Set up some variables
+    let fieldId = event.currentTarget.id;
+    let itemId = fieldId.replace("downtime-dnd5e-world-toggle-desc-", "");
+    if (!itemId) {
+      ui.notifications.warn(game.i18n.localize("downtime-dnd5e.NoIdWarning"), { permanent: true });
+      return;
+    }
+    let allItems = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.worldActivities) || [];
     let item = allItems.filter((obj) => obj.id === itemId)[0];
     let desc = item.description || "";
     let li = $(event.currentTarget).parents(".item");
@@ -424,7 +454,7 @@ function getTemplateData(data) {
     (activity) => !activity.category || !categoriesActorIds.includes(activity.category)
   );
 
-  let activitiesWorld = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities) || [];
+  let activitiesWorld = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.worldActivities) || [];
   let activitiesWorldCategorized = activitiesWorld.filter(
     (activity) => activity.category && categoriesWorldIds.includes(activity.category)
   );

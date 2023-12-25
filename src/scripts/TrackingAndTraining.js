@@ -43,7 +43,7 @@ export default class TrackingAndTraining {
     let actor = game.actors.get(actorId);
     let allItems = [];
     if (world) {
-      allItems = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities) || [];
+      allItems = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.worldActivities) || [];
     } else {
       allItems = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems) || [];
     }
@@ -90,7 +90,7 @@ export default class TrackingAndTraining {
           // Update actor
           if (world) {
             await game.settings.set(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.worldCategories, allCategories);
-            await game.settings.set(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities, allItems);
+            await game.settings.set(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.worldActivities, allItems);
           } else {
             await actor.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.categories, allCategories);
             await actor.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems, allItems);
@@ -132,7 +132,7 @@ export default class TrackingAndTraining {
     }
     let allItems = [];
     if (world) {
-      allItems = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities) || [];
+      allItems = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.worldActivities) || [];
     } else {
       allItems = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems) || [];
     }
@@ -179,7 +179,7 @@ export default class TrackingAndTraining {
         if (del) {
           let allItems = [];
           if (world) {
-            allItems = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities) || [];
+            allItems = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.worldActivities) || [];
           } else {
             allItems = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems) || [];
           }
@@ -189,7 +189,7 @@ export default class TrackingAndTraining {
           allItems.splice(itemIndex, 1);
 
           if (world) {
-            await game.settings.set(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities, allItems);
+            await game.settings.set(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.worldActivities, allItems);
           } else {
             await actor.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems, allItems);
           }
@@ -207,7 +207,7 @@ export default class TrackingAndTraining {
     let actor = game.actors.get(actorId);
     let allItems = [];
     if (world) {
-      allItems = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities) || [];
+      allItems = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.worldActivities) || [];
     } else {
       allItems = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems) || [];
     }
@@ -236,7 +236,7 @@ export default class TrackingAndTraining {
 
     // Update flags and actor
     if (world) {
-      await game.settings.set(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities, allItems);
+      await game.settings.set(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.worldActivities, allItems);
     } else {
       await actor.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems, allItems);
     }
@@ -251,7 +251,7 @@ export default class TrackingAndTraining {
     let actor = game.actors.get(actorId);
     let allItems = [];
     if (world) {
-      allItems = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities) || [];
+      allItems = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.worldActivities) || [];
     } else {
       allItems = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems) || [];
     }
@@ -275,7 +275,7 @@ export default class TrackingAndTraining {
         TrackingAndTraining.checkCompletion(actor, thisItem, alreadyCompleted);
         // Update flags and actor
         if (world) {
-          await game.settings.set(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities, allItems);
+          await game.settings.set(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.worldActivities, allItems);
         } else {
           await actor.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems, allItems);
         }
@@ -299,7 +299,7 @@ export default class TrackingAndTraining {
         TrackingAndTraining.checkCompletion(actor, thisItem, alreadyCompleted);
         // Update flags and actor
         if (world) {
-          await game.settings.set(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities, allItems);
+          await game.settings.set(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.worldActivities, allItems);
         } else {
           await actor.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems, allItems);
         }
@@ -326,7 +326,7 @@ export default class TrackingAndTraining {
           TrackingAndTraining.checkCompletion(actor, thisItem, alreadyCompleted);
           // Update flags and actor
           if (world) {
-            await game.settings.set(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities, allItems);
+            await game.settings.set(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.worldActivities, allItems);
           } else {
             await actor.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems, allItems);
           }
@@ -347,7 +347,7 @@ export default class TrackingAndTraining {
       TrackingAndTraining.checkCompletion(actor, thisItem, alreadyCompleted);
       // Update flags and actor
       if (world) {
-        await game.settings.set(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities, allItems);
+        await game.settings.set(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.worldActivities, allItems);
       } else {
         await actor.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems, allItems);
       }

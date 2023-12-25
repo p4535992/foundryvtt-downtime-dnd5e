@@ -115,7 +115,7 @@ export function registerSettings() {
     default: "pc",
   });
 
-  game.settings.register(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities, {
+  game.settings.register(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.worldActivities, {
     scope: "world",
     config: false,
     default: [],

@@ -239,10 +239,10 @@ export default class TrackedItemApp extends FormApplication {
     }
     // World scope
     else {
-      let allItemsWorld = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities) || [];
+      let allItemsWorld = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.worldActivities) || [];
       /*
         this.activity["world"] = true;
-        const settings = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities);
+        const settings = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.worldActivities);
         if (this.editing) {
             let act = settings.find((act) => act.id == this.activity.id);
             let idx = settings.indexOf(act);
@@ -250,7 +250,7 @@ export default class TrackedItemApp extends FormApplication {
         } else {
             settings.push(this.activity);
         }
-        await game.settings.set(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities, settings);
+        await game.settings.set(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.worldActivities, settings);
         // rerender the character sheet to reflect updated activities
         this.sheet.render(true);
         */
@@ -266,7 +266,7 @@ export default class TrackedItemApp extends FormApplication {
       }
 
       // Update actor and flags
-      (await game.settings.set(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities, allItemsWorld)) || [];
+      (await game.settings.set(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.worldActivities, allItemsWorld)) || [];
     }
 
     // rerender the character sheet to reflect updated activities

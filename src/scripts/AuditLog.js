@@ -61,7 +61,6 @@ export default class AuditLog extends FormApplication {
     this.changes = changes;
 
     return mergeObject(originalData, {
-      isGm: game.user.isGM,
       changes: this.changes,
       // Downtime Ethck
       isGM: game.user.isGM,

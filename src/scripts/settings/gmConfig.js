@@ -6,7 +6,7 @@ export class GMConfig extends FormApplication {
   constructor(...args) {
     super(...args);
     game.users.apps.push(this);
-    this.activities = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities);
+    this.activities = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.worldActivities);
   }
 
   static get defaultOptions() {
@@ -63,13 +63,13 @@ export class GMConfig extends FormApplication {
     readTextFromFile(file).then(async (result) => {
       let settings = JSON.parse(JSON.parse(result).value);
       let [newDowntimes, changed] = await _updateDowntimes(settings);
-      game.settings.set(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities, newDowntimes);
+      game.settings.set(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.worldActivities, newDowntimes);
     });
   }
 
   exportActivities(event) {
     const data = game.data.settings.find(
-      (setting) => setting.key === `${CONSTANTS.MODULE_ID}.${CONSTANTS.SETTINGS.activities}`
+      (setting) => setting.key === `${CONSTANTS.MODULE_ID}.${CONSTANTS.SETTINGS.worldActivities}`
     );
     const jsonData = JSON.stringify(data, null, 2);
     saveDataToFile(jsonData, "application/json", `${CONSTANTS.MODULE_ID}-world-activities.json`);
@@ -89,7 +89,7 @@ class LocalActivityTransfer extends FormApplication {
   constructor(...args) {
     super(...args);
     game.users.apps.push(this);
-    this.activities = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities);
+    this.activities = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.worldActivities);
   }
 
   static get defaultOptions() {

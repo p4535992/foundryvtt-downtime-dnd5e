@@ -8,7 +8,7 @@ const CONSTANTS = {
     categories: "categories",
   },
   SETTINGS: {
-    activities: "activities",
+    worldActivities: "activities",
     worldCategories: "categories",
   },
 };

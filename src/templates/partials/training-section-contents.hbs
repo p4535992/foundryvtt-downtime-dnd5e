@@ -3,7 +3,9 @@
 
   <!-- Uncategorized -->
   <li class="items-header flexrow">
-    <div class="item-name flexrow"><h3><span><i class="fa-solid fa-user-check"></i></span> {{ localize 'downtime-dnd5e.Uncategorized' }}</h3></div>
+    <div class="item-name flexrow" data-tooltip='{{ localize 'downtime-dnd5e.Uncategorized' }}' data-tooltip-direction='UP'>
+      <h3><span><i class="fa-solid fa-user-check"></i></span> {{ localize 'downtime-dnd5e.Uncategorized' }}</h3>
+    </div>
     <div class="activity-type">{{localize "downtime-dnd5e.CheckTypeColumnHeader"}}</div>
     <div class="activity-override">{{localize "downtime-dnd5e.ProgressColumnHeader"}}</div>
     <div class="activity-progress"></div>
@@ -12,7 +14,7 @@
   <ol class="item-list inventory-list">
     {{#each activitiesUnCategorized as |training tid| }}
       <li class="item flexrow">
-        <div class="item-name flexrow rollable">
+        <div class="item-name flexrow rollable" data-tooltip='{{ training.description }}' data-tooltip-direction='UP'>
           <div class="{{downtime-dnd5e-trainingRollBtnClass training}}"
                 id="downtime-dnd5e-roll-{{training.id}}"
                 title="{{downtime-dnd5e-trainingRollBtnTooltip training}}"
@@ -25,7 +27,7 @@
           {{downtime-dnd5e-progressionStyle training ../actor}}
         </div>
         <div class="activity-override-row">
-          {{#if ../showToUserEditMode}}
+          {{#if @root.showToUserEditMode}}
           <input type="text" class="item-control downtime-dnd5e-override" id="downtime-dnd5e-override-{{training.id}}" title="{{ localize 'downtime-dnd5e.AdjustProgressValue' }}" value="{{training.progress}}"/>
           {{else}}
           <input type="text" readonly class="item-control downtime-dnd5e-override" id="downtime-dnd5e-override-{{training.id}}" title="{{ localize 'downtime-dnd5e.AdjustProgressValue' }}" value="{{training.progress}}"/>
@@ -39,7 +41,7 @@
             </div>
           </div>
         </div>
-        {{#if ../showToUserEditMode}}
+        {{#if @root.showToUserEditMode}}
         <div class="downtime-dnd5e-item-row-controls">
           <a class="item-control downtime-dnd5e-edit" id="downtime-dnd5e-edit-{{training.id}}" title="{{ localize 'downtime-dnd5e.EditItem' }}"><i class="fas fa-edit"></i></a>
           <a class="item-control downtime-dnd5e-delete" id="downtime-dnd5e-delete-{{training.id}}" title="{{ localize 'downtime-dnd5e.DeleteItem' }}"><i class="fas fa-trash"></i></a>
@@ -54,11 +56,13 @@
   <!-- Categories -->
   {{#each categoriesActor as |category cid| }}
     <li class="items-header flexrow" title="{{ category.description }}">
-      <div class="item-name flexrow"><h3><span><i class="fa-solid fa-user-check"></i></span> {{ category.name }}</h3></div>
+      <div class="item-name flexrow" data-tooltip='{{ category.description }}' data-tooltip-direction='UP'>
+        <h3><span><i class="fa-solid fa-user-check"></i></span> {{ category.name }}</h3>
+      </div>
       <div class="activity-type">{{localize "downtime-dnd5e.CheckTypeColumnHeader"}}</div>
       <div class="activity-override">{{localize "downtime-dnd5e.ProgressColumnHeader"}}</div>
       <div class="activity-progress"></div>
-      {{#if ../showToUserEditMode}}
+      {{#if @root.showToUserEditMode}}
       <div class="downtime-dnd5e-item-controls flexrow">
         <a class="item-control downtime-dnd5e-edit-category" id="downtime-dnd5e-edit-category-{{category.id}}" title="{{ localize 'downtime-dnd5e.EditCategory' }}"><i class="fas fa-edit"></i></a>
         <a class="item-control downtime-dnd5e-delete-category" id="downtime-dnd5e-delete-category-{{category.id}}" title="{{ localize 'downtime-dnd5e.DeleteCategory' }}"><i class="fas fa-trash"></i></a>
@@ -68,7 +72,7 @@
     <ol class="item-list inventory-list">
       {{#each (downtime-dnd5e-isInCategory ../actor category) as |training tid| }}
         <li class="item flexrow">
-          <div class="item-name flexrow rollable">
+          <div class="item-name flexrow rollable" data-tooltip='{{ training.description }}' data-tooltip-direction='UP'>
             <div class="{{downtime-dnd5e-trainingRollBtnClass training}}"
                   id="downtime-dnd5e-roll-{{training.id}}"
                   title="{{downtime-dnd5e-trainingRollBtnTooltip training}}"
@@ -81,7 +85,7 @@
             {{downtime-dnd5e-progressionStyle training ../../actor}}
           </div>
           <div class="activity-override-row">
-            {{#if ../../showToUserEditMode}}
+            {{#if @root.showToUserEditMode}}
             <input type="text" class="item-control downtime-dnd5e-override" id="downtime-dnd5e-override-{{training.id}}" title="{{ localize 'downtime-dnd5e.AdjustProgressValue' }}" value="{{training.progress}}"/>
             {{else}}
             <input type="text" readonly class="item-control downtime-dnd5e-override" id="downtime-dnd5e-override-{{training.id}}" title="{{ localize 'downtime-dnd5e.AdjustProgressValue' }}" value="{{training.progress}}"/>
@@ -95,7 +99,7 @@
               </div>
             </div>
           </div>
-          {{#if ../../showToUserEditMode}}
+          {{#if @root.showToUserEditMode}}
           <div class="downtime-dnd5e-item-row-controls">
             <a class="item-control downtime-dnd5e-edit" id="downtime-dnd5e-edit-{{training.id}}" title="{{ localize 'downtime-dnd5e.EditItem' }}"><i class="fas fa-edit"></i></a>
             <a class="item-control downtime-dnd5e-delete" id="downtime-dnd5e-delete-{{training.id}}" title="{{ localize 'downtime-dnd5e.DeleteItem' }}"><i class="fas fa-trash"></i></a>

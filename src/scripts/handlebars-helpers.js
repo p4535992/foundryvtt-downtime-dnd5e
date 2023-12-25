@@ -89,7 +89,7 @@ export function registerHelpers() {
 
   Handlebars.registerHelper(`${CONSTANTS.MODULE_ID}-isInWorldCategory`, function (actor, category) {
     let thisCategoryId = category.id;
-    let allTrainingItems = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities) || [];
+    let allTrainingItems = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.worldActivities) || [];
     let matchingItems = [];
     for (var i = 0; i < allTrainingItems.length; i++) {
       let thisItem = allTrainingItems[i];
