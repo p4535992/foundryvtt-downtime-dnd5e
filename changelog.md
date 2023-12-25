@@ -1,3 +1,7 @@
+### 1.3.1 
+
+- Bug fix https://github.com/p4535992/foundryvtt-downtime-dnd5e/issues/8 ty to @kgar 
+
 ### 1.3.0 [BREAKING CHANGES]
 
 - Update Audit Log
