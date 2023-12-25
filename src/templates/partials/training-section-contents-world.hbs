@@ -43,7 +43,7 @@
         </div>
         {{#if @root.showToUserEditMode}}
         <div class="downtime-dnd5e-item-row-controls worldRoll">
-          {{#if isGM}}
+          {{#if @root.isGM}}
           <a class="item-control downtime-dnd5e-world-edit" id="downtime-dnd5e-world-edit-{{training.id}}" title="{{ localize 'downtime-dnd5e.EditItem' }}"><i class="fas fa-edit"></i></a>
           <a class="item-control downtime-dnd5e-world-delete" id="downtime-dnd5e-world-delete-{{training.id}}" title="{{ localize 'downtime-dnd5e.DeleteItem' }}"><i class="fas fa-trash"></i></a>
           {{/if}}
@@ -106,7 +106,7 @@
           </div>
           {{#if @root.showToUserEditMode}}
           <div class="downtime-dnd5e-item-row-controls worldRoll">
-            {{#if isGM}}
+            {{#if @root.isGM}}
               <a class="item-control downtime-dnd5e-world-edit" id="downtime-dnd5e-world-edit-{{training.id}}" title="{{ localize 'downtime-dnd5e.EditItem' }}"><i class="fas fa-edit"></i></a>
               <a class="item-control downtime-dnd5e-world-delete" id="downtime-dnd5e-world-delete-{{training.id}}" title="{{ localize 'downtime-dnd5e.DeleteItem' }}"><i class="fas fa-trash"></i></a>
             {{/if}}

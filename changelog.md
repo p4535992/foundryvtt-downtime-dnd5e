@@ -1,4 +1,4 @@
-### 1.3.0
+### 1.3.0 [BREAKING CHANGES]
 
 - Update Audit Log
 - Add world activites

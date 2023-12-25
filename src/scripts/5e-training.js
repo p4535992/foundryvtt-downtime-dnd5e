@@ -127,6 +127,15 @@ function activateTabListeners(actor, app, html, data) {
     await TrackingAndTraining.deleteCategory(actor.id, categoryId);
   });
 
+  // DELETE WORLD CATEGORY
+  html.find(".downtime-dnd5e-world-delete-category").click(async (event) => {
+    event.preventDefault();
+    // console.log("Delete Category excuted!");
+    let fieldId = event.currentTarget.id;
+    let categoryId = fieldId.replace("downtime-dnd5e-world-delete-category-", "");
+    await TrackingAndTraining.deleteCategory(actor.id, categoryId, true);
+  });
+
   // ADD NEW DOWNTIME ACTIVITY
   html.find(".downtime-dnd5e-add").click(async (event) => {
     event.preventDefault();
