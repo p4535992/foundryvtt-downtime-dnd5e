@@ -656,7 +656,7 @@ Hooks.on("tidy5e-sheet.ready", (api) => {
         return data.editable && showToUser && game.settings.get(CONSTANTS.MODULE_ID, "enableTraining");
       },
       onRender: ({ app, element, data }) => {
-        activateTabListeners(data.actor, $(element));
+        activateTabListeners(data.actor, app, $(element), data);
       },
       tabContentsClasses: ["downtime-dnd5e"],
       activateDefaultSheetListeners: false,
@@ -673,7 +673,7 @@ Hooks.on("tidy5e-sheet.ready", (api) => {
         return data.editable && showToUser && game.settings.get(CONSTANTS.MODULE_ID, "enableTrainingNpc");
       },
       onRender: ({ app, element, data }) => {
-        activateTabListeners(data.actor, $(element));
+        activateTabListeners(data.actor, app, $(element), data);
       },
       tabContentsClasses: ["downtime-dnd5e"],
       activateDefaultSheetListeners: false,
