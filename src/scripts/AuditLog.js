@@ -6,7 +6,7 @@ export default class AuditLog extends FormApplication {
       id: "downtime-audit-log-form",
       template: `modules/${CONSTANTS.MODULE_ID}/templates/audit-dialog.hbs`,
       title: game.i18n.localize("downtime-dnd5e.ChangeLog"),
-      width: 900,
+      width: 1200, //900,
       resizable: true,
       closeOnSubmit: true,
     });
@@ -15,6 +15,8 @@ export default class AuditLog extends FormApplication {
   async getData(options = {}) {
     let originalData = super.getData();
     let activities = originalData.object.flags[CONSTANTS.MODULE_ID].trainingItems || [];
+
+    this.actor = game.actors.get(originalData.object._id);
     let changes = [];
 
     // Loop through each activity. If it's got no changes array, move on to the next one.
@@ -46,6 +48,9 @@ export default class AuditLog extends FormApplication {
           oldValue: activities[a].changes[c].oldValue,
           newValue: activities[a].changes[c].newValue,
           diff: difference,
+          result: activities[a].changes[c].result,
+          timeTaken: activities[a].changes[c].timeTaken,
+          materials: activities[a].changes[c].materials,
         };
         changes.push(change);
       }
@@ -53,9 +58,14 @@ export default class AuditLog extends FormApplication {
     // Sort by time, oldest to newest
     changes.sort((a, b) => (a.timestamp > b.timestamp ? 1 : -1));
 
+    this.changes = changes;
+
     return mergeObject(originalData, {
       isGm: game.user.isGM,
-      changes: changes,
+      changes: this.changes,
+      // Downtime Ethck
+      isGM: game.user.isGM,
+      activities: activities,
     });
   }
 
@@ -89,5 +99,70 @@ export default class AuditLog extends FormApplication {
   activateListeners(html) {
     super.activateListeners(html);
     // add listeners here
+    html.find("#filterActivity").change((event) => this.filterChanges(html, event));
+    // TODO flags changes is not good
+    // html.find(".change-delete").click((event) => this.handleDelete(html, event));
   }
+
+  filterChanges(html, event) {
+    event.preventDefault();
+    // For every row
+    html.find("tr > #activityName").each((i, target) => {
+      let request = $(event.target).val();
+      // Show all
+      $(target).parent().show();
+      // Hide if request val is not blank and activityName does not match requested activityName
+      if (request !== "" && $(target).text().trim() !== request) {
+        $(target).parent().hide();
+      }
+    });
+  }
+
+  /* TODO flags changes is not good
+  async handleDelete(html, event) {
+    event.preventDefault();
+    let del = false;
+
+    let dialogContent = await renderTemplate(
+      `modules/${CONSTANTS.MODULE_ID}/templates/additional/delete-training-dialog.hbs`
+    );
+
+    new Dialog({
+      title: `Delete Activity Entry`,
+      content: dialogContent,
+      buttons: {
+        yes: {
+          icon: "<i class='fas fa-check'></i>",
+          label: "Delete",
+          callback: () => (del = true),
+        },
+        no: {
+          icon: "<i class='fas fa-times'></i>",
+          label: "Cancel",
+          callback: () => (del = false),
+        },
+      },
+      default: "yes",
+      close: async () => {
+        if (del) {
+          // Find our change index
+          let fieldId = $(event.currentTarget).attr("id");
+          let changeIdx = parseInt(fieldId.replace("downtime-dnd5e-", ""));
+          // Remove the change
+          this.changes.splice(changeIdx, 1);
+          // Update Actor
+          this.actor.unsetFlag(CONSTANTS.MODULE_ID, "changes");
+          await this.actor.setFlag(CONSTANTS.MODULE_ID, "changes", this.changes);
+          // Update HTML
+          $(html)
+            .find("#" + fieldId)
+            .parent()
+            .parent()
+            .remove();
+          this.render();
+        }
+      },
+    }).render(true);
+  }
+  */
 }

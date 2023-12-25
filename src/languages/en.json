@@ -128,7 +128,7 @@
 
   "downtime-dnd5e.Time": "Time (UTC)",
   "downtime-dnd5e.User": "User",
-  "downtime-dnd5e.Item": "Item",
+  "downtime-dnd5e.Item": "Item/Activity",
   "downtime-dnd5e.Action": "Action",
   "downtime-dnd5e.ProgressChange": "Progress Change",
   "downtime-dnd5e.ChangeLogDeleteNote": "Note: Dismissing changes does NOT revert them. If you'd like to revert changes you see here, you must do so manually, but this log can serve as a guide to help you figure out what changes to make if required.",

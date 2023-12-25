@@ -1,40 +1,29 @@
 <form class="downtime-dnd5e-audit-log">
   <input type="hidden" name="actorId" value="{{object.id}}"/>
 
-  <h1 class="title">{{ localize "downtime-dnd5e.ChangeLog" }}</h1>
+  <h1 class="title">{{object.name}}'s {{ localize "downtime-dnd5e.ChangeLog" }}</h1>
+  <div class="flexrow">
+    <span style="flex-basis: 10%"> Activity Type </span>
+    <select name="filterActivity" id="filterActivity" style="flex-basis: 90%;">
+      <div>
+          <option label=" "></option>
+          {{#each activities as |activity id|}}
+          <div>
+              <option value="{{activity.name}}" id="{{id}}" data-dtype="Boolean">{{activity.name}}</option>
+          </div>
+          {{/each}}
+      </div>
+    </select>
+  </div>
 
-  <!-- Player View -->
-  {{#unless isGm}}
-    <div class="instructions">
-      <p>{{ localize "downtime-dnd5e.ChangeLogInstructionsPlayer" }}</p>
-    </div>
-    <div class="action-table">
-      <table>
-        <tr>
-          <th>{{ localize "downtime-dnd5e.Time" }}</th>
-          <th>{{ localize "downtime-dnd5e.User" }}</th>
-          <th>{{ localize "downtime-dnd5e.Item" }}</th>
-          <th>{{ localize "downtime-dnd5e.Action" }}</th>
-          <th>{{ localize "downtime-dnd5e.ProgressChange" }}</th>
-        </tr>
-        {{#each changes as |change id|}}
-        <tr>
-          <td>{{change.timestamp}}</td>
-          <td>{{change.user}}</td>
-          <td>{{change.activityName}} {{change.dismissed}}</td>
-          <td>{{change.actionName}}</td>
-          <td>{{change.oldValue}} -> {{change.newValue}} ({{change.diff}})</td>
-        </tr>
-        {{/each}}
-      </table>
-    </div>
-  {{/unless}}
-
-  <!-- GM View -->
-  {{#if isGm}}
   <div class="instructions">
-    <p>{{ localize "downtime-dnd5e.ChangeLogInstructionsGm" }}</p>
-    <p>{{ localize "downtime-dnd5e.ChangeLogDeleteNote" }}</p>
+    {{#if isGM}}
+      <p>{{ localize "downtime-dnd5e.ChangeLogInstructionsGm" }}</p>
+      <p>{{ localize "downtime-dnd5e.ChangeLogDeleteNote" }}</p>
+    {{else}}
+      <p>{{ localize "downtime-dnd5e.ChangeLogInstructionsPlayer" }}</p>
+    {{/if}}
+
   </div>
   <div class="action-table">
     <table>
@@ -44,25 +33,57 @@
         <th>{{ localize "downtime-dnd5e.Item" }}</th>
         <th>{{ localize "downtime-dnd5e.Action" }}</th>
         <th>{{ localize "downtime-dnd5e.ProgressChange" }}</th>
-        <th>{{ localize "downtime-dnd5e.Dismiss" }}<th>
+        <th>Result</th> <!-- Downtime Ethck -->
+        <th>Days Used</th> <!-- Downtime Ethck -->
+        <th>Materials Used</th> <!-- Downtime Ethck -->
+        {{#if isGM}}
+          <th>{{ localize "downtime-dnd5e.Dismiss" }}</th>
+          <!--<th>{{ localize "downtime-dnd5e.Dismiss" }}</th>--> <!-- Downtime Ethck -->
+        {{/if}}
       </tr>
+      {{#if isGM}}
       {{#each changes as |change id|}}
-      <tr>
-        <td>{{change.timestamp}}</td>
-        <td>{{change.user}}</td>
-        <td>{{change.activityName}} {{change.dismissed}}</td>
-        <td>{{change.actionName}}</td>
-        <td>{{change.oldValue}} -> {{change.newValue}} ({{change.diff}})</td>
-        <td><input type="checkbox" name="{{change.timestamp}}" id="{{change.timestamp}}"/></td>
+      <tr id="changeRow">
+        <td id="timestamp">{{change.timestamp}}</td>
+        <td id="user">{{change.user}}</td>
+        <td id="activityName">{{change.activityName}}</td>
+        <td id="actionName">{{change.actionName}}</td>
+        <td id="value">{{change.oldValue}} -> {{change.newValue}} ({{change.diff}})</td>
+        <td id="result">{{change.result}}</td> <!-- Downtime Ethck -->
+        <td id="timeTaken">{{change.timeTaken}}</td> <!-- Downtime Ethck -->
+        <td id="materials">{{change.materials}}</td> <!-- Downtime Ethck -->
+        <td id="dismiss">
+          <input type="checkbox" name="{{change.timestamp}}" id="{{change.timestamp}}"/>
+        </td>
+        <!-- Downtime Ethck -->
+        <!--
+        <td id="delete">
+          <a class="item-control change-delete" id="downtime-dnd5e-delete-{{id}}" title="Delete Downtime Activity">
+            <i class="fas fa-trash"></i>
+          </a>
+        </td>
+        -->
       </tr>
       {{/each}}
+      {{else}}
+      {{#each changes as |change id|}}
+      <tr id="changeRow">
+        <td id="timestamp">{{change.timestamp}}</td>
+        <td id="user">{{change.user}}</td>
+        <td id="activityName">{{change.activityName}} {{change.dismissed}}</td>
+        <td id="actionName">{{change.actionName}}</td>
+        <td id="value">{{change.oldValue}} -> {{change.newValue}} ({{change.diff}})</td>
+        <td id="result">{{change.result}}</td> <!-- Downtime Ethck -->
+        <td id="timeTaken">{{change.timeTaken}}</td> <!-- Downtime Ethck -->
+        <td id="materials">{{change.materials}}</td> <!-- Downtime Ethck -->
+      </tr>
+      {{/each}}
+      {{/if}}
     </table>
   </div>
 
   <footer>
     <button id="apply-audits"><i class='fas fa-check'></i> {{ localize "downtime-dnd5e.DismissSelected" }}</button>
   </footer>
-  {{/if}}
-
 
 </form>
