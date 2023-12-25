@@ -151,6 +151,7 @@
   "downtime-dnd5e.GeneralInformationHeader": "General Information",
   "downtime-dnd5e.ItemId": "Item ID",
   "downtime-dnd5e.Image": "Image",
+  "downtime-dnd5e.Hidden": "Hidden from Players?",
   "downtime-dnd5e.Category": "Category",
   "downtime-dnd5e.ProgressionType": "Progression Type",
   "downtime-dnd5e.CurrentProgress": "Current Progress",

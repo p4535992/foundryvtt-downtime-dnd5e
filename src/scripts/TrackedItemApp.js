@@ -170,6 +170,7 @@ export default class TrackedItemApp extends FormApplication {
     newItem.description = formData.description;
     newItem.progress = formData.progress;
     newItem.completionAt = formData.completionAt;
+    newItem.hidden = formData.hidden;
 
     // Unset the type specific stuff: tool, ability, skill, macro, fixedInput
     // Then put stuff back in where required

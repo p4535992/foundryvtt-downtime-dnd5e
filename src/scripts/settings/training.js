@@ -130,7 +130,7 @@ export async function _updateDowntimes(downtimes) {
       changed = true;
     }
     // 3/20/2021 v0.4.3 added activity visibility
-    if (!("hidden" in downtime.options)) {
+    if (downtime.options && !("hidden" in downtime.options)) {
       downtime.options.hidden = false;
       changed = true;
     }

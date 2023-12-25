@@ -3,6 +3,7 @@
 - Update Audit Log
 - Add world activites
 - Add controls for up and down of the activities
+- Add hidden options on single activity for hide the activity from player
 
 ### 1.2.1
 
