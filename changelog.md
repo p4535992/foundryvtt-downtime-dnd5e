@@ -1,3 +1,8 @@
+### 1.3.0
+
+- Update Audit Log
+- Add world activites
+
 ### 1.2.1
 
 - Many bug fixing done from @kgar for a Tidy5e integration https://github.com/p4535992/foundryvtt-downtime-dnd5e/pull/6

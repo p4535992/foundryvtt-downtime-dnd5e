@@ -7,6 +7,9 @@ const CONSTANTS = {
     backup: "backup",
     categories: "categories",
   },
+  SETTINGS: {
+    activities: "activities",
+  },
 };
 CONSTANTS.PATH = `modules/${CONSTANTS.MODULE_ID}/`;
 export default CONSTANTS;

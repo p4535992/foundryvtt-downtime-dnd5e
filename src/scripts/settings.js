@@ -1,4 +1,5 @@
 import CONSTANTS from "./constants.js";
+import { GMConfig } from "./settings/gmConfig.js";
 
 export function registerSettings() {
   game.settings.registerMenu(CONSTANTS.MODULE_ID, "resetAllSettings", {
@@ -6,6 +7,15 @@ export function registerSettings() {
     hint: `downtime-dnd5e.SettingReset.hint`,
     icon: "fas fa-coins",
     type: ResetSettingsDialog,
+    restricted: true,
+  });
+
+  game.settings.registerMenu(CONSTANTS.MODULE_ID, "config", {
+    name: "Config",
+    label: "Access Config Menu",
+    hint: "Access the configuration menu to find additional options.",
+    icon: "fas fa-desktop",
+    type: GMConfig,
     restricted: true,
   });
 
@@ -103,6 +113,12 @@ export function registerSettings() {
       none: game.i18n.localize("downtime-dnd5e.None"),
     },
     default: "pc",
+  });
+
+  game.settings.register(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.activities, {
+    scope: "world",
+    config: false,
+    default: [],
   });
 }
 
