@@ -462,6 +462,10 @@ function getTemplateData(data) {
   let activitiesUnCategorized = activities.filter(
     (activity) => !activity.category || !categoriesActorIds.includes(activity.category)
   );
+  if (!game.user.isGM) {
+    activitiesCategorized = activitiesCategorized.filter((activity) => !activity.hidden);
+    activitiesUnCategorized = activitiesUnCategorized.filter((activity) => !activity.hidden);
+  }
 
   let activitiesWorld = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.worldActivities) || [];
   let activitiesWorldCategorized = activitiesWorld.filter(
@@ -470,6 +474,11 @@ function getTemplateData(data) {
   let activitiesWorldUnCategorized = activitiesWorld.filter(
     (activity) => !activity.category || !categoriesWorldIds.includes(activity.category)
   );
+
+  if (!game.user.isGM) {
+    activitiesWorldCategorized = activitiesWorldCategorized.filter((activity) => !activity.hidden);
+    activitiesWorldUnCategorized = activitiesWorldUnCategorized.filter((activity) => !activity.hidden);
+  }
 
   data.showImportButton = showImportButton;
   data.showToUserEditMode = !notShowToUserEditMode;
