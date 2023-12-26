@@ -25,7 +25,7 @@
   "downtime-dnd5e.Roll": "Roll",
   "downtime-dnd5e.ToolNotFoundWarning": "Selected tool not found. Please edit the item and select a new one.",
 
-  "downtime-dnd5e.MacroNotFoundWarning": "Couldn't find macro with name",
+  "downtime-dnd5e.MacroNotFoundWarning": "Couldn't find macro with reference",
 
   "downtime-dnd5e.CompletedATrackedItem": "completed a tracked item.",
 
@@ -109,7 +109,7 @@
   "downtime-dnd5e.NewItem": "New Item",
 
   "downtime-dnd5e.InputErrorName": "Please enter a valid item name.",
-  "downtime-dnd5e.InputErrorMacroName": "Please enter a valid macro name.",
+  "downtime-dnd5e.InputErrorMacroName": "Please enter a valid macro name/id/uuid.",
   "downtime-dnd5e.InputErrorFixedIncrease": "Please enter a valid increase number.",
   "downtime-dnd5e.InputErrorCompletionAt": "Please enter a valid completion target.",
   "downtime-dnd5e.InputErrorProgress": "Please enter a valid progress number.",
@@ -119,14 +119,14 @@
   "downtime-dnd5e.CheckDC": "Check DC (Optional)",
   "downtime-dnd5e.CompletionTarget": "Completion Target",
   "downtime-dnd5e.SelectIncreaseAmount": "Increase Amount",
-  "downtime-dnd5e.MacroName": "Macro Name",
+  "downtime-dnd5e.MacroName": "Macro Name/ID/UUID",
   "downtime-dnd5e.SelectASkill": "Skill",
   "downtime-dnd5e.SelectATool": "Tool",
 
   "downtime-dnd5e.CompletionTargetInputHelpText": "The cumulative total of all checks required for the item to be marked as complete. Must be a number above zero.",
   "downtime-dnd5e.SuccessesRequiredInputHelpText": "The number of successful checks that must be made to complete. Must be a number above zero.",
   "downtime-dnd5e.FixedIncreaseInputHelpText": "The amount that this item's progress increased by every time the item is rolled. Must be a number above zero.",
-  "downtime-dnd5e.MacroNameInputHelpText": "The name of the macro to run when this item is rolled. Must be exact.",
+  "downtime-dnd5e.MacroNameInputHelpText": "The name/id/uuid of the macro to run when this item is rolled. Must be exact.",
   "downtime-dnd5e.ToolInputHelpText": "This list is populated based on the tools in this actor's inventory. If there's nothing in it, add a tool and try again.",
   "downtime-dnd5e.ProgressInputHelpText": "The item's current progress value. Must be a number between zero and the item's Completion Target (if no DC is set) or Successes Required (if DC is set).",
 
@@ -174,7 +174,7 @@
   "downtime-dnd5e.ProgressionStyleAbilityCheckHelp": "Each time you roll, you will be prompted to make the specified ability check. If no DC is set, the item's progress will be increased by a number equal to the result of the check. If a DC is set, a successful check will increase progress by 1.",
   "downtime-dnd5e.ProgressionStyleSkillCheckHelp": "Each time you roll, you will be prompted to make the specified skill check. If no DC is set, the item's progress will be increased by a number equal to the result of the check. If a DC is set, a successful check will increase progress by 1.",
   "downtime-dnd5e.ProgressionStyleToolCheckHelp": "Each time you roll, you will be prompted to make the specified tool check. If no DC is set, the item's progress will be increased by a number equal to the result of the check. If a DC is set, a successful check will increase progress by 1.",
-  "downtime-dnd5e.ProgressionStyleMacroHelp": "Each time you roll, the named macro will run. In order for the item's progress to be increased, the macro will have to make a call to this module's API. For sample macros and API documentation, visit the module's github repository.",
+  "downtime-dnd5e.ProgressionStyleMacroHelp": "Each time you roll, the referenced macro will run. In order for the item's progress to be increased, the macro will have to make a call to this module's API. For sample macros and API documentation, visit the module's github repository.",
 
   "downtime-dnd5e.SaveTrackedItem": "Save Tracked Item",
 

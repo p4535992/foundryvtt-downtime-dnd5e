@@ -100,16 +100,16 @@ let newItem = {
   name: "Activity Name",
   img: "icons/svg/book.svg",
   description: "",
-  category: "", // The id of the category. Can be found in the "5e-training", "categories" flags
+  category: "", // The id of the category. Can be found in the "downtime-dnd5e", "categories" flags
   progressionStyle: "ABILITY", // "ABILITY", "SKILL", "TOOL", "MACRO", "FIXED"
   ability: "str", // ABILITY ONLY: any of the ability abbreviations
   skill: null, // SKILL ONLY: any of the skill abbreviations
   tool: null, // TOOL ONLY: this would be the ID of a tool on the actor's sheet
   fixedIncrease: null, // FIXED ONLY: this would be the flat value to increase progress by
-  macroName: null, // MACRO ONLY: this would be the name of the macro to run
+  macroName: null, // MACRO ONLY: this would be the name/id/uuid of the macro to run
   dc: null, // ABILITY,SKILL,TOOL: if set, this will have DC
   progress: 0,
-  completionAt: game.settings.get("5e-training", "totalToComplete"),
+  completionAt: game.settings.get("downtime-dnd5e", "totalToComplete"),
   changes: [],
   schemaVersion: 1 
 };
@@ -118,5 +118,5 @@ let newItem = {
 allTrackedItems.push(newItem);
 
 // Set flag
-a.setFlag("5e-training", "trainingItems", allTrackedItems);
+a.setFlag("downtime-dnd5e", "trainingItems", allTrackedItems);
 ```

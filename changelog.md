@@ -1,3 +1,7 @@
+## 1.3.2 
+
+- Update macro call now it support id and uuid and has some mroe check
+
 ### 1.3.1 
 
 - Bug fix https://github.com/p4535992/foundryvtt-downtime-dnd5e/issues/8 ty to @kgar 

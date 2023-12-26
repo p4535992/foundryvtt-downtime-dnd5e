@@ -3,7 +3,7 @@ import TrackedItemApp from "./TrackedItemApp.js";
 import TrackedItem from "./TrackedItem.js";
 import Category from "./Category.js";
 import CONSTANTS from "./constants.js";
-import { warn, info, error, debug, log } from "./lib/lib.js";
+import { warn, info, error, debug, log, getMacroAsync, runMacro } from "./lib/lib.js";
 
 export default class TrackingAndTraining {
   static async addCategory(actorId, world = false) {
@@ -359,9 +359,11 @@ export default class TrackingAndTraining {
     // Progression Type: Macro
     else if (rollType === "MACRO") {
       let macroName = thisItem.macroName;
-      let macro = game.macros.getName(macroName);
+      // let macro = game.macros.getName(macroName);
+      let macro = await getMacroAsync(macroName, false, false);
       if (macro) {
-        macro.execute();
+        // macro.execute();
+        runMacro(macro);
       } else {
         warn(game.i18n.localize("downtime-dnd5e.MacroNotFoundWarning") + ": " + macroName, true);
       }

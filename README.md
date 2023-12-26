@@ -53,8 +53,7 @@ To install this module manually:
 
 Check out the [wiki](/wiki/Home.md) for instructions, screenshots, sample macros, compatibility info, API documentation, and more!
 
-## Got Questions? Find a Bug?
-Create an issue right here on GitHub. If it's a critical/breaking bug, I'll try to fix it when I can. Feature requests likely won't be worked on unless I can find a use case for them with my groups that use this.
+**Note on the execution of the macro behavior:** executes Macro command, giving speaker, actor, token, character, and event constants. This is recognized as the macro itself. Pass an event as the first argument. Is the same concept used from [Item Macro](https://github.com/Foundry-Workshop/Item-Macro/), but without the item, also the main reference is not the item, but the actor, we used the actor set as character by default or the first owned actor by the user, same concept of [Item Piles](https://github.com/fantasycalendar/FoundryVTT-ItemPiles). The macro is launched under as a asynchronus call so  `await ` command are good.
 
 ## Api
 
