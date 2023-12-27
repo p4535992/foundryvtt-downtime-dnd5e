@@ -105,6 +105,20 @@ npm run build-watch
 npm run-script prettier-format
 ```
 
+### lint and lint:fix
+
+`lint` launch the eslint process based on the configuration [here](./.eslintrc.json)
+
+```bash
+npm run-script lint
+```
+
+`lint:fix` launch the eslint process with the fix argument
+
+```bash
+npm run-script lint:fix
+```
+
 ## [Changelog](./changelog.md)
 
 ## Issues
