@@ -53,15 +53,9 @@ To install this module manually:
 
 Check out the [wiki](/wiki/Home.md) for instructions, screenshots, sample macros, compatibility info, API documentation, and more!
 
-**Note on the execution of the macro behavior:** executes Macro command, giving speaker, actor, token, character, and event constants. This is recognized as the macro itself. Pass an event as the first argument. Is the same concept used from [Item Macro](https://github.com/Foundry-Workshop/Item-Macro/), but without the item, also the main reference is not the item, but the actor, we used the actor set as character by default or the first owned actor by the user, same concept of [Item Piles](https://github.com/fantasycalendar/FoundryVTT-ItemPiles). The macro is launched under as a asynchronus call so  `await ` command are good.
-
 ## Api
 
-`game.modules.get('downtime-dnd5e').api.updateActivityProgress(actorName, itemName, newProgress) => Promise<Void>`
-
-`game.modules.get('downtime-dnd5e').api.getActivitiesForActor(actorName) => List of Activities Objects`
-
-`game.modules.get('downtime-dnd5e').api.getActivity(actorName, itemName) => Activity Object`
+All informations about the api can be found here [API](./wiki/api.md)
 
 # Build
 

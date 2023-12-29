@@ -1,3 +1,7 @@
+### 1.3.3 
+
+- Bug fix on the API + API Documentation updated
+
 ## 1.3.2 
 
 - Update macro call now it support id and uuid and has some mroe check

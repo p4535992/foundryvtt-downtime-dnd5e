@@ -453,11 +453,11 @@ export default class TrackingAndTraining {
   }
 
   // Checks for completion of an item and alerts if it's done
-  static async checkCompletion(actor, item, alreadyCompleted) {
+  static async checkCompletion(actor, activity, alreadyCompleted) {
     if (alreadyCompleted) {
       return;
     }
-    if (item.progress >= item.completionAt) {
+    if (activity.progress >= activity.completionAt) {
       let alertFor = game.settings.get(CONSTANTS.MODULE_ID, "announceCompletionFor");
       let isPc = actor.hasPlayerOwner;
       let sendIt;
@@ -483,7 +483,7 @@ export default class TrackingAndTraining {
         // log("" + actor.name + " " + game.i18n.localize("downtime-dnd5e.CompletedATrackedItem"));
         let chatHtml = await renderTemplate(`modules/${CONSTANTS.MODULE_ID}/templates/completion-message.hbs`, {
           actor: actor,
-          activity: item,
+          activity: activity,
         });
         let chatObj = { content: chatHtml };
         if (game.settings.get(CONSTANTS.MODULE_ID, "gmOnlyMode")) {

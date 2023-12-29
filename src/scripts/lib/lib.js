@@ -109,6 +109,121 @@ export function dialogWarning(message, icon = "fas fa-exclamation-triangle") {
 
 // ===============================================================================
 
+// ================================
+// Retrieve document utility
+// ================================
+
+export function getDocument(target) {
+  if (stringIsUuid(target)) {
+    target = fromUuidSync(target);
+  }
+  return target?.document ?? target;
+}
+
+export function stringIsUuid(inId) {
+  return typeof inId === "string" && (inId.match(/\./g) || []).length && !inId.endsWith(".");
+}
+
+export function getUuid(target) {
+  if (stringIsUuid(target)) {
+    return target;
+  }
+  const document = getDocument(target);
+  return document?.uuid ?? false;
+}
+
+export function getActorSync(target, ignoreError = false, ignoreName = true) {
+  if (!target) {
+    throw error(`Actor is undefined`, true, target);
+  }
+  if (target instanceof Actor) {
+    return target;
+  }
+  // This is just a patch for compatibility with others modules
+  if (target.document) {
+    target = target.document;
+  }
+  if (target.uuid) {
+    target = target.uuid;
+  }
+
+  if (target instanceof Actor) {
+    return target;
+  }
+  if (stringIsUuid(target)) {
+    target = fromUuidSync(target);
+  } else {
+    target = game.actors.get(target);
+    if (!target && !ignoreName) {
+      target = game.actors.getName(target);
+    }
+  }
+  if (!target) {
+    if (ignoreError) {
+      warn(`Actor is not found`, false, target);
+      return;
+    } else {
+      throw error(`Actor is not found`, true, target);
+    }
+  }
+  // Type checking
+  if (!(target instanceof Actor)) {
+    if (ignoreError) {
+      warn(`Invalid Actor`, true, target);
+      return;
+    } else {
+      throw error(`Invalid Actor`, true, target);
+    }
+  }
+  return target;
+}
+
+export async function getActorAsync(target, ignoreError = false, ignoreName = true) {
+  if (!target) {
+    throw error(`Actor is undefined`, true, target);
+  }
+  if (target instanceof Actor) {
+    return target;
+  }
+  // This is just a patch for compatibility with others modules
+  if (target.document) {
+    target = target.document;
+  }
+  if (target.uuid) {
+    target = target.uuid;
+  }
+
+  if (target instanceof Actor) {
+    return target;
+  }
+  if (stringIsUuid(target)) {
+    target = await fromUuid(target);
+  } else {
+    target = game.actors.get(target);
+    if (!target && !ignoreName) {
+      target = game.actors.getName(target);
+    }
+  }
+  if (!target) {
+    if (ignoreError) {
+      warn(`Actor is not found`, false, target);
+      return;
+    } else {
+      throw error(`Actor is not found`, true, target);
+    }
+  }
+  // Type checking
+  if (!(target instanceof Actor)) {
+    if (ignoreError) {
+      warn(`Invalid Actor`, true, target);
+      return;
+    } else {
+      throw error(`Invalid Actor`, true, target);
+    }
+  }
+  return target;
+}
+
 export function getMacroSync(target, ignoreError = false, ignoreName = true) {
   if (!target) {
     throw error(`Macro is undefined`, true, target);
