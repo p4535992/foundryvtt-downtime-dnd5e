@@ -14,7 +14,7 @@ So when you set up to run a macro with this module these arguments are already "
 - **event**: The javascript event passed from the module to the macro.
 - **args**: Additional arguments passed from the module to the macro.
 
-#### updateActivityProgress(actor, activityName, newProgress) ⇒ <code>Promise&lt;void&gt;</code>
+#### [DEPRECATED] updateActivityProgress(actor, activityName, newProgress) ⇒ <code>Promise&lt;void&gt;</code> 
 #### updateActivity(actor, activityName, newProgress) ⇒ <code>Promise&lt;void&gt;</code>
 
 This method will update the selected Tracked Item, replacing the value of the `progress` property with the value provided.
@@ -43,7 +43,7 @@ await game.modules.get('downtime-dnd5e').api.updateActivity("Nazir", "Smithing P
 
 ```
 
-#### getActivitiesForActor(actor) ⇒ <code>Activity[]</code>
+#### [DEPRECATED] getActivitiesForActor(actor) ⇒ <code>Activity[]</code>
 #### getActivities(actor) ⇒ <code>Activity[]</code>
 
 Return all the activities on the actor
@@ -107,7 +107,7 @@ game.modules.get('downtime-dnd5e').api.getCategories("Nazir")
 
 ```
 
-#### updateWorldActivityProgress(activityName, newProgress, explicitActor) ⇒ <code>Promise&lt;void&gt;</code>
+#### [DEPRECATED] updateWorldActivityProgress(activityName, newProgress, explicitActor) ⇒ <code>Promise&lt;void&gt;</code>
 #### updateWorldActivity(activityName, newProgress, explicitActor) ⇒ <code>Promise&lt;void&gt;</code>
 
 This method will update the selected Tracked Item, replacing the value of the `progress` property with the value provided.
