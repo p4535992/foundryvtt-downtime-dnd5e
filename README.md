@@ -65,7 +65,7 @@ So when you set up to run a macro with this module these arguments are already "
 
 ## Api
 
-All informations about the api can be found here [API](./wiki/api.md)
+All informations about the api can be found here [API](./wiki/API.md)
 
 # Build
 
