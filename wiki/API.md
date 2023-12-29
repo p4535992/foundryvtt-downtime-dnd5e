@@ -1,6 +1,9 @@
 # Methods
 These are the methods you can call from macros or your own module, if you so choose.
 
+**Note on the execution of the macro behavior:** executes Macro command, giving speaker, actor, token, character, and event constants. This is recognized as the macro itself. Pass an event as the first argument. Is the same concept used from [Item Macro](https://github.com/Foundry-Workshop/Item-Macro/), but without the item, also the main reference is not the item, but the actor, we used the actor set as character by default or the first owned actor by the user, same concept of [Item Piles](https://github.com/fantasycalendar/FoundryVTT-ItemPiles). The macro is launched under as a asynchronus call so  `await ` command are good.
+
+
 ### game.modules.get('downtime-dnd5e').api.updateActivityProgress(actorName, itemName, newProgress)
 Ex: `game.modules.get('downtime-dnd5e').api.updateActivity("Nazir", "Smithing Proficiency", 75)`
 
