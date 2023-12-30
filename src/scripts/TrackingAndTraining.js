@@ -3,7 +3,7 @@ import TrackedItemApp from "./TrackedItemApp.js";
 import TrackedItem from "./TrackedItem.js";
 import Category from "./Category.js";
 import CONSTANTS from "./constants.js";
-import { warn, info, error, debug, log, getMacroAsync, runMacro } from "./lib/lib.js";
+import { warn, info, error, debug, log, getMacroAsync, runMacro, runMacroOnExplicitActor } from "./lib/lib.js";
 
 export default class TrackingAndTraining {
   static async addCategory(actorId, world = false) {
@@ -362,8 +362,9 @@ export default class TrackingAndTraining {
       // let macro = game.macros.getName(macroName);
       let macro = await getMacroAsync(macroName, false, false);
       if (macro) {
+        let macroData = [];
         // macro.execute();
-        runMacro(macro);
+        runMacroOnExplicitActor(actor, macro, macroData);
       } else {
         warn(game.i18n.localize("downtime-dnd5e.MacroNotFoundWarning") + ": " + macroName, true);
       }

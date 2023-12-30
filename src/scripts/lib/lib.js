@@ -319,6 +319,10 @@ export async function getMacroAsync(target, ignoreError = false, ignoreName = tr
 /* ========================================== */
 
 export async function runMacro(macroReference, ...macroData) {
+  return runMacro(null, macroReference, macroData);
+}
+
+export async function runMacroOnExplicitActor(explicitActor, macroReference, ...macroData) {
   let macroFounded = await getMacroAsync(macroReference, false, true);
   if (!macroFounded) {
     throw error(`Could not find macro with reference "${macroReference}"`, true);
@@ -365,7 +369,7 @@ export async function runMacro(macroReference, ...macroData) {
     } else if (macroTmp.type === "script") {
       //add variable to the evaluation of the script
       const macro = macroTmp;
-      const actor = getUserCharacter();
+      const actor = explicitActor || getUserCharacter();
       const speaker = ChatMessage.getSpeaker({ actor: actor });
       const token = canvas.tokens.get(actor.token);
       const character = game.user.character;

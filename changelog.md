@@ -1,3 +1,7 @@
+### 1.3.4
+
+- add runMacro with a explicit actor parameter
+
 ### 1.3.3 
 
 - Bug fix on the API + API Documentation updated
