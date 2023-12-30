@@ -53,9 +53,19 @@ To install this module manually:
 
 Check out the [wiki](/wiki/Home.md) for instructions, screenshots, sample macros, compatibility info, API documentation, and more!
 
+**Note on the execution of the macro:** executes Macro command, giving speaker, actor, token, character, and event constants. This is recognized as the macro itself. Pass an event as the first argument. Is the same concept used from [Item Macro](https://github.com/Foundry-Workshop/Item-Macro/), but without the item, also the main reference is not the item, but the actor, we used the actor set as character by default or the first owned actor by the user, same concept of [Item Piles](https://github.com/fantasycalendar/FoundryVTT-ItemPiles). The macro is launched under as a asynchronus call so  `await ` command are good.
+
+So when you set up to run a macro with this module these arguments are already "setted":`
+- **speaker**: The chat message speaker referenced to the actor.
+- **actor**: The actor reference.
+- **token**: The token (if present on the current scene), referenced to the actor.
+- **character**: The character is the actor reference to the one setted to the specific player (cannot be the same of the actor reference).
+- **event**: The javascript event passed from the module to the macro.
+- **args**: Additional arguments passed from the module to the macro.
+
 ## Api
 
-All informations about the api can be found here [API](./wiki/api.md)
+All informations about the api can be found here [API](./wiki/API.md)
 
 # Build
 
