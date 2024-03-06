@@ -17,7 +17,7 @@ import { run } from 'vite-plugin-run'
 
 // For convenience, you just need to modify the package ID below as it is used to fill in default proxy settings for
 // the dev server.
-const s_MODULE_ID = "downtime-dnd5e";
+const s_MODULE_ID = "rarity-colors";
 const s_PACKAGE_ID = "modules/"+s_MODULE_ID;
 const s_ENTRY_JAVASCRIPT = "module.js";
 
@@ -153,14 +153,14 @@ export default () => {
             dest: normalizePath(path.resolve(__dirname, `./dist/${s_MODULE_ID}/styles`)),
           },
           {
-            src: normalizePath(path.resolve(__dirname, './src/packs')) + '/[!.]*',
+            src: normalizePath(path.resolve(__dirname, './src/packs')) + '/[!.^(_source)]*',
             dest: normalizePath(path.resolve(__dirname, `./dist/${s_MODULE_ID}/packs`)),
           },
           {
             src: normalizePath(path.resolve(__dirname, './src/module.json')),
             dest: normalizePath(path.resolve(__dirname, `./dist/${s_MODULE_ID}/`)),
           },
-		  {
+		      {
             src: normalizePath(path.resolve(__dirname, './src/scripts/libs')) + '/[!.]*',
             dest: normalizePath(path.resolve(__dirname, `./dist/${s_MODULE_ID}/scripts/libs`)),
           },
