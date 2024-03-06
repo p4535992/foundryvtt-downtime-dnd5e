@@ -1,111 +1,111 @@
 {
-  "id": "downtime-dnd5e",
-  "title": "Downtime (Dnd5e)",
-  "description": "Adds a tab to the character sheet to keep track of downtime activities, training, spell scribing, faction reputation, quest progress, and anything else you can think of.",
-  "version": "1.3.4",
-  "authors": [
-    {
-      "name": "p4535992",
-      "url": "https://github.com/p4535992",
-      "discord": "",
-      "twitter": "",
-      "patreon": "4535992",
-      "github": "p4535992",
-      "ko-fi": "",
-      "reddit": "",
-      "email": ""
-    }
-  ],
-  "type": "module",
-  "socket": true,
-  "includes": [
-    "./assets/**",
-    "./lang/**",
-    "./languages/**",
-    "./scripts/**",
-    "./styles/**",
-    "./templates/**",
-    "./module.json",
-    "./README.md",
-    "./icons/**",
-    "./packs/**"
-  ],
-  "media": [
-    {
-      "type": "icon",
-      "location": ""
-    },
-    {
-      "type": "cover",
-      "location": ""
-    },
-    {
-      "type": "screenshot",
-      "location": ""
-    }
-  ],
-  "languages": [
-    {
-      "lang": "en",
-      "name": "English",
-      "path": "languages/en.json",
-      "flags": {}
-    },
-    {
-      "lang": "ko",
-      "name": "한국어",
-      "path": "languages/ko.json",
-      "flags": {}
-    },
-    {
-      "lang": "es",
-      "name": "Español",
-      "path": "languages/es.json",
-      "flags": {}
-    }
-  ],
-  "esmodules": ["module.js"],
-  "styles": [
-    "styles/downtime-dnd5e-training-tab.css",
-    "styles/downtime-dnd5e-tracked-item-app.css",
-    "styles/downtime-dnd5e-audit-log.css",
-    "styles/downtime-dnd5e-category-app.css"
-  ],
-  "compatibility": {
-    "minimum": 11,
-    "verified": 11,
-    "maximum": 11
-  },
-  "url": "https://github.com/p4535992/foundryvtt-downtime-dnd5e",
-  "manifest": "https://github.com/p4535992/foundryvtt-downtime-dnd5e/releases/download/1.3.4/module.json",
-  "download": "https://github.com/p4535992/foundryvtt-downtime-dnd5e/releases/download/1.3.4/module.zip",
-  "readme": "https://github.com/p4535992/foundryvtt-downtime-dnd5e/blob/master/README.md",
-  "changelog": "https://github.com/p4535992/foundryvtt-downtime-dnd5e/blob/master/changelog.md",
-  "bugs": "https://github.com/p4535992/foundryvtt-downtime-dnd5e/issues",
-  "allowBugReporter": true,
-  "manifestPlusVersion": "1.2.0",
-  "relationships": {
-    "systems": [
-      {
-        "id": "dnd5e",
-        "type": "system",
-        "manifest": "https://raw.githubusercontent.com/foundryvtt/dnd5e/master/system.json",
-        "compatibility": {
-          "minimum": "2.0.3",
-          "verified": "2.0.3"
+    "id": "downtime-dnd5e",
+    "title": "Downtime (Dnd5e)",
+    "description": "Adds a tab to the character sheet to keep track of downtime activities, training, spell scribing, faction reputation, quest progress, and anything else you can think of.",
+    "version": "1.3.4",
+    "authors": [
+        {
+            "name": "p4535992",
+            "url": "https://github.com/p4535992",
+            "discord": "",
+            "twitter": "",
+            "patreon": "4535992",
+            "github": "p4535992",
+            "ko-fi": "",
+            "reddit": "",
+            "email": ""
         }
-      }
     ],
-    "requires": [],
-    "conflicts": [
-      {
-        "id": "5e-training",
-        "reason": "Redundancy of features you can disable 'Crash's Tracking & Training (5e)' module if you want"
-      },
-      {
-        "id": "downtime-ethck",
-        "reason": "Redundancy of features you can disable 'Ethck's 5e Downtime Tracking' module if you want"
-      }
-    ]
-  }
+    "type": "module",
+    "socket": true,
+    "includes": [
+        "./assets/**",
+        "./lang/**",
+        "./languages/**",
+        "./scripts/**",
+        "./styles/**",
+        "./templates/**",
+        "./module.json",
+        "./README.md",
+        "./icons/**",
+        "./packs/**"
+    ],
+    "media": [
+        {
+            "type": "icon",
+            "location": ""
+        },
+        {
+            "type": "cover",
+            "location": ""
+        },
+        {
+            "type": "screenshot",
+            "location": ""
+        }
+    ],
+    "languages": [
+        {
+            "lang": "en",
+            "name": "English",
+            "path": "languages/en.json",
+            "flags": {}
+        },
+        {
+            "lang": "ko",
+            "name": "한국어",
+            "path": "languages/ko.json",
+            "flags": {}
+        },
+        {
+            "lang": "es",
+            "name": "Español",
+            "path": "languages/es.json",
+            "flags": {}
+        }
+    ],
+    "esmodules": ["module.js"],
+    "styles": [
+        "styles/downtime-dnd5e-training-tab.css",
+        "styles/downtime-dnd5e-tracked-item-app.css",
+        "styles/downtime-dnd5e-audit-log.css",
+        "styles/downtime-dnd5e-category-app.css"
+    ],
+    "compatibility": {
+        "minimum": 11,
+        "verified": 11,
+        "maximum": 11
+    },
+    "url": "https://github.com/p4535992/foundryvtt-downtime-dnd5e",
+    "manifest": "https://github.com/p4535992/foundryvtt-downtime-dnd5e/releases/download/1.3.4/module.json",
+    "download": "https://github.com/p4535992/foundryvtt-downtime-dnd5e/releases/download/1.3.4/module.zip",
+    "readme": "https://github.com/p4535992/foundryvtt-downtime-dnd5e/blob/master/README.md",
+    "changelog": "https://github.com/p4535992/foundryvtt-downtime-dnd5e/blob/master/changelog.md",
+    "bugs": "https://github.com/p4535992/foundryvtt-downtime-dnd5e/issues",
+    "allowBugReporter": true,
+    "manifestPlusVersion": "1.2.0",
+    "relationships": {
+        "systems": [
+            {
+                "id": "dnd5e",
+                "type": "system",
+                "manifest": "https://raw.githubusercontent.com/foundryvtt/dnd5e/master/system.json",
+                "compatibility": {
+                    "minimum": "2.0.3",
+                    "verified": "2.0.3"
+                }
+            }
+        ],
+        "requires": [],
+        "conflicts": [
+            {
+                "id": "5e-training",
+                "reason": "Redundancy of features you can disable 'Crash's Tracking & Training (5e)' module if you want"
+            },
+            {
+                "id": "downtime-ethck",
+                "reason": "Redundancy of features you can disable 'Ethck's 5e Downtime Tracking' module if you want"
+            }
+        ]
+    }
 }

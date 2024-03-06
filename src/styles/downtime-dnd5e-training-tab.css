@@ -1,421 +1,421 @@
 /* Control Buttons Container */
 :is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"]) .downtime-dnd5e .downtime-dnd5e-controls {
-  display: flex;
-  justify-content: flex-end;
-  margin: 4px 0;
+    display: flex;
+    justify-content: flex-end;
+    margin: 4px 0;
 }
 
 :is(.tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"]) .downtime-dnd5e .downtime-dnd5e-controls {
-  margin: 0px 15px 4px 0;
+    margin: 0px 15px 4px 0;
 }
 
 /* Control Buttons */
 :is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
-  .downtime-dnd5e
-  .downtime-dnd5e-controls
-  div {
-  font-size: 12px;
-  color: #7a7971;
-  text-align: center;
-  margin-right: 4px;
-  padding: 5px 8px;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.05);
-  border: 2px groove #eeede0;
-  border-radius: 4px;
+    .downtime-dnd5e
+    .downtime-dnd5e-controls
+    div {
+    font-size: 12px;
+    color: #7a7971;
+    text-align: center;
+    margin-right: 4px;
+    padding: 5px 8px;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.05);
+    border: 2px groove #eeede0;
+    border-radius: 4px;
 }
 :is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
-  .downtime-dnd5e
-  .downtime-dnd5e-controls
-  div.push-left {
-  margin-right: auto;
+    .downtime-dnd5e
+    .downtime-dnd5e-controls
+    div.push-left {
+    margin-right: auto;
 }
 :is(.tidy5eDark .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"][data-tidy-theme-type="dark"])
-  .downtime-dnd5e
-  .downtime-dnd5e-controls
-  div {
-  border: 2px groove #7a7971;
+    .downtime-dnd5e
+    .downtime-dnd5e-controls
+    div {
+    border: 2px groove #7a7971;
 }
 :is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
-  .downtime-dnd5e
-  .downtime-dnd5e-controls
-  div:hover {
-  cursor: pointer;
-  color: black;
-  text-shadow: 0 0 5px red;
+    .downtime-dnd5e
+    .downtime-dnd5e-controls
+    div:hover {
+    cursor: pointer;
+    color: black;
+    text-shadow: 0 0 5px red;
 }
 .dark-mode .dnd5e.sheet .downtime-dnd5e .downtime-dnd5e-controls div:hover {
-  cursor: pointer;
-  color: #3f88e6;
-  text-shadow: 0 0 5px #004aa9;
+    cursor: pointer;
+    color: #3f88e6;
+    text-shadow: 0 0 5px #004aa9;
 }
 :is(.tidy5eDark .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"][data-tidy-theme-type="dark"])
-  .downtime-dnd5e
-  .downtime-dnd5e-controls
-  div:hover {
-  text-shadow: none;
-  color: rgba(255, 100, 0, 1);
+    .downtime-dnd5e
+    .downtime-dnd5e-controls
+    div:hover {
+    text-shadow: none;
+    color: rgba(255, 100, 0, 1);
 }
 :is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
-  .downtime-dnd5e
-  .downtime-dnd5e-controls
-  div:last-of-type {
-  margin-right: 0px;
+    .downtime-dnd5e
+    .downtime-dnd5e-controls
+    div:last-of-type {
+    margin-right: 0px;
 }
 
 /* Item List */
 :is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"]) .downtime-dnd5e .items-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  overflow-y: auto;
-  scrollbar-width: thin;
-  color: #7a7971;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    color: #7a7971;
 }
 
 .sheet[data-sheet-module="tidy5e-sheet"] .downtime-dnd5e .items-list {
-  padding-right: 0.75rem;
+    padding-right: 0.75rem;
 }
 
 /* Item List Header */
 :is(.dnd5e.sheet, .tidy5e.sheet) .downtime-dnd5e .items-list .items-header {
-  height: 28px;
-  margin: 2px 0;
-  padding: 0;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.05);
-  border: 2px groove #eeede0;
-  font-weight: bold;
-  border-radius: 0px;
+    height: 28px;
+    margin: 2px 0;
+    padding: 0;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.05);
+    border: 2px groove #eeede0;
+    font-weight: bold;
+    border-radius: 0px;
 }
 :is(.tidy5eDark .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"][data-tidy-theme-type="dark"])
-  .downtime-dnd5e
-  .items-list
-  .items-header {
-  border: 1px;
-  color: white;
+    .downtime-dnd5e
+    .items-list
+    .items-header {
+    border: 1px;
+    color: white;
 }
 
 /* Type Column Header */
 :is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"]) .downtime-dnd5e .activity-type {
-  flex: 0 0 150px;
-  font-size: 12px;
-  color: #7a7971;
-  text-align: center;
-  border-right: 1px solid #c9c7b8;
+    flex: 0 0 150px;
+    font-size: 12px;
+    color: #7a7971;
+    text-align: center;
+    border-right: 1px solid #c9c7b8;
 }
 .dark-mode .dnd5e.sheet .downtime-dnd5e .activity-type {
-  border-right: none;
+    border-right: none;
 }
 :is(.tidy5eDark .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"][data-tidy-theme-type="dark"])
-  .downtime-dnd5e
-  .activity-type {
-  border-right: none;
+    .downtime-dnd5e
+    .activity-type {
+    border-right: none;
 }
 
 /* Progress Override Column Header*/
 :is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"]) .downtime-dnd5e .activity-override {
-  flex: 0 0 110px;
-  font-size: 12px;
-  color: #7a7971;
-  text-align: center;
+    flex: 0 0 110px;
+    font-size: 12px;
+    color: #7a7971;
+    text-align: center;
 }
 
 /* Progress Column Header*/
 :is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"]) .downtime-dnd5e .activity-progress {
-  flex: 0 0 190px;
-  font-size: 12px;
-  color: #7a7971;
-  text-align: center;
-  height: 14px;
-  border-right: 1px solid #c9c7b8;
+    flex: 0 0 190px;
+    font-size: 12px;
+    color: #7a7971;
+    text-align: center;
+    height: 14px;
+    border-right: 1px solid #c9c7b8;
 }
 .dark-mode .dnd5e.sheet .downtime-dnd5e .activity-progress {
-  border-right: none;
+    border-right: none;
 }
 :is(.tidy5eDark .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"][data-tidy-theme-type="dark"])
-  .downtime-dnd5e
-  .activity-progress {
-  border-right: none;
+    .downtime-dnd5e
+    .activity-progress {
+    border-right: none;
 }
 
 /* Edit and Delete Buttons */
 :is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
-  .downtime-dnd5e
-  .downtime-dnd5e-item-controls {
-  flex: 0 0 50px;
-  justify-content: space-between;
-  padding-right: 5px;
-  padding-left: 8px; /* Just to shift the icons right a bit. Looks less weird.*/
+    .downtime-dnd5e
+    .downtime-dnd5e-item-controls {
+    flex: 0 0 50px;
+    justify-content: space-between;
+    padding-right: 5px;
+    padding-left: 8px; /* Just to shift the icons right a bit. Looks less weird.*/
 }
 
 /*======================== COLUMNS ==========================*/
 
 /* Item Name */
 :is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"]) .downtime-dnd5e .items-list .item-name {
-  flex: 2;
-  margin: 0;
-  overflow: hidden;
-  font-size: 13px;
-  font-style: normal;
-  text-align: left;
-  align-items: center;
+    flex: 2;
+    margin: 0;
+    overflow: hidden;
+    font-size: 13px;
+    font-style: normal;
+    text-align: left;
+    align-items: center;
 }
 
 :is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"]) .downtime-dnd5e .item .item-name h4 {
-  font-weight: 400;
+    font-weight: 400;
 }
 
 /* Roll Buttons */
 :is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"]) .downtime-dnd5e .downtime-dnd5e-roll,
 :is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
-  .downtime-dnd5e
-  .downtime-dnd5e-roll-disabled {
-  flex: 0 0 30px;
-  height: 30px;
-  background-size: 30px;
-  background-position: center;
-  background-repeat: no-repeat;
-  border: none;
-  margin-right: 5px;
+    .downtime-dnd5e
+    .downtime-dnd5e-roll-disabled {
+    flex: 0 0 30px;
+    height: 30px;
+    background-size: 30px;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none;
+    margin-right: 5px;
 }
 
 :is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
-  .downtime-dnd5e
-  .downtime-dnd5e-roll
-  .checkmark {
-  display: none;
+    .downtime-dnd5e
+    .downtime-dnd5e-roll
+    .checkmark {
+    display: none;
 }
 
 :is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
-  .downtime-dnd5e
-  .item-name:hover
-  .downtime-dnd5e-roll {
-  background-image: url("/../icons/svg/d20-grey.svg") !important;
+    .downtime-dnd5e
+    .item-name:hover
+    .downtime-dnd5e-roll {
+    background-image: url("/../icons/svg/d20-grey.svg") !important;
 }
 
 :is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
-  .downtime-dnd5e
-  .item-name:hover
-  .downtime-dnd5e-roll:hover {
-  background-image: url("/../icons/svg/d20-black.svg") !important;
+    .downtime-dnd5e
+    .item-name:hover
+    .downtime-dnd5e-roll:hover {
+    background-image: url("/../icons/svg/d20-black.svg") !important;
 }
 
 :is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
-  .downtime-dnd5e
-  .downtime-dnd5e-roll-disabled {
-  opacity: 50%;
+    .downtime-dnd5e
+    .downtime-dnd5e-roll-disabled {
+    opacity: 50%;
 }
 
 :is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
-  .downtime-dnd5e
-  .downtime-dnd5e-roll-disabled
-  .checkmark {
-  color: white;
-  display: block;
-  font-size: 30px;
-  text-shadow: 0 0 5px black;
+    .downtime-dnd5e
+    .downtime-dnd5e-roll-disabled
+    .checkmark {
+    color: white;
+    display: block;
+    font-size: 30px;
+    text-shadow: 0 0 5px black;
 }
 
 /* Roll World Buttons */
 :is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"]) .downtime-dnd5e .downtime-dnd5e-world-roll,
 :is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
-  .downtime-dnd5e
-  .downtime-dnd5e-world-roll-disabled {
-  flex: 0 0 30px;
-  height: 30px;
-  background-size: 30px;
-  background-position: center;
-  background-repeat: no-repeat;
-  border: none;
-  margin-right: 5px;
+    .downtime-dnd5e
+    .downtime-dnd5e-world-roll-disabled {
+    flex: 0 0 30px;
+    height: 30px;
+    background-size: 30px;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none;
+    margin-right: 5px;
 }
 
 :is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
-  .downtime-dnd5e
-  .downtime-dnd5e-world-roll
-  .checkmark {
-  display: none;
+    .downtime-dnd5e
+    .downtime-dnd5e-world-roll
+    .checkmark {
+    display: none;
 }
 
 :is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
-  .downtime-dnd5e
-  .item-name:hover
-  .downtime-dnd5e-world-roll {
-  background-image: url("/../icons/svg/d20-grey.svg") !important;
+    .downtime-dnd5e
+    .item-name:hover
+    .downtime-dnd5e-world-roll {
+    background-image: url("/../icons/svg/d20-grey.svg") !important;
 }
 
 :is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
-  .downtime-dnd5e
-  .item-name:hover
-  .downtime-dnd5e-world-roll:hover {
-  background-image: url("/../icons/svg/d20-black.svg") !important;
+    .downtime-dnd5e
+    .item-name:hover
+    .downtime-dnd5e-world-roll:hover {
+    background-image: url("/../icons/svg/d20-black.svg") !important;
 }
 
 :is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
-  .downtime-dnd5e
-  .downtime-dnd5e-world-roll-disabled {
-  opacity: 50%;
+    .downtime-dnd5e
+    .downtime-dnd5e-world-roll-disabled {
+    opacity: 50%;
 }
 
 :is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
-  .downtime-dnd5e
-  .downtime-dnd5e-world-roll-disabled
-  .checkmark {
-  color: white;
-  display: block;
-  font-size: 30px;
-  text-shadow: 0 0 5px black;
+    .downtime-dnd5e
+    .downtime-dnd5e-world-roll-disabled
+    .checkmark {
+    color: white;
+    display: block;
+    font-size: 30px;
+    text-shadow: 0 0 5px black;
 }
 
 /* Type Column */
 :is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"]) .downtime-dnd5e .activity-type-row {
-  flex: 0 0 150px;
-  text-transform: capitalize;
-  text-align: center;
-  font-size: 12px;
-  border-right: 1px solid #c9c7b8;
+    flex: 0 0 150px;
+    text-transform: capitalize;
+    text-align: center;
+    font-size: 12px;
+    border-right: 1px solid #c9c7b8;
 }
 
 .dark-mode .dnd5e.sheet .downtime-dnd5e .activity-type-row {
-  border-right: none;
+    border-right: none;
 }
 :is(.tidy5eDark .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"][data-tidy-theme-type="dark"])
-  .downtime-dnd5e
-  .activity-type-row {
-  border-right: none;
+    .downtime-dnd5e
+    .activity-type-row {
+    border-right: none;
 }
 
 /* Progress Override Column */
 :is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"]) .downtime-dnd5e .activity-override-row {
-  flex: 0 0 110px;
-  font-size: 12px;
+    flex: 0 0 110px;
+    font-size: 12px;
 }
 
 :is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
-  .downtime-dnd5e
-  .activity-override-row
-  input {
-  max-width: 50px;
-  text-align: right;
-  display: inline-block;
+    .downtime-dnd5e
+    .activity-override-row
+    input {
+    max-width: 50px;
+    text-align: right;
+    display: inline-block;
 }
 
 /* Progress Bar Column */
 :is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"]) .downtime-dnd5e .activity-progress-row {
-  flex: 0 0 190px;
-  font-size: 12px;
-  border-right: 1px solid #c9c7b8;
+    flex: 0 0 190px;
+    font-size: 12px;
+    border-right: 1px solid #c9c7b8;
 }
 .dark-mode .dnd5e.sheet .downtime-dnd5e .activity-progress-row {
-  border-right: none;
+    border-right: none;
 }
 :is(.tidy5eDark .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"][data-tidy-theme-type="dark"])
-  .downtime-dnd5e
-  .activity-progress-row {
-  border-right: none;
+    .downtime-dnd5e
+    .activity-progress-row {
+    border-right: none;
 }
 
 /* Training Bar */
 :is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
-  .downtime-dnd5e
-  .activity-progress-row
-  .progress-bar {
-  flex: 0 0 180px; /* 190 - 10px margin */
-  background-color: rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
-  height: 20px;
-  margin: 5px;
+    .downtime-dnd5e
+    .activity-progress-row
+    .progress-bar {
+    flex: 0 0 180px; /* 190 - 10px margin */
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    height: 20px;
+    margin: 5px;
 }
 
 /* Training Bar - Filled Portion */
 :is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
-  .downtime-dnd5e
-  .activity-progress-row
-  .downtime-dnd5e-completion {
-  color: #111111;
-  background-color: rgba(255, 0, 0, 0.4);
-  border-radius: 4px;
-  height: 100%;
-  line-height: 22px;
+    .downtime-dnd5e
+    .activity-progress-row
+    .downtime-dnd5e-completion {
+    color: #111111;
+    background-color: rgba(255, 0, 0, 0.4);
+    border-radius: 4px;
+    height: 100%;
+    line-height: 22px;
 }
 .dark-mode .dnd5e.sheet .downtime-dnd5e .activity-progress-row .downtime-dnd5e-completion {
-  color: white;
-  background-color: #004aa9;
-  opacity: 0.8;
+    color: white;
+    background-color: #004aa9;
+    opacity: 0.8;
 }
 :is(.tidy5eDark .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"][data-tidy-theme-type="dark"])
-  .downtime-dnd5e
-  .activity-progress-row
-  .downtime-dnd5e-completion {
-  color: white;
-  background-color: rgba(255, 100, 0, 0.6);
+    .downtime-dnd5e
+    .activity-progress-row
+    .downtime-dnd5e-completion {
+    color: white;
+    background-color: rgba(255, 100, 0, 0.6);
 }
 
 /* Training Bar Progress Percent Text */
 :is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
-  .downtime-dnd5e
-  .activity-progress-row
-  .downtime-dnd5e-completion
-  span {
-  margin-left: 5px;
+    .downtime-dnd5e
+    .activity-progress-row
+    .downtime-dnd5e-completion
+    span {
+    margin-left: 5px;
 }
 
 /* Add and Audit Log Buttons */
 .dnd5e.sheet .downtime-dnd5e .downtime-dnd5e-item-row-controls {
-  flex: 0 0 45px; /*50px - 5px right padding on the row*/
-  justify-content: space-between;
-  display: flex;
-  padding-left: 8px; /* Just to shift the icons right a bit. Looks less weird.*/
+    flex: 0 0 45px; /*50px - 5px right padding on the row*/
+    justify-content: space-between;
+    display: flex;
+    padding-left: 8px; /* Just to shift the icons right a bit. Looks less weird.*/
 }
 
 :is(.tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"]) .downtime-dnd5e .downtime-dnd5e-item-row-controls {
-  flex: 0 0 45px;
-  justify-content: space-between;
-  display: flex;
-  padding-left: 0px;
-  padding-right: 11px;
+    flex: 0 0 45px;
+    justify-content: space-between;
+    display: flex;
+    padding-left: 0px;
+    padding-right: 11px;
 }
 
 :is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
-  .downtime-dnd5e
-  .downtime-dnd5e-item-row-controls
-  .downtime-dnd5e-edit,
+    .downtime-dnd5e
+    .downtime-dnd5e-item-row-controls
+    .downtime-dnd5e-edit,
 :is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
-  .downtime-dnd5e
-  .downtime-dnd5e-item-row-controls
-  .downtime-dnd5e-delete {
-  font-size: 12px;
-  text-align: center;
-  flex: 1;
+    .downtime-dnd5e
+    .downtime-dnd5e-item-row-controls
+    .downtime-dnd5e-delete {
+    font-size: 12px;
+    text-align: center;
+    flex: 1;
 }
 
 :is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
-  .downtime-dnd5e
-  .downtime-dnd5e-item-row-controls
-  .downtime-dnd5e-edit:hover,
+    .downtime-dnd5e
+    .downtime-dnd5e-item-row-controls
+    .downtime-dnd5e-edit:hover,
 :is(.dnd5e.sheet, .tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
-  .downtime-dnd5e
-  .downtime-dnd5e-item-row-controls
-  .downtime-dnd5e-delete:hover {
-  text-shadow: 0 0 5px red;
+    .downtime-dnd5e
+    .downtime-dnd5e-item-row-controls
+    .downtime-dnd5e-delete:hover {
+    text-shadow: 0 0 5px red;
 }
 
 .dark-mode .dnd5e.sheet .downtime-dnd5e .downtime-dnd5e-item-row-controls .downtime-dnd5e-edit:hover,
 .dark-mode .dnd5e.sheet .downtime-dnd5e .downtime-dnd5e-item-row-controls .downtime-dnd5e-delete:hover {
-  text-shadow: 0 0 5px #004aa9;
+    text-shadow: 0 0 5px #004aa9;
 }
 
 .tidy5eDark
-  :is(.tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
-  .downtime-dnd5e
-  .downtime-dnd5e-item-row-controls
-  .downtime-dnd5e-edit:hover,
+    :is(.tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
+    .downtime-dnd5e
+    .downtime-dnd5e-item-row-controls
+    .downtime-dnd5e-edit:hover,
 .tidy5eDark
-  :is(.tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
-  .downtime-dnd5e
-  .downtime-dnd5e-item-row-controls
-  .downtime-dnd5e-delete:hover {
-  text-shadow: none;
-  color: rgba(255, 100, 0, 1);
+    :is(.tidy5e.sheet, .sheet[data-sheet-module="tidy5e-sheet"])
+    .downtime-dnd5e
+    .downtime-dnd5e-item-row-controls
+    .downtime-dnd5e-delete:hover {
+    text-shadow: none;
+    color: rgba(255, 100, 0, 1);
 }
