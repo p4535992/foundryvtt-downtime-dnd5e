@@ -146,9 +146,7 @@
                   title="{{downtime-dnd5e-trainingRollBtnTooltip training}}"
               >
                   <img class="item-image gold-icon" src="{{training.img}}">
-                  <div class="name downtime-dnd5e-toggle-desc"
-                       id="downtime-dnd5e-toggle-desc-{{training.id}}"
-                       title="{{ localize 'downtime-dnd5e.ToggleInfo' }}">
+                  <div class="name" id="downtime-dnd5e-toggle-desc-{{training.id}}">
                       {{#if training.hidden}}
                           <span><i class="fa-solid fa-user-secret"></i></span>
                       {{else}}

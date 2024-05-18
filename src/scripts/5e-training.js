@@ -53,14 +53,16 @@ async function addTrainingTab(app, html, data) {
     const templateData = getTemplateData(data);
 
     // Create the tab content
+    // ActorSheet5eCharacter2 requires separate templating
     let trainingTabHtml = '';
-    let sheet = html.find(".tab-body");
-    if (app instanceof ActorSheet5eCharacter2) {
-        sheet = html.find(".sheet-body");
+    let sheet = '';
+    if (app instanceof game.dnd5e.applications.actor.ActorSheet5eCharacter2) {
+        sheet = html.find(".tab-body");
         trainingTabHtml = $(
             await renderTemplate(`modules/${CONSTANTS.MODULE_ID}/templates/training-section-v2.hbs`, templateData),
         );
     } else {
+        sheet = html.find(".sheet-body");
         trainingTabHtml = $(
             await renderTemplate(`modules/${CONSTANTS.MODULE_ID}/templates/training-section.hbs`, templateData)
         );

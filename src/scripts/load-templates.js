@@ -9,6 +9,8 @@ export const preloadTemplates = async function () {
         `modules/${CONSTANTS.MODULE_ID}/templates/partials/fixed.hbs`,
         `modules/${CONSTANTS.MODULE_ID}/templates/partials/training-section-contents.hbs`,
         `modules/${CONSTANTS.MODULE_ID}/templates/partials/training-section-contents-world.hbs`,
+        `modules/${CONSTANTS.MODULE_ID}/templates/partials/training-section-contents-v2.hbs`,
+        `modules/${CONSTANTS.MODULE_ID}/templates/partials/training-section-contents-world-v2.hbs`,
     ];
     return loadTemplates(templatePaths);
 };
