@@ -419,3 +419,82 @@
     text-shadow: none;
     color: rgba(255, 100, 0, 1);
 }
+
+.dnd5e2 .downtime-dnd5e-controls {
+    display: flex;
+    margin: 10px 0 4px 0;
+}
+
+.dnd5e2 .downtime-dnd5e-controls.right {
+    justify-content: flex-end;
+}
+
+.dnd5e2 .downtime-dnd5e-controls button {
+    font-size: var(--font-size-9);
+    /*flex: 1 1;*/
+    white-space: nowrap;
+    color: var(--dnd5e-color-gold);
+    width: min-content;
+}
+
+.dnd5e2 .downtime-dnd5e-controls .spacer {
+    flex: 1 1 10%;
+}
+
+.dnd5e2 .items-section .items-header .activity-type, .dnd5e2 .items-section .item .activity-type {
+    width: 70px;
+}
+
+.dnd5e2 .items-section .items-header .activity-override, .dnd5e2 .items-section .item .activity-override {
+    width: 90px;
+}
+.dnd5e2 .items-section .item .activity-override input {
+    max-width: 50%;
+    text-align: right;
+    display: inline-block;
+    border: 1px var(--dnd5e-background-card) solid;
+}
+.dnd5e2 .items-section .item .activity-override input:hover {
+    border: 1px var(--dnd5e-color-gold) solid;
+}
+
+.dnd5e2 .items-section .items-header .activity-progress, .dnd5e2 .items-section .item .activity-progress {
+    width: 120px;
+}
+
+.dnd5e2 .items-section .item .activity-progress-row .progress-bar {
+    flex: 1 1;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    height: 20px;
+    margin: 5px;
+}
+
+.dnd5e2 .downtime-dnd5e .items-section .item .activity-progress-row .downtime-dnd5e-completion {
+    color: #111111;
+    background-color: rgba(255, 0, 0, 0.4);
+    border-radius: 4px;
+    height: 100%;
+    line-height: 22px;
+}
+
+.dnd5e2 .downtime-dnd5e .items-section .item .activity-progress-row .downtime-dnd5e-completion span {
+    padding: 0 4px;
+}
+
+.dnd5e2 .items-section .items-header .item-controls, .dnd5e2 .items-section .item .item-controls {
+    width: 75px;
+    gap: 0.25rem;
+    padding: 0;
+}
+
+/* dnd5e dark theme */
+.dnd5e-theme-dark .dnd5e2 .downtime-dnd5e .items-section .item .activity-progress-row .downtime-dnd5e-completion {
+    color: white;
+    background-color: #004aa9;
+    opacity: 0.8;
+}
+
+.dnd5e-theme-dark .dnd5e2 .items-section .item .activity-override input {
+    border: 1px var(--dnd5e-background-card) solid;
+}

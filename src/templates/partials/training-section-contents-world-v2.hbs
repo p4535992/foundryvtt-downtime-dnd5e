@@ -1,0 +1,148 @@
+
+
+{{#if @root.isGM}}
+<section class="downtime-dnd5e-controls right">
+        <button class="button  downtime-dnd5e-world-new-category" title="{{ localize 'downtime-dnd5e.CreateNewWorldCategory' }}">
+            <i class="fas fa-list"></i> {{ localize 'downtime-dnd5e.AddWorldCategory' }}
+        </button>
+        <button class="button  downtime-dnd5e-world-add" title="{{ localize 'downtime-dnd5e.CreateNewWorldItem' }}">
+            <i class="fas fa-plus"></i> Add World Downtime
+        </button>
+</section>
+{{/if}}
+
+<!-- Items List -->
+<ol class="items-list">
+
+  <!-- Uncategorized -->
+  <li class="items-header flexrow" data-tooltip='{{ localize 'downtime-dnd5e.Uncategorized' }}' data-tooltip-direction='UP'>
+    <div class="item-name flexrow">
+      <h3><span><i class="fa-solid fa-earth-americas"></i></span> {{ localize 'downtime-dnd5e.Uncategorized' }} World Downtimes</h3>
+    </div>
+    <div class="activity-type">{{localize "downtime-dnd5e.CheckTypeColumnHeader"}}</div>
+    <div class="activity-override">{{localize "downtime-dnd5e.ProgressColumnHeader"}}</div>
+    <div class="activity-progress"></div>
+    <div class="downtime-dnd5e-item-controls flexrow"></div>
+  </li>
+  <ol class="item-list inventory-list">
+    {{#each activitiesWorldUnCategorized as |training tid| }}
+      <li class="item flexrow">
+        <div class="item-name flexrow rollable worldRoll" data-tooltip='{{ training.description }}' data-tooltip-direction='UP'>
+          <div class="{{downtime-dnd5e-worldTrainingRollBtnClass training}}"
+                id="downtime-dnd5e-world-roll-{{training.id}}"
+                title="{{downtime-dnd5e-worldTrainingRollBtnTooltip training}}"
+                style="background-image: url('{{training.img}}')">
+            <div class="checkmark">  <i class="fas fa-check"></i></div>
+          </div>
+          <h4 class="downtime-dnd5e-world-toggle-desc" id="downtime-dnd5e-world-toggle-desc-{{training.id}}" title="{{ localize 'downtime-dnd5e.ToggleInfo' }}">
+            {{#if training.hidden}}
+              <span><i class="fa-solid fa-user-secret"></i></span>
+            {{else}}
+              <span><i class="fa-solid fa-user"></i></span>
+            {{/if}}
+            {{training.name}}
+          </h4>
+        </div>
+        <div class="activity-type-row">
+          {{downtime-dnd5e-progressionStyle training ../actor}}
+        </div>
+        <div class="activity-override-row">
+          {{#if @root.showToUserEditMode}}
+          <input type="text" class="item-control downtime-dnd5e-world-override" id="downtime-dnd5e-world-override-{{training.id}}" title="{{ localize 'downtime-dnd5e.AdjustProgressValue' }}" value="{{training.progress}}"/>
+          {{else}}
+          <input type="text" readonly class="item-control downtime-dnd5e-world-override" id="downtime-dnd5e-world-override-{{training.id}}" title="{{ localize 'downtime-dnd5e.AdjustProgressValue' }}" value="{{training.progress}}"/>
+          {{/if}}
+          <span> / {{training.completionAt}}</span>
+        </div>
+        <div class="activity-progress-row">
+          <div class="progress-bar">
+            <div class="downtime-dnd5e-completion" style="width:{{downtime-dnd5e-trainingCompletion training}}%;">
+              <span>{{downtime-dnd5e-trainingCompletion training}}%</span>
+            </div>
+          </div>
+        </div>
+        {{#if @root.showToUserEditMode}}
+        <div class="downtime-dnd5e-item-row-controls worldRoll">
+          {{#if @root.isGM}}
+          <a class="item-control downtime-dnd5e-world-edit" id="downtime-dnd5e-world-edit-{{training.id}}" title="{{ localize 'downtime-dnd5e.EditItem' }}"><i class="fas fa-edit"></i></a>
+          <a class="item-control downtime-dnd5e-world-delete" id="downtime-dnd5e-world-delete-{{training.id}}" title="{{ localize 'downtime-dnd5e.DeleteItem' }}"><i class="fas fa-trash"></i></a>
+          {{/if}}
+          <a class="item-control downtime-dnd5e-world-move" id="downtime-dnd5e-world-move-{{training.id}}" data-tid={{tid}} title="Move Activity Up"><i class="fas fa-chevron-up"></i></a>
+          <a class="item-control downtime-dnd5e-world-move" id="downtime-dnd5e-world-move-{{training.id}}" data-tid={{tid}} title="Move Activity Down"><i class="fas fa-chevron-down"></i></a>
+        </div>
+        {{/if}}
+      </li>
+    {{/each}}
+  </ol>
+
+  <!-- Categories -->
+  {{#each categoriesWorld as |category cid| }}
+    <li class="items-header flexrow" title="{{ category.description }}">
+      <div class="item-name flexrow" data-tooltip='{{ category.description }}' data-tooltip-direction='UP'>
+        <h3><span><i class="fa-solid fa-earth-americas"></i></span> {{ category.name }} World Downtimes</h3>
+      </div>
+      <div class="activity-type">{{localize "downtime-dnd5e.CheckTypeColumnHeader"}}</div>
+      <div class="activity-override">{{localize "downtime-dnd5e.ProgressColumnHeader"}}</div>
+      <div class="activity-progress"></div>
+      {{#if @root.showToUserEditMode}}
+
+      <div class="downtime-dnd5e-item-controls flexrow">
+        {{#if @root.isGM}}
+        <a class="item-control downtime-dnd5e-world-edit-category" id="downtime-dnd5e-world-edit-category-{{category.id}}" title="{{ localize 'downtime-dnd5e.EditCategory' }}"><i class="fas fa-edit"></i></a>
+        <a class="item-control downtime-dnd5e-world-delete-category" id="downtime-dnd5e-world-delete-category-{{category.id}}" title="{{ localize 'downtime-dnd5e.DeleteCategory' }}"><i class="fas fa-trash"></i></a>
+        {{/if}}
+      </div>
+      {{/if}}
+    </li>
+    <ol class="item-list inventory-list">
+      {{#each (downtime-dnd5e-isInWorldCategory ../actor category) as |training tid| }}
+        <li class="item flexrow">
+          <div class="item-name flexrow rollable worldRoll" data-tooltip='{{ training.description }}' data-tooltip-direction='UP'>
+            <div class="{{downtime-dnd5e-worldTrainingRollBtnClass training}}"
+                  id="downtime-dnd5e-world-roll-{{training.id}}"
+                  title="{{downtime-dnd5e-worldTrainingRollBtnTooltip training}}"
+                  style="background-image: url('{{training.img}}')">
+              <div class="checkmark">  <i class="fas fa-check"></i></div>
+            </div>
+            <h4 class="downtime-dnd5e-world-toggle-desc" id="downtime-dnd5e-world-toggle-desc-{{training.id}}" title="{{ localize 'downtime-dnd5e.ToggleInfo' }}">
+              {{#if training.hidden}}
+                <span><i class="fa-solid fa-user-secret"></i></span>
+              {{else}}
+                <span><i class="fa-solid fa-user"></i></span>
+              {{/if}}
+              {{training.name}}
+            </h4>
+          </div>
+          <div class="activity-type-row">
+            {{downtime-dnd5e-progressionStyle training ../../actor}}
+          </div>
+          <div class="activity-override-row">
+            {{#if @root.showToUserEditMode}}
+            <input type="text" class="item-control downtime-dnd5e-world-override" id="downtime-dnd5e-world-override-{{training.id}}" title="{{ localize 'downtime-dnd5e.AdjustProgressValue' }}" value="{{training.progress}}"/>
+            {{else}}
+            <input type="text" readonly class="item-control downtime-dnd5e-world-override" id="downtime-dnd5e-world-override-{{training.id}}" title="{{ localize 'downtime-dnd5e.AdjustProgressValue' }}" value="{{training.progress}}"/>
+            {{/if}}
+            <span> / {{training.completionAt}}</span>
+          </div>
+          <div class="activity-progress-row">
+            <div class="progress-bar">
+              <div class="downtime-dnd5e-completion" style="width:{{downtime-dnd5e-trainingCompletion training}}%;">
+                <span>{{downtime-dnd5e-trainingCompletion training}}%</span>
+              </div>
+            </div>
+          </div>
+          {{#if @root.showToUserEditMode}}
+          <div class="downtime-dnd5e-item-row-controls worldRoll">
+            {{#if @root.isGM}}
+              <a class="item-control downtime-dnd5e-world-edit" id="downtime-dnd5e-world-edit-{{training.id}}" title="{{ localize 'downtime-dnd5e.EditItem' }}"><i class="fas fa-edit"></i></a>
+              <a class="item-control downtime-dnd5e-world-delete" id="downtime-dnd5e-world-delete-{{training.id}}" title="{{ localize 'downtime-dnd5e.DeleteItem' }}"><i class="fas fa-trash"></i></a>
+            {{/if}}
+            <a class="item-control downtime-dnd5e-world-move" id="downtime-dnd5e-world-move-{{training.id}}" data-tid={{tid}} title="Move Activity Up"><i class="fas fa-chevron-up"></i></a>
+            <a class="item-control downtime-dnd5e-world-move" id="downtime-dnd5e-world-move-{{training.id}}" data-tid={{tid}} title="Move Activity Down"><i class="fas fa-chevron-down"></i></a>
+          </div>
+          {{/if}}
+        </li>
+      {{/each}}
+    </ol>
+  {{/each}}
+</ol>
