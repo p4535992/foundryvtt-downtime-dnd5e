@@ -1,25 +1,26 @@
 <!-- Tab Controls -->
 {{#if showToUserEditMode}}
-<section class="downtime-dnd5e-controls">
-    <button class="button downtime-dnd5e-export" title="{{ localize 'downtime-dnd5e.ExportTrackedItemsTooltip' }}">
-    <i class="fas fa-file-import"></i> {{ localize 'downtime-dnd5e.ExportTrackedItems' }}
-    </button>
-    {{#if showImportButton}}
-    <button class="button downtime-dnd5e-import" title="{{ localize 'downtime-dnd5e.ImportTrackedItemsTooltip' }}">
-    <i class="fas fa-file-export"></i> {{ localize 'downtime-dnd5e.ImportTrackedItems' }}
-    </button>
-    {{/if}}
-    <button class="button  downtime-dnd5e-audit push-left" title="{{ localize 'downtime-dnd5e.ReviewChanges' }}">
-        <i class="fas fa-clipboard"></i> {{ localize 'downtime-dnd5e.ChangeLog' }}
-    </button>
-    <div class="spacer"></div>
-    <button class="button  downtime-dnd5e-new-category" title="{{ localize 'downtime-dnd5e.CreateNewCategory' }}">
-        <i class="fas fa-list"></i> {{ localize 'downtime-dnd5e.AddCategory' }}
-    </button>
-    <button class="button  downtime-dnd5e-add" title="{{ localize 'downtime-dnd5e.CreateNewItem' }}">
-        <i class="fas fa-plus"></i> {{ localize 'downtime-dnd5e.AddItem' }}
-    </button>
-</section>
+    <section class="downtime-dnd5e-controls">
+        <button class="button downtime-dnd5e-export" title="{{ localize 'downtime-dnd5e.ExportTrackedItemsTooltip' }}">
+            <i class="fas fa-file-import"></i> {{ localize 'downtime-dnd5e.ExportTrackedItems' }}
+        </button>
+        {{#if showImportButton}}
+            <button class="button downtime-dnd5e-import"
+                    title="{{ localize 'downtime-dnd5e.ImportTrackedItemsTooltip' }}">
+                <i class="fas fa-file-export"></i> {{ localize 'downtime-dnd5e.ImportTrackedItems' }}
+            </button>
+        {{/if}}
+        <button class="button  downtime-dnd5e-audit push-left" title="{{ localize 'downtime-dnd5e.ReviewChanges' }}">
+            <i class="fas fa-clipboard"></i> {{ localize 'downtime-dnd5e.ChangeLog' }}
+        </button>
+        <div class="spacer"></div>
+        <button class="button  downtime-dnd5e-new-category" title="{{ localize 'downtime-dnd5e.CreateNewCategory' }}">
+            <i class="fas fa-list"></i> {{ localize 'downtime-dnd5e.AddCategory' }}
+        </button>
+        <button class="button  downtime-dnd5e-add" title="{{ localize 'downtime-dnd5e.CreateNewItem' }}">
+            <i class="fas fa-plus"></i> {{ localize 'downtime-dnd5e.AddItem' }}
+        </button>
+    </section>
 {{/if}}
 
 <!-- Items List -->
@@ -113,96 +114,100 @@
         </ol>
     </div>
 
-  <!-- Categories -->
-  {{#each categoriesActor as |category cid| }}
-  <div class="items-section downtime-list card" title="{{ category.description }}">
-      <div class="items-header header" data-tooltip='{{ category.description }}' data-tooltip-direction='UP'>
-          <h3 class="item-name" data-tooltip='{{ category.description }}' data-tooltip-direction='UP'>
-              <span><i class="fa-solid fa-user-check"></i></span> {{ category.name }}
-          </h3>
-          <div class="item-header activity-type">{{localize "downtime-dnd5e.CheckTypeColumnHeader"}}</div>
-          <div class="item-header activity-override">{{localize "downtime-dnd5e.ProgressColumnHeader"}}</div>
-          <div class="item-header activity-progress"></div>
-  {{#if @root.showToUserEditMode}}
-          <div class="item-header item-controls">
-              <a class="item-control downtime-dnd5e-edit-category" id="downtime-dnd5e-edit-category-{{category.id}}" title="{{ localize 'downtime-dnd5e.EditCategory' }}"><i class="fas fa-edit"></i></a>
-              <a class="item-control downtime-dnd5e-delete-category" id="downtime-dnd5e-delete-category-{{category.id}}" title="{{ localize 'downtime-dnd5e.DeleteCategory' }}"><i class="fas fa-trash"></i></a>
-          </div>
-      </div>
-  {{/if}}
-    <ol class="item-list inventory-list">
-      {{#each (downtime-dnd5e-isInCategory ../actor category) as |training tid| }}
-          <li class="item" data-item-id="{{ item.id }}" data-entry-id="{{ item.id }}"
-              data-item-name="{{ item.name }}" data-item-sort="{{ item.sort }}" data-grouped="{{ ctx.group }}"
-              data-ungrouped="{{#if ../hasActions}}active{{else}}passive{{/if}}">
+    <!-- Categories -->
+    {{#each categoriesActor as |category cid| }}
+        <div class="items-section downtime-list card" title="{{ category.description }}">
+        <div class="items-header header" data-tooltip='{{ category.description }}' data-tooltip-direction='UP'>
+            <h3 class="item-name" data-tooltip='{{ category.description }}' data-tooltip-direction='UP'>
+                <span><i class="fa-solid fa-user-check"></i></span> {{ category.name }}
+            </h3>
+            <div class="item-header activity-type">{{localize "downtime-dnd5e.CheckTypeColumnHeader"}}</div>
+            <div class="item-header activity-override">{{localize "downtime-dnd5e.ProgressColumnHeader"}}</div>
+            <div class="item-header activity-progress"></div>
+            {{#if @root.showToUserEditMode}}
+                <div class="item-header item-controls">
+                    <a class="item-control downtime-dnd5e-edit-category"
+                       id="downtime-dnd5e-edit-category-{{category.id}}"
+                       title="{{ localize 'downtime-dnd5e.EditCategory' }}"><i class="fas fa-edit"></i></a>
+                    <a class="item-control downtime-dnd5e-delete-category"
+                       id="downtime-dnd5e-delete-category-{{category.id}}"
+                       title="{{ localize 'downtime-dnd5e.DeleteCategory' }}"><i class="fas fa-trash"></i></a>
+                </div>
+            </div>
+            {{/if}}
+            <ol class="item-list inventory-list">
+                {{#each (downtime-dnd5e-isInCategory ../actor category) as |training tid| }}
+                    <li class="item" data-item-id="{{ item.id }}" data-entry-id="{{ item.id }}"
+                        data-item-name="{{ item.name }}" data-item-sort="{{ item.sort }}" data-grouped="{{ ctx.group }}"
+                        data-ungrouped="{{#if ../hasActions}}active{{else}}passive{{/if}}">
 
 
-              {{!-- Item Name --}}
-              <div
-                  class="item-name item-action item-tooltip {{downtime-dnd5e-trainingRollBtnClass training}}"
-                  role="button"
-                  id="downtime-dnd5e-roll-{{training.id}}"
-                  data-action="use"
-                  title="{{downtime-dnd5e-trainingRollBtnTooltip training}}"
-              >
-                  <img class="item-image gold-icon" src="{{training.img}}">
-                  <div class="name" id="downtime-dnd5e-toggle-desc-{{training.id}}">
-                      {{#if training.hidden}}
-                          <span><i class="fa-solid fa-user-secret"></i></span>
-                      {{else}}
-                          <span><i class="fa-solid fa-user"></i></span>
-                      {{/if}}
-                      {{training.name}}
-                  </div>
-              </div>
+                        {{!-- Item Name --}}
+                        <div
+                            class="item-name item-action item-tooltip {{downtime-dnd5e-trainingRollBtnClass training}}"
+                            role="button"
+                            id="downtime-dnd5e-roll-{{training.id}}"
+                            data-action="use"
+                            title="{{downtime-dnd5e-trainingRollBtnTooltip training}}"
+                        >
+                            <img class="item-image gold-icon" src="{{training.img}}">
+                            <div class="name" id="downtime-dnd5e-toggle-desc-{{training.id}}">
+                                {{#if training.hidden}}
+                                    <span><i class="fa-solid fa-user-secret"></i></span>
+                                {{else}}
+                                    <span><i class="fa-solid fa-user"></i></span>
+                                {{/if}}
+                                {{training.name}}
+                            </div>
+                        </div>
 
 
-              <div class="item-detail activity-type activity-type-row">
-                  {{downtime-dnd5e-progressionStyle training ../../actor}}
-              </div>
-              <div class="item-detail activity-override activity-override-row">
-                  {{#if @root.showToUserEditMode}}
-                      <input type="text" class="item-control downtime-dnd5e-override"
-                             id="downtime-dnd5e-override-{{training.id}}"
-                             title="{{ localize 'downtime-dnd5e.AdjustProgressValue' }}"
-                             value="{{training.progress}}" />
-                  {{else}}
-                      <input type="text" readonly class="item-control downtime-dnd5e-override"
-                             id="downtime-dnd5e-override-{{training.id}}"
-                             title="{{ localize 'downtime-dnd5e.AdjustProgressValue' }}"
-                             value="{{training.progress}}" />
-                  {{/if}}
-                  <span> / {{training.completionAt}}</span>
-              </div>
-              <div class="item-detail activity-progress activity-progress-row">
-                  <div class="progress-bar">
-                      <div class="downtime-dnd5e-completion"
-                           style="width:{{downtime-dnd5e-trainingCompletion training}}%;">
-                          <span>{{downtime-dnd5e-trainingCompletion training}}%</span>
-                      </div>
-                  </div>
-              </div>
-              {{#if @root.showToUserEditMode}}
-                  <div class="item-detail item-controls downtime-dnd5e-item-row-controls">
-                      <a class="item-control item-action downtime-dnd5e-edit"
-                         id="downtime-dnd5e-edit-{{training.id}}"
-                         title="{{ localize 'downtime-dnd5e.EditItem' }}"><i class="fas fa-edit"></i></a>
-                      <a class="item-control item-action downtime-dnd5e-delete"
-                         id="downtime-dnd5e-delete-{{training.id}}"
-                         title="{{ localize 'downtime-dnd5e.DeleteItem' }}"><i class="fas fa-trash"></i></a>
-                      <a class="item-control item-action downtime-dnd5e-move"
-                         id="downtime-dnd5e-move-{{training.id}}" data-tid={{tid}} title="Move Activity Up"><i
-                          class="fas fa-chevron-up"></i></a>
-                      <a class="item-control item-action downtime-dnd5e-move"
-                         id="downtime-dnd5e-move-{{training.id}}" data-tid={{tid}} title="Move Activity Down"><i
-                          class="fas fa-chevron-down"></i></a>
-                  </div>
-              {{/if}}
-          </li>
-      {{/each}}
-    </ol>
-  </div>
-  {{/each}}
+                        <div class="item-detail activity-type activity-type-row">
+                            {{downtime-dnd5e-progressionStyle training ../../actor}}
+                        </div>
+                        <div class="item-detail activity-override activity-override-row">
+                            {{#if @root.showToUserEditMode}}
+                                <input type="text" class="item-control downtime-dnd5e-override"
+                                       id="downtime-dnd5e-override-{{training.id}}"
+                                       title="{{ localize 'downtime-dnd5e.AdjustProgressValue' }}"
+                                       value="{{training.progress}}" />
+                            {{else}}
+                                <input type="text" readonly class="item-control downtime-dnd5e-override"
+                                       id="downtime-dnd5e-override-{{training.id}}"
+                                       title="{{ localize 'downtime-dnd5e.AdjustProgressValue' }}"
+                                       value="{{training.progress}}" />
+                            {{/if}}
+                            <span> / {{training.completionAt}}</span>
+                        </div>
+                        <div class="item-detail activity-progress activity-progress-row">
+                            <div class="progress-bar">
+                                <div class="downtime-dnd5e-completion"
+                                     style="width:{{downtime-dnd5e-trainingCompletion training}}%;">
+                                    <span>{{downtime-dnd5e-trainingCompletion training}}%</span>
+                                </div>
+                            </div>
+                        </div>
+                        {{#if @root.showToUserEditMode}}
+                            <div class="item-detail item-controls downtime-dnd5e-item-row-controls">
+                                <a class="item-control item-action downtime-dnd5e-edit"
+                                   id="downtime-dnd5e-edit-{{training.id}}"
+                                   title="{{ localize 'downtime-dnd5e.EditItem' }}"><i class="fas fa-edit"></i></a>
+                                <a class="item-control item-action downtime-dnd5e-delete"
+                                   id="downtime-dnd5e-delete-{{training.id}}"
+                                   title="{{ localize 'downtime-dnd5e.DeleteItem' }}"><i class="fas fa-trash"></i></a>
+                                <a class="item-control item-action downtime-dnd5e-move"
+                                   id="downtime-dnd5e-move-{{training.id}}" data-tid={{tid}} title="Move Activity Up"><i
+                                    class="fas fa-chevron-up"></i></a>
+                                <a class="item-control item-action downtime-dnd5e-move"
+                                   id="downtime-dnd5e-move-{{training.id}}" data-tid={{tid}} title="Move Activity Down"><i
+                                    class="fas fa-chevron-down"></i></a>
+                            </div>
+                        {{/if}}
+                    </li>
+                {{/each}}
+            </ol>
+        </div>
+    {{/each}}
 </section>
 
 {{> "modules/downtime-dnd5e/templates/partials/training-section-contents-world-v2.hbs" }}

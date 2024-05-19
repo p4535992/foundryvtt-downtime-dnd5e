@@ -45,7 +45,12 @@ async function addTrainingTab(app, html, data) {
 
     // Update the nav menu
     let tabName = game.settings.get(CONSTANTS.MODULE_ID, "tabName");
-    let trainingTabBtn = $('<a class="item" data-tab="training">' + tabName + "</a>");
+    let trainingTabBtn = '';
+    if (app instanceof game.dnd5e.applications.actor.ActorSheet5eCharacter2) {
+        trainingTabBtn = $(`<a class="item" data-tab="training" data-gorup="primary" data-tooltip="${tabName}"><i class="fas fa-clock"></i></a>`);
+    } else {
+        trainingTabBtn = $('<a class="item" data-tab="training">' + tabName + "</a>")
+    }
     let tabs = html.find('.tabs[data-group="primary"]');
     tabs.append(trainingTabBtn);
 
