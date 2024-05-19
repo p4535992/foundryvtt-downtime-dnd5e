@@ -15,7 +15,7 @@
 <section class="items-list downtime-list">
 
     <!-- Uncategorized -->
-    <div class="items-section downtime-list card">
+    <div class="items-section downtime-list card" {{#unless activitiesWorldUnCategorized}}hidden{{/unless}}>
         <div class="items-header header">
             <h3 class="item-name" data-tooltip='{{ localize 'downtime-dnd5e.Uncategorized' }}'
                 data-tooltip-direction='UP'>
@@ -27,7 +27,7 @@
             <div class="item-header activity-progress"></div>
             <div class="item-header item-controls"></div>
         </div>
-        <ol class="item-list inventory-list">
+        <ol class="item-list inventory-list" {{#unless activitiesWorldUnCategorized}}hidden{{/unless}}>
             {{#each activitiesWorldUnCategorized as |training tid| }}
 
                 <li class="item" data-item-id="{{ item.id }}" data-entry-id="{{ item.id }}"
