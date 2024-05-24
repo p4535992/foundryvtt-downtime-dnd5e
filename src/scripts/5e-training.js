@@ -45,11 +45,13 @@ async function addTrainingTab(app, html, data) {
 
     // Update the nav menu
     let tabName = game.settings.get(CONSTANTS.MODULE_ID, "tabName");
-    let trainingTabBtn = '';
+    let trainingTabBtn = "";
     if (app instanceof game.dnd5e.applications.actor.ActorSheet5eCharacter2) {
-        trainingTabBtn = $(`<a class="item" data-tab="training" data-gorup="primary" data-tooltip="${tabName}"><i class="fas fa-clock"></i></a>`);
+        trainingTabBtn = $(
+            `<a class="item" data-tab="training" data-group="primary" data-tooltip="${tabName}"><i class="fas fa-clock"></i></a>`,
+        );
     } else {
-        trainingTabBtn = $('<a class="item" data-tab="training">' + tabName + "</a>")
+        trainingTabBtn = $('<a class="item" data-tab="training">' + tabName + "</a>");
     }
     let tabs = html.find('.tabs[data-group="primary"]');
     tabs.append(trainingTabBtn);
@@ -59,8 +61,8 @@ async function addTrainingTab(app, html, data) {
 
     // Create the tab content
     // ActorSheet5eCharacter2 requires separate templating
-    let trainingTabHtml = '';
-    let sheet = '';
+    let trainingTabHtml = "";
+    let sheet = "";
     if (app instanceof game.dnd5e.applications.actor.ActorSheet5eCharacter2) {
         sheet = html.find(".tab-body");
         trainingTabHtml = $(
@@ -69,7 +71,7 @@ async function addTrainingTab(app, html, data) {
     } else {
         sheet = html.find(".sheet-body");
         trainingTabHtml = $(
-            await renderTemplate(`modules/${CONSTANTS.MODULE_ID}/templates/training-section.hbs`, templateData)
+            await renderTemplate(`modules/${CONSTANTS.MODULE_ID}/templates/training-section.hbs`, templateData),
         );
     }
     sheet.append(trainingTabHtml);
@@ -221,7 +223,10 @@ function activateTabListeners(actor, app, html, data) {
         // let actor = game.actors.get(actorId);
         let allItems = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems) || [];
         // let thisItem = allItems.filter((obj) => obj.id === itemId)[0];
-
+        // if(!thisItem){
+        //     warn(game.i18n.localize("downtime-dnd5e.InvalidItemWarning"), true);
+        //     return;
+        // }
         // Set up some variables
         let world = false;
         let trainingIdx = parseInt(event.currentTarget.dataset.tid);
@@ -267,7 +272,10 @@ function activateTabListeners(actor, app, html, data) {
         // let actor = game.actors.get(actorId);
         let allItems = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.worldActivities) || [];
         // let thisItem = allItems.filter((obj) => obj.id === itemId)[0];
-
+        // if(!thisItem){
+        //     warn(game.i18n.localize("downtime-dnd5e.InvalidItemWarning"), true);
+        //     return;
+        // }
         // Set up some variables
         let world = true;
         let trainingIdx = parseInt(event.currentTarget.dataset.tid);
@@ -314,6 +322,10 @@ function activateTabListeners(actor, app, html, data) {
         }
         let allItems = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems) || [];
         let thisItem = allItems.filter((obj) => obj.id === itemId)[0];
+        if (!thisItem) {
+            warn(game.i18n.localize("downtime-dnd5e.InvalidItemWarning"), true);
+            return;
+        }
         if (isNaN(field.value)) {
             field.value = thisItem.progress;
             warn(game.i18n.localize("downtime-dnd5e.InvalidNumberWarning"), true);
@@ -334,6 +346,10 @@ function activateTabListeners(actor, app, html, data) {
         }
         let allItems = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.worldActivities) || [];
         let thisItem = allItems.filter((obj) => obj.id === itemId)[0];
+        if (!thisItem) {
+            warn(game.i18n.localize("downtime-dnd5e.InvalidItemWarning"), true);
+            return;
+        }
         if (isNaN(field.value)) {
             field.value = thisItem.progress;
             warn(game.i18n.localize("downtime-dnd5e.InvalidNumberWarning"), true);
@@ -728,6 +744,10 @@ export function crashTNT() {
 
 		// Increase progress
 		let thisItem = allItems[itemIdx];
+        if(!thisItem){
+            warn(game.i18n.localize("downtime-dnd5e.InvalidItemWarning"), true);
+            return;
+        }
 		let alreadyCompleted = thisItem.progress >= thisItem.completionAt;
 		thisItem = TrackingAndTraining.calculateNewProgress(
 			thisItem,

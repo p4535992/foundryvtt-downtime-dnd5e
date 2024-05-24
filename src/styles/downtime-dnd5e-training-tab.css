@@ -441,11 +441,13 @@
     flex: 1 1 10%;
 }
 
-.dnd5e2 .items-section .items-header .activity-type, .dnd5e2 .items-section .item .activity-type {
+.dnd5e2 .items-section .items-header .activity-type,
+.dnd5e2 .items-section .item .activity-type {
     width: 70px;
 }
 
-.dnd5e2 .items-section .items-header .activity-override, .dnd5e2 .items-section .item .activity-override {
+.dnd5e2 .items-section .items-header .activity-override,
+.dnd5e2 .items-section .item .activity-override {
     width: 90px;
 }
 .dnd5e2 .items-section .item .activity-override input {
@@ -458,7 +460,8 @@
     border: 1px var(--dnd5e-color-gold) solid;
 }
 
-.dnd5e2 .items-section .items-header .activity-progress, .dnd5e2 .items-section .item .activity-progress {
+.dnd5e2 .items-section .items-header .activity-progress,
+.dnd5e2 .items-section .item .activity-progress {
     width: 120px;
 }
 
@@ -482,7 +485,8 @@
     padding: 0 4px;
 }
 
-.dnd5e2 .items-section .items-header .item-controls, .dnd5e2 .items-section .item .item-controls {
+.dnd5e2 .items-section .items-header .item-controls,
+.dnd5e2 .items-section .item .item-controls {
     width: 75px;
     gap: 0.25rem;
     padding: 0;

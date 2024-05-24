@@ -138,7 +138,10 @@ export default class TrackingAndTraining {
             allItems = actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems) || [];
         }
         let thisItem = allItems.filter((obj) => obj.id === itemId)[0];
-
+        if (!thisItem) {
+            warn(game.i18n.localize("downtime-dnd5e.InvalidItemWarning"), true);
+            return;
+        }
         let data = {
             actor: actor,
             item: thisItem,
@@ -186,6 +189,10 @@ export default class TrackingAndTraining {
                     }
 
                     let thisItem = allItems.filter((obj) => obj.id === itemId)[0];
+                    if (!thisItem) {
+                        warn(game.i18n.localize("downtime-dnd5e.InvalidItemWarning"), true);
+                        return;
+                    }
                     let itemIndex = allItems.findIndex((obj) => obj.id === thisItem.id);
                     allItems.splice(itemIndex, 1);
 
@@ -214,6 +221,10 @@ export default class TrackingAndTraining {
         }
 
         let thisItem = allItems.filter((obj) => obj.id === itemId)[0];
+        if (!thisItem) {
+            warn(game.i18n.localize("downtime-dnd5e.InvalidItemWarning"), true);
+            return;
+        }
         let adjustment = 0;
         let alreadyCompleted = thisItem.progress >= thisItem.completionAt;
 
@@ -258,6 +269,10 @@ export default class TrackingAndTraining {
         }
 
         let thisItem = allItems.filter((obj) => obj.id === itemId)[0];
+        if (!thisItem) {
+            warn(game.i18n.localize("downtime-dnd5e.InvalidItemWarning"), true);
+            return;
+        }
         let rollType = TrackingAndTraining.determineRollType(thisItem);
         let alreadyCompleted = thisItem.progress >= thisItem.completionAt;
 

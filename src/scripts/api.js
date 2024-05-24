@@ -56,6 +56,10 @@ const API = {
 
         // Increase progress
         let thisItem = allItems[itemIdx];
+        if (!thisItem) {
+            warn(game.i18n.localize("downtime-dnd5e.InvalidItemWarning"), true);
+            return;
+        }
         let alreadyCompleted = thisItem.progress >= thisItem.completionAt;
         thisItem = TrackingAndTraining.calculateNewProgress(
             thisItem,
@@ -171,6 +175,10 @@ const API = {
 
         // Increase progress
         let thisItem = allItems[itemIdx];
+        if (!thisItem) {
+            warn(game.i18n.localize("downtime-dnd5e.InvalidItemWarning"), true);
+            return;
+        }
         let alreadyCompleted = thisItem.progress >= thisItem.completionAt;
         thisItem = TrackingAndTraining.calculateNewProgress(
             thisItem,

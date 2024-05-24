@@ -80,6 +80,10 @@ export function registerHelpers() {
         let matchingItems = [];
         for (var i = 0; i < allTrainingItems.length; i++) {
             let thisItem = allTrainingItems[i];
+            if (!thisItem) {
+                warn(game.i18n.localize("downtime-dnd5e.InvalidItemWarning"), true);
+                return;
+            }
             if (thisItem.category == thisCategoryId) {
                 matchingItems.push(thisItem);
             }
@@ -94,6 +98,10 @@ export function registerHelpers() {
         let matchingItems = [];
         for (var i = 0; i < allTrainingItems.length; i++) {
             let thisItem = allTrainingItems[i];
+            if (!thisItem) {
+                warn(game.i18n.localize("downtime-dnd5e.InvalidItemWarning"), true);
+                return;
+            }
             if (thisItem.category == thisCategoryId) {
                 matchingItems.push(thisItem);
             }
@@ -107,6 +115,10 @@ export function registerHelpers() {
     //   let matchingItems = [];
     //   for (var i = 0; i < allTrainingItems.length; i++) {
     //     let thisItem = allTrainingItems[i];
+    //     if(!thisItem){
+    //      warn(game.i18n.localize("downtime-dnd5e.InvalidItemWarning"), true);
+    //      return;
+    //     }
     //     if (!thisItem.category) {
     //       matchingItems.push(thisItem);
     //     }

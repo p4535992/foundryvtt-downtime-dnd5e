@@ -5,6 +5,7 @@
     "downtime-dnd5e.UnnamedCategory": "Unnamed Category",
 
     "downtime-dnd5e.InvalidNumberWarning": "Invalid input. Please enter a number.",
+    "downtime-dnd5e.InvalidItemWarning": "Invalid item. Item not found.",
 
     "downtime-dnd5e.Skipping": "SKIPPING MIGRATION FOR ACTOR",
     "downtime-dnd5e.BackingUpDataFor": "BACKING UP DATA FOR ACTOR",
