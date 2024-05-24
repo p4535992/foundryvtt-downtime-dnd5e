@@ -30,47 +30,62 @@ export const readyHooks = () => {
 // The Meat And Potatoes
 async function addTrainingTab(app, html, data) {
     // Determine if we should show the downtime tab
-    let showTrainingTab = false;
-    let showToUser = game.users.current.isGM || !game.settings.get(CONSTANTS.MODULE_ID, "gmOnlyMode");
-    if (data.isCharacter && data.editable) {
-        showTrainingTab = game.settings.get(CONSTANTS.MODULE_ID, "enableTraining") && showToUser;
-    } else if (data.isNPC && data.editable) {
-        showTrainingTab = game.settings.get(CONSTANTS.MODULE_ID, "enableTrainingNpc") && showToUser;
+    const enableCharacter = game.settings.get(CONSTANTS.MODULE_ID, "enableTraining");
+    const enableNpc = game.settings.get(CONSTANTS.MODULE_ID, "enableTrainingNpc");
+    const gmOnlyMode = game.settings.get(CONSTANTS.MODULE_ID, "gmOnlyMode");
+
+    let showToUser = game.user.isGM || (app.object.isOwner && gmOnlyMode);
+
+    if (!showToUser) return;
+    if (data.isCharacter && !enableCharacter) return;
+    if (data.isNPC && !enableNpc) return;
+
+    // Get our actor and our flags
+    let actor = game.actors.contents.find((a) => a._id === data.actor._id);
+
+    // Update the nav menu
+    let tabName = game.settings.get(CONSTANTS.MODULE_ID, "tabName");
+    let trainingTabBtn = '';
+    if (app instanceof game.dnd5e.applications.actor.ActorSheet5eCharacter2) {
+        trainingTabBtn = $(`<a class="item" data-tab="training" data-gorup="primary" data-tooltip="${tabName}"><i class="fas fa-clock"></i></a>`);
+    } else {
+        trainingTabBtn = $('<a class="item" data-tab="training">' + tabName + "</a>")
     }
+    let tabs = html.find('.tabs[data-group="primary"]');
+    tabs.append(trainingTabBtn);
 
-    if (showTrainingTab) {
-        // Get our actor and our flags
-        let actor = game.actors.contents.find((a) => a._id === data.actor._id);
+    // Get the data to render the template
+    const templateData = getTemplateData(data);
 
-        // Update the nav menu
-        let tabName = game.settings.get(CONSTANTS.MODULE_ID, "tabName");
-        let trainingTabBtn = $('<a class="item" data-tab="training">' + tabName + "</a>");
-        let tabs = html.find('.tabs[data-group="primary"]');
-        tabs.append(trainingTabBtn);
-
-        // Get the data to render the template
-        const templateData = getTemplateData(data);
-
-        // Create the tab content
-        let sheet = html.find(".sheet-body");
-        let trainingTabHtml = $(
-            await renderTemplate(`modules/${CONSTANTS.MODULE_ID}/templates/training-section.hbs`, templateData),
+    // Create the tab content
+    // ActorSheet5eCharacter2 requires separate templating
+    let trainingTabHtml = '';
+    let sheet = '';
+    if (app instanceof game.dnd5e.applications.actor.ActorSheet5eCharacter2) {
+        sheet = html.find(".tab-body");
+        trainingTabHtml = $(
+            await renderTemplate(`modules/${CONSTANTS.MODULE_ID}/templates/training-section-v2.hbs`, templateData),
         );
-        sheet.append(trainingTabHtml);
-
-        // Set up our big list of dropdown options
-        activateTabListeners(actor, app, html, data);
-
-        // Set Training Tab as Active
-        html.find('.tabs .item[data-tab="training"]').click((ev) => {
-            app.activateTrainingTab = true;
-        });
-
-        // Unset Training Tab as Active
-        html.find('.tabs .item:not(.tabs .item[data-tab="training"])').click((ev) => {
-            app.activateTrainingTab = false;
-        });
+    } else {
+        sheet = html.find(".sheet-body");
+        trainingTabHtml = $(
+            await renderTemplate(`modules/${CONSTANTS.MODULE_ID}/templates/training-section.hbs`, templateData)
+        );
     }
+    sheet.append(trainingTabHtml);
+
+    // Set up our big list of dropdown options
+    activateTabListeners(actor, app, html, data);
+
+    // Set Training Tab as Active
+    html.find('.tabs .item[data-tab="training"]').click((ev) => {
+        app.activateTrainingTab = true;
+    });
+
+    // Unset Training Tab as Active
+    html.find('.tabs .item:not(.tabs .item[data-tab="training"])').click((ev) => {
+        app.activateTrainingTab = false;
+    });
 
     //Tab is ready
     Hooks.call(`TrainingTabReady`, app, html, data);
