@@ -1,3 +1,7 @@
+### 1.3.5 
+
+- Ty very much to @Forien for the Dnd5e 3.0.0. sheet compatibility
+
 ### 1.3.4
 
 - add runMacro with a explicit actor parameter

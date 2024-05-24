@@ -13,7 +13,6 @@
 // Import TypeScript modules
 import { registerSettings } from "./scripts/settings.js";
 import { initHooks, readyHooks, setupHooks } from "./scripts/5e-training.js";
-import { error } from "./scripts/lib/lib.js";
 import CONSTANTS from "./scripts/constants.js";
 /* ------------------------------------ */
 /* Initialize module					*/
@@ -24,7 +23,7 @@ Hooks.once("init", async () => {
     registerSettings();
     initHooks();
     // Preload Handlebars templates
-    //await preloadTemplates();
+    // await preloadTemplates();
 });
 /* ------------------------------------ */
 /* Setup module							*/
@@ -41,12 +40,12 @@ Hooks.once("ready", async () => {
     // if (!game.modules.get('lib-wrapper')?.active && game.user?.isGM) {
     //   let word = 'install and activate';
     //   if (game.modules.get('lib-wrapper')) word = 'activate';
-    //   throw error(`Requires the 'libWrapper' module. Please ${word} it.`);
+    //   throw Logger.error(`Requires the 'libWrapper' module. Please ${word} it.`);
     // }
     // if (!game.modules.get('socketLib')?.active && game.user?.isGM) {
     //   let word = 'install and activate';
     //   if (game.modules.get('socketLib')) word = 'activate';
-    //   throw error(`Requires the 'socketLib' module. Please ${word} it.`);
+    //   throw Logger.error(`Requires the 'socketLib' module. Please ${word} it.`);
     // }
     readyHooks();
 });

@@ -1,5 +1,5 @@
 import CONSTANTS from "../constants.js";
-import { warn, info, error, log, debug } from "../lib/lib.js";
+import Logger from "../lib/Logger.js";
 import { _updateDowntimes } from "./training.js";
 
 export class GMConfig extends FormApplication {
@@ -73,7 +73,7 @@ export class GMConfig extends FormApplication {
         );
         const jsonData = JSON.stringify(data, null, 2);
         saveDataToFile(jsonData, "application/json", `${CONSTANTS.MODULE_ID}-world-activities.json`);
-        info("Downtime: Saved Activity Data.", true);
+        Logger.info("Downtime: Saved Activity Data.", true);
     }
 
     duplicateActorActivities() {
@@ -139,7 +139,7 @@ class LocalActivityTransfer extends FormApplication {
                 actorAct.append(`<option value=` + act.id + `>` + act.name + `</option>`);
             });
         } else {
-            info("Actor " + srcActor.name + " does not have any downtime activities.", true);
+            Logger.info("Actor " + srcActor.name + " does not have any downtime activities.", true);
         }
     }
 
@@ -161,7 +161,7 @@ class LocalActivityTransfer extends FormApplication {
             await destActor.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems, newActivities);
             info(`Successfully copied ${activityToTransfer.name} from ${srcActor.name} to ${destActor.name}.`, true);
         } else {
-            error("Source Actor and Destination Actor are the same.", true);
+            Logger.error("Source Actor and Destination Actor are the same.", true);
             return;
         }
     }

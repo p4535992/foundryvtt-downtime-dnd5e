@@ -1,5 +1,5 @@
 import CONSTANTS from "./constants.js";
-import { debug } from "./lib/lib.js";
+import Logger from "./lib/Logger.js";
 import { GMConfig } from "./settings/gmConfig.js";
 
 export function registerSettings() {
@@ -157,7 +157,7 @@ class ResetSettingsDialog extends FormApplication {
                         for (let setting of game.settings.storage
                             .get("world")
                             .filter((setting) => setting.key.startsWith(`${CONSTANTS.MODULE_ID}.`))) {
-                            debug(`Reset setting '${setting.key}'`);
+                            Logger.debug(`Reset setting '${setting.key}'`);
                             await setting.delete();
                         }
                         //window.location.reload();

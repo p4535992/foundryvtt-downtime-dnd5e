@@ -3,11 +3,13 @@ import TrackedItemApp from "./TrackedItemApp.js";
 import TrackedItem from "./TrackedItem.js";
 import Category from "./Category.js";
 import CONSTANTS from "./constants.js";
-import { warn, info, error, debug, log, getMacroAsync, runMacro, runMacroOnExplicitActor } from "./lib/lib.js";
+import { runMacro, runMacroOnExplicitActor } from "./lib/lib.js";
+import { RetrieveHelpers } from "./lib/retrieve-helpers.js";
+import Logger from "./lib/Logger.js";
 
 export default class TrackingAndTraining {
     static async addCategory(actorId, world = false) {
-        // log("New Category excuted!");
+        Logger.debug("New Category excuted!");
 
         let actor = game.actors.get(actorId);
         let data = {
@@ -19,7 +21,7 @@ export default class TrackingAndTraining {
     }
 
     static async editCategory(actorId, categoryId, world = false) {
-        // log("Edit Category excuted!");
+        Logger.debug("Edit Category excuted!");
 
         let actor = game.actors.get(actorId);
         let allCategories = [];
@@ -38,7 +40,7 @@ export default class TrackingAndTraining {
     }
 
     static async deleteCategory(actorId, categoryId, world = false) {
-        // log("Delete Category excuted!");
+        Logger.debug("Delete Category excuted!");
 
         // Set up some variables
         let actor = game.actors.get(actorId);
@@ -102,7 +104,7 @@ export default class TrackingAndTraining {
     }
 
     static async addItem(actorId, DROPDOWN_OPTIONS, world = false) {
-        // log("New Item excuted!");
+        Logger.debug("New Item excuted!");
         let actor = game.actors.get(actorId);
         let allCategories = [];
         if (world) {
@@ -123,7 +125,7 @@ export default class TrackingAndTraining {
     }
 
     static async editFromSheet(actorId, itemId, DROPDOWN_OPTIONS, world = false) {
-        // log("Edit Downtime Activity excuted!");
+        Logger.debug("Edit Downtime Activity excuted!");
         let actor = game.actors.get(actorId);
         let allCategories = [];
         if (world) {
@@ -139,7 +141,7 @@ export default class TrackingAndTraining {
         }
         let thisItem = allItems.filter((obj) => obj.id === itemId)[0];
         if (!thisItem) {
-            warn(game.i18n.localize("downtime-dnd5e.InvalidItemWarning"), true);
+            Logger.warn(game.i18n.localize("downtime-dnd5e.InvalidItemWarning"), true);
             return;
         }
         let data = {
@@ -155,7 +157,7 @@ export default class TrackingAndTraining {
     }
 
     static async deleteFromSheet(actorId, itemId, world = false) {
-        // log("Delete Downtime Activity excuted!");
+        Logger.debug("Delete Downtime Activity excuted!");
 
         // Set up some variables
         let actor = game.actors.get(actorId);
@@ -190,7 +192,7 @@ export default class TrackingAndTraining {
 
                     let thisItem = allItems.filter((obj) => obj.id === itemId)[0];
                     if (!thisItem) {
-                        warn(game.i18n.localize("downtime-dnd5e.InvalidItemWarning"), true);
+                        Logger.warn(game.i18n.localize("downtime-dnd5e.InvalidItemWarning"), true);
                         return;
                     }
                     let itemIndex = allItems.findIndex((obj) => obj.id === thisItem.id);
@@ -209,7 +211,7 @@ export default class TrackingAndTraining {
     }
 
     static async updateItemProgressFromSheet(actorId, itemId, value, world = false) {
-        // log("Progression Override excuted!");
+        Logger.debug("Progression Override excuted!");
 
         // Set up some variables
         let actor = game.actors.get(actorId);
@@ -222,7 +224,7 @@ export default class TrackingAndTraining {
 
         let thisItem = allItems.filter((obj) => obj.id === itemId)[0];
         if (!thisItem) {
-            warn(game.i18n.localize("downtime-dnd5e.InvalidItemWarning"), true);
+            Logger.warn(game.i18n.localize("downtime-dnd5e.InvalidItemWarning"), true);
             return;
         }
         let adjustment = 0;
@@ -257,7 +259,7 @@ export default class TrackingAndTraining {
     }
 
     static async progressItem(actorId, itemId, world = false) {
-        // log("Progress Downtime Activity excuted!");
+        Logger.debug("Progress Downtime Activity excuted!");
 
         // Set up some variables
         let actor = game.actors.get(actorId);
@@ -270,7 +272,7 @@ export default class TrackingAndTraining {
 
         let thisItem = allItems.filter((obj) => obj.id === itemId)[0];
         if (!thisItem) {
-            warn(game.i18n.localize("downtime-dnd5e.InvalidItemWarning"), true);
+            Logger.warn(game.i18n.localize("downtime-dnd5e.InvalidItemWarning"), true);
             return;
         }
         let rollType = TrackingAndTraining.determineRollType(thisItem);
@@ -350,7 +352,7 @@ export default class TrackingAndTraining {
                     actor.sheet.render(true);
                 }
             } else {
-                warn(game.i18n.localize("downtime-dnd5e.ToolNotFoundWarning"));
+                Logger.warn(game.i18n.localize("downtime-dnd5e.ToolNotFoundWarning"));
             }
         }
 
@@ -375,13 +377,13 @@ export default class TrackingAndTraining {
         else if (rollType === "MACRO") {
             let macroName = thisItem.macroName;
             // let macro = game.macros.getName(macroName);
-            let macro = await getMacroAsync(macroName, false, false);
+            let macro = await RetrieveHelpers.getMacroAsync(macroName, false, false);
             if (macro) {
                 let macroData = [];
                 // macro.execute();
                 runMacroOnExplicitActor(actor, macro, macroData);
             } else {
-                warn(game.i18n.localize("downtime-dnd5e.MacroNotFoundWarning") + ": " + macroName, true);
+                Logger.warn(game.i18n.localize("downtime-dnd5e.MacroNotFoundWarning") + ": " + macroName, true);
             }
         }
     }
@@ -499,7 +501,7 @@ export default class TrackingAndTraining {
             }
 
             if (sendIt) {
-                // log("" + actor.name + " " + game.i18n.localize("downtime-dnd5e.CompletedATrackedItem"));
+                Logger.debug("" + actor.name + " " + game.i18n.localize("downtime-dnd5e.CompletedATrackedItem"));
                 let chatHtml = await renderTemplate(`modules/${CONSTANTS.MODULE_ID}/templates/completion-message.hbs`, {
                     actor: actor,
                     activity: activity,
@@ -618,7 +620,7 @@ export default class TrackingAndTraining {
             categories: allCategories,
         };
         if (allItems.length < 1 && allCategories.length < 1) {
-            info(game.i18n.localize("downtime-dnd5e.ExportNoTrackedItems"), true);
+            Logger.info(game.i18n.localize("downtime-dnd5e.ExportNoTrackedItems"), true);
             return;
         }
         let jsonData = JSON.stringify(dataToExport);
@@ -631,7 +633,7 @@ export default class TrackingAndTraining {
         input.on("change", function () {
             const file = this.files[0];
             if (!file) {
-                info(game.i18n.localize("downtime-dnd5e.ImportNoFile"), true);
+                Logger.info(game.i18n.localize("downtime-dnd5e.ImportNoFile"), true);
                 return;
             }
             readTextFromFile(file).then(async (contents) => {
@@ -655,12 +657,12 @@ export default class TrackingAndTraining {
                         },
                         default: "ok",
                     }).render(true);
-                    log("Import detected old format.", importedData);
+                    Logger.debug("Import detected old format.", importedData);
                     importedItems = importedData;
                 }
 
                 if (importedItems.length < 1 && importedCategories.legnth < 1) {
-                    info(game.i18n.localize("downtime-dnd5e.ImportNoTrackedItems"), true);
+                    Logger.info(game.i18n.localize("downtime-dnd5e.ImportNoTrackedItems"), true);
                     return;
                 }
 
@@ -730,7 +732,7 @@ export default class TrackingAndTraining {
                 await actor.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.categories, combinedCategories);
                 await actor.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems, combinedItems);
 
-                info(game.i18n.localize("downtime-dnd5e.ImportComplete"), true);
+                Logger.info(game.i18n.localize("downtime-dnd5e.ImportComplete"), true);
 
                 // let act = "quit";
                 //let content = `<p><b>${game.i18n.localize("downtime-dnd5e.ImportTypeSelectionOverwrite")}:</b> ${game.i18n.localize("downtime-dnd5e.ImportTypeSelectionTextOverwrite")}</p>
@@ -759,7 +761,7 @@ export default class TrackingAndTraining {
                 //         }
                 //       }
                 //       actor.setFlag(CONSTANTS.MODULE_ID,CONSTANTS.FLAGS.trainingItems,importedItems);
-                //       await info(game.i18n.localize("downtime-dnd5e.ImportComplete"), true);
+                //       Logger.info(game.i18n.localize("downtime-dnd5e.ImportComplete"), true);
                 //     } else if (act === "add") {
                 //       let currentItems = actor.getFlag(CONSTANTS.MODULE_ID,CONSTANTS.FLAGS.trainingItems) || [];
                 //       let currentCategories = actor.getFlag(CONSTANTS.MODULE_ID,CONSTANTS.FLAGS.categories) || [];
@@ -788,7 +790,7 @@ export default class TrackingAndTraining {
                 //       }
                 //       let combinedItems = currentItems.concat(importedItems);
                 //       await actor.setFlag(CONSTANTS.MODULE_ID,CONSTANTS.FLAGS.trainingItems, combinedItems);
-                //       info(game.i18n.localize("downtime-dnd5e.ImportComplete"), true);
+                //       Logger.info(game.i18n.localize("downtime-dnd5e.ImportComplete"), true);
                 //       if(possibleDupes){
                 //         new Dialog({
                 //           title: game.i18n.localize("downtime-dnd5e.ImportDupeWarningTitle"),

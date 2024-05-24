@@ -1,7 +1,8 @@
 import Category from "./Category.js";
 import TrackingAndTraining from "./TrackingAndTraining.js";
 import CONSTANTS from "./constants.js";
-import { getActorAsync, getActorSync, getUserCharacter, isRealNumber, warn } from "./lib/lib.js";
+import { RetrieveHelpers } from "./lib/retrieve-helpers.js";
+import { getUserCharacter, isRealNumber } from "./lib/lib.js";
 
 const API = {
     // renderDialogMMMForXXXArr(...inAttributes) {
@@ -36,28 +37,28 @@ const API = {
      * @returns {Promise<void>}
      */
     async updateActivity(actor, activityName, newProgress) {
-        let actorTmp = await getActorAsync(actor, false, false);
+        let actorTmp = await RetrieveHelpers.getActorAsync(actor, false, false);
         if (!actorTmp) {
-            warn(game.i18n.localize("downtime-dnd5e.ActorNotFoundWarning"), true);
+            Logger.warn(game.i18n.localize("downtime-dnd5e.ActorNotFoundWarning"), true);
             return;
         }
         let allItems = actorTmp.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.trainingItems) || [];
         let itemIdx = allItems.findIndex((i) => i.name === activityName);
         if (itemIdx < 0) {
-            warn(game.i18n.localize("downtime-dnd5e.ItemNotFoundWarning") + ": " + activityName, true);
+            Logger.warn(game.i18n.localize("downtime-dnd5e.ItemNotFoundWarning") + ": " + activityName, true);
             return;
         }
 
         let newProgressI = parseInt(newProgress);
         if (!isRealNumber(newProgressI)) {
-            warn(game.i18n.localize("downtime-dnd5e.ProgressValueIsNanWarning"), true);
+            Logger.warn(game.i18n.localize("downtime-dnd5e.ProgressValueIsNanWarning"), true);
             return;
         }
 
         // Increase progress
         let thisItem = allItems[itemIdx];
         if (!thisItem) {
-            warn(game.i18n.localize("downtime-dnd5e.InvalidItemWarning"), true);
+            Logger.warn(game.i18n.localize("downtime-dnd5e.InvalidItemWarning"), true);
             return;
         }
         let alreadyCompleted = thisItem.progress >= thisItem.completionAt;
@@ -88,12 +89,12 @@ const API = {
      * @returns {Activity[]}
      */
     getActivities(actor) {
-        let actorTmp = getActorSync(actor, false, false);
+        let actorTmp = RetrieveHelpers.getActorSync(actor, false, false);
         if (actorTmp) {
             let allItems = getProperty(actorTmp, `flags.${CONSTANTS.MODULE_ID}.${CONSTANTS.FLAGS.trainingItems}`) || [];
             return allItems;
         } else {
-            warn(game.i18n.localize("downtime-dnd5e.ActorNotFoundWarning"), true);
+            Logger.warn(game.i18n.localize("downtime-dnd5e.ActorNotFoundWarning"), true);
             return [];
         }
     },
@@ -105,15 +106,15 @@ const API = {
      * @returns {Activity}
      */
     getActivity(actor, activityName) {
-        let actorTmp = getActorSync(actor, false, false);
+        let actorTmp = RetrieveHelpers.getActorSync(actor, false, false);
         if (!actorTmp) {
-            warn(game.i18n.localize("downtime-dnd5e.ActorNotFoundWarning"), true);
+            Logger.warn(game.i18n.localize("downtime-dnd5e.ActorNotFoundWarning"), true);
             return;
         }
         let allItems = getProperty(actorTmp, `flags.${CONSTANTS.MODULE_ID}.${CONSTANTS.FLAGS.trainingItems}`) || [];
         let itemIdx = allItems.findIndex((i) => i.name === activityName);
         if (itemIdx < 0) {
-            warn(game.i18n.localize("downtime-dnd5e.ItemNotFoundWarning") + ": " + activityName, true);
+            Logger.warn(game.i18n.localize("downtime-dnd5e.ItemNotFoundWarning") + ": " + activityName, true);
             return;
         } else {
             return allItems[itemIdx];
@@ -125,13 +126,13 @@ const API = {
      * @returns {Category[]}
      */
     getCategories(actor) {
-        let actorTmp = getActorSync(actor, false, false);
+        let actorTmp = RetrieveHelpers.getActorSync(actor, false, false);
         if (actorTmp) {
             let allCategories =
                 getProperty(actorTmp, `flags.${CONSTANTS.MODULE_ID}.${CONSTANTS.FLAGS.categories}`) || [];
             return allCategories;
         } else {
-            warn(game.i18n.localize("downtime-dnd5e.ActorNotFoundWarning"), true);
+            Logger.warn(game.i18n.localize("downtime-dnd5e.ActorNotFoundWarning"), true);
             return [];
         }
     },
@@ -155,28 +156,30 @@ const API = {
      * @returns {Promise<void>}
      */
     async updateWorldActivity(activityName, newProgress, explicitActor) {
-        let actorTmp = explicitActor ? await getActorAsync(explicitActor, false, false) : getUserCharacter(game.user);
+        let actorTmp = explicitActor
+            ? await RetrieveHelpers.getActorAsync(explicitActor, false, false)
+            : getUserCharacter(game.user);
         if (!actorTmp) {
-            warn(game.i18n.localize("downtime-dnd5e.ActorNotFoundWarning"), true);
+            Logger.warn(game.i18n.localize("downtime-dnd5e.ActorNotFoundWarning"), true);
             return;
         }
         let allItems = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.worldActivities) || [];
         let itemIdx = allItems.findIndex((i) => i.name === activityName);
         if (itemIdx < 0) {
-            warn(game.i18n.localize("downtime-dnd5e.ItemNotFoundWarning") + ": " + activityName, true);
+            Logger.warn(game.i18n.localize("downtime-dnd5e.ItemNotFoundWarning") + ": " + activityName, true);
             return;
         }
 
         let newProgressI = parseInt(newProgress);
         if (!isRealNumber(newProgressI)) {
-            warn(game.i18n.localize("downtime-dnd5e.ProgressValueIsNanWarning"), true);
+            Logger.warn(game.i18n.localize("downtime-dnd5e.ProgressValueIsNanWarning"), true);
             return;
         }
 
         // Increase progress
         let thisItem = allItems[itemIdx];
         if (!thisItem) {
-            warn(game.i18n.localize("downtime-dnd5e.InvalidItemWarning"), true);
+            Logger.warn(game.i18n.localize("downtime-dnd5e.InvalidItemWarning"), true);
             return;
         }
         let alreadyCompleted = thisItem.progress >= thisItem.completionAt;
@@ -211,7 +214,7 @@ const API = {
         let allItems = game.settings.get(CONSTANTS.MODULE_ID, CONSTANTS.SETTINGS.worldActivities) || [];
         let itemIdx = allItems.findIndex((i) => i.name === activityName);
         if (itemIdx < 0) {
-            warn(game.i18n.localize("downtime-dnd5e.ItemNotFoundWarning") + ": " + activityName, true);
+            Logger.warn(game.i18n.localize("downtime-dnd5e.ItemNotFoundWarning") + ": " + activityName, true);
             return;
         } else {
             return allItems[itemIdx];
