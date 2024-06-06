@@ -1,4 +1,4 @@
-### 1.3.5 
+### 1.3.5-6
 
 - Ty very much to @Forien for the Dnd5e 3.0.0. sheet compatibility
 
@@ -6,17 +6,17 @@
 
 - add runMacro with a explicit actor parameter
 
-### 1.3.3 
+### 1.3.3
 
 - Bug fix on the API + API Documentation updated
 
-## 1.3.2 
+## 1.3.2
 
 - Update macro call now it support id and uuid and has some mroe check
 
-### 1.3.1 
+### 1.3.1
 
-- Bug fix https://github.com/p4535992/foundryvtt-downtime-dnd5e/issues/8 ty to @kgar 
+- Bug fix https://github.com/p4535992/foundryvtt-downtime-dnd5e/issues/8 ty to @kgar
 
 ### 1.3.0 [BREAKING CHANGES]
 
@@ -38,7 +38,7 @@
 
 - Born of Donwtime dnd5e
 
-### Version 1.0.0 (Foundry v10) 
+### Version 1.0.0 (Foundry v10)
 - Compatibility update for Foundry v10
 - Importing has been streamlined and now also handles categories
 - As of this release I will no longer be officially maintaing this module. You're welcome to keep submitting bug reports, and I'll try to fix issues if/when I can, but feature requests that haven't been gotten to by now will likely never get done. Thanks all for sticking with me this far, really appreciate all the support.
