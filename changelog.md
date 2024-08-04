@@ -1,3 +1,7 @@
+### 1.3.7
+
+- Bug fix: https://github.com/p4535992/foundryvtt-downtime-dnd5e/issues/16 ty to @Igor-Iugin
+
 ### 1.3.5-6
 
 - Ty very much to @Forien for the Dnd5e 3.0.0. sheet compatibility
