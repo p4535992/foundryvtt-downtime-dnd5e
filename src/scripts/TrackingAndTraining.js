@@ -396,7 +396,7 @@ export default class TrackingAndTraining {
         } //GM Only Mode
         if (
             !game.modules.get("midi-qol")?.active ||
-            isNewerVersion(game.modules.get("midi-qol").data.version, "0.9.25")
+            isNewerVersion(game.modules.get("midi-qol").version, "0.9.25")
         ) {
             options.vanilla = true;
         } //Handles BR. Want it on in all cases except when midi is enabled
