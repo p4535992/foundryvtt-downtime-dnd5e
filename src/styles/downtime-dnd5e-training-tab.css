@@ -502,3 +502,11 @@
 .dnd5e-theme-dark .dnd5e2 .items-section .item .activity-override input {
     border: 1px var(--dnd5e-background-card) solid;
 }
+
+/* Fix view in D&D5e sheet */
+.dnd5e2 .downtime-list .item {
+    display: flex;
+}
+.dnd5e-theme-dark .dnd5e2 .downtime-list .item {
+    display: flex;
+}
