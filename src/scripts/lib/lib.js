@@ -1,4 +1,6 @@
 import CONSTANTS from "../constants.js";
+import Logger from "./Logger.js";
+import { RetrieveHelpers } from "./retrieve-helpers.js";
 
 /* ========================================== */
 
@@ -7,7 +9,7 @@ export async function runMacro(macroReference, ...macroData) {
 }
 
 export async function runMacroOnExplicitActor(explicitActor, macroReference, ...macroData) {
-    let macroFounded = await getMacroAsync(macroReference, false, true);
+    let macroFounded = await RetrieveHelpers.getMacroAsync(macroReference, false, true);
     if (!macroFounded) {
         throw error(`Could not find macro with reference "${macroReference}"`, true);
     }
@@ -59,7 +61,7 @@ export async function runMacroOnExplicitActor(explicitActor, macroReference, ...
             const character = game.user.character;
             const event = getEvent();
 
-            debug("runMacro | ", { macro, speaker, actor, token, character, event, args });
+            Logger.debug("runMacro | ", { macro, speaker, actor, token, character, event, args });
 
             //build script execution
             let body = ``;
@@ -72,7 +74,7 @@ export async function runMacroOnExplicitActor(explicitActor, macroReference, ...
             }
             const fn = Function("speaker", "actor", "token", "character", "event", "args", body);
 
-            debug("runMacro | ", { body, fn });
+            Logger.debug("runMacro | ", { body, fn });
 
             //attempt script execution
             try {

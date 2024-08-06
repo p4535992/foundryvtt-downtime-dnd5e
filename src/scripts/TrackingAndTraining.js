@@ -394,10 +394,7 @@ export default class TrackingAndTraining {
         if (game.settings.get(CONSTANTS.MODULE_ID, "gmOnlyMode")) {
             options.rollMode = "gmroll";
         } //GM Only Mode
-        if (
-            !game.modules.get("midi-qol")?.active ||
-            isNewerVersion(game.modules.get("midi-qol").version, "0.9.25")
-        ) {
+        if (!game.modules.get("midi-qol")?.active || isNewerVersion(game.modules.get("midi-qol").version, "0.9.25")) {
             options.vanilla = true;
         } //Handles BR. Want it on in all cases except when midi is enabled
         return options;

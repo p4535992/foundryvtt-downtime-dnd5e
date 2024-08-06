@@ -1,3 +1,9 @@
+### 1.3.8
+
+- Little fix on Dnd5e Sheet https://github.com/p4535992/foundryvtt-downtime-dnd5e/pull/24 ty to @Igor-Iugin
+- Add language https://github.com/p4535992/foundryvtt-downtime-dnd5e/issues/13
+- Fix https://github.com/p4535992/foundryvtt-downtime-dnd5e/issues/20
+
 ### 1.3.7
 
 - Bug fix: https://github.com/p4535992/foundryvtt-downtime-dnd5e/issues/16 ty to @Igor-Iugin
