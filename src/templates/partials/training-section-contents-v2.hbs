@@ -1,23 +1,23 @@
 <!-- Tab Controls -->
 {{#if showToUserEditMode}}
     <section class="downtime-dnd5e-controls">
-        <button class="button downtime-dnd5e-export" title="{{ localize 'downtime-dnd5e.ExportTrackedItemsTooltip' }}">
+        <button type="button"class="button downtime-dnd5e-export" title="{{ localize 'downtime-dnd5e.ExportTrackedItemsTooltip' }}">
             <i class="fas fa-file-import"></i> {{ localize 'downtime-dnd5e.ExportTrackedItems' }}
         </button>
         {{#if showImportButton}}
-            <button class="button downtime-dnd5e-import"
+            <button type="button"class="button downtime-dnd5e-import"
                     title="{{ localize 'downtime-dnd5e.ImportTrackedItemsTooltip' }}">
                 <i class="fas fa-file-export"></i> {{ localize 'downtime-dnd5e.ImportTrackedItems' }}
             </button>
         {{/if}}
-        <button class="button  downtime-dnd5e-audit push-left" title="{{ localize 'downtime-dnd5e.ReviewChanges' }}">
+        <button type="button"class="button  downtime-dnd5e-audit push-left" title="{{ localize 'downtime-dnd5e.ReviewChanges' }}">
             <i class="fas fa-clipboard"></i> {{ localize 'downtime-dnd5e.ChangeLog' }}
         </button>
         <div class="spacer"></div>
-        <button class="button  downtime-dnd5e-new-category" title="{{ localize 'downtime-dnd5e.CreateNewCategory' }}">
+        <button type="button"class="button  downtime-dnd5e-new-category" title="{{ localize 'downtime-dnd5e.CreateNewCategory' }}">
             <i class="fas fa-list"></i> {{ localize 'downtime-dnd5e.AddCategory' }}
         </button>
-        <button class="button  downtime-dnd5e-add" title="{{ localize 'downtime-dnd5e.CreateNewItem' }}">
+        <button type="button"class="button  downtime-dnd5e-add" title="{{ localize 'downtime-dnd5e.CreateNewItem' }}">
             <i class="fas fa-plus"></i> {{ localize 'downtime-dnd5e.AddItem' }}
         </button>
     </section>
