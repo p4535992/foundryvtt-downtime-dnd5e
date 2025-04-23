@@ -1,3 +1,7 @@
+### 12.0.0
+
+- Fixed: https://github.com/p4535992/foundryvtt-downtime-dnd5e/issues/26 ty to @Mkeefeus contribution https://github.com/p4535992/foundryvtt-downtime-dnd5e/pull/27
+
 ### 1.3.8
 
 - Little fix on Dnd5e Sheet https://github.com/p4535992/foundryvtt-downtime-dnd5e/pull/24 ty to @Igor-Iugin
