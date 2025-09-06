@@ -1,4 +1,5 @@
 # Downtime Dnd5e
+# ATTENTION THE MODULE HAS A NEW OWNER HERE  [Downtime Dnd5e by laquasicinque](https://github.com/laquasicinque/foundryvtt-downtime-dnd5e)
 
 ![Latest Release Download Count](https://img.shields.io/github/downloads/p4535992/foundryvtt-downtime-dnd5e/latest/module.zip?color=2b82fc&label=DOWNLOADS&style=for-the-badge) 
 
@@ -144,3 +145,4 @@ This package is under an [MIT license](LICENSE) and the [Foundry Virtual Tableto
 - Thanks Varriount for some CSS fixes
 - Thanks to crash1115 for the module [Crash's Tracking & Training (formerly known as Crash's Downtime Tracking)](https://github.com/crash1115/5e-training)
 - Thanks to Ethck for the module [Ethck's 5e Downtime Tracking](https://github.com/Ethck/Ethck-s-Downtime-Tracking)
+
